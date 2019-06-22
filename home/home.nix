@@ -1,14 +1,18 @@
 { config, pkgs, ... }:
 
 {
+  imports = [ ./tmux.nix ];
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
   # User packages
   home.packages = [
+    pkgs.bat
     pkgs.fortune
     pkgs.iosevka
-    pkgs.bat
+    pkgs.inter-ui
+    pkgs.standardnotes
   ];
 
   # Git
