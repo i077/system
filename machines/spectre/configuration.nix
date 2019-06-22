@@ -1,12 +1,15 @@
 { config, pkgs, ... }:
 
+let unstableTarball = 
+  fetchTarball https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz;
+in
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
       ./hardware-configuration.nix
     ];
 
-  # Create swapfile
+  # Swapfile
   swapDevices = [
     {device = "/var/swapfile"; size = 8192;}
   ];
@@ -18,7 +21,7 @@
   # Optimize for SSDs
   fileSystems."/".options = [ "discard" ];
 
-  # Define encrypted partition
+  # Define encrypted partition (extended from hardware-configuration)
   boot.initrd.luks.devices."cryptroot" = {
     preLVM = true;
     allowDiscards = true;
@@ -26,19 +29,19 @@
 
   networking.hostName = "Imran-SpectreNix"; # Define your hostname.
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+  nixpkgs.config = {
+    # Allow unfree software
+    allowUnfree = true;
 
-  # Select internationalisation properties.
-  # i18n = {
-  #   consoleFont = "Lat2-Terminus16";
-  #   consoleKeyMap = "us";
-  #   defaultLocale = "en_US.UTF-8";
-  # };
-  
+    # Allow some packages from unstable, so less essential packages get upgraded more quickly
+    packageOverrides = pkgs: {
+      unstable = import unstableTarball {
+        config = config.nixpkgs.config;
+      };
+    };
+  };
+
   # NVIDIA
-  nixpkgs.config.allowUnfree = true;
   hardware.nvidiaOptimus.disable = true;
   hardware.opengl.extraPackages = [ pkgs.linuxPackages.nvidia_x11.out ];
   hardware.opengl.extraPackages32 = [ pkgs.linuxPackages.nvidia_x11.lib32 ];
@@ -49,7 +52,21 @@
 
   # System packages
   environment.systemPackages = with pkgs; [
-    wget neovim fish firefox git
+    acpi
+    binutils
+    file
+    firefox
+    gitFull
+    gnupg
+    htop
+    unstable.keybase
+    unstable.keybase-gui
+    light
+    unstable.neovim
+    openconnect
+    powertop
+    ripgrep
+    wget
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -91,12 +108,38 @@
   users.users.imran = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    shell = "/run/current-system/sw/bin/fish";
   };
 
-  # This value determines the NixOS release with which your system is to be
-  # compatible, in order to avoid breaking some software such as database
-  # servers. You should change this only after NixOS release notes say you
-  # should.
-  system.stateVersion = "19.03"; # Did you read the comment?
+  # Fish shell
+  programs.fish.enable = true;
 
+  # Keybase
+  services.kbfs = {
+    enable = true;
+    mountPoint = "%h/keybase";
+    extraFlags = [ "-label %u" ];
+  };
+
+  systemd.user.services = {
+    keybase.serviceConfig.Slice = "keybase.slice";
+
+    kbfs = {
+      environment = { KEYBASE_RUN_MODE = "prod"; };
+      serviceConfig.Slice = "keybase.slice";
+    };
+
+    keybase-gui = {
+      description = "Keybase GUI";
+      requires = [ "keybase.service" "kbfs.service" ];
+      after    = [ "keybase.service" "kbfs.service" ];
+      serviceConfig = {
+        ExecStart  = "${pkgs.keybase-gui}/share/keybase/Keybase";
+        PrivateTmp = true;
+        Slice      = "keybase.slice";
+      };
+    };
+  };
+
+  system.stateVersion = "19.03";
 }
