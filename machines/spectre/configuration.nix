@@ -64,6 +64,8 @@ in
     light
     unstable.neovim
     openconnect
+    python3Full
+    python3Packages.pip
     powertop
     ripgrep
     wget
