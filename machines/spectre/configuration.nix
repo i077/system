@@ -7,6 +7,8 @@ in
   imports =
     [
       ./hardware-configuration.nix
+      ./services.nix
+      ./yubikey.nix
     ];
 
   # Swapfile
@@ -26,6 +28,9 @@ in
     preLVM = true;
     allowDiscards = true;
   };
+
+  # Support exFAT filesystems
+  boot.extraModulePackages = [ config.boot.kernelPackages.exfat-nofuse ];
 
   networking.hostName = "Imran-SpectreNix"; # Define your hostname.
 
@@ -76,36 +81,6 @@ in
   # programs.mtr.enable = true;
   programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
 
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.layout = "us";
-  # services.xserver.xkbOptions = "eurosign:e";
-
-  # Enable touchpad support.
-  services.xserver.libinput.enable = true;
-
-  # GDM + GNOME 3
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome3.enable = true;
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.imran = {
     isNormalUser = true;
@@ -115,33 +90,6 @@ in
 
   # Fish shell
   programs.fish.enable = true;
-
-  # Keybase
-  services.kbfs = {
-    enable = true;
-    mountPoint = "%h/keybase";
-    extraFlags = [ "-label %u" ];
-  };
-
-  systemd.user.services = {
-    keybase.serviceConfig.Slice = "keybase.slice";
-
-    kbfs = {
-      environment = { KEYBASE_RUN_MODE = "prod"; };
-      serviceConfig.Slice = "keybase.slice";
-    };
-
-    keybase-gui = {
-      description = "Keybase GUI";
-      requires = [ "keybase.service" "kbfs.service" ];
-      after    = [ "keybase.service" "kbfs.service" ];
-      serviceConfig = {
-        ExecStart  = "${pkgs.keybase-gui}/share/keybase/Keybase";
-        PrivateTmp = true;
-        Slice      = "keybase.slice";
-      };
-    };
-  };
 
   system.stateVersion = "19.03";
 }
