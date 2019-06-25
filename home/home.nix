@@ -7,12 +7,20 @@
   programs.home-manager.enable = true;
 
   # User packages
-  home.packages = [
-    pkgs.bat
-    pkgs.fortune
-    pkgs.iosevka
-    pkgs.inter-ui
-    pkgs.standardnotes
+  home.packages = with pkgs; [
+    # Command-line utilities
+    bat
+    fortune
+    gopass
+    pass
+    python3Packages.powerline
+
+    # Apps
+    standardnotes
+
+    # Fonts
+    iosevka
+    inter-ui
   ];
 
   # Git
