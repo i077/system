@@ -68,6 +68,7 @@ in
     unstable.keybase-gui
     light
     unstable.neovim
+    nix-index
     openconnect
     python3Full
     python3Packages.pip
