@@ -1,10 +1,21 @@
 { config, pkgs, ... }:
 
+let unstableTarball = 
+  fetchTarball https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz;
+in
 {
-  imports = [ ./tmux.nix ];
+  imports = [
+    ./tmux.nix
+    ./gnome.nix
+  ];
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  # Set environment variables
+  home.sessionVariables = {
+    EDITOR = "nvim";
+  };
 
   # User packages
   home.packages = with pkgs; [
@@ -21,6 +32,11 @@
     # Fonts
     iosevka
     inter-ui
+
+    # GNOME Shell extensions
+    gnomeExtensions.dash-to-dock
+    gnomeExtensions.caffeine
+    gnomeExtensions.timepp
   ];
 
   # Git
