@@ -5,8 +5,9 @@ let unstableTarball =
 in
 {
   imports = [
-    ./tmux.nix
+    ./git.nix
     ./gnome.nix
+    ./tmux.nix
   ];
 
   # Let Home Manager install and manage itself.
@@ -38,16 +39,6 @@ in
     gnomeExtensions.caffeine
     gnomeExtensions.timepp
   ];
-
-  # Git
-  programs.git = {
-    enable = true;
-    userName = "Imran Hossain";
-    userEmail = "imran3740@gmail.com";
-    extraConfig = {
-      core.editor = "nvim";
-    };
-  };
 
   # Alacritty
   programs.alacritty = {
