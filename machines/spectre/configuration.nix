@@ -74,6 +74,7 @@ in
     python3Packages.pip
     powertop
     ripgrep
+    unzip
     wget
   ];
 

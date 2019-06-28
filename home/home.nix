@@ -1,7 +1,8 @@
 { config, pkgs, ... }:
 
-let unstableTarball = 
-  fetchTarball https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz;
+let
+  unstable = import <unstable> {};
+  paperwm = pkgs.callPackage ./packages/paperwm {};
 in
 {
   imports = [
@@ -28,16 +29,22 @@ in
     python3Packages.powerline
 
     # Apps
-    standardnotes
+    unstable.standardnotes
 
     # Fonts
     iosevka
     inter-ui
 
     # GNOME Shell extensions
-    gnomeExtensions.dash-to-dock
     gnomeExtensions.caffeine
+    gnomeExtensions.dash-to-dock
+    gnomeExtensions.gsconnect
+    gnomeExtensions.mediaplayer
     gnomeExtensions.timepp
+  ] ++ 
+  # Custom packages from above (defined in ./packages/)
+  [
+    paperwm 
   ];
 
   # Alacritty

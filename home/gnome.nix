@@ -24,5 +24,16 @@
     "org/gnome/shell/extensions/dash-to-dock" = {
       intellihide-mode = "ALL_WINDOWS";
     };
+
+    # For PaperWM
+    "org/gnome/shell/overrides" = {
+      attach-modal-dialogs = false;
+      dynamic-workspaces = false;
+      edge-tiling = false;
+      workspaces-only-on-primary = false;
+    };
+    "org/gnome/mutter" = {
+      auto-maximize = false;
+    };
   };
 }
