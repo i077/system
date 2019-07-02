@@ -195,8 +195,8 @@ in
     #     - #{uptime_s}
     #     - #{username}
     #     - #{username_ssh}
-    tmux_conf_theme_status_left=' ❐ #S | ↑#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} '
-    tmux_conf_theme_status_right='#{prefix}#{pairing}#{synchronized} #{?battery_status, #{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , %R , %d %b | #{username}#{root} | #{hostname} '
+    tmux_conf_theme_status_left=' ❐ #S '
+    tmux_conf_theme_status_right='#{prefix}#{pairing}#{synchronized} #{?battery_status, #{battery_status},}#{?battery_hbar, #{battery_hbar},}#{?battery_percentage, #{battery_percentage},} , %R , %d %b | #{loadavg} , ↑#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} | #{username}#{root} | #{hostname} '
 
     # status left style
     tmux_conf_theme_status_left_fg='#000000,#e4e4e4,#e4e4e4'  # black, white , white
@@ -204,9 +204,9 @@ in
     tmux_conf_theme_status_left_attr='bold,none,none'
 
     # status right style
-    tmux_conf_theme_status_right_fg='#8a8a8a,#e4e4e4,#000000' # light gray, white, black
-    tmux_conf_theme_status_right_bg='#080808,#d70000,#e4e4e4' # dark gray, red, white
-    tmux_conf_theme_status_right_attr='none,none,bold'
+    tmux_conf_theme_status_right_fg='#8a8a8a,#e4e4e4,#e4e4e4,#000000' # light gray, white, white, black
+    tmux_conf_theme_status_right_bg='#080808,#0b3c20,#d70000,#e4e4e4' # dark gray, deep green, red, white
+    tmux_conf_theme_status_right_attr='none,none,none,bold'
 
     # pairing indicator
     tmux_conf_theme_pairing='👓 '          # U+1F453
@@ -294,19 +294,19 @@ in
     #set -g history-limit 10000
 
     # start with mouse mode enabled
-    #set -g mouse on
+    set -g mouse on
 
     # force Vi mode
     #   really you should export VISUAL or EDITOR environment variable, see manual
-    #set -g status-keys vi
-    #set -g mode-keys vi
+    set -g status-keys vi
+    set -g mode-keys vi
 
     # replace C-b by C-a instead of using both prefixes
-    # set -gu prefix2
-    # unbind C-a
-    # unbind C-b
-    # set -g prefix C-a
-    # bind C-a send-prefix
+    set -gu prefix2
+    unbind C-a
+    unbind C-b
+    set -g prefix C-a
+    bind C-a send-prefix
 
     # move status line to top
     #set -g status-position top
