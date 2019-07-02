@@ -3,9 +3,11 @@
 let
   unstable = import <unstable> {};
   paperwm = pkgs.callPackage ./packages/paperwm {};
+  budspencer = pkgs.callPackage ./packages/budspencer.nix {};
 in
 {
   imports = [
+    ./fish.nix
     ./git.nix
     ./gnome.nix
     ./tmux.nix
@@ -19,8 +21,12 @@ in
     EDITOR = "nvim";
   };
 
+  nixpkgs.config = {
+    allowUnfree = true;
+  };
+
   # User packages
-  home.packages = with pkgs; [
+  home.packages = with unstable; [
     # Command-line utilities
     bat
     fortune
@@ -29,7 +35,7 @@ in
     python3Packages.powerline
 
     # Apps
-    unstable.standardnotes
+    standardnotes
 
     # Fonts
     iosevka
@@ -45,6 +51,7 @@ in
   # Custom packages from above (defined in ./packages/)
   [
     paperwm 
+    budspencer
   ];
 
   # Alacritty
