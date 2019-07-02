@@ -9,14 +9,22 @@
       night-light-temperature = 4000;
     };
 
+    # Top bar stuff
+    "org/gnome/desktop/interface" = {
+      clock-show-date = true;
+      show-battery-percentage = true;
+    };
+
     # Enabled extensions
     "org/gnome/shell" = {
       enabled-extensions = [
-      	"alternate-tab@gnome-shell-extensions.gcampax.github.com"
-      	"user-theme@gnome-shell-extensions.gcampax.github.com"
+        "alternate-tab@gnome-shell-extensions.gcampax.github.com"
+        "user-theme@gnome-shell-extensions.gcampax.github.com"
         "dash-to-dock@micxgx.gmail.com"
         "caffeine@patapon.info"
         "timepp@zagortenay333"
+        "paperwm@hedning:matrix.org"
+        "gsconnect@andyholmes.github.io"
       ];
     };
 
