@@ -30,12 +30,18 @@ in
     # Command-line utilities
     bat
     fortune
+    fzf
     gopass
     pass
     python3Packages.powerline
+    tmuxPlugins.resurrect
 
     # Apps
+    android-studio
     standardnotes
+
+    # Languages
+    dart
 
     # Fonts
     iosevka

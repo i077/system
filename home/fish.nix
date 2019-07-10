@@ -27,6 +27,7 @@ in
 
     shellInit = ''
       for file in ${custompkgs.budspencer}/lib/budspencer/*.fish; source $file; end
+      fzf_key_bindings
     '';
   };
 }
