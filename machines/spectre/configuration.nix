@@ -61,15 +61,19 @@ in
     binutils
     file
     firefox
+    gdb
     gitFull
     gnupg
     htop
+    unstable.interception-tools
     unstable.keybase
     unstable.keybase-gui
     light
     unstable.neovim
     nix-index
     openconnect
+    patchelf
+    psmisc
     python3Full
     python3Packages.pip
     powertop

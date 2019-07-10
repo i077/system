@@ -19,6 +19,7 @@
   # GDM + GNOME 3
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome3.enable = true;
+  services.dbus.packages = with pkgs; [ gnome3.dconf ];
 
   # Keybase
   services.kbfs = {
