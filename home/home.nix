@@ -2,8 +2,7 @@
 
 let
   unstable = import <unstable> {};
-  paperwm = pkgs.callPackage ./packages/paperwm {};
-  budspencer = pkgs.callPackage ./packages/budspencer.nix {};
+  custompkgs = import ./packages {};
 in
 {
   imports = [
@@ -56,8 +55,8 @@ in
   ] ++ 
   # Custom packages from above (defined in ./packages/)
   [
-    paperwm 
-    budspencer
+    custompkgs.paperwm 
+    custompkgs.budspencer
   ];
 
   # Alacritty
