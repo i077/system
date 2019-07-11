@@ -9,6 +9,7 @@ in
     ./fish.nix
     ./git.nix
     ./gnome.nix
+    ./neovim.nix
     ./tmux.nix
   ];
 
