@@ -37,6 +37,7 @@ in
 
     # Apps
     android-studio
+    gitg
     standardnotes
 
     # Languages
@@ -51,12 +52,14 @@ in
     gnomeExtensions.dash-to-dock
     gnomeExtensions.gsconnect
     gnomeExtensions.mediaplayer
-    gnomeExtensions.timepp
   ] ++ 
   # Custom packages from above (defined in ./packages/)
   [
-    custompkgs.paperwm 
     custompkgs.budspencer
+
+    custompkgs.gnomeExtensions.paperwm 
+    custompkgs.gnomeExtensions.timepp
+    custompkgs.gnomeExtensions.switcher
   ];
 
   # Alacritty

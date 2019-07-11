@@ -4,7 +4,8 @@ let
   pkgs = import <nixpkgs> { inherit system; };
   callPackage = pkgs.lib.callPackageWith (pkgs // self);
   self = {
-    budspencer = callPackage ./budspencer.nix {};
-    gnomeExtensions = import ./gnomeExtensions {};
+    paperwm = callPackage ./paperwm {};
+    timepp = callPackage ./timepp {};
+    switcher = callPackage ./switcher {};
   };
 in self

@@ -24,6 +24,7 @@
         "caffeine@patapon.info"
         "timepp@zagortenay333"
         "paperwm@hedning:matrix.org"
+        "switcher@daniellandau"
         "gsconnect@andyholmes.github.io"
       ];
     };
