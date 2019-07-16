@@ -1,13 +1,14 @@
 { config, pkgs, ... }:
 
 let
+  unstable = import <unstable> {};
   readVimSection = file: builtins.readFile (./nvim + "/${file}.vim");
 in
 {
   programs.neovim = {
     enable = true;
     configure = {
-      plug.plugins = with pkgs.vimPlugins; [
+      plug.plugins = with unstable.vimPlugins; [
         # Editor
         sensible                    # Sensible defaults
         repeat	            		# Repeatable plugin actions
@@ -34,7 +35,8 @@ in
 
         # Languages
         ale                         # Async linting framework
-        deoplete-nvim               # Completion framework
+        coc-nvim                    # Conquerer of completion
+        coc-python
         LanguageClient-neovim	    # Integrations with language clients
         polyglot		            # Multiple language support
         vimtex			            # LaTeX support
@@ -47,8 +49,13 @@ in
         limelight-vim               # Focus mode for vim
         vim-pencil			        # Writing tool for vim
       ];
+
       customRC = ''
         ${readVimSection "editor"}
+        ${readVimSection "ui"}
+        ${readVimSection "mappings"}
+        ${readVimSection "syntax"}
+        ${readVimSection "functions"}
       '';
     };
   };
