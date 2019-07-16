@@ -71,6 +71,7 @@ in
     light
     unstable.neovim
     nix-index
+    nodejs-11_x
     openconnect
     patchelf
     psmisc
@@ -80,6 +81,7 @@ in
     ripgrep
     unzip
     wget
+    yarn
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

@@ -1,7 +1,9 @@
 { config, pkgs, ... }:
 
 let
-  unstable = import <unstable> {};
+  unstable = import <unstable> {
+    config.allowUnfree = true;
+  };
   custompkgs = import ./packages {};
 in
 {
@@ -21,6 +23,7 @@ in
     EDITOR = "nvim";
   };
 
+  # Allow unfree software
   nixpkgs.config = {
     allowUnfree = true;
   };
@@ -31,15 +34,19 @@ in
     bat
     fortune
     fzf
+    gitAndTools.gita
     gopass
     pass
     python3Packages.powerline
     tmuxPlugins.resurrect
+    tectonic
+    neovim-remote
 
     # Apps
     android-studio
     gitg
     standardnotes
+    sublime-merge
 
     # Languages
     dart
@@ -47,6 +54,12 @@ in
     # Fonts
     iosevka
     inter-ui
+
+    # Python packages
+    python3Packages.pylint
+
+    # Node packages
+    nodePackages.neovim
 
     # GNOME Shell extensions
     gnomeExtensions.caffeine
