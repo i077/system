@@ -38,6 +38,7 @@ in
     gitAndTools.gita
     gopass
     pass
+    pandoc
     python3Packages.powerline
     tmuxPlugins.resurrect
     tectonic
@@ -48,6 +49,7 @@ in
     gitg
     standardnotes
     sublime-merge
+    qt5.qtbase
 
     # Languages
     dart
@@ -55,6 +57,8 @@ in
     # Fonts
     iosevka
     inter-ui
+    roboto
+    roboto-mono
 
     # Python packages
     python3Packages.pylint
@@ -75,6 +79,8 @@ in
     custompkgs.gnomeExtensions.paperwm 
     custompkgs.gnomeExtensions.timepp
     custompkgs.gnomeExtensions.switcher
+
+    custompkgs.write_stylus
   ];
 
   # Alacritty
