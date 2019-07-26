@@ -32,6 +32,7 @@ in
   home.packages = with unstable; [
     # Command-line utilities
     bat
+    exa
     fortune
     fzf
     gitAndTools.gita

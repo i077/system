@@ -10,9 +10,11 @@ in
     shellAbbrs = {
       g = "git";
       hm = "home-manager";
-      l = "ls";
-      la = "ls -A";
-      ll = "ls -Alh";
+      l = "exa";
+      la = "exa -a";
+      ll = "exa -al";
+      lL = "exa -algiSH --git";
+      lt = "exa -alT";
       t = "tmux";
       ta = "tmux a -t";
       userctl = "systemctl --user";
