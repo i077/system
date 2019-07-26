@@ -1,3 +1,6 @@
+"" Deoplete
+let g:deoplete#enable_at_startup = 1
+
 "" Vimtex
 " vimtex neovim remote support
 let g:vimtex_compiler_progname = 'nvr'
@@ -11,7 +14,7 @@ set conceallevel=1
 let g:tex_conceal = 'abdmg'
 
 " Use tectonic with vimtex
-let g:vimtex_compiler_progname = 'tectonic'
+let g:vimtex_compiler_method = 'tectonic'
 
 " Use tmux with slime
 let g:slime_target = "tmux"

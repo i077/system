@@ -37,6 +37,7 @@ in
         ale                         # Async linting framework
         coc-nvim                    # Conquerer of completion
         coc-python
+        coc-vimtex
         LanguageClient-neovim	    # Integrations with language clients
         polyglot		            # Multiple language support
         vimtex			            # LaTeX support
