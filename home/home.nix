@@ -42,6 +42,7 @@ in
     python3Packages.powerline
     tmuxPlugins.resurrect
     tectonic
+    todoist
     neovim-remote
 
     # Apps
@@ -93,6 +94,19 @@ in
       font.bold.family = "Iosevka";
       font.italic.family = "Iosevka";
     };
+  };
+
+  # Todoist config
+  home.file.".todoist.config.json".text = ''
+    {
+      "token": "${builtins.readFile ../secrets/todoist_api_token}",
+      "color": "true"
+    }
+  '';
+
+  # Zathura
+  programs.zathura = {
+    enable = true;
   };
 
   # Fonts

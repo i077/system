@@ -17,6 +17,7 @@ in
       lt = "exa -alT";
       t = "tmux";
       ta = "tmux a -t";
+      td = "todoist";
       userctl = "systemctl --user";
       v = "nvim";
     };
