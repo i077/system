@@ -1,7 +1,7 @@
 { config, pkgs, ...}:
 
 let
-  custompkgs = import ./packages {};
+  custompkgs = import ../packages {};
 in
 {
   programs.fish = {

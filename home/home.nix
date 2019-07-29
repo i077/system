@@ -4,7 +4,7 @@ let
   unstable = import <unstable> {
     config.allowUnfree = true;
   };
-  custompkgs = import ./packages {};
+  custompkgs = import ../packages {};
 in
 {
   imports = [
