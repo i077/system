@@ -47,6 +47,7 @@ in
 
     # Apps
     android-studio
+    brscan4
     gitg
     standardnotes
     sublime-merge

@@ -9,6 +9,9 @@ in
       ./hardware-configuration.nix
       ./services.nix
       ./yubikey.nix
+
+      # Used for Brother scanners
+      <nixpkgs/nixos/modules/services/hardware/sane_extra_backends/brscan4.nix>
     ];
 
   # Swapfile
@@ -88,6 +91,31 @@ in
   # started in user sessions.
   # programs.mtr.enable = true;
   programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
+
+  # Printing
+  services.printing = {
+    enable = true;
+    drivers = with pkgs; [
+      brlaser
+      brgenml1cupswrapper
+      brgenml1lpr
+    ];
+  };
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
+  };
+
+  # Scanning
+  hardware.sane = {
+    enable = true;
+    brscan4 = {
+      enable = true;
+      netDevices = {
+        home = { model = "MFC-9130CW"; ip = "192.168.86.110"; };
+      };
+    };
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.imran = {
