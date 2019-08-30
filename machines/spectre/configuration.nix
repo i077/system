@@ -69,6 +69,7 @@ in
     gnupg
     htop
     unstable.interception-tools
+    unstable.openjdk12
     unstable.keybase
     unstable.keybase-gui
     light

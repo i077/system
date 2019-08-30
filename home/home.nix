@@ -64,6 +64,7 @@ in
 
     # Python packages
     python3Packages.pylint
+    pipenv
 
     # Node packages
     nodePackages.neovim
