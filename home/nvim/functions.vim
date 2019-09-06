@@ -24,4 +24,4 @@ com! EditConfig call s:EditConfig()
 autocmd filetype tex call vimtex#compiler#compile()
 
 " Use pandoc as dispatch job
-autocmd filetype pandoc let b:dispatch = 'pandoc -o %:r.pdf %'
+autocmd filetype pandoc let b:dispatch = 'pandoc -o %:r.pdf --pdf-engine tectonic %'
