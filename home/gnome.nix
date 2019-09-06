@@ -37,7 +37,6 @@
     # For PaperWM
     "org/gnome/shell/overrides" = {
       attach-modal-dialogs = false;
-      dynamic-workspaces = false;
       edge-tiling = false;
       workspaces-only-on-primary = false;
     };
