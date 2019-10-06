@@ -1,7 +1,12 @@
 { config, pkgs, ... }:
 
+with pkgs;
 let unstableTarball = 
   fetchTarball https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz;
+  my-py-packages = python-packages: with python-packages; [
+    numpy
+  ];
+  my-python3Full = unstable.python3Full.withPackages my-py-packages;
 in
 {
   imports =
@@ -76,8 +81,9 @@ in
     openconnect
     patchelf
     psmisc
-    python3Full
-    python3Packages.pip
+    my-python3Full
+    unstable.python3Packages.pip
+    unstable.python3Packages.setuptools
     powertop
     ripgrep
     unzip
