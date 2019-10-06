@@ -37,21 +37,39 @@ in
     fzf
     gitAndTools.gita
     gopass
-    pass
     pandoc
-    python3Packages.powerline
+    pass
+    passff-host
     tmuxPlugins.resurrect
     tectonic
     todoist
+    tomb
     neovim-remote
+    xsel
 
     # Apps
     android-studio
     brscan4
+    gnome3.geary
     gitg
+    kitty
+    libreoffice-fresh
+    nasc
     standardnotes
     sublime-merge
+    jetbrains.idea-community
+    jetbrains.pycharm-community
+    qalculate-gtk
     qt5.qtbase
+    gnome3.sushi
+    typora
+    pinta
+    vlc
+    vscode-with-extensions
+    zotero
+
+    # Games
+    minecraft
 
     # Languages
     dart
@@ -63,6 +81,7 @@ in
     roboto-mono
 
     # Python packages
+    python3Packages.powerline
     python3Packages.pylint
     pipenv
 
@@ -74,6 +93,8 @@ in
     gnomeExtensions.dash-to-dock
     gnomeExtensions.gsconnect
     gnomeExtensions.mediaplayer
+    equilux-theme
+    pantheon.elementary-icon-theme
   ] ++ 
   # Custom packages from above (defined in ./packages/)
   [
