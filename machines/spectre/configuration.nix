@@ -66,6 +66,7 @@ in
     binutils
     file
     firefox
+    freetype
     gdb
     gitFull
     gnupg
@@ -80,13 +81,17 @@ in
     nodejs-11_x
     openconnect
     patchelf
+    pciutils
+    pkg-config
     psmisc
     my-python3Full
     unstable.python3Packages.pip
     unstable.python3Packages.setuptools
     powertop
+    qt5.qtbase
     ripgrep
     unzip
+    vivaldi
     wget
     yarn
   ];
