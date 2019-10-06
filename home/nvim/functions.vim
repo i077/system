@@ -20,8 +20,8 @@ com! EditConfig call s:EditConfig()
 " AUTOCMDS
 " ------------
 
-" Enable vimtex autocompiler in *TeX files
-autocmd filetype tex call vimtex#compiler#compile()
+" Enable vimtex in *TeX files
+autocmd filetype tex call vimtex#init()
 
 " Use pandoc as dispatch job
 autocmd filetype pandoc let b:dispatch = 'pandoc -o %:r.pdf --pdf-engine tectonic %'
