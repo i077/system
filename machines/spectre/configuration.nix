@@ -50,10 +50,7 @@ in
   };
 
   # NVIDIA
-  hardware.nvidiaOptimus.disable = true;
-  hardware.opengl.extraPackages = [ pkgs.linuxPackages.nvidia_x11.out ];
-  hardware.opengl.extraPackages32 = [ pkgs.linuxPackages.nvidia_x11.lib32 ];
-  # TODO get primerun script from https://nixos.wiki/wiki/Nvidia
+  hardware.bumblebee.enable = true;
 
   # Set timezone
   time.timeZone = "America/New_York";
