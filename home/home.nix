@@ -37,9 +37,12 @@ in
     fzf
     gitAndTools.gita
     gopass
+    python3Packages.jedi
+    python3Packages.python-language-server
     pandoc
     pass
     passff-host
+    pipenv
     tmuxPlugins.resurrect
     tectonic
     todoist
@@ -56,6 +59,7 @@ in
     libreoffice-fresh
     nasc
     standardnotes
+    station
     sublime-merge
     jetbrains.idea-community
     jetbrains.pycharm-community
@@ -83,16 +87,14 @@ in
     # Python packages
     python3Packages.powerline
     python3Packages.pylint
-    pipenv
 
     # Node packages
     nodePackages.neovim
 
     # GNOME Shell extensions
-    gnomeExtensions.caffeine
     gnomeExtensions.dash-to-dock
+    gnomeExtensions.dash-to-panel
     gnomeExtensions.gsconnect
-    gnomeExtensions.mediaplayer
     equilux-theme
     pantheon.elementary-icon-theme
   ] ++ 
