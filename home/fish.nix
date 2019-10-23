@@ -26,6 +26,7 @@ in
       hms = "home-manager switch";
       nxu = "nix-channel --update && sudo nix-channel --update";
       nxs = "sudo nixos-rebuild switch";
+      nxb = "sudo nixos-rebuild boot";
     };
 
     shellInit = ''
