@@ -4,7 +4,10 @@ with pkgs;
 let unstableTarball = 
   fetchTarball https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz;
   my-py-packages = python-packages: with python-packages; [
+    setuptools
     numpy
+    scipy
+    cython
   ];
   my-python3Full = unstable.python3Full.withPackages my-py-packages;
 in
@@ -69,16 +72,17 @@ in
     freetype
     gdb
     gitFull
+    gnome3.gnome-tweak-tool
     gnupg
     htop
     unstable.interception-tools
     unstable.openjdk12
-    unstable.keybase
-    unstable.keybase-gui
+    keybase-gui
+    libsecret
     light
     unstable.neovim
     nix-index
-    nodejs-11_x
+    nodejs
     openconnect
     patchelf
     pciutils
@@ -86,12 +90,10 @@ in
     psmisc
     my-python3Full
     unstable.python3Packages.pip
-    unstable.python3Packages.setuptools
     powertop
     qt5.qtbase
     ripgrep
     unzip
-    vivaldi
     wget
     yarn
   ];
