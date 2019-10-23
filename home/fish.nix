@@ -24,7 +24,7 @@ in
 
     shellAliases = {
       hms = "home-manager switch";
-      nxu = "sudo nix-channel --update";
+      nxu = "nix-channel --update && sudo nix-channel --update";
       nxs = "sudo nixos-rebuild switch";
     };
 
