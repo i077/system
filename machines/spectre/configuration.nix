@@ -15,6 +15,7 @@ in
   imports =
     [
       ./hardware-configuration.nix
+      ./printing.nix
       ./services.nix
       ./yubikey.nix
 
@@ -42,6 +43,9 @@ in
 
   # Support exFAT filesystems
   boot.extraModulePackages = [ config.boot.kernelPackages.exfat-nofuse ];
+
+  # Clean up /tmp on boot
+  boot.cleanTmpDir = true;
 
   networking.hostName = "Imran-SpectreNix"; # Define your hostname.
 
@@ -103,32 +107,7 @@ in
   # programs.mtr.enable = true;
   programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
 
-  # Printing
-  services.printing = {
-    enable = true;
-    drivers = with pkgs; [
-      brlaser
-      brgenml1cupswrapper
-      brgenml1lpr
-    ];
-  };
-  services.avahi = {
-    enable = true;
-    nssmdns = true;
-  };
-
-  # Scanning
-  hardware.sane = {
-    enable = true;
-    brscan4 = {
-      enable = true;
-      netDevices = {
-        home = { model = "MFC-9130CW"; ip = "192.168.86.110"; };
-      };
-    };
-  };
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Define the user
   users.users.imran = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
