@@ -1,6 +1,11 @@
 "" Deoplete
 let g:deoplete#enable_at_startup = 1
 
+"" LanguageClient
+let g:LanguageClient_serverCommands = {
+    \ 'python': ['/home/imran/.nix-profile/bin/pyls'],
+    \ }
+
 "" Vimtex
 let g:vimtex_enabled = 1
 " vimtex neovim remote support

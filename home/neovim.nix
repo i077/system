@@ -10,46 +10,46 @@ in
     package = unstable.neovim;
     plugins = with unstable.vimPlugins; [
       # Editor
-      sensible                    # Sensible defaults
+      sensible                      # Sensible defaults
       repeat	            		# Repeatable plugin actions
-      surround            		# Surround text
+      surround            		    # Surround text
       commentary        			# Comment code with 'gcc'
       easy-align        			# Alignment plugin
       easymotion        			# Enhanced motions
       vim-indent-object             # Use indents as motions
 
       # Extensions
-      fugitive		            # Git wrapper
-      vim-dispatch                # Asynchronous job runner
+      fugitive		                # Git wrapper
+      vim-dispatch                  # Asynchronous job runner
       fzf-vim			           	# Fuzzy entry selection
       denite-nvim		           	# Async unite interface
-      nvim-yarp		           	# Remote plugin framework
-      nerdtree		           	# File sidebar
+      nvim-yarp		           	    # Remote plugin framework
+      nerdtree		           	    # File sidebar
 
       # UI + Colorschemes
       airline	                    # Smarter tabline
-      vim-airline-themes          # Airline themes (automatches colorscheme)
-      base16-vim                  # Base16
+      vim-airline-themes            # Airline themes (automatches colorscheme)
+      base16-vim                    # Base16
       falcon	                    # Falcon
       gruvbox	                    # Gruvbox
-      vim-monokai-pro             # Monokai Pro
-      awesome-vim-colorschemes    # Collection of colorschemes
+      vim-monokai-pro               # Monokai Pro
+      awesome-vim-colorschemes      # Collection of colorschemes
+      solarized                     # Solarized
 
       # Languages
-      ale                         # Async linting framework
-      coc-nvim                    # Conquerer of completion
-      coc-python
-      coc-vimtex
-      LanguageClient-neovim	    # Integrations with language clients
-      polyglot		            # Multiple language support
+      ale                           # Async linting framework
+      deoplete-nvim                 # Dark-powered async completion framework
+      # deoplete-jedi
+      LanguageClient-neovim	        # Integrations with language clients, used with deoplete
+      polyglot		                # Multiple language support
       vimtex			            # LaTeX support
-      vim-pandoc                  # Pandoc support
-      vim-pandoc-syntax           # Pandoc syntax support
-      vim-slime		        	# Scheme support
+      vim-pandoc                    # Pandoc support
+      vim-pandoc-syntax             # Pandoc syntax support
+      vim-slime		        	    # Scheme support
 
       # Prose
-      goyo				        # Distraction-free editing
-      limelight-vim               # Focus mode for vim
+      goyo				            # Distraction-free editing
+      limelight-vim                 # Focus mode for vim
       vim-pencil			        # Writing tool for vim
     ];
 
