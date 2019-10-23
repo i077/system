@@ -11,7 +11,7 @@ stdenv.mkDerivation rec {
     sha256 = "0mqbcdm7115pnxy4ngr9y0ip783813ihima1svnvr0zb3g6qlpgq";
   };
 
-  uuid = "switcher@daniellandau";
+  uuid = "switcher@landau.fi";
   installPhase = ''
     mkdir -p $out/share/gnome-shell/extensions/${uuid}
     cp -r . $out/share/gnome-shell/extensions/${uuid}
