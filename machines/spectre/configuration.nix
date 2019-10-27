@@ -23,6 +23,8 @@ in
       <nixpkgs/nixos/modules/services/hardware/sane_extra_backends/brscan4.nix>
     ];
 
+  networking.hostName = "i077-spectrenix";
+
   # Swapfile
   swapDevices = [
     {device = "/var/swapfile"; size = 8192;}
@@ -46,8 +48,6 @@ in
 
   # Clean up /tmp on boot
   boot.cleanTmpDir = true;
-
-  networking.hostName = "Imran-SpectreNix"; # Define your hostname.
 
   nixpkgs.config = {
     # Allow unfree software
