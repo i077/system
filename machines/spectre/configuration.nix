@@ -64,6 +64,21 @@ in
   # NVIDIA
   hardware.bumblebee.enable = true;
 
+  # Audio + bluetooth
+  hardware.pulseaudio = {
+    enable = true;
+    extraModules = [ pkgs.pulseaudio-modules-bt ];
+    package = pkgs.pulseaudioFull;
+  };
+
+  hardware.bluetooth = {
+    enable = true;
+    extraConfig = ''
+      [General]
+      Enable=Source,Sink,Media,Socket
+    '';
+  };
+
   # Set timezone
   time.timeZone = "America/New_York";
 
