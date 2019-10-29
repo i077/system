@@ -58,6 +58,7 @@ in
     kitty
     libreoffice-fresh
     nasc
+    rhythmbox
     standardnotes
     station
     sublime-merge
@@ -93,7 +94,6 @@ in
 
     # GNOME Shell extensions
     gnomeExtensions.dash-to-dock
-    gnomeExtensions.dash-to-panel
     gnomeExtensions.gsconnect
     equilux-theme
     pantheon.elementary-icon-theme

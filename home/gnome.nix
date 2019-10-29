@@ -20,11 +20,11 @@
       enabled-extensions = [
         "alternate-tab@gnome-shell-extensions.gcampax.github.com"
         "user-theme@gnome-shell-extensions.gcampax.github.com"
-        "dash-to-panel@jderose9.github.com"
         "caffeine@patapon.info"
         # "timepp@zagortenay333"
         "paperwm@hedning:matrix.org"
         "switcher@landau.fi"
+        "TopIcons@phocean.net"
         "gsconnect@andyholmes.github.io"
       ];
     };
