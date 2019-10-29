@@ -7,8 +7,8 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "paperwm";
     repo = "PaperWM";
-    rev = "e75f3aac7f46fb6c019647853ca9c0d6906d0789";
-    sha256 = "1400fkpkq9cl9r18258q21m1vfvjclpqz0rx12736ysqzvj0fwbb";
+    rev = "0bd9de889e29c9fcc7de5f4348975c36efd7c8f8";
+    sha256 = "1g3ml9gp2ihfg14k14djbrn2bhgjrcp1r2ka3g0cp34p9j3nkk08";
   };
 
   uuid = "paperwm@hedning:matrix.org";
