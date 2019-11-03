@@ -36,6 +36,7 @@ in
     fortune
     fzf
     gitAndTools.gita
+    gnumake
     gopass
     python3Packages.jedi
     python3Packages.python-language-server
@@ -95,6 +96,8 @@ in
     # GNOME Shell extensions
     gnomeExtensions.dash-to-dock
     gnomeExtensions.gsconnect
+    gnomeExtensions.mpris-indicator-button
+    gnomeExtensions.topicons-plus
     equilux-theme
     pantheon.elementary-icon-theme
   ] ++ 
