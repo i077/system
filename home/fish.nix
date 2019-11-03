@@ -23,10 +23,15 @@ in
     };
 
     shellAliases = {
+      # NixOS management
       hms = "home-manager switch";
       nxu = "nix-channel --update && sudo nix-channel --update";
       nxs = "sudo nixos-rebuild switch";
       nxb = "sudo nixos-rebuild boot";
+
+      # Keybase stuff
+      cdkb = "cd /keybase/private/i077";
+      cdkbp = "cd /keybase/public/i077";
     };
 
     shellInit = ''

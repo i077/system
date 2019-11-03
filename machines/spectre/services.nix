@@ -24,8 +24,8 @@
   # Keybase
   services.kbfs = {
     enable = true;
-    mountPoint = "%h/keybase";
-    extraFlags = [ "-label %u" ];
+    mountPoint = "/keybase";
+    extraFlags = [ "-label kbfs" ];
   };
 
   systemd.user.services = {
