@@ -4,8 +4,10 @@ with pkgs;
 let unstableTarball = 
   fetchTarball https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz;
   my-py-packages = python-packages: with python-packages; [
-    setuptools
+    matplotlib
+    notebook
     numpy
+    setuptools
     scipy
     cython
   ];
@@ -93,6 +95,9 @@ in
 
   # Set timezone
   time.timeZone = "America/New_York";
+
+  # Optimize nix store automatically
+  nix.autoOptimiseStore = true;
 
   # System packages
   environment.systemPackages = with pkgs; [
