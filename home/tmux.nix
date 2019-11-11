@@ -20,16 +20,6 @@ in
     #         Copyright 2012— Gregory Pakosz (@gpakosz).
 
 
-    # -- navigation ----------------------------------------------------------------
-
-    # if you're running tmux within iTerm2
-    #   - and tmux is 1.9 or 1.9a
-    #   - and iTerm2 is configured to let option key act as +Esc
-    #   - and iTerm2 is configured to send [1;9A -> [1;9D for option + arrow keys
-    # then uncomment the following line to make Meta + arrow keys mapping work
-    #set -ga terminal-overrides "*:kUP3=\e[1;9A,*:kDN3=\e[1;9B,*:kRIT3=\e[1;9C,*:kLFT3=\e[1;9D"
-
-
     # -- windows & pane creation ---------------------------------------------------
 
     # new window retains current path, possible values are:
@@ -50,7 +40,7 @@ in
     # prompt for session name when creating a new session, possible values are:
     #   - true
     #   - false (default)
-    tmux_conf_new_session_prompt=false
+    tmux_conf_new_session_prompt=true
 
 
     # -- display -------------------------------------------------------------------
@@ -284,7 +274,7 @@ in
     #   - false (default)
     # on macOS, this requires installing reattach-to-user-namespace, see README.md
     # on Linux, this requires xsel or xclip
-    tmux_conf_copy_to_os_clipboard=false
+    tmux_conf_copy_to_os_clipboard=true
 
 
     # -- user customizations -------------------------------------------------------
