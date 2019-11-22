@@ -78,6 +78,8 @@ in
 
     # Languages
     dart
+    texlive.combined.scheme-full
+    texlab
 
     # Fonts
     iosevka
