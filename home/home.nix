@@ -38,8 +38,7 @@ in
     gitAndTools.gita
     gnumake
     gopass
-    python3Packages.jedi
-    python3Packages.python-language-server
+    python3Packages.black
     pandoc
     pass
     passff-host

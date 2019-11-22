@@ -7,9 +7,13 @@ let unstableTarball =
     matplotlib
     notebook
     numpy
+    rope
     setuptools
     scipy
+    sympy
     cython
+    jedi
+    python-language-server
   ];
   my-python3Full = unstable.python3Full.withPackages my-py-packages;
 in
