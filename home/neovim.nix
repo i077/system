@@ -39,8 +39,7 @@ in
       # Languages
       ale                           # Async linting framework
       deoplete-nvim                 # Dark-powered async completion framework
-      # deoplete-jedi
-      LanguageClient-neovim	        # Integrations with language clients, used with deoplete
+      LanguageClient-neovim	        # Integrations with language servers, used with deoplete
       polyglot		                # Multiple language support
       vimtex			            # LaTeX support
       vim-pandoc                    # Pandoc support

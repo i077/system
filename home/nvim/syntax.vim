@@ -3,8 +3,13 @@ let g:deoplete#enable_at_startup = 1
 
 "" LanguageClient
 let g:LanguageClient_serverCommands = {
-    \ 'python': ['/home/imran/.nix-profile/bin/pyls'],
+    \ 'python': ['/run/current-system/sw/bin/pyls'],
+    \ 'tex': ['/home/imran/.nix-profile/bin/texlab'],
     \ }
+"" Don't nag me on every little hint
+let g:LanguageClient_diagnosticsMaxSeverity = "Warning"
+"" Disable virtual text
+let g:LanguageClient_useVirtualText = 0
 
 "" Vimtex
 let g:vimtex_enabled = 1

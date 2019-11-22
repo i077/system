@@ -58,12 +58,13 @@ function! s:denite_my_settings() abort
   \ denite#do_map('toggle_select').'j'
 endfunction
 " Files buffer
-noremap <silent> <c-P> :Denite -start-filter -vertical-preview file/rec<CR>
+noremap <silent> <c-P> :Files<CR>
 " Lines buffer
-noremap <silent> <m-p> :Denite -start-filter line<CR>
+noremap <silent> <m-p> :Lines<CR>
 
-" ALE
-nnoremap <silent> <F5> :ALEDetail<CR>
+" LanguageClient
+nnoremap <silent> <leader>s :call LanguageClient_contextMenu()<CR>
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 
 " Run Dispatch job
 nnoremap <silent> <leader>m :Dispatch!<CR>
