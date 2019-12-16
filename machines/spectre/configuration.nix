@@ -136,14 +136,22 @@ in
     pkg-config
     psmisc
     my-python3Full
-    unstable.python3Packages.pip
     powertop
     qt5.qtbase
+    rclone
     ripgrep
     unzip
     wget
     yarn
+
+    manpages
+    stdmanpages
   ];
+
+  documentation = {
+    dev.enable = true;
+    man.enable = true;
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
