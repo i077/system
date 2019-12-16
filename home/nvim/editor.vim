@@ -33,6 +33,9 @@ set wrap linebreak
 " Show results of :substitute
 set inccommand=nosplit
 
+" Do case insentitive search unless capital letter present
+set smartcase
+
 " Compatibility with COC
 set shell=/bin/sh
 unlet g:loaded_node_provider

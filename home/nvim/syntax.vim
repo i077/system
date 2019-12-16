@@ -11,6 +11,14 @@ let g:LanguageClient_diagnosticsMaxSeverity = "Warning"
 "" Disable virtual text
 let g:LanguageClient_useVirtualText = 0
 
+"" ALE
+"" Disable for languages that LanguageClient covers
+"" (offers superior functionality)
+let g:ale_linters = {
+    \ 'python': [],
+    \ 'tex': [],
+    \ }
+
 "" Vimtex
 let g:vimtex_enabled = 1
 " vimtex neovim remote support

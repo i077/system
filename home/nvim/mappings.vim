@@ -86,3 +86,6 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gD <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
+" In markdown, align tables
+au FileType markdown vmap <silent> <Leader><Bslash> :EasyAlign*<Bar><Enter>
