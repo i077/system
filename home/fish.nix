@@ -39,4 +39,7 @@ in
       fzf_key_bindings
     '';
   };
+
+  # Enable direnv integration with fish
+  programs.direnv.enableFishIntegration = true;
 }

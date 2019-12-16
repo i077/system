@@ -113,6 +113,16 @@ in
     custompkgs.write_stylus
   ];
 
+  services.lorri.enable = true;
+
+  # Password Store
+  programs.password-store = {
+    enable = true;
+    settings = {
+      PASSWORD_STORE_DIR = "/home/imran/.password-store";
+    };
+  };
+
   # Alacritty
   programs.alacritty = {
     enable = true;
