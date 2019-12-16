@@ -16,6 +16,11 @@ let unstableTarball =
     python-language-server
   ];
   my-python3Full = unstable.python3Full.withPackages my-py-packages;
+
+  # Have Firefox use PassFF
+  my-firefox = unstable.firefox.override {
+    extraNativeMessagingHosts = with pkgs; [ passff-host ];
+  };
 in
 {
   imports =
@@ -108,7 +113,7 @@ in
     acpi
     binutils
     file
-    firefox
+    my-firefox
     freetype
     gdb
     gitFull
