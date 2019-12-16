@@ -25,7 +25,9 @@ in
 {
   imports =
     [
+      ./backup.nix
       ./hardware-configuration.nix
+      ./keybase.nix
       ./printing.nix
       ./services.nix
       ./yubikey.nix

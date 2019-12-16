@@ -32,6 +32,8 @@ in
   home.packages = with unstable; [
     # Command-line utilities
     bat
+    ctags
+    direnv
     exa
     fortune
     fzf
@@ -40,11 +42,10 @@ in
     gopass
     python3Packages.black
     pandoc
-    pass
     passff-host
     pipenv
+    pypi2nix
     tmuxPlugins.resurrect
-    tectonic
     todoist
     tomb
     neovim-remote
@@ -60,7 +61,6 @@ in
     nasc
     rhythmbox
     standardnotes
-    station
     sublime-merge
     jetbrains.idea-community
     jetbrains.pycharm-community
