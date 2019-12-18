@@ -1,21 +1,22 @@
 { config, pkgs, ... }:
 
 with pkgs;
-let unstableTarball = 
-  fetchTarball https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz;
-  my-py-packages = python-packages: with python-packages; [
+let
+  unstableTarball = fetchTarball https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz;
+
+  my-python3Full = unstable.python3Full.withPackages (ps: with ps; [
     matplotlib
     notebook
     numpy
     rope
     setuptools
     scipy
+    scikitlearn
     sympy
     cython
     jedi
     python-language-server
-  ];
-  my-python3Full = unstable.python3Full.withPackages my-py-packages;
+  ]);
 
   # Have Firefox use PassFF
   my-firefox = unstable.firefox.override {
