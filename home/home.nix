@@ -7,13 +7,8 @@ let
   custompkgs = import ../packages {};
 in
 {
-  imports = [
-    ./fish.nix
-    ./git.nix
-    ./gnome.nix
-    ./neovim.nix
-    ./tmux.nix
-  ];
+  imports = with builtins;
+    map (name: ./configurations + "/${name}") (attrNames (readDir ./configurations));
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -86,6 +81,7 @@ in
     inter-ui
     roboto
     roboto-mono
+    ubuntu_font_family
 
     # Python packages
     python3Packages.powerline
@@ -99,8 +95,11 @@ in
     gnomeExtensions.gsconnect
     gnomeExtensions.mpris-indicator-button
     gnomeExtensions.topicons-plus
+    gnomeExtensions.night-theme-switcher
     equilux-theme
     pantheon.elementary-icon-theme
+    pantheon.elementary-gtk-theme
+    pantheon.elementary-sound-theme
   ] ++ 
   # Custom packages from above (defined in ./packages/)
   [
@@ -134,6 +133,8 @@ in
       font.italic.family = "Iosevka";
     };
   };
+
+  home.file.".config/kitty/kitty.conf".source = ./kitty.conf;
 
   # Todoist config
   home.file.".todoist.config.json".text = ''

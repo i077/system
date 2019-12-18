@@ -1,7 +1,7 @@
 { config, pkgs, ...}:
 
 let
-  custompkgs = import ../packages {};
+  custompkgs = import ../../packages {};
 in
 {
   programs.fish = {
@@ -12,9 +12,9 @@ in
       hm = "home-manager";
       l = "exa";
       la = "exa -a";
-      ll = "exa -al";
+      ll = "exa -l";
       lL = "exa -algiSH --git";
-      lt = "exa -alT";
+      lt = "exa -lT";
       t = "tmux";
       ta = "tmux a -t";
       td = "todoist";

@@ -2,7 +2,7 @@
 
 let
   unstable = import <unstable> {};
-  readVimSection = file: builtins.readFile (./nvim + "/${file}.vim");
+  readVimSection = file: builtins.readFile (./. + "/${file}.vim");
 in
 {
   programs.neovim = {
