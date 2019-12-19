@@ -1,8 +1,7 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
-{
+lib.mkIf config.programs.git.enable {
   programs.git = {
-    enable = true;
     userName = "Imran Hossain";
     userEmail = "imran3740@gmail.com";
     signing.key = "211F871962EA405B";

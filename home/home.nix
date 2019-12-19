@@ -40,7 +40,6 @@ in
     passff-host
     pipenv
     pypi2nix
-    tmuxPlugins.resurrect
     todoist
     tomb
     neovim-remote
@@ -112,27 +111,15 @@ in
     custompkgs.write_stylus
   ];
 
+  # Enabled programs and services (respective configs are in ./configurations)
+  programs.alacritty.enable = true;
+  programs.fish.enable = true;
+  programs.git.enable = true;
+  programs.password-store.enable = true;
+  programs.tmux.enable = true;
+  programs.zathura.enable = true;
+
   services.lorri.enable = true;
-
-  # Password Store
-  programs.password-store = {
-    enable = true;
-    settings = {
-      PASSWORD_STORE_DIR = "/home/imran/.password-store";
-    };
-  };
-
-  # Alacritty
-  programs.alacritty = {
-    enable = true;
-    settings = {
-      window.decorations = "none";
-      background_opacity = 0.8;
-      font.normal.family = "Iosevka";
-      font.bold.family = "Iosevka";
-      font.italic.family = "Iosevka";
-    };
-  };
 
   home.file.".config/kitty/kitty.conf".source = ./kitty.conf;
 
@@ -143,11 +130,6 @@ in
       "color": "true"
     }
   '';
-
-  # Zathura
-  programs.zathura = {
-    enable = true;
-  };
 
   # Fonts
   fonts.fontconfig.enable = true;

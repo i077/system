@@ -1,15 +1,15 @@
-{ config, pkgs, ...}:
+{ config, lib, pkgs, ...}:
 
 let
   omt_repo = builtins.fetchGit {
     url = https://github.com/gpakosz/.tmux;
-    rev = "e0a45082ebb5381e585f7a41de2993a7789b9448";
+    rev = "f4fc2730cf1a2ae26ebf3707548945a73cd74ff1";
   };
-in
-{
-  programs.tmux = {
-    enable = true;
-  };
+
+  unstable = import <unstable> {};
+in lib.mkIf config.programs.tmux.enable {
+  # Use tmux from unstable channel
+  programs.tmux.package = unstable.tmux;
 
   # Use oh my tmux config
   home.file.".tmux.conf".source = omt_repo.outPath + "/.tmux.conf";

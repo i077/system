@@ -1,12 +1,9 @@
-{ config, pkgs, ...}:
+{ config, lib, pkgs, ...}:
 
 let
   custompkgs = import ../../packages {};
-in
-{
+in lib.mkIf config.programs.fish.enable {
   programs.fish = {
-    enable = true;
-
     shellAbbrs = {
       g = "git";
       hm = "home-manager";

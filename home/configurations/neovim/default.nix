@@ -1,12 +1,10 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   unstable = import <unstable> {};
   readVimSection = file: builtins.readFile (./. + "/${file}.vim");
-in
-{
+in lib.mkIf config.programs.neovim.enable {
   programs.neovim = {
-    enable = true;
     package = unstable.neovim;
     plugins = with unstable.vimPlugins; [
       # Editor
