@@ -50,7 +50,6 @@ in
     brscan4
     gnome3.geary
     gitg
-    kitty
     libreoffice-fresh
     nasc
     rhythmbox
@@ -76,10 +75,10 @@ in
     texlab
 
     # Fonts
+    corefonts # Microsoft core fonts for Web
     iosevka
     inter-ui
-    roboto
-    roboto-mono
+    roboto roboto-mono
     ubuntu_font_family
 
     # Python packages
@@ -115,13 +114,12 @@ in
   programs.alacritty.enable = true;
   programs.fish.enable = true;
   programs.git.enable = true;
+  programs.neovim.enable = true;
   programs.password-store.enable = true;
   programs.tmux.enable = true;
   programs.zathura.enable = true;
 
   services.lorri.enable = true;
-
-  home.file.".config/kitty/kitty.conf".source = ./kitty.conf;
 
   # Todoist config
   home.file.".todoist.config.json".text = ''
