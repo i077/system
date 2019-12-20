@@ -112,6 +112,7 @@ in
 
   # Enabled programs and services (respective configs are in ./configurations)
   programs.alacritty.enable = true;
+  programs.firefox.enable = true;
   programs.fish.enable = true;
   programs.git.enable = true;
   programs.neovim.enable = true;

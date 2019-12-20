@@ -17,11 +17,6 @@ let
     jedi
     python-language-server
   ]);
-
-  # Have Firefox use PassFF
-  my-firefox = unstable.firefox.override {
-    extraNativeMessagingHosts = with pkgs; [ passff-host ];
-  };
 in
 {
   imports =
@@ -119,7 +114,6 @@ in
     acpi
     binutils
     file
-    my-firefox
     freetype
     gdb
     gitFull
