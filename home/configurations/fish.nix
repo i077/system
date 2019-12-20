@@ -5,24 +5,25 @@ let
 in lib.mkIf config.programs.fish.enable {
   programs.fish = {
     shellAbbrs = {
-      g = "git";
-      hm = "home-manager";
-      l = "exa";
-      la = "exa -a";
-      ll = "exa -l";
-      lL = "exa -algiSH --git";
-      lt = "exa -lT";
-      t = "tmux";
-      ta = "tmux a -t";
-      td = "todoist";
+      g       = "git";
+      hm      = "home-manager";
+      l       = "exa";
+      ls      = "exa";
+      la      = "exa -a";
+      ll      = "exa -l";
+      lL      = "exa -algiSH --git";
+      lt      = "exa -lT";
+      t       = "tmux";
+      ta      = "tmux a -t";
+      td      = "todoist";
       userctl = "systemctl --user";
-      v = "nvim";
+      v       = "nvim";
     };
 
     shellAliases = {
       # NixOS management
       hms = "home-manager switch";
-      nxu = "nix-channel --update && sudo nix-channel --update";
+      nxu = "sudo nix-channel --update";
       nxs = "sudo nixos-rebuild switch";
       nxb = "sudo nixos-rebuild boot";
 
