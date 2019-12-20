@@ -24,11 +24,32 @@ Files are split into several directories.
 ## Usage
 
 To bootstrap a NixOS system with an existing configuration (e.g. `spectre`, my current laptop),
-clone this repository to `/etc/nixos` on the root filesystem, then add a `configuration.nix` with:
+from the installer, mount the target filesystem (assumed here to be on `/mnt`).
+Clone this repository to `/etc/nixos` on the target filesystem
+(alternatively, clone it elsewhere on the filesystem and symlink `/etc/nixos` to it),
+then add a top-level `configuration.nix` with:
+
 ```nix
 {
   imports = [ ./machines/<name> ];
 }
 ```
-where `<name>` is the name of the configuration (e.g. `spectre`).
-Then run `nixos-rebuild`.
+
+Replace `<name>` with the name of the configuration, a subdirectory of `machines/` (e.g. `spectre`).
+Everything in `secrets/` needs to be loaded from elsewhere,
+and two channels `<home-manager>` and `<unstable>` need to be added.
+
+```sh
+$ nix-channel --add https://github.com/rycee/home-manager/archive/master.tar.gz home-manager
+$ nix-channel --add https://nixos.org/channels/nixos-unstable unstable
+```
+
+The hardware configuration may also need to be regenerated to reflect UUID changes, etc.
+Generate it, then move it to the appropriate directory.
+
+```sh
+$ nixos-generate-config --root /mnt  # Creates /etc/nixos/hardware-configuration.nix
+$ mv /mnt/etc/nixos/hardware-configuration.nix /mnt/etc/nixos/machines/<name>/
+```
+
+Finally, run `nixos-install`.
