@@ -15,7 +15,7 @@
       "--exclude-caches"
     ];
 
-    passwordFile = "/home/imran/system/secrets/restic_backup_pass";
+    passwordFile = "/etc/nixos/secrets/restic_backup_pass";
 
     # Run every day
     timerConfig = {
@@ -29,7 +29,7 @@
   ];
   systemd.services.restic-backups-spectre.environment = {
     RCLONE_CONFIG_ONEDRIVE_TYPE = "onedrive";
-    RCLONE_CONFIG_ONEDRIVE_TOKEN = builtins.readFile /home/imran/system/secrets/rclone_config_onedrive_token;
+    RCLONE_CONFIG_ONEDRIVE_TOKEN = builtins.readFile ../../secrets/rclone_config_onedrive_token;
     RCLONE_CONFIG_ONEDRIVE_DRIVE_ID = "a2694ab35f8cf64";
     RCLONE_CONFIG_ONEDRIVE_DRIVE_TYPE = "personal";
   };
