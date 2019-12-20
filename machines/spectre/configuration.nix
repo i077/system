@@ -33,6 +33,9 @@ in
       ./services.nix
       ./yubikey.nix
 
+      # Home manager
+      <home-manager/nixos>
+
       # Used for Brother scanners
       <nixpkgs/nixos/modules/services/hardware/sane_extra_backends/brscan4.nix>
     ];
@@ -67,8 +70,8 @@ in
     # Allow unfree software
     allowUnfree = true;
 
-    # Allow some packages from unstable, so less essential packages get upgraded more quickly
     packageOverrides = pkgs: {
+      # Allow some packages from unstable, so less essential packages get upgraded more quickly
       unstable = import unstableTarball {
         config = config.nixpkgs.config;
       };
@@ -159,12 +162,14 @@ in
   # programs.mtr.enable = true;
   programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
 
-  # Define the user
+  # Users
   users.users.imran = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" ];
     shell = "/run/current-system/sw/bin/fish";
   };
+  home-manager.users.imran = import /home/imran/system/home/home.nix;
+  home-manager.useUserPackages = true;
 
   # Fish shell
   programs.fish.enable = true;
