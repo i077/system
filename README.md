@@ -20,3 +20,15 @@ Files are split into several directories.
   (yet).
 
 - Some code may contain references to files in `secrets/` which is a directory not tracked here for obvious reasons.
+
+## Usage
+
+To bootstrap a NixOS system with an existing configuration (e.g. `spectre`, my current laptop),
+clone this repository to `/etc/nixos` on the root filesystem, then add a `configuration.nix` with:
+```nix
+{
+  imports = [ ./machines/<name> ];
+}
+```
+where `<name>` is the name of the configuration (e.g. `spectre`).
+Then run `nixos-rebuild`.
