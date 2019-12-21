@@ -101,26 +101,11 @@ in
     # Node packages
     nodePackages.neovim
 
-    # GNOME Shell extensions
-    gnomeExtensions.dash-to-dock
-    gnomeExtensions.gsconnect
-    gnomeExtensions.mpris-indicator-button
-    gnomeExtensions.topicons-plus
-    gnomeExtensions.night-theme-switcher
+    # GTK
     equilux-theme
     pantheon.elementary-icon-theme
     pantheon.elementary-gtk-theme
     pantheon.elementary-sound-theme
-  ] ++ 
-  # Custom packages from above (defined in ./packages/)
-  [
-    custompkgs.budspencer
-
-    custompkgs.gnomeExtensions.paperwm 
-    custompkgs.gnomeExtensions.timepp
-    custompkgs.gnomeExtensions.switcher
-
-    custompkgs.write_stylus
   ];
 
   # Enabled programs and services (respective configs are in ./configurations)
@@ -139,6 +124,9 @@ in
   systemd.user.startServices = true;
   services.gpg-agent.enable = true;
   services.lorri.enable = true;
+
+  xsession.enable = true;
+  xsession.windowManager.i3.enable = true;
 
   # Todoist config
   home.file.".todoist.config.json".text = ''
