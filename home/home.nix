@@ -2,7 +2,7 @@
 
 let
   unstable = import <unstable> {
-    config.allowUnfree = true;
+    config = config.nixpkgs.config;
   };
   custompkgs = import ../packages {};
 in
@@ -16,25 +16,26 @@ in
   # Set environment variables
   home.sessionVariables = {
     EDITOR = "nvim";
+    PAGER = "most";
   };
 
   # Allow unfree software
   nixpkgs.config = {
     allowUnfree = true;
+
+    packageOverrides = pkgs: {
+      write_stylus = custompkgs.write_stylus;
+    };
   };
 
   # User packages
   home.packages = with unstable; [
     # Command-line utilities
-    bat
     ctags
-    direnv
     exa
-    fortune
-    fzf
-    gitAndTools.gita
     gnumake
     gopass
+    most
     python3Packages.black
     pandoc
     passff-host
@@ -49,7 +50,6 @@ in
     android-studio
     brscan4
     gnome3.geary
-    gitg
     libreoffice-fresh
     nasc
     rhythmbox
@@ -64,6 +64,7 @@ in
     pinta
     vlc
     vscode-with-extensions
+    write_stylus
     zotero
 
     # Games
@@ -112,14 +113,19 @@ in
 
   # Enabled programs and services (respective configs are in ./configurations)
   programs.alacritty.enable = true;
+  programs.bat.enable = true;
+  programs.direnv.enable = true;
   programs.firefox.enable = true;
   programs.fish.enable = true;
+  programs.fzf.enable = true;
   programs.git.enable = true;
   programs.neovim.enable = true;
   programs.password-store.enable = true;
   programs.tmux.enable = true;
   programs.zathura.enable = true;
 
+  systemd.user.startServices = true;
+  services.gpg-agent.enable = true;
   services.lorri.enable = true;
 
   # Todoist config

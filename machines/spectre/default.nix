@@ -118,7 +118,6 @@ in
     gdb
     gitFull
     gnome3.gnome-tweak-tool
-    gnupg
     htop
     unstable.interception-tools
     unstable.openjdk12
@@ -151,18 +150,13 @@ in
     man.enable = true;
   };
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
-
   # Users
   users.users.imran = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
     shell = "/run/current-system/sw/bin/fish";
   };
-  home-manager.users.imran = import /home/imran/system/home/home.nix;
+  home-manager.users.imran = import ../../home/home.nix;
   home-manager.useUserPackages = true;
 
   # Fish shell
