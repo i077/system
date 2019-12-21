@@ -5,7 +5,7 @@ let
 in lib.mkIf config.services.polybar.enable {
   services.polybar.package = pkgs.polybar.override {
     i3GapsSupport = true;
-    alsaSupport = true;
+    pulseSupport = true;
   };
   services.polybar.script = "polybar bar1 &";
 
@@ -34,7 +34,7 @@ in lib.mkIf config.services.polybar.enable {
       line-size = 3;
 
       modules-left = "i3 sep xwindow";
-      modules-right = "wlan sep cpu loadavg sep battery sep date sep";
+      modules-right = "pulseaudio sep wlan sep memory sep cpu loadavg sep battery sep date sep";
     };
 
     # Modules
@@ -177,6 +177,30 @@ in lib.mkIf config.services.polybar.enable {
       format-prefix = " ";
       format-prefix-foreground = colors.fg1;
       format-underline = colors.secondary;
+    };
+
+    "module/memory" = {
+      type = "internal/memory";
+      interval = 5;
+      format-prefix = " ";
+      format-prefix-foreground = colors.fg1;
+      format-underline = colors.secondary;
+      label = "%percentage_used%%, %gb_used%";
+    };
+
+    "module/pulseaudio" = {
+      type = "internal/pulseaudio";
+      format-volume = "<ramp-volume> <label-volume>";
+      label-volume = "%percentage%%";
+      label-volume-foreground = colors.fg1;
+      format-underline = colors.tertiary;
+
+      label-muted = "ﱝ --";
+      label-muted-foreground = colors.fg3;
+
+      ramp-volume-0 = "奄";
+      ramp-volume-1 = "奔";
+      ramp-volume-2 = "墳";
     };
 
     "module/wlan" = {
