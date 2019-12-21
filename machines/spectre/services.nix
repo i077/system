@@ -12,8 +12,21 @@
   # Enable touchpad support.
   services.xserver.libinput.enable = true;
 
-  # GDM + GNOME 3
-  services.xserver.displayManager.gdm.enable = true;
+  # Display manager
+  services.xserver.displayManager.lightdm = {
+    enable = true;
+  };
   services.xserver.desktopManager.gnome3.enable = true;
-  services.dbus.packages = with pkgs; [ gnome3.dconf ];
+  # services.dbus.packages = with pkgs; [ gnome3.dconf ];
+
+  # Caps2esc
+  services.interception-tools = {
+    enable = true;
+    plugins = with pkgs.interception-tools-plugins; [
+      caps2esc
+    ];
+  };
+
+  # Hide cursor (on X) when inactive
+  services.xbanish.enable = true;
 }
