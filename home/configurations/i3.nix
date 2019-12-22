@@ -60,4 +60,14 @@ in lib.mkIf config.xsession.windowManager.i3.enable {
 
   # Status bar
   services.polybar.enable = true;
+
+  # Random backgrounds
+  services.random-background = {
+    enable = true;
+    imageDirectory = "%h/Pictures/walls";
+    interval = "6h";
+  };
+
+  # Redshift at night
+  services.redshift.enable = true;
 }
