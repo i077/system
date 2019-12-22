@@ -45,14 +45,14 @@ let
     vim-scheme = "gruvbox";
   };
 
-  nord = {
+  nord = rec {
     dark0 = "#2e3440";
     dark1 = "#3b4252";
     dark2 = "#434c5e";
     dark3 = "#4c566a";
-    light0 = "#d8dee9";
+    light0 = "#eceff4";
     light1 = "#e5e9f0";
-    light2 = "#eceff4";
+    light2 = "#d8dee9";
     blue0 = "#8fbcbb";
     blue1 = "#88c0d0";
     blue2 = "#81a1c1";
@@ -63,6 +63,23 @@ let
     green = "#a3be8c";
     purple = "#b48ead";
 
+    bg0 = dark0;
+    bg1 = dark1;
+    bg2 = dark2;
+    bg3 = dark3;
+    fg0 = light0;
+    fg1 = light1;
+    fg2 = light2;
+    fg3 = blue2;
+    alert = red;
+    primary = blue1;
+    secondary = green;
+    tertiary = purple;
+    quaternary = orange;
+    quinary = yellow;
+    senary = blue3;
+    septary = blue0;
+
     vim-scheme = "nord";
   };
-in gruvbox-dark
+in nord
