@@ -6,6 +6,8 @@ let
     rev = "f4fc2730cf1a2ae26ebf3707548945a73cd74ff1";
   };
 
+  colors = import ../colors.nix;
+
   unstable = import <unstable> {};
 in lib.mkIf config.programs.tmux.enable {
   # Use tmux from unstable channel
@@ -48,7 +50,7 @@ in lib.mkIf config.programs.tmux.enable {
     # RGB 24-bit colour support (tmux >= 2.2), possible values are:
     #  - true
     #  - false (default)
-    tmux_conf_theme_24b_colour=false
+    tmux_conf_theme_24b_colour=true
 
     # window style
     tmux_conf_theme_window_fg='default'
@@ -61,7 +63,7 @@ in lib.mkIf config.programs.tmux.enable {
 
     # focused pane colours:
     tmux_conf_theme_focused_pane_fg='default'
-    tmux_conf_theme_focused_pane_bg='#0087d7'               # light blue
+    tmux_conf_theme_focused_pane_bg='${colors.bg3}'
 
     # pane border style, possible values are:
     #   - thin (default)
@@ -69,31 +71,31 @@ in lib.mkIf config.programs.tmux.enable {
     tmux_conf_theme_pane_border_style=thin
 
     # pane borders colours:
-    tmux_conf_theme_pane_border='#444444'                   # gray
-    tmux_conf_theme_pane_active_border='#00afff'            # light blue
+    tmux_conf_theme_pane_border='${colors.bg1}'
+    tmux_conf_theme_pane_active_border='${colors.primary}'
 
     # pane indicator colours
-    tmux_conf_theme_pane_indicator='#00afff'                # light blue
-    tmux_conf_theme_pane_active_indicator='#00afff'         # light blue
+    tmux_conf_theme_pane_indicator='${colors.primary}'
+    tmux_conf_theme_pane_active_indicator='${colors.primary}'
 
     # status line style
-    tmux_conf_theme_message_fg='#000000'                    # black
-    tmux_conf_theme_message_bg='#ffff00'                    # yellow
+    tmux_conf_theme_message_fg='${colors.bg0}'
+    tmux_conf_theme_message_bg='${colors.quinary}'
     tmux_conf_theme_message_attr='bold'
 
     # status line command style (<prefix> : Escape)
-    tmux_conf_theme_message_command_fg='#ffff00'            # yellow
-    tmux_conf_theme_message_command_bg='#000000'            # black
+    tmux_conf_theme_message_command_fg='${colors.quinary}'
+    tmux_conf_theme_message_command_bg='${colors.bg0}'
     tmux_conf_theme_message_command_attr='bold'
 
     # window modes style
-    tmux_conf_theme_mode_fg='#000000'                       # black
-    tmux_conf_theme_mode_bg='#ffff00'                       # yellow
+    tmux_conf_theme_mode_fg='${colors.bg0}'
+    tmux_conf_theme_mode_bg='${colors.primary}'
     tmux_conf_theme_mode_attr='bold'
 
     # status line style
-    tmux_conf_theme_status_fg='#8a8a8a'                     # light gray
-    tmux_conf_theme_status_bg='#080808'                     # dark gray
+    tmux_conf_theme_status_fg='${colors.fg1}'                     # light gray
+    tmux_conf_theme_status_bg='${colors.bg1}'                     # dark gray
     tmux_conf_theme_status_attr='none'
 
     # terminal title
@@ -114,12 +116,12 @@ in lib.mkIf config.programs.tmux.enable {
     #     - #{hostname_ssh}
     #     - #{username}
     #     - #{username_ssh}
-    tmux_conf_theme_window_status_fg='#8a8a8a'              # light gray
-    tmux_conf_theme_window_status_bg='#080808'              # dark gray
+    tmux_conf_theme_window_status_fg='${colors.fg3}'
+    tmux_conf_theme_window_status_bg='${colors.bg1}'
     tmux_conf_theme_window_status_attr='none'
-    tmux_conf_theme_window_status_format='#I #W'
+    # tmux_conf_theme_window_status_format='#I #W'
     #tmux_conf_theme_window_status_format='#{circled_window_index} #W'
-    #tmux_conf_theme_window_status_format='#I #W#{?window_bell_flag,🔔,}#{?window_zoomed_flag,🔍,}'
+    tmux_conf_theme_window_status_format='#I #W#{?window_bell_flag,🔔,}#{?window_zoomed_flag,🔍,}'
 
     # window current status style
     #   - built-in variables are:
@@ -129,12 +131,12 @@ in lib.mkIf config.programs.tmux.enable {
     #     - #{hostname_ssh}
     #     - #{username}
     #     - #{username_ssh}
-    tmux_conf_theme_window_status_current_fg='#000000'      # black
-    tmux_conf_theme_window_status_current_bg='#00afff'      # light blue
+    tmux_conf_theme_window_status_current_fg='${colors.bg1}'
+    tmux_conf_theme_window_status_current_bg='${colors.primary}'
     tmux_conf_theme_window_status_current_attr='bold'
-    tmux_conf_theme_window_status_current_format='#I #W'
+    # tmux_conf_theme_window_status_current_format='#I #W'
     #tmux_conf_theme_window_status_current_format='#{circled_window_index} #W'
-    #tmux_conf_theme_window_status_current_format='#I #W#{?window_zoomed_flag,🔍,}'
+    tmux_conf_theme_window_status_current_format='#I #W#{?window_zoomed_flag,🔍,}'
 
     # window activity status style
     tmux_conf_theme_window_status_activity_fg='default'
@@ -147,7 +149,7 @@ in lib.mkIf config.programs.tmux.enable {
     tmux_conf_theme_window_status_bell_attr='blink,bold'
 
     # window last status style
-    tmux_conf_theme_window_status_last_fg='#00afff'         # light blue
+    tmux_conf_theme_window_status_last_fg='${colors.fg2}'
     tmux_conf_theme_window_status_last_bg='default'
     tmux_conf_theme_window_status_last_attr='none'
 
@@ -189,13 +191,13 @@ in lib.mkIf config.programs.tmux.enable {
     tmux_conf_theme_status_right='#{prefix}#{pairing}#{synchronized} #{?battery_status, #{battery_status},}#{?battery_hbar, #{battery_hbar},}#{?battery_percentage, #{battery_percentage},} , %R , %d %b | #{loadavg} , ↑#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} | #{username}#{root} | #{hostname} '
 
     # status left style
-    tmux_conf_theme_status_left_fg='#000000,#e4e4e4,#e4e4e4'  # black, white , white
-    tmux_conf_theme_status_left_bg='#ffff00,#ff00af,#00afff'  # yellow, pink, white blue
+    tmux_conf_theme_status_left_fg='${colors.bg0},#e4e4e4,#e4e4e4'  # black, white , white
+    tmux_conf_theme_status_left_bg='${colors.fg1},#ff00af,#00afff'  # yellow, pink, white blue
     tmux_conf_theme_status_left_attr='bold,none,none'
 
     # status right style
-    tmux_conf_theme_status_right_fg='#8a8a8a,#e4e4e4,#e4e4e4,#000000' # light gray, white, white, black
-    tmux_conf_theme_status_right_bg='#080808,#0b3c20,#d70000,#e4e4e4' # dark gray, deep green, red, white
+    tmux_conf_theme_status_right_fg='${colors.fg1},${colors.fg2},${colors.bg1},${colors.bg0}'
+    tmux_conf_theme_status_right_bg='${colors.bg0},${colors.bg2},${colors.primary},${colors.fg1}'
     tmux_conf_theme_status_right_attr='none,none,none,bold'
 
     # pairing indicator
@@ -245,7 +247,7 @@ in lib.mkIf config.programs.tmux.enable {
     #   - heat
     #   - 'colour_low,colour_half,colour_full'
     tmux_conf_battery_hbar_palette='gradient'
-    #tmux_conf_battery_hbar_palette='#d70000,#ff5f00,#5fff00'  # red, orange, green
+    tmux_conf_battery_hbar_palette='${colors.alert},${colors.quaternary},${colors.secondary}'
 
     # battery vbar palette, possible values are:
     #   - gradient (default)
@@ -300,5 +302,8 @@ in lib.mkIf config.programs.tmux.enable {
 
     # move status line to top
     #set -g status-position top
+
+    # Set tmux to prefer RGB
+    set -as terminal-overrides ",alacritty:RGB"
   '';
 }
