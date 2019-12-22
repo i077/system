@@ -4,7 +4,6 @@
 set background=dark
 let ayucolor="dark"
 let g:gruvbox_contrast_dark="hard"
-colorscheme gruvbox
 set termguicolors
 
 "" Airline config

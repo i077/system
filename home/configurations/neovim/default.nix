@@ -2,6 +2,7 @@
 
 let
   unstable = import <unstable> {};
+  colors = import ../../colors.nix;
   readVimSection = file: builtins.readFile (./. + "/${file}.vim");
 in lib.mkIf config.programs.neovim.enable {
   programs.neovim = {
@@ -29,7 +30,6 @@ in lib.mkIf config.programs.neovim.enable {
       vim-airline-themes            # Airline themes (automatches colorscheme)
       base16-vim                    # Base16
       falcon	                    # Falcon
-      gruvbox	                    # Gruvbox
       vim-monokai-pro               # Monokai Pro
       awesome-vim-colorschemes      # Collection of colorschemes
       solarized                     # Solarized
@@ -40,6 +40,7 @@ in lib.mkIf config.programs.neovim.enable {
       LanguageClient-neovim	        # Integrations with language servers, used with deoplete
       polyglot		                # Multiple language support
       vimtex			            # LaTeX support
+      vim-addon-nix                 # Nix language support
       vim-pandoc                    # Pandoc support
       vim-pandoc-syntax             # Pandoc syntax support
       vim-slime		        	    # Scheme support
@@ -56,6 +57,9 @@ in lib.mkIf config.programs.neovim.enable {
       ${readVimSection "mappings"}
       ${readVimSection "syntax"}
       ${readVimSection "functions"}
+
+      "" Set colorscheme from colors.nix
+      colorscheme ${colors.vim-scheme}
     '';
   };
 }
