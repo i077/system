@@ -34,7 +34,7 @@ in lib.mkIf config.services.polybar.enable {
       line-size = 3;
 
       modules-left = "i3 sep xwindow";
-      modules-right = "pulseaudio sep wlan sep memory sep cpu loadavg sep battery sep date sep";
+      modules-right = "pulseaudio sep wlan sep memory temperature sep cpu loadavg sep battery sep date sep";
     };
 
     # Modules
@@ -174,7 +174,7 @@ in lib.mkIf config.services.polybar.enable {
       type = "custom/script";
       exec = "${pkgs.coreutils}/bin/cut -d ' ' -f1,2,3 /proc/loadavg";
       interval = 5;
-      format-prefix = " ";
+      format-prefix = " ";
       format-prefix-foreground = colors.fg1;
       format-underline = colors.secondary;
     };
@@ -201,6 +201,28 @@ in lib.mkIf config.services.polybar.enable {
       ramp-volume-0 = "奄";
       ramp-volume-1 = "奔";
       ramp-volume-2 = "墳";
+    };
+
+    "module/temperature" = {
+      type = "internal/temperature";
+      thermal-zone = 6;
+      warn-temperature = 75;
+
+      format = "<ramp> <label>";
+      format-underline = colors.secondary;
+      format-warn = "<ramp> <label-warn>";
+      format-warn-underline = colors.alert;
+
+      label = "%temperature-c%";
+      label-warn = "%temperature-c%";
+      label-warn-foreground = colors.quinary;
+
+      ramp-0 = "";
+      ramp-1 = "";
+      ramp-2 = "";
+      ramp-3 = "";
+      ramp-4 = "";
+      ramp-foreground = colors.fg1;
     };
 
     "module/wlan" = {
