@@ -28,7 +28,6 @@ in
   # Set environment variables
   home.sessionVariables = {
     EDITOR = "nvim";
-    PAGER = "most";
   };
 
   # Allow unfree software
@@ -47,7 +46,6 @@ in
     exa
     gnumake
     gopass
-    most
     python3Packages.black
     pandoc
     passff-host
