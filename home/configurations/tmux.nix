@@ -12,6 +12,7 @@ let
 in lib.mkIf config.programs.tmux.enable {
   # Use tmux from unstable channel
   programs.tmux.package = unstable.tmux;
+  programs.tmux.tmuxp.enable = true;
 
   # Use oh my tmux config
   home.file.".tmux.conf".source = omt_repo.outPath + "/.tmux.conf";
@@ -158,10 +159,10 @@ in lib.mkIf config.programs.tmux.enable {
     #tmux_conf_theme_left_separator_sub='|'
     #tmux_conf_theme_right_separator_main='''
     #tmux_conf_theme_right_separator_sub='|'
-    tmux_conf_theme_left_separator_main='\uE0B0'  # /!\ you don't need to install Powerline
-    tmux_conf_theme_left_separator_sub='\uE0B1'   #   you only need fonts patched with
-    tmux_conf_theme_right_separator_main='\uE0B2' #   Powerline symbols or the standalone
-    tmux_conf_theme_right_separator_sub='\uE0B3'  #   PowerlineSymbols.otf font, see README.md
+    tmux_conf_theme_left_separator_main='\uE0BC'  # /!\ you don't need to install Powerline
+    tmux_conf_theme_left_separator_sub='\uE0BD'   #   you only need fonts patched with
+    tmux_conf_theme_right_separator_main='\uE0BA' #   Powerline symbols or the standalone
+    tmux_conf_theme_right_separator_sub='\uE0BB'  #   PowerlineSymbols.otf font, see README.md
 
     # status left/right content:
     #   - separate main sections with '|'
@@ -301,9 +302,9 @@ in lib.mkIf config.programs.tmux.enable {
     bind C-a send-prefix
 
     # move status line to top
-    #set -g status-position top
+    # set -g status-position top
 
-    # Set tmux to prefer RGB
+    # Tell tmux that alacritty can handle RGB
     set -as terminal-overrides ",alacritty:RGB"
   '';
 }
