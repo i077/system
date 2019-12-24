@@ -163,7 +163,7 @@ in
   # Users
   users.users.imran = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "wheel" "video" ];
     shell = "/run/current-system/sw/bin/fish";
   };
   home-manager.users.imran = import ../../home/home.nix;

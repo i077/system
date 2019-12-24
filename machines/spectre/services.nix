@@ -10,7 +10,13 @@
   services.xserver.layout = "us";
 
   # Enable touchpad support.
-  services.xserver.libinput.enable = true;
+  services.xserver.libinput = {
+    enable = true;
+
+    tapping = false;
+    naturalScrolling = true;
+    clickMethod = "clickfinger";
+  };
 
   # Display manager
   services.xserver.displayManager.lightdm = {
