@@ -2,7 +2,7 @@
 
 let
   unstable = import <unstable> {
-    config = config.nixpkgs.config;
+    config = { allowUnfree = true; };
   };
   custompkgs = import ../packages {};
   nerdfonts-iosevka = let version = "2.0.0"; in pkgs.fetchzip rec {
@@ -35,7 +35,8 @@ in
     allowUnfree = true;
 
     packageOverrides = pkgs: {
-      write_stylus = custompkgs.write_stylus;
+      unstable = import <unstable> { config.allowUnfree = true; };
+      alacritty = unstable.alacritty;
     };
   };
 
@@ -74,7 +75,7 @@ in
     pinta
     vlc
     vscode-with-extensions
-    write_stylus
+    custompkgs.write_stylus
     zotero
 
     # Games

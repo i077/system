@@ -6,14 +6,12 @@ let
     mapAttrs (name: value: "0x" + (removePrefix "#" value)) (import ../colors.nix);
 in lib.mkIf config.programs.alacritty.enable {
   programs.alacritty.settings = {
-    background_opacity = 0.8;
-
     font = {
       normal.family = "Iosevka";
       bold.family = "Iosevka";
       italic.family = "Iosevka";
 
-      size = 12.0;
+      size = 8;
     };
 
     colors = with myColors; {
