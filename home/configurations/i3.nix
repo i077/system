@@ -44,6 +44,55 @@ in lib.mkIf config.xsession.windowManager.i3.enable {
         childBorder = alert;
       };
     };
+
+    fonts = [ "Iosevka Nerd Font 9" "Inter UI 9" ];
+
+    keybindings = let
+        mod = config.xsession.windowManager.i3.config.modifier; 
+      in lib.mkOptionDefault {
+        # Launcher
+        "${mod}+d" = "exec rofi -show run";
+        "${mod}+Shift+d" = "exec rofi -show drun";
+        "${mod}+Tab" = "exec rofi -show window";
+        "${mod}+Shift+p" = "exec ${pkgs.rofi-pass}/bin/rofi-pass";
+
+        # Terminal
+        "${mod}+Return" = "exec alacritty";
+        "${mod}+Shift+Return" = "exec alacritty --class AlacrittyFloat";
+
+        # Volume/media controls
+        "XF86AudioRaiseVolume" = "exec ${pkgs.alsaUtils}/bin/amixer -q set Master 2%+ unmute";
+        "XF86AudioLowerVolume" = "exec ${pkgs.alsaUtils}/bin/amixer -q set Master 2%- unmute";
+        "XF86AudioMute" = "exec ${pkgs.alsaUtils}/bin/amixer -q set Master toggle";
+
+        # Brightness controls
+        "XF86MonBrightnessUp" = "exec light -A 10";
+        "XF86MonBrightnessDown" = "exec light -U 10";
+
+        # Printscreen
+        "Print" = "exec ${pkgs.maim}/bin/maim | ${pkgs.xclip}/bin/xclip -selection clipboard -t image/png";
+        "Shift+Print" = "exec ${pkgs.maim}/bin/maim -s | ${pkgs.xclip}/bin/xclip -selection clipboard -t image/png";
+        "Ctrl+Print" = "exec ${pkgs.maim}/bin/maim ~/Pictures/screen-$(date +%Y-%m-%dT%H-%M-%S).png";
+      };
+
+    floating = {
+      criteria = [
+        { class = "^AlacrittyFloat$"; }
+      ];
+    };
+
+    startup = [
+      { command = "${pkgs.lightlocker}/bin/light-locker --idle-hint"; }
+      { command = "systemctl --user restart polybar";
+        always = true; notification = false; }
+    ];
+  };
+
+  # Cursor
+  xsession.pointerCursor = {
+    package = pkgs.unstable.pantheon.elementary-icon-theme;
+    name = "Elementary";
+    size = 24;
   };
 
   # Automatic display configuration
