@@ -1,10 +1,9 @@
 { config, pkgs, ... }:
 
-with pkgs;
 let
   unstableTarball = fetchTarball https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz;
 
-  my-python3Full = unstable.python3Full.withPackages (ps: with ps; [
+  my-python3Full = pkgs.unstable.python3Full.withPackages (ps: with ps; [
     matplotlib
     notebook
     numpy
@@ -45,6 +44,9 @@ in
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  # Plymouth boot screen
+  boot.plymouth.enable = true;
 
   # Optimize for SSDs
   fileSystems."/".options = [ "discard" ];
@@ -115,6 +117,9 @@ in
   # Optimize nix store automatically
   nix.autoOptimiseStore = true;
 
+  # Grant sudoers rights with the nix daemon
+  nix.trustedUsers = [ "root" "@wheel" ];
+
   # System packages
   environment.systemPackages = with pkgs; [
     acpi
@@ -129,7 +134,6 @@ in
     unstable.openjdk12
     keybase-gui
     libsecret
-    light
     unstable.neovim
     nix-index
     nodejs
@@ -167,6 +171,9 @@ in
 
   # Fish shell
   programs.fish.enable = true;
+
+  # Backlight control
+  programs.light.enable = true;
 
   system.stateVersion = "19.03";
 }
