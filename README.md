@@ -19,7 +19,8 @@ Files are split into several directories.
 - `packages/` stores Nix expressions for packages that aren't in [nixpkgs](https://github.com/NixOS/nixpkgs)
   (yet).
 
-- Some code may contain references to files in `secrets/` which is a directory not tracked here for obvious reasons.
+- `secrets/` stores strings that are not publicly accessible (API tokens, etc).
+  Everything in this directory is encrypted with GPG via [git-crypt](https://github.com/AGWA/git-crypt).
 
 ## Usage
 
@@ -36,8 +37,12 @@ then add a top-level `configuration.nix` with:
 ```
 
 Replace `<name>` with the name of the configuration, a subdirectory of `machines/` (e.g. `spectre`).
-Everything in `secrets/` needs to be loaded from elsewhere,
-and two channels `<home-manager>` and `<unstable>` need to be added.
+
+To decrypt secrets, import the PGP private key and decrypt with `git-crypt`:
+
+```sh
+$ git-crypt unlock
+```
 
 ```sh
 $ nix-channel --add https://github.com/rycee/home-manager/archive/master.tar.gz home-manager

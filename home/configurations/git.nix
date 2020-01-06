@@ -1,5 +1,10 @@
 { config, lib, pkgs, ... }:
 
+let
+  unstable = import <unstable> {
+    config = { allowUnfree = true; };
+  };
+in
 lib.mkIf config.programs.git.enable {
   programs.git = {
     userName = "Imran Hossain";
@@ -24,4 +29,9 @@ lib.mkIf config.programs.git.enable {
       core.editor = "nvim";
     };
   };
+
+  # Add extra packages that extend git
+  home.packages = with unstable; [
+    git-crypt
+  ];
 }
