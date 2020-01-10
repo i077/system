@@ -40,15 +40,18 @@ in
   # User packages
   home.packages = with pkgs.unstable; [
     # Command-line utilities
+    python3Packages.black
     ctags
     exa
     gnumake
     gopass
-    python3Packages.black
+    hugo
     pandoc
     passff-host
+    pinentry
     pipenv
     pypi2nix
+    ranger
     todoist
     tomb
     neovim-remote
@@ -112,6 +115,7 @@ in
   programs.fish.enable = true;
   programs.fzf.enable = true;
   programs.git.enable = true;
+  programs.man.enable = true;
   programs.neovim.enable = true;
   programs.password-store.enable = true;
   programs.tmux.enable = true;
@@ -120,6 +124,7 @@ in
   systemd.user.startServices = true;
   services.gpg-agent.enable = true;
   services.lorri.enable = true;
+  services.udiskie.enable = true;
 
   xsession.enable = true;
   xsession.windowManager.i3.enable = true;
