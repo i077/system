@@ -38,7 +38,7 @@ in
 
   # Swapfile
   swapDevices = [
-    {device = "/var/swapfile"; size = 8192;}
+    {device = "/var/swapfile"; size = 4096;}
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -47,6 +47,8 @@ in
 
   # Plymouth boot screen
   boot.plymouth.enable = true;
+  # Use large console font for HiDPI screen
+  i18n.consoleFont = "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
 
   # Optimize for SSDs
   fileSystems."/".options = [ "discard" ];
