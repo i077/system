@@ -1,9 +1,6 @@
 { config, pkgs, ... }:
 
 let
-  unstable = import <unstable> {
-    config = { allowUnfree = true; };
-  };
   custompkgs = import ../packages {};
   nerdfonts-iosevka = let version = "2.0.0"; in pkgs.fetchzip rec {
     name = "nerdfonts-iosevka";
@@ -34,14 +31,14 @@ in
   nixpkgs.config = {
     allowUnfree = true;
 
-    packageOverrides = pkgs: {
+    packageOverrides = pkgs: rec {
       unstable = import <unstable> { config.allowUnfree = true; };
       alacritty = unstable.alacritty;
     };
   };
 
   # User packages
-  home.packages = with unstable; [
+  home.packages = with pkgs.unstable; [
     # Command-line utilities
     ctags
     exa
