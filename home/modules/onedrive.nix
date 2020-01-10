@@ -60,7 +60,8 @@ in {
 
     # We have to write to a writable directory,
     # since onedrive writes to a database in the config directory at runtime.
-    xdg.configFile."onedrive/config".text =
-      concatMapStrings (e: e+"\n") (mapAttrsToList (n: v: "${n} = \"${v}\"") cfg.settings);
+    xdg.configFile."onedrive/config" = mkIf (cfg.settings != {}) {
+      text = concatStringsSep "\n" (mapAttrsToList (n: v: "${n} = \"${v}\"") cfg.settings);
+    };
   };
 }
