@@ -33,4 +33,6 @@
     RCLONE_CONFIG_ONEDRIVE_DRIVE_ID = "a2694ab35f8cf64";
     RCLONE_CONFIG_ONEDRIVE_DRIVE_TYPE = "personal";
   };
+  systemd.services.restic-backups-spectre.after = [ "network-online.target" ];
+  systemd.services.restic-backups-spectre.wants = [ "network-online.target" ];
 }
