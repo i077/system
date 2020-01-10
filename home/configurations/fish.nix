@@ -23,10 +23,10 @@ in lib.mkIf config.programs.fish.enable {
 
     shellAliases = {
       # NixOS management
-      hms = "home-manager switch";
       nxu = "sudo nix-channel --update";
       nxs = "sudo nixos-rebuild switch";
       nxb = "sudo nixos-rebuild boot";
+      nxt = "sudo nixos-rebuild test";
 
       # Keybase stuff
       cdkb = "cd /keybase/private/i077";
