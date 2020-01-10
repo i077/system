@@ -17,6 +17,7 @@ let
 in
 {
   imports = with builtins;
+    map (name: ./modules + "/${name}") (attrNames (readDir ./modules)) ++
     map (name: ./configurations + "/${name}") (attrNames (readDir ./configurations));
 
   # Let Home Manager install and manage itself.
@@ -34,6 +35,7 @@ in
     packageOverrides = pkgs: rec {
       unstable = import <unstable> { config.allowUnfree = true; };
       alacritty = unstable.alacritty;
+      onedrive = unstable.onedrive;
     };
   };
 
@@ -124,6 +126,7 @@ in
   systemd.user.startServices = true;
   services.gpg-agent.enable = true;
   services.lorri.enable = true;
+  services.onedrive.enable = true;
   services.udiskie.enable = true;
 
   xsession.enable = true;
