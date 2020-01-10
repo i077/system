@@ -111,6 +111,9 @@ in
     '';
   };
 
+  # Networking
+  networking.networkmanager.enable = true;
+
   # Set timezone
   time.timeZone = "America/New_York";
 
@@ -163,7 +166,7 @@ in
   # Users
   users.users.imran = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "video" ];
+    extraGroups = [ "wheel" "video" "networkmanager" ];
     shell = "/run/current-system/sw/bin/fish";
   };
   home-manager.users.imran = import ../../home/home.nix;
