@@ -35,10 +35,10 @@ in lib.mkIf config.programs.rofi.enable {
       };
     };
 
-    font = "Inter UI 11";
+    font = "Iosevka 24";
 
     extraConfig = ''
-      rofi.dpi = 96
+      rofi.dpi = 192
     '';
   };
 }
