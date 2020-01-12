@@ -28,19 +28,11 @@ in
     EDITOR = "nvim";
   };
 
-  # Allow unfree software
-  nixpkgs.config = {
-    allowUnfree = true;
-
-    packageOverrides = pkgs: rec {
-      unstable = import <unstable> { config.allowUnfree = true; };
-      alacritty = unstable.alacritty;
-      onedrive = unstable.onedrive;
-    };
-  };
+  nixpkgs.config = import ../nixpkgs-config.nix;
+  nixpkgs.overlays = import ../overlays;
 
   # User packages
-  home.packages = with pkgs.unstable; [
+  home.packages = with pkgs; [
     # Command-line utilities
     python3Packages.black
     ctags
@@ -64,7 +56,6 @@ in
     brscan4
     gnome3.geary
     libreoffice-fresh
-    nasc
     rhythmbox
     standardnotes
     sublime-merge

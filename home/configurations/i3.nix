@@ -1,14 +1,12 @@
 { config, lib, pkgs, ... }:
 
 let
-  unstable = pkgs.unstable;
-
   myColors = import ../colors.nix;
   custompkgs = import ../../packages {};
-  lockCommand = "${pkgs.xlockmore}/bin/xlock -mode fiberlamp -delay 10000 -erasedelay 0";
+  lockCommand = "${pkgs.xlockmore}/bin/xlock -mode fiberlamp -delay 50000 -erasedelay 0";
 
   mod = config.xsession.windowManager.i3.config.modifier;
-  termExec = "${unstable.alacritty}/bin/alacritty";
+  termExec = "${pkgs.alacritty}/bin/alacritty";
 in lib.mkIf config.xsession.windowManager.i3.enable {
   xsession.windowManager.i3.config = {
     modifier = "Mod4";
@@ -174,10 +172,10 @@ in lib.mkIf config.xsession.windowManager.i3.enable {
 
       launch = {
         "w" = "exec firefox --new-window; mode default";
-        "Shift+w" = "exec ${unstable.firefox}/bin/firefox --private-window; mode default";
+        "Shift+w" = "exec ${pkgs.firefox}/bin/firefox --private-window; mode default";
         "e" = "exec ${termExec} -e ${config.home.sessionVariables.EDITOR}; mode default";
         "n" = "exec ${custompkgs.write_stylus}/bin/write_stylus; mode default";
-        "g" = "exec ${unstable.sublime-merge}/bin/sublime-merge; mode default";
+        "g" = "exec ${pkgs.sublime-merge}/bin/sublime-merge; mode default";
 
         "Escape" = "mode default";
       };
@@ -208,7 +206,7 @@ in lib.mkIf config.xsession.windowManager.i3.enable {
 
   # Cursor
   xsession.pointerCursor = {
-    package = pkgs.unstable.pantheon.elementary-icon-theme;
+    package = pkgs.pantheon.elementary-icon-theme;
     name = "elementary";
     size = 48;
   };

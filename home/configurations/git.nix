@@ -1,9 +1,6 @@
 { config, lib, pkgs, ... }:
 
 let
-  unstable = import <unstable> {
-    config = { allowUnfree = true; };
-  };
 in
 lib.mkIf config.programs.git.enable {
   programs.git = {
@@ -31,7 +28,7 @@ lib.mkIf config.programs.git.enable {
   };
 
   # Add extra packages that extend git
-  home.packages = with unstable; [
+  home.packages = with pkgs; [
     git-crypt
   ];
 }

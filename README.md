@@ -22,6 +22,10 @@ Files are split into several directories.
 - `secrets/` stores strings that are not publicly accessible (API tokens, etc).
   Everything in this directory is encrypted with GPG via [git-crypt](https://github.com/AGWA/git-crypt).
 
+- Dependencies are tracked (and nixpkgs is pinned) through [niv](https://github.com/nmattia/niv/),
+  which leaves two files in `nix/` that provide dependency info and a Nix function to
+  import those dependencies.
+
 ## Usage
 
 To bootstrap a NixOS system with an existing configuration (e.g. `spectre`, my current laptop),
@@ -44,12 +48,10 @@ To decrypt secrets, import the PGP private key and decrypt with `git-crypt`:
 $ git-crypt unlock
 ```
 
-```sh
-$ nix-channel --add https://github.com/rycee/home-manager/archive/master.tar.gz home-manager
-$ nix-channel --add https://nixos.org/channels/nixos-unstable unstable
-```
+Dependencies such as the `nixpkgs` and `home-manager` channels should be importable through
+`nix/sources.nix`, so there should be no need to add them through `nix-channel`.
 
-The hardware configuration may also need to be regenerated to reflect UUID changes, etc.
+The hardware configuration may need to be regenerated to reflect UUID changes, etc.
 Generate it, then move it to the appropriate directory.
 
 ```sh

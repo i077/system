@@ -7,11 +7,7 @@ let
   };
 
   colors = import ../colors.nix;
-
-  unstable = import <unstable> {};
 in lib.mkIf config.programs.tmux.enable {
-  # Use tmux from unstable channel
-  programs.tmux.package = unstable.tmux;
   programs.tmux.tmuxp.enable = true;
 
   # Use oh my tmux config

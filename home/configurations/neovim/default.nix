@@ -1,13 +1,11 @@
 { config, lib, pkgs, ... }:
 
 let
-  unstable = import <unstable> {};
   colors = import ../../colors.nix;
   readVimSection = file: builtins.readFile (./. + "/${file}.vim");
 in lib.mkIf config.programs.neovim.enable {
   programs.neovim = {
-    package = unstable.neovim;
-    plugins = with unstable.vimPlugins; [
+    plugins = with pkgs.vimPlugins; [
       # Editor
       sensible                      # Sensible defaults
       repeat	            		# Repeatable plugin actions

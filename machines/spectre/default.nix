@@ -1,38 +1,24 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
-  unstableTarball = fetchTarball https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz;
-
-  my-python3Full = pkgs.unstable.python3Full.withPackages (ps: with ps; [
-    matplotlib
-    notebook
-    numpy
-    rope
-    setuptools
-    scipy
-    scikitlearn
-    sympy
-    cython
-    jedi
-    python-language-server
-  ]);
+  sources = import ../../nix/sources.nix;
 in
 {
-  imports =
-    [
-      ./backup.nix
-      ./hardware-configuration.nix
-      ./keybase.nix
-      ./printing.nix
-      ./services.nix
-      ./yubikey.nix
+  imports = [
+    ./backup.nix
+    ./hardware-configuration.nix
+    ./keybase.nix
+    ./packages.nix
+    ./printing.nix
+    ./services.nix
+    ./yubikey.nix
 
-      # Home manager
-      <home-manager/nixos>
+    # Home manager
+    <home-manager/nixos>
 
-      # Used for Brother scanners
-      <nixpkgs/nixos/modules/services/hardware/sane_extra_backends/brscan4.nix>
-    ];
+    # Used for Brother scanners
+    <nixpkgs/nixos/modules/services/hardware/sane_extra_backends/brscan4.nix>
+  ];
 
   networking.hostName = "i077-spectrenix";
 
@@ -41,42 +27,35 @@ in
     {device = "/var/swapfile"; size = 4096;}
   ];
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+    # Use the systemd-boot EFI boot loader
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
 
-  # Plymouth boot screen
-  boot.plymouth.enable = true;
+    # Plymouth boot screen
+    plymouth.enable = true;
+
+    # Allow trimming on encrypted partition
+    initrd.luks.devices."cryptroot" = {
+      preLVM = true;
+      allowDiscards = true;
+    };
+
+    extraModulePackages = [ 
+      config.boot.kernelPackages.exfat-nofuse # Support exFAT
+    ];
+
+    # Clean up /tmp on boot
+    cleanTmpDir = true;
+  };
+
   # Use large console font for HiDPI screen
-  i18n.consoleFont = "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
+  console.font = "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
 
   # Optimize for SSDs
   fileSystems."/".options = [ "discard" ];
-
-  # Define encrypted partition (extended from hardware-configuration)
-  boot.initrd.luks.devices."cryptroot" = {
-    preLVM = true;
-    allowDiscards = true;
-  };
-
-  # Support exFAT filesystems
-  boot.extraModulePackages = [ config.boot.kernelPackages.exfat-nofuse ];
-
-  # Clean up /tmp on boot
-  boot.cleanTmpDir = true;
-
-  nixpkgs.config = {
-    # Allow unfree software
-    allowUnfree = true;
-
-    packageOverrides = pkgs: {
-      # Allow some packages from unstable, so less essential packages get upgraded more quickly
-      unstable = import unstableTarball {
-        config = config.nixpkgs.config;
-      };
-      vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
-    };
-  };
 
   # OpenGL
   hardware.opengl = {
@@ -107,10 +86,11 @@ in
 
   hardware.bluetooth = {
     enable = true;
-    extraConfig = ''
-      [General]
-      Enable=Source,Sink,Media,Socket
-    '';
+    config = {
+      General = {
+        Enable = "Source,Sink,Media,Socket";
+      };
+    };
   };
 
   # Networking
@@ -118,47 +98,6 @@ in
 
   # Set timezone
   time.timeZone = "America/New_York";
-
-  # Optimize nix store automatically
-  nix.autoOptimiseStore = true;
-
-  # Grant sudoers rights with the nix daemon
-  nix.trustedUsers = [ "root" "@wheel" ];
-
-  # System packages
-  environment.systemPackages = with pkgs; [
-    acpi
-    binutils
-    file
-    freetype
-    gdb
-    gitFull
-    gnome3.gnome-tweak-tool
-    htop
-    unstable.interception-tools
-    unstable.openjdk12
-    keybase-gui
-    libsecret
-    unstable.neovim
-    nix-index
-    nodejs
-    openconnect
-    patchelf
-    pciutils
-    pkg-config
-    psmisc
-    my-python3Full
-    powertop
-    qt5.qtbase
-    rclone
-    ripgrep
-    unzip
-    wget
-    yarn
-
-    manpages
-    stdmanpages
-  ];
 
   documentation = {
     dev.enable = true;
