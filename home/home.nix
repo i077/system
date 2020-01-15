@@ -25,6 +25,7 @@
     gnumake
     gopass
     hugo
+    openfortivpn
     pandoc
     passff-host
     pinentry
@@ -39,7 +40,7 @@
     # Apps
     android-studio
     brscan4
-    gnome3.geary
+    lazygit
     libreoffice-fresh
     rhythmbox
     standardnotes
@@ -48,7 +49,6 @@
     jetbrains.pycharm-community
     qalculate-gtk
     qt5.qtbase
-    gnome3.sushi
     typora
     pinta
     vlc
@@ -69,6 +69,7 @@
     iosevka nerdfonts-iosevka
     inter-ui
     roboto roboto-mono
+    source-code-pro source-sans-pro source-serif-pro
     ubuntu_font_family
 
     # Python packages
