@@ -2,9 +2,8 @@ self: super:
 
 let
   sources = import ../nix/sources.nix {};
-  unstable = import sources.nixpkgs-unstable {};
 in {
-  my-python3Full = super.python3Full.withPackages (ps: with ps; [
+  my-python3Full = super.python3Full.withPackages (pypkgs: with pypkgs; [
     matplotlib
     notebook
     numpy
@@ -16,6 +15,8 @@ in {
     cython
     jedi
     python-language-server
+
+    ptpython
   ]);
 
   niv = (import sources.niv {}).niv;
