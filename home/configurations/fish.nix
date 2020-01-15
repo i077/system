@@ -1,7 +1,6 @@
 { config, lib, pkgs, ...}:
 
 let
-  custompkgs = import ../../packages {};
   colors = with lib;
     mapAttrs (name: value: (removePrefix "#" value)) (import ../colors.nix);
 in lib.mkIf config.programs.fish.enable {
@@ -34,7 +33,7 @@ in lib.mkIf config.programs.fish.enable {
     };
 
     promptInit = ''
-      for file in ${custompkgs.bobthefish}/lib/bobthefish/**.fish; source $file; end
+      for file in ${pkgs.bobthefish}/lib/bobthefish/**.fish; source $file; end
       set -g theme_color_scheme terminal2
       set -g theme_nerd_fonts yes
       set -g theme_display_jobs_verbose yes

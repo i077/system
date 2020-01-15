@@ -2,7 +2,6 @@
 
 let
   myColors = import ../colors.nix;
-  custompkgs = import ../../packages {};
   lockCommand = "${pkgs.xlockmore}/bin/xlock -mode fiberlamp -delay 50000 -erasedelay 0";
 
   mod = config.xsession.windowManager.i3.config.modifier;
@@ -174,7 +173,7 @@ in lib.mkIf config.xsession.windowManager.i3.enable {
         "w" = "exec firefox --new-window; mode default";
         "Shift+w" = "exec ${pkgs.firefox}/bin/firefox --private-window; mode default";
         "e" = "exec ${termExec} -e ${config.home.sessionVariables.EDITOR}; mode default";
-        "n" = "exec ${custompkgs.write_stylus}/bin/write_stylus; mode default";
+        "n" = "exec ${pkgs.write_stylus}/bin/Write; mode default";
         "g" = "exec ${pkgs.sublime-merge}/bin/sublime-merge; mode default";
 
         "Escape" = "mode default";

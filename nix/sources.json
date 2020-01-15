@@ -1,4 +1,16 @@
 {
+    "fish-bobthefish": {
+        "branch": "master",
+        "description": "A Powerline-style, Git-aware fish theme optimized for awesome.",
+        "homepage": "",
+        "owner": "oh-my-fish",
+        "repo": "theme-bobthefish",
+        "rev": "f3301c2e2c1a5664634ccd0181289cc4037a0411",
+        "sha256": "1b4vrl2rhj4ypjjhbvgx5kzkhn423fqgb4jl0ckjvg1z5xlc874k",
+        "type": "tarball",
+        "url": "https://github.com/oh-my-fish/theme-bobthefish/archive/f3301c2e2c1a5664634ccd0181289cc4037a0411.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "home-manager": {
         "branch": "master",
         "description": "Manage a user environment using Nix",
