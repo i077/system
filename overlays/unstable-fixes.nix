@@ -7,7 +7,4 @@ let
   trace = builtins.trace;
 in
 {
-  # LDC does not build on current unstable
-  ldc = trace "Currently overriding ldc" nixpkgs-d244b77.ldc;
-  dmd = nixpkgs-d244b77.dmd;
 }
