@@ -5,10 +5,10 @@
         "homepage": "",
         "owner": "oh-my-fish",
         "repo": "theme-bobthefish",
-        "rev": "f3301c2e2c1a5664634ccd0181289cc4037a0411",
-        "sha256": "1b4vrl2rhj4ypjjhbvgx5kzkhn423fqgb4jl0ckjvg1z5xlc874k",
+        "rev": "5ed60e09ae7f307c4eb5c0de10296f3b713cb94e",
+        "sha256": "0crx983ar5mbnc1n7ccl4b88pfp8s0rpjrzs1x1qbsmdri3r4yxf",
         "type": "tarball",
-        "url": "https://github.com/oh-my-fish/theme-bobthefish/archive/f3301c2e2c1a5664634ccd0181289cc4037a0411.tar.gz",
+        "url": "https://github.com/oh-my-fish/theme-bobthefish/archive/5ed60e09ae7f307c4eb5c0de10296f3b713cb94e.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "home-manager": {
@@ -17,10 +17,22 @@
         "homepage": "",
         "owner": "rycee",
         "repo": "home-manager",
-        "rev": "4b04050953be214e5e3b7233a5bf2fbe0090a196",
-        "sha256": "1lh3zls8vkvxl373myfr5cdlvnvbh25ks5gqbk6m538mfm3n0c8l",
+        "rev": "95c8007b8fe4433cd217db83ce26b8e29875ba06",
+        "sha256": "1f5fbpsaizz1hrsajprn2bcbjzgjs5jy72yir6gszg6360j61w5q",
         "type": "tarball",
-        "url": "https://github.com/rycee/home-manager/archive/4b04050953be214e5e3b7233a5bf2fbe0090a196.tar.gz",
+        "url": "https://github.com/rycee/home-manager/archive/95c8007b8fe4433cd217db83ce26b8e29875ba06.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "i3-workspacer": {
+        "branch": "master",
+        "description": "simplifying large amounts of i3 workspaces with naming and infinite* workspace traversal",
+        "homepage": null,
+        "owner": "cameronleger",
+        "repo": "i3-workspacer",
+        "rev": "583d94894863369693a25080b76a2472fd359975",
+        "sha256": "09jl8r76k8y9k654n2hqrx64vz9x988j7af7c5i0x924xdwddfhq",
+        "type": "tarball",
+        "url": "https://github.com/cameronleger/i3-workspacer/archive/583d94894863369693a25080b76a2472fd359975.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "niv": {
@@ -29,10 +41,10 @@
         "homepage": "https://github.com/nmattia/niv",
         "owner": "nmattia",
         "repo": "niv",
-        "rev": "c8f74f44b5f5df2c8f20a1834460d012e74d78f9",
-        "sha256": "0zmhxgl37f1p2aiqjmiccflpgga6phj6vmqs3jd33z0frj6hsy5c",
+        "rev": "49157afd2298749b8a5062fd21079542a6b2de35",
+        "sha256": "0q7ymfrcgagcsw6kr93kprag7k358qj8znyzyri53ci1mrsak5y1",
         "type": "tarball",
-        "url": "https://github.com/nmattia/niv/archive/c8f74f44b5f5df2c8f20a1834460d012e74d78f9.tar.gz",
+        "url": "https://github.com/nmattia/niv/archive/49157afd2298749b8a5062fd21079542a6b2de35.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs": {
@@ -41,10 +53,10 @@
         "homepage": "https://github.com/NixOS/nixpkgs",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "7184df6beb88c4f5f3186e5b73d5437a3461ceaf",
-        "sha256": "0gn3qwzj6alza1ccbla6wa09f93j2gh74ilpn84m387gclipkinp",
+        "rev": "05626cc86b8a8bbadae7753d2e33661400ff67de",
+        "sha256": "1lx5hs2yzg21pc8fv982kdqhc5j5kxi08h8wn3plx848bcnd8jj6",
         "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs/archive/7184df6beb88c4f5f3186e5b73d5437a3461ceaf.tar.gz",
+        "url": "https://github.com/NixOS/nixpkgs/archive/05626cc86b8a8bbadae7753d2e33661400ff67de.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs-old": {
@@ -53,10 +65,10 @@
         "homepage": null,
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "eb65d1dae626f4b149566c4cbccdad7ec24af189",
-        "sha256": "0zl4zakmw2s7gnkc2bmnjl71xg55n0kqrcm834kjq49lwwmdk225",
+        "rev": "e6391b4389e10a52358bd94b3031238648818b0a",
+        "sha256": "07nkaihks0k60krghd900x8zhfrsxmvdchlf5fzqmhgmfw5x6krv",
         "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs/archive/eb65d1dae626f4b149566c4cbccdad7ec24af189.tar.gz",
+        "url": "https://github.com/NixOS/nixpkgs/archive/e6391b4389e10a52358bd94b3031238648818b0a.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }

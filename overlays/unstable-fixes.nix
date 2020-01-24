@@ -1,10 +1,11 @@
 self: super:
 
 let
-  nixpkgs-d244b77 = import
-    (fetchTarball "https://github.com/NixOS/nixpkgs/archive/d244b77850263501c149435f2ff2de357b9db72c.tar.gz") {};
+  nixpkgs-100012e = import
+    (fetchTarball "https://github.com/NixOS/nixpkgs/archive/100012e55bc2a82fc680cba31a426ad38ead6fab.tar.gz") {};
   
   trace = builtins.trace;
 in
 {
+  onedrive = nixpkgs-100012e.onedrive;
 }
