@@ -74,7 +74,6 @@
 
     # Python packages
     python3Packages.powerline
-    python3Packages.pylint
 
     # Node packages
     nodePackages.neovim

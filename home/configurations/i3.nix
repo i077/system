@@ -174,7 +174,7 @@ in lib.mkIf config.xsession.windowManager.i3.enable {
         "Shift+w" = "exec ${pkgs.firefox}/bin/firefox --private-window; mode default";
         "e" = "exec ${termExec} -e ${config.home.sessionVariables.EDITOR}; mode default";
         "n" = "exec ${pkgs.write_stylus}/bin/Write; mode default";
-        "g" = "exec ${pkgs.sublime-merge}/bin/sublime-merge; mode default";
+        "g" = "exec ${pkgs.sublime-merge}/bin/sublime_merge; mode default";
 
         "Escape" = "mode default";
       };
