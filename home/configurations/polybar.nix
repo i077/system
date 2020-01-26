@@ -18,10 +18,10 @@ in lib.mkIf config.services.polybar.enable {
       radius = 0;
       fixed-center = false;
       padding-left = 0;
-      padding-right = 2;
+      padding-right = 0;
       module-margin-left = 1;
       module-margin-right = 1;
-      font-0 = "Inter UI:size=8";
+      font-0 = "Jetbrains Mono:size=8";
       font-1 = "Iosevka Nerd Font:size=8";
       wm-restack = "i3";
 
@@ -146,7 +146,7 @@ in lib.mkIf config.services.polybar.enable {
       # Only show workspaces on displayed monitor
       pin-workspaces = true;
 
-      label-mode-padding = 2;
+      label-mode-padding = 1;
       label-mode-foreground = colors.bg0;
       label-mode-background = colors.primary;
 
@@ -154,20 +154,20 @@ in lib.mkIf config.services.polybar.enable {
       label-focused = "%index%";
       label-focused-background = colors.bg3;
       label-focused-underline = colors.primary;
-      label-focused-padding = 2;
+      label-focused-padding = 1;
 
       # unfocused = Inactive workspace on any monitor
       label-unfocused = "%index%";
-      label-unfocused-padding = 2;
+      label-unfocused-padding = 1;
 
       # visible = Active workspace on unfocused monitor
       label-visible = "%index%";
-      label-visible-padding = 2;
+      label-visible-padding = 1;
 
       # urgent = Workspace with alerting window
       label-urgent = "%index%";
       label-urgent-background = colors.alert;
-      label-urgent-padding = 2;
+      label-urgent-padding = 1;
     };
 
     "module/loadavg" = {

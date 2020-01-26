@@ -7,9 +7,9 @@ let
 in lib.mkIf config.programs.alacritty.enable {
   programs.alacritty.settings = {
     font = {
-      normal.family = "Iosevka";
-      bold.family = "Iosevka";
-      italic.family = "Iosevka";
+      normal.family = "Jetbrains Mono";
+      bold.family = "Jetbrains Mono";
+      italic.family = "Jetbrains Mono";
 
       size = 8;
     };

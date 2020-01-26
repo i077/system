@@ -68,6 +68,7 @@
     corefonts # Microsoft core fonts for Web
     iosevka nerdfonts-iosevka
     inter-ui
+    jetbrains-mono
     roboto roboto-mono
     source-code-pro source-sans-pro source-serif-pro
     ubuntu_font_family

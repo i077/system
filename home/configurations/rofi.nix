@@ -35,7 +35,7 @@ in lib.mkIf config.programs.rofi.enable {
       };
     };
 
-    font = "Iosevka 24";
+    font = "Jetbrains Mono 24";
 
     extraConfig = ''
       rofi.dpi = 192
