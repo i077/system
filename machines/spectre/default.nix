@@ -6,6 +6,7 @@ in {
   imports = [
     ../common
 
+    ./autorandr.nix
     ./backup.nix
     ./hardware-configuration.nix
     ./services.nix
