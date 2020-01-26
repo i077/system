@@ -7,4 +7,8 @@ in lib.mkIf config.programs.firefox.enable {
       extraNativeMessagingHosts = with pkgs; [ passff-host ];
     };
   };
+
+  home.sessionVariables = {
+    MOZ_USE_XINPUT2 = 1;
+  };
 }
