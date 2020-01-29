@@ -19,5 +19,9 @@ in {
     ptpython
   ]);
 
+  my-python3-i3 = super.python3Full.withPackages (pypkgs: with pypkgs; [
+    i3ipc
+  ]);
+
   niv = (import sources.niv {}).niv;
 }

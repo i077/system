@@ -6,6 +6,18 @@ let
 
   mod = config.xsession.windowManager.i3.config.modifier;
   termExec = "${pkgs.alacritty}/bin/alacritty";
+
+  wsrPath = "${(import ../../nix/sources.nix).i3-workspacer}/i3-workspacer.py";
+  wsr = "${pkgs.my-python3-i3}/bin/python ${wsrPath}";
+
+  wsrGotoScript = pkgs.writeShellScript "i3-goto-workspace" ''
+    i3-input -f "pango:Jetbrains Mono 9" -F \
+    "exec --no-startup-id ${wsr} go --exact --number \"%s\"" -P 'Go to workspace number: '
+  '';
+  wsrMovetoScript = pkgs.writeShellScript "i3-moveto-workspace" ''
+    i3-input -f "pango:Jetbrains Mono 9" -F \
+    "exec --no-startup-id ${wsr} move --exact --number \"%s\"" -P 'Move container to workspace number: '
+  '';
 in lib.mkIf config.xsession.windowManager.i3.enable {
   xsession.windowManager.i3.config = {
     modifier = "Mod4";
@@ -92,27 +104,39 @@ in lib.mkIf config.xsession.windowManager.i3.enable {
         "${mod}+Shift+a" = "focus child";
 
         # Workspaces
-        "${mod}+1" = "workspace number 1";
-        "${mod}+2" = "workspace number 2";
-        "${mod}+3" = "workspace number 3";
-        "${mod}+4" = "workspace number 4";
-        "${mod}+5" = "workspace number 5";
-        "${mod}+6" = "workspace number 6";
-        "${mod}+7" = "workspace number 7";
-        "${mod}+8" = "workspace number 8";
-        "${mod}+9" = "workspace number 9";
-        "${mod}+0" = "workspace number 10";
+        "${mod}+grave" = "exec --no-startup-id ${wsrGotoScript}";
+        "${mod}+1" = "exec --no-startup-id ${wsr} go -n 1";
+        "${mod}+2" = "exec --no-startup-id ${wsr} go -n 2";
+        "${mod}+3" = "exec --no-startup-id ${wsr} go -n 3";
+        "${mod}+4" = "exec --no-startup-id ${wsr} go -n 4";
+        "${mod}+5" = "exec --no-startup-id ${wsr} go -n 5";
+        "${mod}+6" = "exec --no-startup-id ${wsr} go -n 6";
+        "${mod}+7" = "exec --no-startup-id ${wsr} go -n 7";
+        "${mod}+8" = "exec --no-startup-id ${wsr} go -n 8";
+        "${mod}+9" = "exec --no-startup-id ${wsr} go -n 9";
+        "${mod}+0" = "exec --no-startup-id ${wsr} go -n 10";
         # Move container to workspace
-        "${mod}+Shift+1" = "move container to workspace number 1";
-        "${mod}+Shift+2" = "move container to workspace number 2";
-        "${mod}+Shift+3" = "move container to workspace number 3";
-        "${mod}+Shift+4" = "move container to workspace number 4";
-        "${mod}+Shift+5" = "move container to workspace number 5";
-        "${mod}+Shift+6" = "move container to workspace number 6";
-        "${mod}+Shift+7" = "move container to workspace number 7";
-        "${mod}+Shift+8" = "move container to workspace number 8";
-        "${mod}+Shift+9" = "move container to workspace number 9";
-        "${mod}+Shift+0" = "move container to workspace number 10";
+        "${mod}+Shift+grave" = "exec --no-startup-id ${wsrMovetoScript}";
+        "${mod}+Shift+1" = "exec --no-startup-id ${wsr} move -n 1";
+        "${mod}+Shift+2" = "exec --no-startup-id ${wsr} move -n 2";
+        "${mod}+Shift+3" = "exec --no-startup-id ${wsr} move -n 3";
+        "${mod}+Shift+4" = "exec --no-startup-id ${wsr} move -n 4";
+        "${mod}+Shift+5" = "exec --no-startup-id ${wsr} move -n 5";
+        "${mod}+Shift+6" = "exec --no-startup-id ${wsr} move -n 6";
+        "${mod}+Shift+7" = "exec --no-startup-id ${wsr} move -n 7";
+        "${mod}+Shift+8" = "exec --no-startup-id ${wsr} move -n 8";
+        "${mod}+Shift+9" = "exec --no-startup-id ${wsr} move -n 9";
+        "${mod}+Shift+0" = "exec --no-startup-id ${wsr} move -n 10";
+        # Navigate workspaces
+        "${mod}+Ctrl+h" = "exec --no-startup-id ${wsr} go -d prev";
+        "${mod}+Ctrl+j" = "exec --no-startup-id ${wsr} go -d down";
+        "${mod}+Ctrl+k" = "exec --no-startup-id ${wsr} go -d up";
+        "${mod}+Ctrl+l" = "exec --no-startup-id ${wsr} go -d next";
+        # Move container to relative workspace
+        "${mod}+Ctrl+Shift+h" = "exec --no-startup-id ${wsr} move -d prev";
+        "${mod}+Ctrl+Shift+j" = "exec --no-startup-id ${wsr} move -d down";
+        "${mod}+Ctrl+Shift+k" = "exec --no-startup-id ${wsr} move -d up";
+        "${mod}+Ctrl+Shift+l" = "exec --no-startup-id ${wsr} move -d next";
 
         # Scratchpad
         "${mod}+minus" = "scratchpad show";
