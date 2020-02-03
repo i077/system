@@ -5,7 +5,7 @@ let
 in {
   my-python3Full = super.python3Full.withPackages (pypkgs: with pypkgs; [
     matplotlib
-    notebook
+    jupyter
     numpy
     rope
     setuptools
