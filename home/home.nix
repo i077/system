@@ -11,6 +11,7 @@
   # Set environment variables
   home.sessionVariables = {
     EDITOR = "nvim";
+    TERMINAL = "alacritty";
   };
 
   nixpkgs.config = import ../nixpkgs-config.nix;
@@ -46,7 +47,7 @@
     standardnotes
     sublime-merge
     jetbrains.idea-community
-    jetbrains.pycharm-community
+    jetbrains.pycharm-professional
     qalculate-gtk
     qt5.qtbase
     typora
@@ -61,6 +62,7 @@
 
     # Languages
     dart
+    julia
     texlive.combined.scheme-full
     texlab
 
