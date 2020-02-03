@@ -13,6 +13,7 @@ in lib.mkIf config.programs.fish.enable {
       ll      = "exa -l";
       lL      = "exa -algiSH --git";
       lt      = "exa -lT";
+      py      = "ptpython";
       t       = "tmux";
       ta      = "tmux a -t";
       td      = "todoist";

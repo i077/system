@@ -97,6 +97,7 @@
   programs.man.enable = true;
   programs.neovim.enable = true;
   programs.password-store.enable = true;
+  programs.ptpython.enable = true;
   programs.tmux.enable = true;
   programs.zathura.enable = true;
 
