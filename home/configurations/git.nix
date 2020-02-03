@@ -5,7 +5,7 @@ in
 lib.mkIf config.programs.git.enable {
   programs.git = {
     userName = "Imran Hossain";
-    userEmail = "imran3740@gmail.com";
+    userEmail = "contact@imranhossa.in";
     signing.key = "211F871962EA405B";
 
     aliases = {
