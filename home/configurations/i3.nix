@@ -7,8 +7,7 @@ let
   mod = config.xsession.windowManager.i3.config.modifier;
   termExec = "${pkgs.alacritty}/bin/alacritty";
 
-  wsrPath = "${(import ../../nix/sources.nix).i3-workspacer}/i3-workspacer.py";
-  wsr = "${pkgs.my-python3-i3}/bin/python ${wsrPath}";
+  wsr = "${pkgs.my-python3-i3}/bin/python ${(import ../../nix/sources.nix).i3-workspacer}/i3-workspacer.py";
 
   wsrGotoScript = pkgs.writeShellScript "i3-goto-workspace" ''
     i3-input -f "pango:Jetbrains Mono 9" -F \
@@ -61,117 +60,121 @@ in lib.mkIf config.xsession.windowManager.i3.enable {
       };
     };
 
-    fonts = [ "Iosevka Nerd Font 9" "Inter UI 9" ];
+    fonts = [ "Iosevka Nerd Font 9" "Jetbrains Mono 9" ];
 
     keybindings = {
-        # Restart i3
-        "${mod}+Shift+r" = "restart";
+      # Restart i3
+      "${mod}+Shift+r" = "restart";
 
-        # Change focus
-        "${mod}+h" = "focus left";
-        "${mod}+j" = "focus down";
-        "${mod}+k" = "focus up";
-        "${mod}+l" = "focus right";
+      # Change focus
+      "${mod}+h" = "focus left";
+      "${mod}+j" = "focus down";
+      "${mod}+k" = "focus up";
+      "${mod}+l" = "focus right";
 
-        # Move focused container
-        "${mod}+Shift+h" = "move left";
-        "${mod}+Shift+j" = "move down";
-        "${mod}+Shift+k" = "move up";
-        "${mod}+Shift+l" = "move right";
+      # Move focused container
+      "${mod}+Shift+h" = "move left";
+      "${mod}+Shift+j" = "move down";
+      "${mod}+Shift+k" = "move up";
+      "${mod}+Shift+l" = "move right";
 
-        # Change split orientation
-        "${mod}+z" = "split h";
-        "${mod}+v" = "split v";
-        # Fullscreen
-        "${mod}+f" = "fullscreen toggle";
+      # Change split orientation
+      "${mod}+z" = "split h";
+      "${mod}+v" = "split v";
+      # Fullscreen
+      "${mod}+f" = "fullscreen toggle";
 
-        # Kill focused container
-        "${mod}+Shift+q" = "kill";
+      # Kill focused container
+      "${mod}+Shift+q" = "kill";
 
-        # Change container layout
-        "${mod}+s" = "layout stacking";
-        "${mod}+w" = "layout tabbed";
-        "${mod}+e" = "layout toggle split";
+      # Change container layout
+      "${mod}+s" = "layout stacking";
+      "${mod}+w" = "layout tabbed";
+      "${mod}+e" = "layout toggle split";
 
-        # Floating
-        "${mod}+Shift+space" = "floating toggle";
-        "${mod}+space" = "focus mode_toggle";
-        # Sticky (stay on top of all workspaces)
-        "${mod}+Ctrl+space" = "sticky toggle";
+      # Floating
+      "${mod}+Shift+space" = "floating toggle";
+      "${mod}+space" = "focus mode_toggle";
+      # Sticky (stay on top of all workspaces)
+      "${mod}+Ctrl+space" = "sticky toggle";
 
-        # Focus parent/child container
-        "${mod}+a" = "focus parent";
-        "${mod}+Shift+a" = "focus child";
+      # Focus parent/child container
+      "${mod}+a" = "focus parent";
+      "${mod}+Shift+a" = "focus child";
 
-        # Workspaces
-        "${mod}+grave" = "exec --no-startup-id ${wsrGotoScript}";
-        "${mod}+1" = "exec --no-startup-id ${wsr} go -n 1";
-        "${mod}+2" = "exec --no-startup-id ${wsr} go -n 2";
-        "${mod}+3" = "exec --no-startup-id ${wsr} go -n 3";
-        "${mod}+4" = "exec --no-startup-id ${wsr} go -n 4";
-        "${mod}+5" = "exec --no-startup-id ${wsr} go -n 5";
-        "${mod}+6" = "exec --no-startup-id ${wsr} go -n 6";
-        "${mod}+7" = "exec --no-startup-id ${wsr} go -n 7";
-        "${mod}+8" = "exec --no-startup-id ${wsr} go -n 8";
-        "${mod}+9" = "exec --no-startup-id ${wsr} go -n 9";
-        "${mod}+0" = "exec --no-startup-id ${wsr} go -n 10";
-        # Move container to workspace
-        "${mod}+Shift+grave" = "exec --no-startup-id ${wsrMovetoScript}";
-        "${mod}+Shift+1" = "exec --no-startup-id ${wsr} move -n 1";
-        "${mod}+Shift+2" = "exec --no-startup-id ${wsr} move -n 2";
-        "${mod}+Shift+3" = "exec --no-startup-id ${wsr} move -n 3";
-        "${mod}+Shift+4" = "exec --no-startup-id ${wsr} move -n 4";
-        "${mod}+Shift+5" = "exec --no-startup-id ${wsr} move -n 5";
-        "${mod}+Shift+6" = "exec --no-startup-id ${wsr} move -n 6";
-        "${mod}+Shift+7" = "exec --no-startup-id ${wsr} move -n 7";
-        "${mod}+Shift+8" = "exec --no-startup-id ${wsr} move -n 8";
-        "${mod}+Shift+9" = "exec --no-startup-id ${wsr} move -n 9";
-        "${mod}+Shift+0" = "exec --no-startup-id ${wsr} move -n 10";
-        # Navigate workspaces
-        "${mod}+Ctrl+h" = "exec --no-startup-id ${wsr} go -d prev";
-        "${mod}+Ctrl+j" = "exec --no-startup-id ${wsr} go -d down";
-        "${mod}+Ctrl+k" = "exec --no-startup-id ${wsr} go -d up";
-        "${mod}+Ctrl+l" = "exec --no-startup-id ${wsr} go -d next";
-        # Move container to relative workspace
-        "${mod}+Ctrl+Shift+h" = "exec --no-startup-id ${wsr} move -d prev";
-        "${mod}+Ctrl+Shift+j" = "exec --no-startup-id ${wsr} move -d down";
-        "${mod}+Ctrl+Shift+k" = "exec --no-startup-id ${wsr} move -d up";
-        "${mod}+Ctrl+Shift+l" = "exec --no-startup-id ${wsr} move -d next";
+      # Workspaces
+      "${mod}+grave" = "exec --no-startup-id ${wsrGotoScript}";
+      "${mod}+1" = "exec --no-startup-id ${wsr} go -n 1";
+      "${mod}+2" = "exec --no-startup-id ${wsr} go -n 2";
+      "${mod}+3" = "exec --no-startup-id ${wsr} go -n 3";
+      "${mod}+4" = "exec --no-startup-id ${wsr} go -n 4";
+      "${mod}+5" = "exec --no-startup-id ${wsr} go -n 5";
+      "${mod}+6" = "exec --no-startup-id ${wsr} go -n 6";
+      "${mod}+7" = "exec --no-startup-id ${wsr} go -n 7";
+      "${mod}+8" = "exec --no-startup-id ${wsr} go -n 8";
+      "${mod}+9" = "exec --no-startup-id ${wsr} go -n 9";
+      "${mod}+0" = "exec --no-startup-id ${wsr} go -n 10";
+      # Move container to workspace
+      "${mod}+Shift+grave" = "exec --no-startup-id ${wsrMovetoScript}";
+      "${mod}+Shift+1" = "exec --no-startup-id ${wsr} move -n 1";
+      "${mod}+Shift+2" = "exec --no-startup-id ${wsr} move -n 2";
+      "${mod}+Shift+3" = "exec --no-startup-id ${wsr} move -n 3";
+      "${mod}+Shift+4" = "exec --no-startup-id ${wsr} move -n 4";
+      "${mod}+Shift+5" = "exec --no-startup-id ${wsr} move -n 5";
+      "${mod}+Shift+6" = "exec --no-startup-id ${wsr} move -n 6";
+      "${mod}+Shift+7" = "exec --no-startup-id ${wsr} move -n 7";
+      "${mod}+Shift+8" = "exec --no-startup-id ${wsr} move -n 8";
+      "${mod}+Shift+9" = "exec --no-startup-id ${wsr} move -n 9";
+      "${mod}+Shift+0" = "exec --no-startup-id ${wsr} move -n 10";
+      # Navigate workspaces
+      "${mod}+Ctrl+h" = "exec --no-startup-id ${wsr} go -d prev";
+      "${mod}+Ctrl+j" = "exec --no-startup-id ${wsr} go -d down";
+      "${mod}+Ctrl+k" = "exec --no-startup-id ${wsr} go -d up";
+      "${mod}+Ctrl+l" = "exec --no-startup-id ${wsr} go -d next";
+      # Move container to relative workspace
+      "${mod}+Ctrl+Shift+h" = "exec --no-startup-id ${wsr} move -d prev";
+      "${mod}+Ctrl+Shift+j" = "exec --no-startup-id ${wsr} move -d down";
+      "${mod}+Ctrl+Shift+k" = "exec --no-startup-id ${wsr} move -d up";
+      "${mod}+Ctrl+Shift+l" = "exec --no-startup-id ${wsr} move -d next";
 
-        # Scratchpad
-        "${mod}+minus" = "scratchpad show";
-        "${mod}+Shift+minus" = "move scratchpad";
+      # Mark windows
+      "${mod}+Shift+m" = "exec i3-input -F 'mark %s' -l 1 -P 'Mark: '";
+      "${mod}+m" = "exec i3-input -F '[con_mark=\"%s\"] focus' -l 1 -P 'Goto: '";
 
-        # Launcher
-        "${mod}+d" = "exec rofi -show run";
-        "${mod}+Shift+d" = "exec rofi -show drun";
-        "${mod}+Tab" = "exec rofi -show window";
-        # Password interface
-        "${mod}+Shift+p" = "exec ${pkgs.rofi-pass}/bin/rofi-pass";
+      # Scratchpad
+      "${mod}+minus" = "scratchpad show";
+      "${mod}+Shift+minus" = "move scratchpad";
 
-        # Terminal
-        "${mod}+Return" = "exec ${termExec}";
-        "${mod}+Shift+Return" = "exec ${termExec} --class AlacrittyFloat";
+      # Launcher
+      "${mod}+d" = "exec rofi -show run";
+      "${mod}+Shift+d" = "exec rofi -show drun";
+      "${mod}+Tab" = "exec rofi -show window";
+      # Password interface
+      "${mod}+Shift+p" = "exec ${pkgs.rofi-pass}/bin/rofi-pass";
 
-        # Volume/media controls
-        "XF86AudioRaiseVolume" = "exec ${pkgs.alsaUtils}/bin/amixer -q set Master 2%+ unmute";
-        "XF86AudioLowerVolume" = "exec ${pkgs.alsaUtils}/bin/amixer -q set Master 2%- unmute";
-        "XF86AudioMute" = "exec ${pkgs.alsaUtils}/bin/amixer -q set Master toggle";
+      # Terminal
+      "${mod}+Return" = "exec ${termExec}";
+      "${mod}+Shift+Return" = "exec ${termExec} --class AlacrittyFloat";
 
-        # Brightness controls
-        "XF86MonBrightnessUp" = "exec light -A 10";
-        "XF86MonBrightnessDown" = "exec light -U 10";
+      # Volume/media controls
+      "XF86AudioRaiseVolume" = "exec ${pkgs.alsaUtils}/bin/amixer -q set Master 2%+ unmute";
+      "XF86AudioLowerVolume" = "exec ${pkgs.alsaUtils}/bin/amixer -q set Master 2%- unmute";
+      "XF86AudioMute" = "exec ${pkgs.alsaUtils}/bin/amixer -q set Master toggle";
 
-        # Printscreen
-        "Print" = "exec ${pkgs.maim}/bin/maim | ${pkgs.xclip}/bin/xclip -selection clipboard -t image/png";
-        "Shift+Print" = "exec ${pkgs.maim}/bin/maim -s | ${pkgs.xclip}/bin/xclip -selection clipboard -t image/png";
-        "Ctrl+Print" = "exec ${pkgs.maim}/bin/maim ~/Pictures/screen-$(date +%Y-%m-%dT%H-%M-%S).png";
+      # Brightness controls
+      "XF86MonBrightnessUp" = "exec light -A 10";
+      "XF86MonBrightnessDown" = "exec light -U 10";
 
-        # Mode switching
-        "${mod}+r" = "mode resize";
-        "${mod}+o" = "mode launch";
-        "${mod}+Escape" = "mode system";
-      };
+      # Printscreen
+      "Print" = "exec ${pkgs.maim}/bin/maim | ${pkgs.xclip}/bin/xclip -selection clipboard -t image/png";
+      "Shift+Print" = "exec ${pkgs.maim}/bin/maim -s | ${pkgs.xclip}/bin/xclip -selection clipboard -t image/png";
+      "Ctrl+Print" = "exec ${pkgs.maim}/bin/maim ~/Pictures/screen-$(date +%Y-%m-%dT%H-%M-%S).png";
+
+      # Mode switching
+      "${mod}+r" = "mode resize";
+      "${mod}+o" = "mode launch";
+      "${mod}+Escape" = "mode system";
+    };
 
     modes = {
       resize = {
@@ -197,8 +200,9 @@ in lib.mkIf config.xsession.windowManager.i3.enable {
         "w" = "exec firefox --new-window; mode default";
         "Shift+w" = "exec ${pkgs.firefox}/bin/firefox --private-window; mode default";
         "e" = "exec ${termExec} -e ${config.home.sessionVariables.EDITOR}; mode default";
-        "n" = "exec ${pkgs.write_stylus}/bin/Write; mode default";
+        "f" = "exec ${termExec} -e ${pkgs.ranger}/bin/ranger; mode default";
         "g" = "exec ${pkgs.sublime-merge}/bin/sublime_merge; mode default";
+        "n" = "exec ${pkgs.write_stylus}/bin/Write; mode default";
 
         "Escape" = "mode default";
       };
