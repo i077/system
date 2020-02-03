@@ -33,7 +33,6 @@
     pipenv
     pypi2nix
     ranger
-    todoist
     tomb
     neovim-remote
     xsel
@@ -50,6 +49,7 @@
     jetbrains.pycharm-professional
     qalculate-gtk
     qt5.qtbase
+    todoist-electron
     typora
     pinta
     vlc
