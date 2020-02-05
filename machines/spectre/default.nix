@@ -42,14 +42,17 @@ in {
   # Optimize for SSDs
   fileSystems."/".options = [ "discard" ];
 
-  # NVIDIA
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia.modesetting.enable = true;
-  hardware.nvidia.optimus_prime = {
-    enable = true;
-    nvidiaBusId = "PCI:1:0:0";
-    intelBusId = "PCI:0:2:0";
+  services.xserver = {
+    videoDrivers = [ "intel" ];
+
+    # Prevent screen tearing on Intel Graphics
+    deviceSection = ''
+      Option      "TearFree"    "true"
+    '';
   };
+
+  # NVIDIA
+  hardware.bumblebee.enable = true;
 
   # Backlight control
   programs.light.enable = true;

@@ -11,7 +11,7 @@ in lib.mkIf config.services.polybar.enable {
 
   services.polybar.config = {
     "bar/bar1" = {
-      monitor = "\${env:MONITOR:eDP-1-1}";
+      monitor = "\${env:MONITOR:eDP1}";
       dpi = 200;
       width = "100%";
       height = 48;
