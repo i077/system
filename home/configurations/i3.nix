@@ -139,7 +139,7 @@ in lib.mkIf config.xsession.windowManager.i3.enable {
 
       # Mark windows
       "${mod}+Shift+m" = "exec i3-input -F 'mark %s' -l 1 -P 'Mark: '";
-      "${mod}+m" = "exec i3-input -F '[con_mark=\"%s\"] focus' -l 1 -P 'Goto: '";
+      "${mod}+m" = "exec i3-input -F '[con_mark=\"%s\"] focus' -l 1 -P 'Goto mark: '";
 
       # Scratchpad
       "${mod}+minus" = "scratchpad show";
@@ -231,6 +231,8 @@ in lib.mkIf config.xsession.windowManager.i3.enable {
       { command = "${pkgs.autorandr}/bin/autorandr -l main"; }
       { command = "systemctl --user restart polybar"; always = true; notification = false; }
     ];
+
+    workspaceAutoBackAndForth = true;
   };
 
   # Cursor
@@ -267,7 +269,7 @@ in lib.mkIf config.xsession.windowManager.i3.enable {
     enable = true;
     inactiveInterval = 15;
     xautolockExtraOptions = [
-      "-corners +-+-" # Don't lock when mouse moves to right corners, lock when moves to left
+      "-corners ++--" # Don't lock when mouse moves to lower corners, lock at upper corners
       "-cornerdelay 2"
       "-cornerredelay 10"
       # "-bell 0" # No audio cues
