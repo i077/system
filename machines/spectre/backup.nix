@@ -30,7 +30,7 @@
   systemd.services.restic-backups-spectre.environment = {
     RCLONE_CONFIG_ONEDRIVE_TYPE = "onedrive";
     RCLONE_CONFIG_ONEDRIVE_TOKEN = builtins.readFile ../../secrets/rclone_config_onedrive_token;
-    RCLONE_CONFIG_ONEDRIVE_DRIVE_ID = "a2694ab35f8cf64";
+    RCLONE_CONFIG_ONEDRIVE_DRIVE_ID = builtins.readFile ../../secrets/rclone_config_onedrive_drive_id;
     RCLONE_CONFIG_ONEDRIVE_DRIVE_TYPE = "personal";
   };
   systemd.services.restic-backups-spectre.after = [ "network-online.target" ];
