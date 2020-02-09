@@ -69,7 +69,7 @@
   # Users
   users.users.imran = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "video" "networkmanager" ];
+    extraGroups = [ "wheel" "video" "networkmanager" "adbusers" ];
     shell = "/run/current-system/sw/bin/fish";
   };
   home-manager.users.imran = import ../../home/home.nix;
@@ -77,6 +77,9 @@
 
   # Fish shell
   programs.fish.enable = true;
+
+  programs.adb.enable = true;
+  services.udev.packages = with pkgs; [ android-udev-rules ];
 
   system.stateVersion = "19.03";
 }
