@@ -6,6 +6,9 @@ let ayucolor="dark"
 let g:gruvbox_contrast_dark="hard"
 set termguicolors
 
+" Remove background from conceal chars
+hi Conceal guibg=None
+
 "" Airline config
 let g:airline_powerline_fonts = 1
 
