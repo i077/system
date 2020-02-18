@@ -17,10 +17,10 @@
         "homepage": "",
         "owner": "rycee",
         "repo": "home-manager",
-        "rev": "f0fe18cd22f8daededa54892f8ba8d363c1ea1d9",
-        "sha256": "0pi9m95szvrsclj5jizjw35b996fnhr2fvkdapfv14ijkqd5cn0v",
+        "rev": "5be9aa417a3993c3fe246c775cae7152ad5ca97d",
+        "sha256": "0j8mz7vkj97dwifwpwd5r9l031x8dhavklhs6x7h1gpfggqf6mw9",
         "type": "tarball",
-        "url": "https://github.com/rycee/home-manager/archive/f0fe18cd22f8daededa54892f8ba8d363c1ea1d9.tar.gz",
+        "url": "https://github.com/rycee/home-manager/archive/5be9aa417a3993c3fe246c775cae7152ad5ca97d.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "i3-workspacer": {
@@ -77,10 +77,12 @@
         "homepage": null,
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "c49da6435f314e04fc58ca29807221817ac2ac6b",
-        "sha256": "17zsqhaf098bvcfarnq0h9601z6smkfd1kz1px6xfg6xqfmr80r7",
+        "rev": "8731aaaf8b30888bc24994096db830993090d7c4",
+        "sha256": "1hcc89rxi47nb0mpk05nl9rbbb04kfw97xfydhpmmgh57yrp3zqa",
         "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs/archive/c49da6435f314e04fc58ca29807221817ac2ac6b.tar.gz",
+        "url": "https://github.com/NixOS/nixpkgs/archive/8731aaaf8b30888bc24994096db830993090d7c4.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "poetry2nix": {
         "branch": "master",
         "description": "Convert poetry projects to nix automagically [maintainer=@adisbladis] ",
