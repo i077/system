@@ -16,7 +16,6 @@ in lib.mkIf config.programs.fish.enable {
       py      = "ptpython";
       t       = "tmux";
       ta      = "tmux a -t";
-      td      = "todoist";
       userctl = "systemctl --user";
       v       = "nvim";
     };
@@ -36,7 +35,7 @@ in lib.mkIf config.programs.fish.enable {
     promptInit = ''
       for file in ${pkgs.bobthefish}/lib/bobthefish/**.fish; source $file; end
       set -g theme_color_scheme terminal2
-      set -g theme_nerd_fonts yes
+      set -g theme_nerd_fonts no
       set -g theme_display_jobs_verbose yes
       set -g theme_show_exit_status yes
       set -g theme_display_date no
