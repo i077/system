@@ -26,11 +26,11 @@
     gnumake
     gopass
     hugo
+    ix
     openfortivpn
     pandoc
     passff-host
-    pinentry
-    pipenv
+    pinentry-gtk2
     pypi2nix
     ranger
     tomb
@@ -62,7 +62,7 @@
 
     # Languages
     dart
-    julia
+    julia_11
     texlive.combined.scheme-full
     texlab
 
