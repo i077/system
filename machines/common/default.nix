@@ -22,11 +22,14 @@
       efi.canTouchEfiVariables = true;
     };
 
+    # Use latest linux kernel (default is LTS)
+    kernelPackages = pkgs.linuxPackages_latest;
+
     # Plymouth boot screen
     plymouth.enable = true;
 
-    extraModulePackages = [ 
-      config.boot.kernelPackages.exfat-nofuse # Support exFAT
+    extraModulePackages = with config.boot.kernelPackages; [
+      exfat-nofuse # Support exFAT
     ];
 
     # Clean up /tmp on boot
