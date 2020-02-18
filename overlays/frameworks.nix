@@ -5,7 +5,7 @@ let
 in {
   my-python3Full = super.python3Full.withPackages (pypkgs: with pypkgs; [
     matplotlib
-    jupyter
+    jupyter jupyterlab
     numpy
     rope
     setuptools
@@ -22,6 +22,8 @@ in {
   my-python3-i3 = super.python3Full.withPackages (pypkgs: with pypkgs; [
     i3ipc
   ]);
+
+  jupyterWith = (import sources.jupyterWith {});
 
   niv = (import sources.niv {}).niv;
 }

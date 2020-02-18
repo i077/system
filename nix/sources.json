@@ -35,6 +35,18 @@
         "url": "https://github.com/cameronleger/i3-workspacer/archive/583d94894863369693a25080b76a2472fd359975.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "jupyterWith": {
+        "branch": "master",
+        "description": "declarative and reproducible Jupyter environments - powered by Nix",
+        "homepage": "",
+        "owner": "tweag",
+        "repo": "jupyterWith",
+        "rev": "7a6716f0c0a5538691a2f71a9f12b066bce7d55c",
+        "sha256": "0q8g93if8k53ick13hrpzwbbc0ymkx87mzpa7dhkfyilj7vksa2g",
+        "type": "tarball",
+        "url": "https://github.com/tweag/jupyterWith/archive/7a6716f0c0a5538691a2f71a9f12b066bce7d55c.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "niv": {
         "branch": "master",
         "description": "Easy dependency management for Nix projects",
@@ -69,6 +81,16 @@
         "sha256": "17zsqhaf098bvcfarnq0h9601z6smkfd1kz1px6xfg6xqfmr80r7",
         "type": "tarball",
         "url": "https://github.com/NixOS/nixpkgs/archive/c49da6435f314e04fc58ca29807221817ac2ac6b.tar.gz",
+    "poetry2nix": {
+        "branch": "master",
+        "description": "Convert poetry projects to nix automagically [maintainer=@adisbladis] ",
+        "homepage": "",
+        "owner": "nix-community",
+        "repo": "poetry2nix",
+        "rev": "cdb1bd83a31d7ae12dd5b5b1ea460c11c942be16",
+        "sha256": "0xni4vl1i368ff0xawqkdg6zw1w7xzdn6xi19c3hjig4hx6fs4b9",
+        "type": "tarball",
+        "url": "https://github.com/nix-community/poetry2nix/archive/cdb1bd83a31d7ae12dd5b5b1ea460c11c942be16.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
