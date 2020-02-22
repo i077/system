@@ -62,10 +62,6 @@ noremap <silent> <c-P> :Files<CR>
 " Lines buffer
 noremap <silent> <m-p> :Lines<CR>
 
-" LanguageClient
-nnoremap <silent> <leader>s :call LanguageClient_contextMenu()<CR>
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-
 " Run Dispatch job
 nnoremap <silent> <leader>m :Dispatch!<CR>
 
@@ -82,10 +78,10 @@ map <Leader>l <Plug>(easymotion-lineforward)
 
 " COC
 " Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gD <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+nmap <silent> <Leader>sd <Plug>(coc-definition)
+nmap <silent> <Leader>sD <Plug>(coc-type-definition)
+nmap <silent> <Leader>si <Plug>(coc-implementation)
+nmap <silent> <Leader>sr <Plug>(coc-references)
 
 " In markdown, align tables
 au FileType markdown vmap <silent> <Leader><Bslash> :EasyAlign*<Bar><Enter>
