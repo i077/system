@@ -128,13 +128,13 @@ in lib.mkIf config.xsession.windowManager.i3.enable {
       "${mod}+Shift+0" = "exec --no-startup-id ${wsr} move -n 10";
       # Navigate workspaces
       "${mod}+Ctrl+h" = "exec --no-startup-id ${wsr} go -d prev";
-      "${mod}+Ctrl+j" = "exec --no-startup-id ${wsr} go -d down";
-      "${mod}+Ctrl+k" = "exec --no-startup-id ${wsr} go -d up";
+      "${mod}+Ctrl+j" = "exec --no-startup-id ${wsr} go -d up";
+      "${mod}+Ctrl+k" = "exec --no-startup-id ${wsr} go -d down";
       "${mod}+Ctrl+l" = "exec --no-startup-id ${wsr} go -d next";
       # Move container to relative workspace
       "${mod}+Ctrl+Shift+h" = "exec --no-startup-id ${wsr} move -d prev";
-      "${mod}+Ctrl+Shift+j" = "exec --no-startup-id ${wsr} move -d down";
-      "${mod}+Ctrl+Shift+k" = "exec --no-startup-id ${wsr} move -d up";
+      "${mod}+Ctrl+Shift+j" = "exec --no-startup-id ${wsr} move -d up";
+      "${mod}+Ctrl+Shift+k" = "exec --no-startup-id ${wsr} move -d down";
       "${mod}+Ctrl+Shift+l" = "exec --no-startup-id ${wsr} move -d next";
 
       # Mark windows
@@ -168,6 +168,7 @@ in lib.mkIf config.xsession.windowManager.i3.enable {
       # Printscreen
       "Print" = "exec ${pkgs.maim}/bin/maim | ${pkgs.xclip}/bin/xclip -selection clipboard -t image/png";
       "Shift+Print" = "exec ${pkgs.maim}/bin/maim -s | ${pkgs.xclip}/bin/xclip -selection clipboard -t image/png";
+      "Shift+Ctrl+Print" = "exec ${pkgs.maim}/bin/maim -s ~/Pictures/scregion-$(date +%Y-%m-%dT%H-%M-%S).png";
       "Ctrl+Print" = "exec ${pkgs.maim}/bin/maim ~/Pictures/screen-$(date +%Y-%m-%dT%H-%M-%S).png";
 
       # Mode switching
