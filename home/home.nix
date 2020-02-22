@@ -27,6 +27,7 @@
     gopass
     hugo
     ix
+    maim
     openfortivpn
     pandoc
     passff-host
@@ -45,7 +46,7 @@
     rhythmbox
     standardnotes
     sublime-merge
-    jetbrains.idea-community
+    jetbrains.idea-ultimate
     jetbrains.pycharm-professional
     qalculate-gtk
     qt5.qtbase
@@ -71,6 +72,7 @@
     iosevka nerdfonts-iosevka
     inter-ui
     jetbrains-mono
+    latinmodern-math
     roboto roboto-mono
     source-code-pro source-sans-pro source-serif-pro
     ubuntu_font_family
