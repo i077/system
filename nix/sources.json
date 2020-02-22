@@ -11,16 +11,28 @@
         "url": "https://github.com/oh-my-fish/theme-bobthefish/archive/5ed60e09ae7f307c4eb5c0de10296f3b713cb94e.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "fish-z": {
+        "branch": "master",
+        "description": "Pure-fish z directory jumping",
+        "homepage": "",
+        "owner": "jethrokuan",
+        "repo": "z",
+        "rev": "ddeb28a7b6a1f0ec6dae40c636e5ca4908ad160a",
+        "sha256": "0c5i7sdrsp0q3vbziqzdyqn4fmp235ax4mn4zslrswvn8g3fvdyh",
+        "type": "tarball",
+        "url": "https://github.com/jethrokuan/z/archive/ddeb28a7b6a1f0ec6dae40c636e5ca4908ad160a.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "home-manager": {
         "branch": "master",
         "description": "Manage a user environment using Nix",
         "homepage": "",
         "owner": "rycee",
         "repo": "home-manager",
-        "rev": "5be9aa417a3993c3fe246c775cae7152ad5ca97d",
-        "sha256": "0j8mz7vkj97dwifwpwd5r9l031x8dhavklhs6x7h1gpfggqf6mw9",
+        "rev": "543118ac703d8ea83714dd9c0c2b8041067552dd",
+        "sha256": "0av48w25ab25v5b7ld2qqyyfh27v1nm117bcih8x9n4nri511f3b",
         "type": "tarball",
-        "url": "https://github.com/rycee/home-manager/archive/5be9aa417a3993c3fe246c775cae7152ad5ca97d.tar.gz",
+        "url": "https://github.com/rycee/home-manager/archive/543118ac703d8ea83714dd9c0c2b8041067552dd.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "i3-workspacer": {

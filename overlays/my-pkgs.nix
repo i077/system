@@ -19,6 +19,5 @@ in
       '';
     };
 
-  bobthefish = custompkgs.bobthefish;
   todoist-electron = custompkgs.todoist-electron;
 }
