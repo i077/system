@@ -18,6 +18,4 @@ in
         unzip -j $downloadedFile \*.ttf -d $out/share/fonts/truetype
       '';
     };
-
-  todoist-electron = custompkgs.todoist-electron;
 }
