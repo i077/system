@@ -49,7 +49,6 @@
     jetbrains.idea-ultimate
     jetbrains.pycharm-professional
     qalculate-gtk
-    qt5.qtbase
     todoist-electron
     typora
     pinta
@@ -61,9 +60,9 @@
     # Games
     minecraft
 
-    # Languages
+    # Languages & frameworks
     dart
-    julia_11
+    nixfmt
     texlive.combined.scheme-full
     texlab
 
