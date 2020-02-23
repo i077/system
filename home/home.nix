@@ -24,7 +24,6 @@
     ctags
     exa
     gnumake
-    gopass
     hugo
     ix
     maim
