@@ -13,6 +13,7 @@ in lib.mkIf config.services.polybar.enable {
     "bar/bar1" = {
       monitor = "\${env:MONITOR:eDP1}";
       dpi = 200;
+      bottom = true;
       width = "100%";
       height = 48;
       radius = 0;
@@ -21,6 +22,7 @@ in lib.mkIf config.services.polybar.enable {
       padding-right = 0;
       module-margin-left = 1;
       module-margin-right = 1;
+
       font-0 = "Jetbrains Mono:size=8";
       font-1 = "Iosevka Nerd Font:size=8";
       wm-restack = "i3";
