@@ -82,4 +82,42 @@ let
 
     vim-scheme = "nord";
   };
-in nord
+
+  oceanicnext = rec {
+    c-dark0 = "#1b2b34";
+    c-dark1 = "#343d46";
+    c-dark2 = "#4f5b66";
+    c-dark3 = "#65737e";
+    c-light0 = "#d8dee9";
+    c-light1 = "#cdd3de";
+    c-light2 = "#c0c5ce";
+    c-light3 = "#a7adba";
+    c-red = "#ec5f67";
+    c-orange = "#f99157";
+    c-yellow = "#fac863";
+    c-green = "#99c794";
+    c-aqua = "#5fb3b3";
+    c-blue = "#6699cc";
+    c-purple = "#c594c5";
+    c-brown = "#ab7967";
+
+    bg0 = c-dark0;
+    bg1 = c-dark1;
+    bg2 = c-dark2;
+    bg3 = c-dark3;
+    fg0 = c-light0;
+    fg1 = c-light1;
+    fg2 = c-light2;
+    fg3 = c-light3;
+    alert = c-red;
+    primary = c-blue;
+    secondary = c-green;
+    tertiary = c-purple;
+    quaternary = c-orange;
+    quinary = c-yellow;
+    senary = c-aqua;
+    septary = c-brown;
+
+    vim-scheme = "OceanicNext";
+  };
+in oceanicnext

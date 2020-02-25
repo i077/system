@@ -25,9 +25,9 @@ in lib.mkIf config.programs.alacritty.enable {
         red = alert;
         green = secondary;
         yellow = quinary;
-        blue = senary;
+        blue = c-blue;
         magenta = tertiary;
-        cyan = septary;
+        cyan = senary;
         white = fg0;
       };
     };
