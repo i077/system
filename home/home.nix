@@ -83,6 +83,7 @@
   # Enabled programs and services (respective configs are in ./configurations)
   programs.alacritty.enable = true;
   programs.bat.enable = true;
+  programs.broot.enable = true;
   programs.direnv.enable = true;
   programs.firefox.enable = true;
   programs.fish.enable = true;
