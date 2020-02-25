@@ -59,6 +59,12 @@ in lib.mkIf config.programs.neovim.enable {
 
       "" Set colorscheme from colors.nix
       colorscheme ${colors.vim-scheme}
+
+      " Remove background from conceal chars
+      hi Conceal guibg=None
     '';
   };
+
+  # Add node package
+  home.packages = [ pkgs.nodePackages.neovim ];
 }

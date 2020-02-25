@@ -5,9 +5,6 @@ set background=dark
 let ayucolor="dark"
 let g:gruvbox_contrast_dark="hard"
 set termguicolors
-
-" Remove background from conceal chars
-hi Conceal guibg=None
 let g:oceanic_next_terminal_bold=1
 let g:oceanic_next_terminal_italic=1
 

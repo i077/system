@@ -73,9 +73,6 @@
     source-code-pro source-sans-pro source-serif-pro
     ubuntu_font_family
 
-    # Node packages
-    nodePackages.neovim
-
     # GTK
     equilux-theme
     pantheon.elementary-icon-theme
