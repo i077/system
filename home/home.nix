@@ -20,7 +20,6 @@
   # User packages
   home.packages = with pkgs; [
     # Command-line utilities
-    python3Packages.black
     ctags
     exa
     gnumake
@@ -31,7 +30,6 @@
     pandoc
     passff-host
     pinentry-gtk2
-    pypi2nix
     ranger
     tomb
     neovim-remote
@@ -74,9 +72,6 @@
     roboto roboto-mono
     source-code-pro source-sans-pro source-serif-pro
     ubuntu_font_family
-
-    # Python packages
-    python3Packages.powerline
 
     # Node packages
     nodePackages.neovim
