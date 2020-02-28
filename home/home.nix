@@ -25,6 +25,7 @@
     gnumake
     hugo
     ix
+    jq
     maim
     openfortivpn
     pandoc
