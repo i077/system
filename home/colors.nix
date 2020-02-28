@@ -3,6 +3,44 @@
 # Color definitions are specific to the color scheme and define actual colors.
 # Scheme definitions are read externally and are defined in terms of color definitions.
 let
+  gotham = rec {
+    c-base0 = "#0c1014";
+    c-base1 = "#11151c";
+    c-base2 = "#091f2e";
+    c-base3 = "#0a3749";
+    c-base4 = "#245361";
+    c-base5 = "#599cab";
+    c-base6 = "#99d1ce";
+    c-base7 = "#d3ebe9";
+    c-red = "#c23127";
+    c-orange = "#d26937";
+    c-yellow = "#edb443";
+    c-magenta = "#888ca6";
+    c-violet = "#4e5166";
+    c-blue = "#195466";
+    c-cyan = "#33859e";
+    c-green = "#2aa889";
+
+    bg0 = c-base0;
+    bg1 = c-base1;
+    bg2 = c-base2;
+    bg3 = c-base3;
+    fg0 = c-base7;
+    fg1 = c-base6;
+    fg2 = c-base5;
+    fg3 = c-base4;
+    alert = c-red;
+    primary = c-cyan;
+    secondary = c-green;
+    tertiary = c-violet;
+    quaternary = c-orange;
+    quinary = c-yellow;
+    senary = c-magenta;
+    septary = c-blue;
+
+    vim-scheme = "gotham";
+  };
+
   gruvbox-dark = rec {
     # Color definitions
     c-bg = "#282828";
@@ -46,39 +84,39 @@ let
   };
 
   nord = rec {
-    dark0 = "#2e3440";
-    dark1 = "#3b4252";
-    dark2 = "#434c5e";
-    dark3 = "#4c566a";
-    light0 = "#eceff4";
-    light1 = "#e5e9f0";
-    light2 = "#d8dee9";
-    blue0 = "#8fbcbb";
-    blue1 = "#88c0d0";
-    blue2 = "#81a1c1";
-    blue3 = "#5e81ac";
-    red = "#bf616a";
-    orange = "#d08770";
-    yellow = "#ebcb8b";
-    green = "#a3be8c";
-    purple = "#b48ead";
+    c-dark0 = "#2e3440";
+    c-dark1 = "#3b4252";
+    c-dark2 = "#434c5e";
+    c-dark3 = "#4c566a";
+    c-light0 = "#eceff4";
+    c-light1 = "#e5e9f0";
+    c-light2 = "#d8dee9";
+    c-blue0 = "#8fbcbb";
+    c-blue1 = "#88c0d0";
+    c-blue2 = "#81a1c1";
+    c-blue3 = "#5e81ac";
+    c-red = "#bf616a";
+    c-orange = "#d08770";
+    c-yellow = "#ebcb8b";
+    c-green = "#a3be8c";
+    c-purple = "#b48ead";
 
-    bg0 = dark0;
-    bg1 = dark1;
-    bg2 = dark2;
-    bg3 = dark3;
-    fg0 = light0;
-    fg1 = light1;
-    fg2 = light2;
-    fg3 = blue2;
-    alert = red;
-    primary = blue1;
-    secondary = green;
-    tertiary = purple;
-    quaternary = orange;
-    quinary = yellow;
-    senary = blue3;
-    septary = blue0;
+    bg0 = c-dark0;
+    bg1 = c-dark1;
+    bg2 = c-dark2;
+    bg3 = c-dark3;
+    fg0 = c-light0;
+    fg1 = c-light1;
+    fg2 = c-light2;
+    fg3 = c-blue2;
+    alert = c-red;
+    primary = c-blue1;
+    secondary = c-green;
+    tertiary = c-purple;
+    quaternary = c-orange;
+    quinary = c-yellow;
+    senary = c-blue3;
+    septary = c-blue0;
 
     vim-scheme = "nord";
   };
@@ -120,4 +158,4 @@ let
 
     vim-scheme = "OceanicNext";
   };
-in oceanicnext
+in gotham
