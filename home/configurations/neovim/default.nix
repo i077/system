@@ -21,7 +21,6 @@ in lib.mkIf config.programs.neovim.enable {
       fzf-vim                       # Fuzzy entry selection
       denite-nvim                   # Async unite interface
       nvim-yarp                     # Remote plugin framework
-      nerdtree                      # File sidebar
 
       # UI + Colorschemes
       airline                       # Smarter tabline
