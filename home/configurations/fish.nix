@@ -79,7 +79,4 @@ in lib.mkIf config.programs.fish.enable {
       }
     ];
   };
-
-  # Enable direnv integration with fish
-  programs.direnv.enableFishIntegration = true;
 }
