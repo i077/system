@@ -158,4 +158,4 @@ let
 
     vim-scheme = "OceanicNext";
   };
-in gotham
+in oceanicnext

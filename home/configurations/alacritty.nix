@@ -32,7 +32,7 @@ in lib.mkIf config.programs.alacritty.enable {
       };
 
       bright = {
-        black = fg3;
+        black = bg2;
         red = alert;
         green = secondary;
         yellow = quinary;
