@@ -7,4 +7,5 @@ let
 in
 {
   neovim-unwrapped = nixpkgs-91fb0f2.neovim-unwrapped;
+  nixfmt = nixpkgs-91fb0f2.nixfmt;
 }
