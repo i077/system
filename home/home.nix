@@ -26,6 +26,7 @@
     hugo
     ix
     jq
+    lynx
     maim
     openfortivpn
     pandoc
@@ -70,6 +71,7 @@
     inter-ui
     jetbrains-mono
     latinmodern-math
+    open-sans
     roboto roboto-mono
     source-code-pro source-sans-pro source-serif-pro
     ubuntu_font_family
