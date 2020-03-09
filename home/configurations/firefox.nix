@@ -4,7 +4,10 @@ let
 in lib.mkIf config.programs.firefox.enable {
   programs.firefox = {
     package = pkgs.firefox.override {
-      extraNativeMessagingHosts = with pkgs; [ passff-host ];
+      extraNativeMessagingHosts = with pkgs; [
+        passff-host
+        tridactyl-native
+      ];
     };
   };
 
