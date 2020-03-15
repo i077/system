@@ -9,7 +9,7 @@ in lib.mkIf config.services.dunst.enable {
       follow = "mouse";
 
       # Appearance
-      geometry = "650x5-30+78";
+      geometry = "800x5-30+30";
       shrink = "no";
       transparency = 10;
       notification_height = 0;
@@ -22,7 +22,7 @@ in lib.mkIf config.services.dunst.enable {
       frame_color = colors.primary;
       separator_color = "auto";
 
-      font = "Inter UI 9";
+      font = "Jetbrains Mono 9";
 
       # Sort by urgency
       sort = true;
@@ -35,7 +35,7 @@ in lib.mkIf config.services.dunst.enable {
       markup = "full";
 
       # Formatting
-      format = "%a\n<b>%s<\b>%b\n%p";
+      format = "<i>%a</i>\\n<b>%s</b>\\n%b\\n%p";
       alignment = "left";
       show_age_threshold = 60;
       word_wrap = true;
