@@ -42,12 +42,12 @@
     brscan4
     lazygit
     libreoffice-fresh
-    rhythmbox
     standardnotes
     sublime-merge
     jetbrains.idea-ultimate
     jetbrains.pycharm-professional
     qalculate-gtk
+    quodlibet-full
     todoist-electron
     typora
     pinta
