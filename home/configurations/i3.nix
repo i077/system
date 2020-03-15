@@ -216,7 +216,7 @@ in lib.mkIf config.xsession.windowManager.i3.enable {
         "s" = "exec systemctl suspend; mode default";
         "Shift+s" = "exec systemctl poweroff";
         "Shift+r" = "exec systemctl reboot";
-        
+
         "Escape" = "mode default";
       };
     };

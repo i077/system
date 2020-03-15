@@ -19,7 +19,7 @@ in {
     ptpython
   ]);
 
-  my-python3-i3 = super.python3Full.withPackages (pypkgs: with pypkgs; [
+  my-python3-i3 = super.python3.withPackages (pypkgs: with pypkgs; [
     i3ipc
   ]);
 

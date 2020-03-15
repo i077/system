@@ -103,7 +103,7 @@ in lib.mkIf config.programs.tmux.enable {
     #     - #{hostname_ssh}
     #     - #{username}
     #     - #{username_ssh}
-    tmux_conf_theme_terminal_title='#h ❐ #S ● #I #W'
+    tmux_conf_theme_terminal_title='#h - #S ● #I #W'
 
     # window status style
     #   - built-in variables are:
