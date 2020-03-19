@@ -38,7 +38,6 @@ set smartcase
 
 " Compatibility with COC
 set shell=/bin/sh
-unlet g:loaded_node_provider
 
 " Easymotion
 let g:EasyMotion_startofline = 0 " keep cursor column on easymotion-{j,k}

@@ -5,6 +5,15 @@ let
   readVimSection = file: builtins.readFile (./. + "/${file}.vim");
 in lib.mkIf config.programs.neovim.enable {
   programs.neovim = {
+    withNodeJs = true;
+
+    extraPython3Packages = (ps: with ps; [
+      black
+      jedi
+      pylint
+      python-language-server
+    ]);
+
     plugins = with pkgs.vimPlugins; [
       # Editor
       sensible                      # Sensible defaults
@@ -63,7 +72,4 @@ in lib.mkIf config.programs.neovim.enable {
       hi Conceal guibg=None
     '';
   };
-
-  # Add node package
-  home.packages = [ pkgs.nodePackages.neovim ];
 }
