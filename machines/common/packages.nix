@@ -13,6 +13,7 @@ in {
       "nixpkgs=/etc/sources/nixpkgs"
       "home-manager=/etc/sources/home-manager"
       "nixos-config=/etc/nixos/configuration.nix"
+      "nixpkgs-overlays=/etc/nixos/overlays"
     ];
 
     # Optimize nix store automatically
@@ -26,7 +27,8 @@ in {
     config = import ../../nixpkgs-config.nix;
   };
 
-  nixpkgs.overlays = import ../../overlays;
+  nixpkgs.overlays = with builtins;
+    map (name: import (../../overlays + "/${name}")) (attrNames (readDir ../../overlays));
 
   # System packages
   environment.systemPackages = with pkgs; [

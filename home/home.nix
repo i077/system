@@ -15,7 +15,8 @@
   };
 
   nixpkgs.config = import ../nixpkgs-config.nix;
-  nixpkgs.overlays = import ../overlays;
+  nixpkgs.overlays = with builtins;
+    map (name: import (../overlays + "/${name}")) (attrNames (readDir ../overlays));
 
   # User packages
   home.packages = with pkgs; [
