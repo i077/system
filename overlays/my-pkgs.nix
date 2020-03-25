@@ -1,7 +1,7 @@
 self: super:
 
 let
-  custompkgs = import ../packages {};
+  callPackage = self.lib.callPackageWith self;
 in
 {
   nerdfonts-iosevka = let
