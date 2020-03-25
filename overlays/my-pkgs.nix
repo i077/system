@@ -18,4 +18,6 @@ in
         unzip -j $downloadedFile \*.ttf -d $out/share/fonts/truetype
       '';
     };
+
+    everdo = callPackage ../packages/everdo {};
 }

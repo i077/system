@@ -204,7 +204,7 @@ in lib.mkIf config.xsession.windowManager.i3.enable {
         "f" = "exec ${termExec} -e ${pkgs.ranger}/bin/ranger; mode default";
         "g" = "exec ${pkgs.sublime-merge}/bin/sublime_merge; mode default";
         "n" = "exec ${pkgs.write_stylus}/bin/Write; mode default";
-        "t" = "exec ${pkgs.todoist-electron}/bin/todoist; mode default";
+        "t" = "exec ${pkgs.everdo}/bin/everdo; mode default";
 
         "Escape" = "mode default";
       };
@@ -224,7 +224,7 @@ in lib.mkIf config.xsession.windowManager.i3.enable {
     floating = {
       criteria = [
         { class = "^AlacrittyFloat$"; }
-        { class = "^Todoist$"; }
+        { class = "^everdo$"; }
       ];
     };
 

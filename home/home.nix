@@ -41,6 +41,7 @@
     # Apps
     android-studio
     brscan4
+    everdo
     lazygit
     libreoffice-fresh
     standardnotes
