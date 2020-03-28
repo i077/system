@@ -250,7 +250,7 @@ in lib.mkIf config.xsession.windowManager.i3.enable {
   programs.rofi.enable = true;
 
   # Smoother compositing
-  services.compton.enable = true;
+  services.picom.enable = true;
 
   # Notifications
   services.dunst.enable = true;

@@ -40,7 +40,6 @@ in {
     gitFull
     htop
     interception-tools
-    openjdk12
     keybase-gui
     libsecret
     neovim

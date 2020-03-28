@@ -63,6 +63,7 @@
 
     # Languages & frameworks
     dart
+    jdk13
     nixfmt
     texlive.combined.scheme-full
     texlab
