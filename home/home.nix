@@ -14,10 +14,6 @@
     TERMINAL = "alacritty";
   };
 
-  nixpkgs.config = import ../nixpkgs-config.nix;
-  nixpkgs.overlays = with builtins;
-    map (name: import (../overlays + "/${name}")) (attrNames (readDir ../overlays));
-
   xdg.configFile."nixpkgs/config.nix".source = ../nixpkgs-config.nix;
 
   # User packages

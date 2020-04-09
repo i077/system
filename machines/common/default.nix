@@ -77,6 +77,7 @@
   };
   home-manager.users.imran = import ../../home/home.nix;
   home-manager.useUserPackages = true;
+  home-manager.useGlobalPkgs = true;
 
   # Fish shell
   programs.fish.enable = true;
