@@ -6,11 +6,16 @@ let
   cfg = config.programs.ptpython;
 
   boolToPyBool = b: if b then "True" else "False";
-  attrsToPyStmts = attrs: concatStringsSep "\n    "
-    (mapAttrsToList
-    (n: v: "repl.${n} = ${if (isBool v) then (boolToPyBool v)
-                          else if (isInt v) then "${v}"
-                          else "\"${v}\""}") attrs);
+  attrsToPyStmts = attrs:
+    concatStringsSep "\n    " (mapAttrsToList (n: v:
+      "repl.${n} = ${
+        if (isBool v) then
+          (boolToPyBool v)
+        else if (isInt v) then
+          "${v}"
+        else
+          ''"${v}"''
+      }") attrs);
 
 in {
   options.programs.ptpython = {
@@ -47,7 +52,7 @@ in {
   config = mkIf cfg.enable {
     # The ptpython package must be added to the python package using python3.withPackages
 
-    home.file.".ptpython/config.py".text = ''
+    xdg.configFile."ptpython/config.py".text = ''
       from __future__ import unicode_literals
       from prompt_toolkit.filters import ViInsertMode
       from prompt_toolkit.key_binding.key_processor import KeyPress
