@@ -39,13 +39,11 @@ in {
     gdb
     gitFull
     htop
-    interception-tools
     keybase-gui
     libsecret
     neovim
     niv
     nix-index
-    nodejs
     openconnect
     patchelf
     pciutils
@@ -53,12 +51,10 @@ in {
     psmisc
     my-python3Full
     powertop
-    qt5.qtbase
     rclone
     ripgrep
     unzip
     wget
-    yarn
 
     manpages
     stdmanpages
