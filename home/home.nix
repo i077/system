@@ -18,6 +18,8 @@
   nixpkgs.overlays = with builtins;
     map (name: import (../overlays + "/${name}")) (attrNames (readDir ../overlays));
 
+  xdg.configFile."nixpkgs/config.nix".source = ../nixpkgs-config.nix;
+
   # User packages
   home.packages = with pkgs; [
     # Command-line utilities
@@ -110,14 +112,6 @@
 
   xsession.enable = true;
   xsession.windowManager.i3.enable = true;
-
-  # Todoist config
-  home.file.".todoist.config.json".text = ''
-    {
-      "token": "${builtins.readFile ../secrets/todoist_api_token}",
-      "color": "true"
-    }
-  '';
 
   # Fonts
   fonts.fontconfig.enable = true;
