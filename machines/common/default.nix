@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }:
 
-{
+let sources = import ../../nix/sources.nix;
+in {
   imports = [
     ./keybase.nix
     ./packages.nix
@@ -9,10 +10,7 @@
     ./yubikey.nix
 
     # Home manager
-    <home-manager/nixos>
-
-    # Used for Brother scanners
-    <nixpkgs/nixos/modules/services/hardware/sane_extra_backends/brscan4.nix>
+    "${sources.home-manager}/nixos"
   ];
 
   boot = {

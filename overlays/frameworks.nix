@@ -25,5 +25,5 @@ in {
 
   jupyterWith = (import sources.jupyterWith {});
 
-  niv = (import sources.niv {}).niv;
+  inherit (import sources.niv {}) niv;
 }
