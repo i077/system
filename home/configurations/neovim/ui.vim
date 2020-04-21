@@ -36,3 +36,8 @@ let g:airline_symbols.linenr = ''
 " Smarter tabline
 let g:airline#extensions#tabline#enabled = 1
 
+"" FZF
+" Set layout to a floating window
+let g:fzf_layout = {
+            \ 'window': { 'width': 0.9, 'height': 0.6 }
+            \ }
