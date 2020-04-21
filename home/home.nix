@@ -34,6 +34,7 @@
     ranger
     tomb
     neovim-remote
+    xdotool
     xsel
 
     # Apps

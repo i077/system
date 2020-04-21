@@ -51,6 +51,7 @@ in {
     psmisc
     my-python3Full
     powertop
+    qt5.qtbase
     rclone
     ripgrep
     unzip
