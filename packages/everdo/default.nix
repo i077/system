@@ -2,14 +2,14 @@
 
 let
   pname = "everdo";
-  version = "1.3.4";
+  version = "1.3.5";
 in appimageTools.wrapType2 rec {
   name = "${pname}-${version}";
 
   src = fetchurl {
     url =
       "https://d11l8siwmn8w36.cloudfront.net/${version}/Everdo-${version}.AppImage";
-    sha256 = "0340fawpi8xp2wfrxzzzxn6g1k8l1p481phn6f2y11khxjc4g4ip";
+    sha256 = "1h3ljlc7gqfnyycdrwd76r7vwx8mr7br0lvx4g27kzrmm9yr93hp";
   };
 
   profile = ''
