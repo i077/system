@@ -69,6 +69,7 @@
 
     # Fonts
     corefonts # Microsoft core fonts for Web
+    fira fira-code fira-mono
     iosevka nerdfonts-iosevka
     inter-ui
     jetbrains-mono
