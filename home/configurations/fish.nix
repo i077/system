@@ -24,10 +24,10 @@ in lib.mkIf config.programs.fish.enable {
 
     shellAliases = {
       # NixOS management
-      nxu = "sudo nix-channel --update";
       nxs = "sudo nixos-rebuild switch";
       nxb = "sudo nixos-rebuild boot";
       nxt = "sudo nixos-rebuild test";
+      nxgc = "sudo nix-collect-garbage";
 
       # Keybase stuff
       cdkb = "cd /keybase/private/i077";
@@ -41,6 +41,11 @@ in lib.mkIf config.programs.fish.enable {
       set -g theme_display_jobs_verbose yes
       set -g theme_show_exit_status yes
       set -g theme_display_date no
+
+      # Show vi-mode in cursor
+      set -g theme_display_vi no
+      set -g fish_cursor_default block
+      set -g fish_cursor_insert line
 
       # Define custom colors
       function bobthefish_colors -S -d 'Define custom bobthefish color scheme'
