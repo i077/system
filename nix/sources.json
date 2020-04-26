@@ -5,10 +5,10 @@
         "homepage": "",
         "owner": "oh-my-fish",
         "repo": "theme-bobthefish",
-        "rev": "3b37ec9f0b72b2be1d9f2682bbb47eaf8ab64335",
-        "sha256": "05vfsmdhi451r705a6jcf05idha5ydcky68c3whfg7dln835nd0q",
+        "rev": "6e75f31c3fd10944b108b0338e855a993bad17c9",
+        "sha256": "0qn4pr6l7fbljnl8jjgm0mdw1rjdv9mc8y7wpk7rcnkkaqrd457r",
         "type": "tarball",
-        "url": "https://github.com/oh-my-fish/theme-bobthefish/archive/3b37ec9f0b72b2be1d9f2682bbb47eaf8ab64335.tar.gz",
+        "url": "https://github.com/oh-my-fish/theme-bobthefish/archive/6e75f31c3fd10944b108b0338e855a993bad17c9.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "fish-z": {
@@ -29,10 +29,10 @@
         "homepage": "",
         "owner": "rycee",
         "repo": "home-manager",
-        "rev": "3e3de8cee20fb00253927d017e4714f1e5be781e",
-        "sha256": "1135ppj272hk4b94pfh7xsvp7cx4p1j6dxvkfl04n6192h1xhh1w",
+        "rev": "a6037a9eb885d8ad8c2087e3b2091cd5913242b2",
+        "sha256": "1b6pzscx7zss9s5dgnm2vwff56bjl1643qdgq725r5gc067wlqqz",
         "type": "tarball",
-        "url": "https://github.com/rycee/home-manager/archive/3e3de8cee20fb00253927d017e4714f1e5be781e.tar.gz",
+        "url": "https://github.com/rycee/home-manager/archive/a6037a9eb885d8ad8c2087e3b2091cd5913242b2.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "i3-workspacer": {
@@ -83,16 +83,16 @@
         "url": "https://github.com/NixOS/nixpkgs/archive/22a3bf9fb9edad917fb6cd1066d58b5e426ee975.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
-    "nixpkgs-old": {
-        "branch": "nixos-19.09",
+    "nixpkgs-stable": {
+        "branch": "nixos-20.03",
         "description": "Nix Packages collection",
         "homepage": null,
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "9237a09d8edbae9951a67e9a3434a07ef94035b7",
-        "sha256": "05bizymljzzd665bpsjbhxamcgzq7bkjjzjfapkl2nicy774ak4x",
+        "rev": "74a80c5a9ab04f87d48b91281f8508ee4b631d43",
+        "sha256": "1a10scwa86dlqrxz76y5m971kkqkkvf9vnc58n514l5ny3h5cw7j",
         "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs/archive/9237a09d8edbae9951a67e9a3434a07ef94035b7.tar.gz",
+        "url": "https://github.com/NixOS/nixpkgs/archive/74a80c5a9ab04f87d48b91281f8508ee4b631d43.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "poetry2nix": {
