@@ -26,9 +26,7 @@ in {
     # Plymouth boot screen
     plymouth.enable = true;
 
-    extraModulePackages = with config.boot.kernelPackages; [
-      exfat-nofuse # Support exFAT
-    ];
+    extraModulePackages = with config.boot.kernelPackages; [];
 
     # Clean up /tmp on boot
     cleanTmpDir = true;
