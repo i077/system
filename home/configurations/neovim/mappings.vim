@@ -14,8 +14,10 @@ map <leader><Tab> <C-^>
 " Work with OS clipboard
 nnoremap gy "+y
 nnoremap gp "+p
+nnoremap gP "+P
 vnoremap gy "+y
 vnoremap gp "+p
+vnoremap gP "+P
 
 " :write with ZW
 nmap ZW :w<CR>
