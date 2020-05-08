@@ -1,0 +1,161 @@
+{
+  "nodes": {
+    "fish-bobthefish": {
+      "flake": false,
+      "info": {
+        "lastModified": 1588602977,
+        "narHash": "sha256-mJ592BHPFglEeAtOTDPheVgk2kiOev1MQaeJhldZWrs="
+      },
+      "locked": {
+        "owner": "oh-my-fish",
+        "repo": "theme-bobthefish",
+        "rev": "a2ad38aa051aaed25ae3bd6129986e7f27d42d7b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oh-my-fish",
+        "repo": "theme-bobthefish",
+        "type": "github"
+      }
+    },
+    "fish-z": {
+      "flake": false,
+      "info": {
+        "lastModified": 1566207907,
+        "narHash": "sha256-0LftxkN2c52p/sRW0lUZ4lZHLPbt4/jXHhhcnZs+sTA="
+      },
+      "locked": {
+        "owner": "jethrokuan",
+        "repo": "z",
+        "rev": "ddeb28a7b6a1f0ec6dae40c636e5ca4908ad160a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jethrokuan",
+        "repo": "z",
+        "type": "github"
+      }
+    },
+    "home-manager": {
+      "flake": false,
+      "info": {
+        "lastModified": 1588890102,
+        "narHash": "sha256-sMSY27oTwoCnsUQRo+2Ylq46eSOA+Kgmh3oXsxRSDGk="
+      },
+      "locked": {
+        "owner": "rycee",
+        "repo": "home-manager",
+        "rev": "2434984336d5f48928e926a07d7295be52cb1091",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rycee",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "i3-workspacer": {
+      "flake": false,
+      "info": {
+        "lastModified": 1489953479,
+        "narHash": "sha256-GLrWeOtEpA5iYcepIxFKPf1NTM8YCkuKmcmjaU5GVCY="
+      },
+      "locked": {
+        "owner": "cameronleger",
+        "repo": "i3-workspacer",
+        "rev": "583d94894863369693a25080b76a2472fd359975",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cameronleger",
+        "repo": "i3-workspacer",
+        "type": "github"
+      }
+    },
+    "niv": {
+      "flake": false,
+      "info": {
+        "lastModified": 1585677523,
+        "narHash": "sha256-GieMLnJK3EvF17fggNhDItRoc9v3U+gpznjLMUzPlUo="
+      },
+      "locked": {
+        "owner": "nmattia",
+        "repo": "niv",
+        "rev": "f73bf8d584148677b01859677a63191c31911eae",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nmattia",
+        "repo": "niv",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "info": {
+        "lastModified": 1587961704,
+        "narHash": "sha256-/aqrj8zYfwz8Wd0qu7jgNvddXj7Bro3QHz2YKJOJO5M="
+      },
+      "locked": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "fce7562cf46727fdaf801b232116bc9ce0512049",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "info": {
+        "lastModified": 1588916605,
+        "narHash": "sha256-e2Y74WUeREr9+yYQtuD38MJI6SQkhgctiAjH0FsLaC4="
+      },
+      "locked": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "d78ba41a5604c8e06d40756a2436e52169354d36",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
+    "poetry2nix": {
+      "info": {
+        "lastModified": 1588708544,
+        "narHash": "sha256-podhPKUKHbi3b1DsUeHjST4ECRImEDOzULdFMNcKJZ8="
+      },
+      "inputs": {
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "owner": "nix-community",
+        "repo": "poetry2nix",
+        "rev": "4aa4f748641420252ff892d656bfae7c3d9a5d3d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "poetry2nix",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "fish-bobthefish": "fish-bobthefish",
+        "fish-z": "fish-z",
+        "home-manager": "home-manager",
+        "i3-workspacer": "i3-workspacer",
+        "niv": "niv",
+        "nixpkgs": "nixpkgs",
+        "poetry2nix": "poetry2nix"
+      }
+    }
+  },
+  "root": "root",
+  "version": 5
+}

@@ -17,10 +17,16 @@ in {
     ];
 
     # Optimize nix store automatically
-    autoOptimiseStore = true;
+    optimise.automatic = true;
 
     # Grant sudoers rights with the nix daemon
     trustedUsers = [ "root" "@wheel" ];
+
+    # Use flakes
+    package = pkgs.nixFlakes;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
   };
   
   nixpkgs.pkgs = import sources.nixpkgs {
