@@ -1,6 +1,5 @@
 {
   description = "My NixOS configurations";
-  edition = 201909;
 
   inputs = {
     # Nixpkgs tracks nixos-unstable
@@ -82,6 +81,9 @@
             {
               # Set hostname as i077-[host directory name]
               networking.hostName = hostname;
+
+              # System revision tracks git commit hash
+              system.configurationRevision = self.rev;
 
               system.stateVersion = "19.03";
             }
