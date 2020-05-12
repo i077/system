@@ -72,24 +72,6 @@
         "type": "github"
       }
     },
-    "niv": {
-      "flake": false,
-      "info": {
-        "lastModified": 1585677523,
-        "narHash": "sha256-GieMLnJK3EvF17fggNhDItRoc9v3U+gpznjLMUzPlUo="
-      },
-      "locked": {
-        "owner": "nmattia",
-        "repo": "niv",
-        "rev": "f73bf8d584148677b01859677a63191c31911eae",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nmattia",
-        "repo": "niv",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "info": {
         "lastModified": 1587961704,
@@ -124,6 +106,24 @@
         "type": "indirect"
       }
     },
+    "oh-my-tmux": {
+      "flake": false,
+      "info": {
+        "lastModified": 1584538220,
+        "narHash": "sha256-kRY7I0T7B9Oao0PmCzbXSVqHT3FLVmcQkmh5KxWXbsk="
+      },
+      "locked": {
+        "owner": "gpakosz",
+        "repo": ".tmux",
+        "rev": "d6f0f647dd68561ed010f83d8d226383aebfb805",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gpakosz",
+        "repo": ".tmux",
+        "type": "github"
+      }
+    },
     "poetry2nix": {
       "info": {
         "lastModified": 1588708544,
@@ -150,8 +150,8 @@
         "fish-z": "fish-z",
         "home-manager": "home-manager",
         "i3-workspacer": "i3-workspacer",
-        "niv": "niv",
         "nixpkgs": "nixpkgs",
+        "oh-my-tmux": "oh-my-tmux",
         "poetry2nix": "poetry2nix"
       }
     }

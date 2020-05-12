@@ -1,6 +1,5 @@
 {
   description = "My NixOS configurations";
-
   edition = 201909;
 
   inputs = {
@@ -20,19 +19,19 @@
       flake = false;
     };
 
-    # Manage dependencies for nix projects
-    niv = {
-      type = "github";
-      owner = "nmattia";
-      repo = "niv";
-      flake = false;
-    };
-
     # Build python poetry projects under nix
     poetry2nix = {
       type = "github";
       owner = "nix-community";
       repo = "poetry2nix";
+    };
+
+    # Tmux configuration
+    oh-my-tmux = {
+      type = "github";
+      owner = "gpakosz";
+      repo = ".tmux";
+      flake = false;
     };
 
     # Bobthefish theme for fish
@@ -63,27 +62,42 @@
   outputs = inputs@{ self, nixpkgs, home-manager, ... }: {
     # Map each directory in ./hosts to a nixos system
     nixosConfigurations = let
-      inherit (builtins) attrNames filter readDir;
-      inherit (nixpkgs.lib) genAttrs removePrefix nixosSystem;
+      inherit (builtins) attrNames readDir;
+      inherit (nixpkgs.lib) filterAttrs genAttrs removePrefix nixosSystem;
 
-      hosts = map (name: "i077-" + name)
-        (filter (n: n != "common") ((attrNames (readDir ./machines))));
+      hosts = let
+        hostDirs = attrNames
+          (filterAttrs (_: type: type == "directory") (readDir ./hosts));
+      in map (name: "i077-" + name) hostDirs;
 
       mkHostConfig = hostname:
         let
           name = removePrefix "i077-" hostname;
+          device = import (./hosts + "/${name}");
         in nixosSystem {
           system = "x86_64-linux";
-          modules = [
-            {
-              # System config revision tracks commit hash of this flake
-              system.configurationRevision = self.rev;
-            }
 
-            (import (./machines + "/${name}"))
+          modules = [
+            nixpkgs.nixosModules.notDetected
+            {
+              # Set hostname as i077-[host directory name]
+              networking.hostName = hostname;
+
+              system.stateVersion = "19.03";
+            }
+            (import (./hosts + "/${name}" + /hardware-configuration.nix))
+
+            # Use home-manager, which is not yet a flake
+            (import (home-manager + "/nixos"))
+
+            # Import custom packages module
+            (import ./packages)
+
+            (import ./modules)
           ];
-          # Pass flake inputs to modules
-          specialArgs = { inherit inputs; };
+
+          # Pass flake inputs and device parameters to modules
+          specialArgs = { inherit inputs device; };
         };
     in genAttrs hosts mkHostConfig;
   };
