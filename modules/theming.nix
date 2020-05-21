@@ -231,7 +231,7 @@ in {
         pkg = pkgs.source-serif-pro;
       };
       mono = {
-        family = "JetBrains Mono";
+        family = "Iosevka";
         size = 8;
         pkg = pkgs.jetbrains-mono;
       };
