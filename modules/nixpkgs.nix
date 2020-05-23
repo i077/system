@@ -22,6 +22,12 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
+
+    binaryCaches = [ "https://cache.nixos.org" "https://srid.cachix.org" ];
+    binaryCachePublicKeys = [
+      "hydra.nixos.org-1:CNHJZBh9K4tP3EKF6FkkgeVYsS3ohTl+oS0Qa8bezVs="
+      "srid.cachix.org-1:MTQ6ksbfz3LBMmjyPh0PLmos+1x+CdtJxA/J2W+PQxI="
+    ];
   };
 
   nixpkgs.config = import ../nixpkgs-config.nix;
@@ -73,6 +79,10 @@
 
       my-python3-i3 =
         super.python3.withPackages (pypkgs: with pypkgs; [ i3ipc ]);
+
+      neuron = (import (inputs.neuron + "/project.nix") {
+        inherit (device) system;
+      }).ghc.neuron;
     })
   ];
 }

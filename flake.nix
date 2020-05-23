@@ -56,6 +56,14 @@
       repo = "i3-workspacer";
       flake = false;
     };
+
+    # Neuron zettelkasten
+    neuron = {
+      type = "github";
+      owner = "srid";
+      repo = "neuron";
+      flake = false;
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, ... }: {

@@ -39,13 +39,13 @@
     "home-manager": {
       "flake": false,
       "info": {
-        "lastModified": 1590006755,
-        "narHash": "sha256-m+TIbfEGN/AYaaQF+XVbLHz1MnzE0lLzbRj+nF9rl7o="
+        "lastModified": 1590098873,
+        "narHash": "sha256-jr35BU9vz+WqoOKeghfTNnt0fh2/2eWg/K9b9LIVwqQ="
       },
       "locked": {
         "owner": "rycee",
         "repo": "home-manager",
-        "rev": "dcbe0f2a31715f62a040b6602eece9c7282d191f",
+        "rev": "d99f54b51b7395e0652ddb2212676b7076c9af4f",
         "type": "github"
       },
       "original": {
@@ -72,6 +72,24 @@
         "type": "github"
       }
     },
+    "neuron": {
+      "flake": false,
+      "info": {
+        "lastModified": 1590176520,
+        "narHash": "sha256-C7oWydQXDFYNtHQ7nefF7ZaT5OtHmCk/RIhjcn+yAZo="
+      },
+      "locked": {
+        "owner": "srid",
+        "repo": "neuron",
+        "rev": "33bcf2fbb7645f1e3a20763837dc35f1e9367d99",
+        "type": "github"
+      },
+      "original": {
+        "owner": "srid",
+        "repo": "neuron",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "info": {
         "lastModified": 1589844680,
@@ -92,13 +110,13 @@
     },
     "nixpkgs_2": {
       "info": {
-        "lastModified": 1590022193,
-        "narHash": "sha256-FdF7m/uesJ0BR+ekGN3lSQemJtitBzNIl/uCM38n7ck="
+        "lastModified": 1590194050,
+        "narHash": "sha256-6GpMgeo/HWzlhvdlBW12Tx59OwdxnmTvSr450AodAqE="
       },
       "locked": {
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "9caecc8bc5e859dbf3825068e5aadf6e132f9c2a",
+        "rev": "d8435f6d5fe20aaca216185fca2640d10dff1d97",
         "type": "github"
       },
       "original": {
@@ -150,6 +168,7 @@
         "fish-z": "fish-z",
         "home-manager": "home-manager",
         "i3-workspacer": "i3-workspacer",
+        "neuron": "neuron",
         "nixpkgs": "nixpkgs",
         "oh-my-tmux": "oh-my-tmux",
         "poetry2nix": "poetry2nix"

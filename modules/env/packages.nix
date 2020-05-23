@@ -50,6 +50,7 @@
       jq
       lynx
       maim
+      neuron
       niv
       openfortivpn
       pandoc
