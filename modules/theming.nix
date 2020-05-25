@@ -233,7 +233,7 @@ in {
       mono = {
         family = "Iosevka";
         size = 8;
-        pkg = pkgs.jetbrains-mono;
+        pkg = pkgs.iosevka;
       };
       ui = sans;
     };
