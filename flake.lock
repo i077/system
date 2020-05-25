@@ -39,13 +39,13 @@
     "home-manager": {
       "flake": false,
       "info": {
-        "lastModified": 1590098873,
-        "narHash": "sha256-jr35BU9vz+WqoOKeghfTNnt0fh2/2eWg/K9b9LIVwqQ="
+        "lastModified": 1590360449,
+        "narHash": "sha256-lSj8nMWo879omLcxsOULSVmSO77otCatHURtjCbg+V0="
       },
       "locked": {
         "owner": "rycee",
         "repo": "home-manager",
-        "rev": "d99f54b51b7395e0652ddb2212676b7076c9af4f",
+        "rev": "2ed978eb79af72a7696ea61df07102d38134517f",
         "type": "github"
       },
       "original": {
@@ -75,13 +75,13 @@
     "neuron": {
       "flake": false,
       "info": {
-        "lastModified": 1590176520,
-        "narHash": "sha256-C7oWydQXDFYNtHQ7nefF7ZaT5OtHmCk/RIhjcn+yAZo="
+        "lastModified": 1590365024,
+        "narHash": "sha256-So5MzfZxPwAqmBKvF1/EgBMVYocQ7wNJORjBsAODMLs="
       },
       "locked": {
         "owner": "srid",
         "repo": "neuron",
-        "rev": "33bcf2fbb7645f1e3a20763837dc35f1e9367d99",
+        "rev": "2d05fed0e93870c1d9d39b735bfdf39e446f7787",
         "type": "github"
       },
       "original": {
@@ -110,13 +110,13 @@
     },
     "nixpkgs_2": {
       "info": {
-        "lastModified": 1590194050,
-        "narHash": "sha256-6GpMgeo/HWzlhvdlBW12Tx59OwdxnmTvSr450AodAqE="
+        "lastModified": 1590374834,
+        "narHash": "sha256-is4BfxaUmvVqX0Ath7MOo86ZpzgIibjxPb0OeIcNMYg="
       },
       "locked": {
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "d8435f6d5fe20aaca216185fca2640d10dff1d97",
+        "rev": "7a2307dc4b9a4ccbfd5f29b30a572297a47f63e8",
         "type": "github"
       },
       "original": {
