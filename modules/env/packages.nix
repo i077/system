@@ -73,6 +73,7 @@
       jetbrains.pycharm-professional
       qalculate-gtk
       quodlibet-full
+      ripcord
       todoist-electron
       typora
       pinta
