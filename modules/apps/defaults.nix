@@ -12,7 +12,7 @@
         desktop = "Alacritty";
       };
       editor = {
-        cmd = "${terminal.cmd} -e ${pkgs.neovim}/bin/nvim";
+        cmd = "nvim";
         desktop = "nvim";
       };
       browser = {
