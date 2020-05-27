@@ -209,7 +209,7 @@ in {
         "e" = "exec ${config.defaultApplications.editor.cmd}; mode default";
         "f" = "exec ${termExec} -e ${pkgs.ranger}/bin/ranger; mode default";
         "g" = "exec ${pkgs.sublime-merge}/bin/sublime_merge; mode default";
-        "n" = "exec ${pkgs.write_stylus}/bin/Write; mode default";
+        "n" = "exec ${pkgs.obsidian}/bin/obsidian; mode default";
         "t" = "exec ${pkgs.everdo}/bin/everdo; mode default";
 
         "Escape" = "mode default";
