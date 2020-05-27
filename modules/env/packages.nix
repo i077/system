@@ -71,6 +71,7 @@
       sublime-merge
       jetbrains.idea-ultimate
       jetbrains.pycharm-professional
+      obsidian
       qalculate-gtk
       quodlibet-full
       ripcord
