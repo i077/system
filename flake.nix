@@ -3,65 +3,44 @@
 
   inputs = {
     # Nixpkgs tracks nixos-unstable
-    nixpkgs = {
-      type = "github";
-      owner = "NixOS";
-      repo = "nixpkgs";
-      ref = "nixos-unstable";
-    };
+    nixpkgs.url = github:NixOS/nixpkgs/nixos-unstable;
 
     # Manage user environment
     home-manager = {
-      type = "github";
-      owner = "rycee";
-      repo = "home-manager";
+      url = github:rycee/home-manager;
       flake = false;
     };
 
     # Build python poetry projects under nix
-    poetry2nix = {
-      type = "github";
-      owner = "nix-community";
-      repo = "poetry2nix";
-    };
+    poetry2nix.url = github:nix-community/poetry2nix;
 
     # Tmux configuration
     oh-my-tmux = {
-      type = "github";
-      owner = "gpakosz";
-      repo = ".tmux";
+      url = github:gpakosz/.tmux;
       flake = false;
     };
 
     # Bobthefish theme for fish
     fish-bobthefish = {
-      type = "github";
-      owner = "oh-my-fish";
-      repo = "theme-bobthefish";
+      url = github:oh-my-fish/theme-bobthefish;
       flake = false;
     };
 
     # Jump to directories by frecency with fish
     fish-z = {
-      type = "github";
-      owner = "jethrokuan";
-      repo = "z";
+      url = github:jethrokuan/z;
       flake = false;
     };
 
     # Workspace scripts for i3
     i3-workspacer = {
-      type = "github";
-      owner = "cameronleger";
-      repo = "i3-workspacer";
+      url = github:cameronleger/i3-workspacer;
       flake = false;
     };
 
     # Neuron zettelkasten
     neuron = {
-      type = "github";
-      owner = "srid";
-      repo = "neuron";
+      url = github:srid/neuron;
       flake = false;
     };
   };
