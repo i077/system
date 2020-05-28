@@ -6,9 +6,8 @@ let
 
   name = "${pname}-${version}";
 
-  # Fetch from my keybase public directory
   src = fetchurl {
-    url = "https://i077.keybase.pub/Obsidian-${version}.AppImage";
+    url = "https://github.com/obsidianmd/obsidian-releases/releases/download/v${version}/Obsidian-${version}.AppImage";
     sha256 = "14yawv9k1j4lly9c5hricvzn9inzx23q38vsymgwwy6qhkpkrjcb";
   };
 
