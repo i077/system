@@ -25,6 +25,7 @@
       enable = true;
       extraModules = [ pkgs.pulseaudio-modules-bt ];
       package = pkgs.pulseaudioFull;
+      support32Bit = true;
     };
 
     # Bluetooth
@@ -38,6 +39,8 @@
 
     # Graphics
     bumblebee.enable = (device.gpu == "optimus");
+
+    steam-hardware.enable = true;
   };
 
   # Allow backlight control

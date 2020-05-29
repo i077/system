@@ -85,6 +85,7 @@
 
       # Games
       minecraft
+      steam
 
       # Languages & frameworks
       dart
