@@ -22,6 +22,10 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
+    registry.nixpkgs = {
+      from = { id = "nixpkgs"; type = "indirect"; };
+      flake = inputs.nixpkgs;
+    };
 
     binaryCaches = [ "https://cache.nixos.org" "https://srid.cachix.org" ];
     binaryCachePublicKeys = [
