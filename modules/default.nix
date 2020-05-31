@@ -7,6 +7,7 @@
     ./hardware.nix
     ./networking.nix
     ./nixpkgs.nix
+    ./power.nix
     ./printing.nix
     ./private.nix
     ./services.nix
