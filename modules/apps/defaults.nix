@@ -45,6 +45,11 @@
         cmd = "${pkgs.libreoffice}/bin/simpress";
         desktop = "impress";
       };
+
+      zoom = {
+        cmd = "${pkgs.zoom-us}/bin/zoom-us";
+        desktop = "Zoom";
+      };
     };
 
     home-manager.users.imran.xdg.mimeApps.enable = true;
@@ -57,6 +62,8 @@
         "x-scheme-handler/about" = browser;
         "x-scheme-handler/chrome" = browser;
         "x-scheme-handler/unknown" = browser;
+
+        "x-scheme-handler/zoommtg" = zoom;
 
         "application/zip" = archive;
         "application/rar" = archive;

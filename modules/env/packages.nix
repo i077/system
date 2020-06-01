@@ -81,6 +81,7 @@
       vlc
       vscode-with-extensions
       write_stylus
+      zoom-us
       zotero
 
       # Games
