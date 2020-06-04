@@ -19,7 +19,6 @@
     fonts.fontconfig.enable = true;
 
     systemd.user.startServices = true;
-    services.gpg-agent.enable = true;
     services.lorri.enable = true;
     services.udiskie.enable = true;
 
