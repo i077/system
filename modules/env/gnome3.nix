@@ -13,4 +13,8 @@
     night-theme-switcher
     paperwm
   ];
+
+  home-manager.users.imran.home.packages = with pkgs; [
+    gnome3.gnome-tweaks
+  ];
 }
