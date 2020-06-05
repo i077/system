@@ -56,7 +56,7 @@
       };
     };
 
-    home-manager.users.imran.xdg.mimeApps.enable = true;
+    home-manager.users.imran.xdg.mimeApps.enable = false;
     home-manager.users.imran.xdg.mimeApps.defaultApplications =
       with config.defaultApplications;
       builtins.mapAttrs (n: v: "${v.desktop}.desktop") {
