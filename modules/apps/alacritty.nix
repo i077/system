@@ -13,7 +13,7 @@ in {
       bold.family = fonts.mono.family;
       italic.family = fonts.mono.family;
 
-      size = 14;
+      size = 12;
     };
 
     colors = with myColors; {
