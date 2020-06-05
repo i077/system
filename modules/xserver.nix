@@ -25,12 +25,6 @@
     };
 
     # Display manager
-    displayManager.lightdm = { enable = true; };
-
-    # Window manager
-    windowManager.i3 = {
-      enable = true;
-      package = pkgs.i3-gaps;
-    };
+    displayManager.gdm = { enable = true; };
   };
 }

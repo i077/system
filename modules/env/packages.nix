@@ -55,7 +55,6 @@
       openfortivpn
       pandoc
       passff-host
-      pinentry-gtk2
       ranger
       tomb
       neovim-remote

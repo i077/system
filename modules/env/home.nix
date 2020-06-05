@@ -13,7 +13,7 @@
     xdg.configFile."nixpkgs/config.nix".source = ../../nixpkgs-config.nix;
 
     # Manage xsession
-    xsession.enable = true;
+    # xsession.enable = true;
 
     # Manage fonts
     fonts.fontconfig.enable = true;

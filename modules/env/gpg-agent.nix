@@ -5,7 +5,7 @@
     enable = true;
     enableSshSupport = true;
     defaultCacheTtl = 300;
-    pinentryFlavor = "gtk2";
+    pinentryFlavor = "gnome3";
   };
 
   services.dbus.packages = [ pkgs.gcr ];

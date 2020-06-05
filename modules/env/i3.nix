@@ -23,6 +23,12 @@ let
     "exec --no-startup-id ${wsr} move --exact --number \"%s\"" -P 'Move container to workspace number: '
   '';
 in {
+  # Window manager
+  windowManager.i3 = {
+    enable = true;
+    package = pkgs.i3-gaps;
+  };
+
   home-manager.users.imran.xsession.windowManager.i3.enable = true;
   home-manager.users.imran.xsession.windowManager.i3.config = {
     modifier = "Mod4";

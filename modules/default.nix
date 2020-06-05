@@ -27,22 +27,23 @@
     ./apps/tmux.nix
     ./apps/zathura.nix
 
-    ./env/autorandr.nix
+    # ./env/autorandr.nix
     ./env/broot.nix
     ./env/direnv.nix
     ./env/dunst.nix
     ./env/fish.nix
     ./env/fzf.nix
     ./env/git.nix
+    ./env/gnome3.nix
     ./env/gpg-agent.nix
     ./env/home.nix
-    ./env/i3.nix
+    # ./env/i3.nix
     ./env/onedrive.nix
     ./env/packages.nix
     ./env/picom.nix
-    ./env/polybar.nix
+    # ./env/polybar.nix
     ./env/rclone.nix
-    ./env/redshift.nix
+    # ./env/redshift.nix
     ./env/rofi.nix
     ./env/wallpaper.nix
   ];
