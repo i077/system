@@ -13,8 +13,7 @@ in {
       bold.family = fonts.mono.family;
       italic.family = fonts.mono.family;
 
-      # Scale font up for non-HiDPI devices
-      size = fonts.mono.size * (if device.isHiDPI then 1 else 2);
+      size = 14;
     };
 
     colors = with myColors; {
