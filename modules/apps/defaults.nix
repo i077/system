@@ -50,6 +50,10 @@
         cmd = "${pkgs.zoom-us}/bin/zoom-us";
         desktop = "Zoom";
       };
+
+      gsconnect = {
+        desktop = "org.gnome.Shell.Extensions.GSConnect";
+      };
     };
 
     home-manager.users.imran.xdg.mimeApps.enable = true;
@@ -62,6 +66,8 @@
         "x-scheme-handler/about" = browser;
         "x-scheme-handler/chrome" = browser;
         "x-scheme-handler/unknown" = browser;
+        "x-scheme-handler/sms" = gsconnect;
+        "x-scheme-handler/tel" = gsconnect;
 
         "x-scheme-handler/zoommtg" = zoom;
 
