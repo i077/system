@@ -39,13 +39,13 @@
     "home-manager": {
       "flake": false,
       "info": {
-        "lastModified": 1591454597,
-        "narHash": "sha256-ebCy0sMLKlIcu1pBAIhBcB40EU/6Xkwbm8+7pdx2QQk="
+        "lastModified": 1591471381,
+        "narHash": "sha256-nNNOZA4vjQzPOlZuZX/448pTmRyMtursoMe4/KWHM2w="
       },
       "locked": {
         "owner": "rycee",
         "repo": "home-manager",
-        "rev": "ba91ac59489f288e74c7b5b733d26c303dd3a774",
+        "rev": "479274775f25be4000e41ee6584ea0865e77808b",
         "type": "github"
       },
       "original": {
@@ -69,24 +69,6 @@
       "original": {
         "owner": "cameronleger",
         "repo": "i3-workspacer",
-        "type": "github"
-      }
-    },
-    "neuron": {
-      "flake": false,
-      "info": {
-        "lastModified": 1591458286,
-        "narHash": "sha256-xsp5JkIEB2SA6VFNMB6YpbZUwWUR8vFblXRsSzGrII8="
-      },
-      "locked": {
-        "owner": "srid",
-        "repo": "neuron",
-        "rev": "dba49a391b7b45dc4f36740f8828462014f51e18",
-        "type": "github"
-      },
-      "original": {
-        "owner": "srid",
-        "repo": "neuron",
         "type": "github"
       }
     },
@@ -169,7 +151,6 @@
         "fish-z": "fish-z",
         "home-manager": "home-manager",
         "i3-workspacer": "i3-workspacer",
-        "neuron": "neuron",
         "nixpkgs": "nixpkgs",
         "oh-my-tmux": "oh-my-tmux",
         "poetry2nix": "poetry2nix"
