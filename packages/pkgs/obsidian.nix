@@ -2,13 +2,13 @@
 
 let
   pname = "obsidian";
-  version = "0.6.4";
+  version = "0.6.7";
 
   name = "${pname}-${version}";
 
   src = fetchurl {
     url = "https://github.com/obsidianmd/obsidian-releases/releases/download/v${version}/Obsidian-${version}.AppImage";
-    sha256 = "14yawv9k1j4lly9c5hricvzn9inzx23q38vsymgwwy6qhkpkrjcb";
+    sha256 = "0pv6csks6pznsbr07xjgrf9ks7lfxr635xw37prnarlqiifh4bn0";
   };
 
   appimageContents = appimageTools.extract { inherit name src; };
@@ -34,8 +34,8 @@ in appimageTools.wrapType2 rec {
   '';
 
   meta = with lib; {
-    description = "A second brain for you, forever";
-    homepage = "https://obsidia.md";
+    description = "A second brain, for you, forever";
+    homepage = "https://obsidian.md";
     license = licenses.unfree;
     platforms = [ "x86_64-linux" ];
     maintainers = with maintainers; [ i077 ];
