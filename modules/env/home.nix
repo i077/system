@@ -20,7 +20,6 @@
 
     systemd.user.startServices = true;
     services.lorri.enable = true;
-    services.udiskie.enable = true;
 
     # Cursor
     xsession.pointerCursor = {
