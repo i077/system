@@ -17,6 +17,7 @@ in {
       ll = "exa -l";
       lL = "exa -algiSH --git";
       lt = "exa -lT";
+      m = "make";
       py = "ptpython";
       t = "tmux";
       ta = "tmux a -t";
