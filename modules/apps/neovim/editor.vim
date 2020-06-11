@@ -41,3 +41,16 @@ set smartcase
 
 " Easymotion
 let g:EasyMotion_startofline = 0 " keep cursor column on easymotion-{j,k}
+
+" Pencil
+let g:pencil#textwidth = 100
+let g:pencil#wrapModeDefault = 'hard'
+" Auto-init pencil for markdown files
+" Workaround to set textwidth from https://github.com/reedes/vim-pencil/issues/85
+augroup pencil
+    autocmd!
+    autocmd FileType markdown,pandoc,mkd
+                \ call pencil#init() | setlocal textwidth=100
+augroup END
+" Suspend formatting when prefixing command with K
+let g:pencil#map#suspend_af = 'K'
