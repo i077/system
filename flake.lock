@@ -72,6 +72,42 @@
         "type": "github"
       }
     },
+    "neuron": {
+      "flake": false,
+      "info": {
+        "lastModified": 1591742159,
+        "narHash": "sha256-oLWG4dW8R0oNOucaoufOO1VkQU79NncQeipCLNYwa6c="
+      },
+      "locked": {
+        "owner": "srid",
+        "repo": "neuron",
+        "rev": "689a2f549eaec493a2e472cfc65343fbfc282385",
+        "type": "github"
+      },
+      "original": {
+        "owner": "srid",
+        "repo": "neuron",
+        "type": "github"
+      }
+    },
+    "neuron-vim": {
+      "flake": false,
+      "info": {
+        "lastModified": 1591217903,
+        "narHash": "sha256-lNiMWrRlumzMQI0WHVDYHvriqlT7u7dxHIeKKlgi4R0="
+      },
+      "locked": {
+        "owner": "ihsanturk",
+        "repo": "neuron.vim",
+        "rev": "2389c1d700773a3d7c1da825b8c57a9eb83fac72",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ihsanturk",
+        "repo": "neuron.vim",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "info": {
         "lastModified": 1591465133,
@@ -151,6 +187,8 @@
         "fish-z": "fish-z",
         "home-manager": "home-manager",
         "i3-workspacer": "i3-workspacer",
+        "neuron": "neuron",
+        "neuron-vim": "neuron-vim",
         "nixpkgs": "nixpkgs",
         "oh-my-tmux": "oh-my-tmux",
         "poetry2nix": "poetry2nix"

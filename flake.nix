@@ -37,6 +37,17 @@
       url = github:cameronleger/i3-workspacer;
       flake = false;
     };
+
+    # Neuron zettelkasten
+    neuron = {
+      url = github:srid/neuron;
+      flake = false;
+    };
+    # neuron.vim
+    neuron-vim = {
+      url = github:ihsanturk/neuron.vim;
+      flake = false;
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, ... }: {
