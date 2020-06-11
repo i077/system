@@ -39,13 +39,13 @@
     "home-manager": {
       "flake": false,
       "info": {
-        "lastModified": 1591728502,
-        "narHash": "sha256-FCUiJhtetsMvGC5/7Th674xO3WP95xfAJ+Eszs2OeRc="
+        "lastModified": 1591824764,
+        "narHash": "sha256-PdYE8Ldpa+125Wbdp3Ov3h380XygLmjwoIsJ9s38HgE="
       },
       "locked": {
         "owner": "rycee",
         "repo": "home-manager",
-        "rev": "5a97bf30d498e84de87bc247b6fa4f4115b68c6d",
+        "rev": "02c1f8d416d55d8bc8d4de62f65f62fef40e5e80",
         "type": "github"
       },
       "original": {
@@ -75,13 +75,13 @@
     "neuron": {
       "flake": false,
       "info": {
-        "lastModified": 1591742159,
-        "narHash": "sha256-oLWG4dW8R0oNOucaoufOO1VkQU79NncQeipCLNYwa6c="
+        "lastModified": 1591841067,
+        "narHash": "sha256-7xui3wIfewCkEa/Kld7W65R7nbASLmDx5u2vEQGfWmc="
       },
       "locked": {
         "owner": "srid",
         "repo": "neuron",
-        "rev": "689a2f549eaec493a2e472cfc65343fbfc282385",
+        "rev": "81e69150bb1a61d755b3ffdd1683b7d27f0843bf",
         "type": "github"
       },
       "original": {
@@ -163,8 +163,8 @@
     },
     "poetry2nix": {
       "info": {
-        "lastModified": 1591653816,
-        "narHash": "sha256-aCqcTjvgtt00MbMmI/KZ5e50mdaWt+qZNP5P0rxXtXI="
+        "lastModified": 1591783276,
+        "narHash": "sha256-S7G5E21wwW/h6RxoUsGVP55mZfDNIaCa0FIrF4mVLvU="
       },
       "inputs": {
         "nixpkgs": "nixpkgs_2"
@@ -172,7 +172,7 @@
       "locked": {
         "owner": "nix-community",
         "repo": "poetry2nix",
-        "rev": "e410ed770d92aa25c9f9e8acb5834245e3c86bfa",
+        "rev": "31f9f723c327e0c9c2383a3dea9fa7d3af3ae55c",
         "type": "github"
       },
       "original": {
