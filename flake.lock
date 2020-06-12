@@ -39,13 +39,13 @@
     "home-manager": {
       "flake": false,
       "info": {
-        "lastModified": 1591985609,
-        "narHash": "sha256-2puVN8CWBDVnlmB/LIArw1FfY4ARKuZX0P/OX1Ao4BU="
+        "lastModified": 1591999333,
+        "narHash": "sha256-wOw70pcONKN21ELGhi/4azlhE7LTCUX19vvztXqXtTs="
       },
       "locked": {
         "owner": "rycee",
         "repo": "home-manager",
-        "rev": "21fbc5e5ad59ab8c3006cf689a1addfea16921a0",
+        "rev": "478022afadb1eff716b4ff66f3a1f2b92798d460",
         "type": "github"
       },
       "original": {
