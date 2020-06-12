@@ -3,6 +3,7 @@
 {
   home-manager.users.imran.programs.git = {
     enable = true;
+    package = pkgs.gitAndTools.gitFull;
 
     userName = "Imran Hossain";
     userEmail = "contact@imranhossa.in";
@@ -22,7 +23,16 @@
       st = "status";
     };
 
-    extraConfig = { core.editor = config.defaultApplications.editor.desktop; };
+    extraConfig = { 
+      core.editor = config.defaultApplications.editor.desktop;
+      sendemail = with config.private.email; {
+        smtpserver = smtpServ;
+        smtpserverport = smtpPort;
+        smtpuser = username;
+        smtpencryption = smtpEncryption;
+        smtppass = password;
+      };
+    };
   };
 
   # Add extensions to git
