@@ -33,6 +33,10 @@ with [git-crypt](https://github.com/AGWA/git-crypt). You can view the
 structure of this file in the [module](./modules/private.nix) where it is
 declared.
 
+- [`do`](./do) is a fish script I wrote to help manage common tasks like
+  updating this flake and rebuilding the system configuration (`./do up`) or
+  removing generations more than a month old (`./do GC 30`).
+
 ## Installing
 
 [Partition and format](https://nixos.org/nixos/manual/index.html#sec-installation-partitioning),
@@ -48,9 +52,9 @@ For a new device, create a new directory under `hosts/` and add
 `default.nix` (see the other hosts' configs for structure).
 
 Finally, install the configuration,
-passing the name of the device to `NAME=`:
+passing the name of the device:
 
 ```sh
 # In /mnt/etc/nixos
-make PREFIX=/mnt NAME=devicename install
+./do install devicename
 ```
