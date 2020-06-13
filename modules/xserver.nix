@@ -16,6 +16,11 @@
       Option      "TearFree"    "true"
     '';
 
+    # ...and on NVIDIA graphics
+    screenSection = lib.optionalString (device.gpu == "nvidia") ''
+      Option "metamodes" "nvidia-auto-select +0+0 { ForceCompositionPipeline = On }"
+    '';
+
     # Touchpad
     libinput = {
       enable = device.isLaptop;

@@ -16,7 +16,10 @@ in {
     config = {
       # TODO Device-specific bars
       "bar/bar1" = {
-        monitor = { spectre = "\${env:MONITOR:eDP1}"; }.${device.name};
+        monitor = {
+          spectre = "\${env:MONITOR:eDP1}";
+          tower = "\${env:MONITOR:DP-4}";
+        }.${device.name};
         dpi = 100 * (if device.isHiDPI then 2 else 1);
         bottom = true;
         width = "100%";

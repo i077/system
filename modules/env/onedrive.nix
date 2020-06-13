@@ -2,12 +2,15 @@
 
 {
   home-manager.users.imran.services.onedrive = {
-    enable = true;
+    enable = device.name == "spectre";
     monitor = true;
     settings = {
       skip_file = "desktop.ini|Thumbs.db|*.url";
       skip_dir = "backup|Apps|Pictures";
-      sync_dir = { spectre = "~/OneDrive"; }.${device.name};
+      sync_dir = {
+        spectre = "~/OneDrive";
+        tower = "TODO"; # TODO
+      }.${device.name};
     };
   };
 
