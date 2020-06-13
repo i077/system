@@ -66,7 +66,7 @@
           name = removePrefix "i077-" hostname;
           device = import (./hosts + "/${name}");
         in nixosSystem {
-          system = "x86_64-linux";
+          inherit (device) system;
 
           modules = [
             nixpkgs.nixosModules.notDetected
