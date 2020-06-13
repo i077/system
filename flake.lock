@@ -39,13 +39,13 @@
     "home-manager": {
       "flake": false,
       "info": {
-        "lastModified": 1591999333,
-        "narHash": "sha256-wOw70pcONKN21ELGhi/4azlhE7LTCUX19vvztXqXtTs="
+        "lastModified": 1592088224,
+        "narHash": "sha256-Jq4mnp8xskLqekIM+ZiLUelHKOHAtlAVLIqLiNXltrY="
       },
       "locked": {
         "owner": "rycee",
         "repo": "home-manager",
-        "rev": "478022afadb1eff716b4ff66f3a1f2b92798d460",
+        "rev": "507e4464751b86b24e435bc8f178942f7d0de101",
         "type": "github"
       },
       "original": {
@@ -75,13 +75,13 @@
     "neuron": {
       "flake": false,
       "info": {
-        "lastModified": 1591917257,
-        "narHash": "sha256-/p/nLVlKKN5P3hDlmr31rZaw7GDm6omOGJe0Us5Rql0="
+        "lastModified": 1592065296,
+        "narHash": "sha256-11Flz9PKyRs/aeRu2H0OD2eTgQm/TL8EyculKid4gfM="
       },
       "locked": {
         "owner": "srid",
         "repo": "neuron",
-        "rev": "956e78e9c328b664638926823302a5763015deb3",
+        "rev": "9a788bb3e2570639758c786114340addf77b958c",
         "type": "github"
       },
       "original": {
