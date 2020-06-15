@@ -75,7 +75,6 @@
       quodlibet-full
       ripcord
       todoist-electron
-      typora
       pinta
       vlc
       vscode-with-extensions
