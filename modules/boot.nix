@@ -9,7 +9,7 @@
     };
 
     # Use latest linux kernel (default is LTS)
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_5_6;
 
     # Plymouth boot screen
     plymouth.enable = true;
