@@ -2,14 +2,14 @@
 
 let
   pname = "everdo";
-  version = "1.3.6";
+  version = "1.3.7";
 
   name = "${pname}-${version}";
 
   src = fetchurl {
     url =
       "https://d11l8siwmn8w36.cloudfront.net/${version}/Everdo-${version}.AppImage";
-    sha256 = "0sq2c939zi0rkhzxmhy1xdsgybw07n5y6wadx0qqc3cyr6lhc6qm";
+    sha256 = "1z5qwdsmfwmr6yphib9fkckskx63n7m0lfcmkr8c8n6kzwdcspfl";
   };
 
   appimageContents = appimageTools.extract {
