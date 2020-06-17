@@ -103,7 +103,7 @@ function update
         # Print which inputs were updated
         log_ok "Updated inputs:"
         git log --format=%B -1 | grep "Updated" | \
-            sed "s/\* Updated '\(.*\)': '.*\/\([0-9a-f]\{7\}\)[0-9a-f]\{33\}' -> '.*\/\([0-9a-f]\{7\}\)[0-9a-f]\{33\}'/     \1: \2 -> \3/"
+            sed "s/\* Updated '\(.*\)': '.*\([0-9a-f]\{7\}\)[0-9a-f]\{33\}' -> '.*\([0-9a-f]\{7\}\)[0-9a-f]\{33\}'/     \1: \2 -> \3/"
     else
         # No flake inputs were changed
         log_ok "No flake inputs were updated."
