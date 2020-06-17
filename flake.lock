@@ -39,13 +39,13 @@
     "home-manager": {
       "flake": false,
       "info": {
-        "lastModified": 1592170493,
-        "narHash": "sha256-nxLFrk4USkqUOwKkDg+PGLUBaTS6aUrdSk4Ck/gNSAQ="
+        "lastModified": 1592261120,
+        "narHash": "sha256-hCr6Rfz67ZCvJaZiYmuNH8lPa48J9PFZ+V/swxI+i48="
       },
       "locked": {
         "owner": "rycee",
         "repo": "home-manager",
-        "rev": "ecb93ab9aeeb718e238114243d951a82f20ebf3f",
+        "rev": "bf7297d55cb0edc1917cbb2c46be27dcd230db43",
         "type": "github"
       },
       "original": {
@@ -75,13 +75,13 @@
     "neuron": {
       "flake": false,
       "info": {
-        "lastModified": 1592149390,
-        "narHash": "sha256-UxYqqCFItZPjnFKTcLcVTEBzJqVOs9TBpyDlLTIDRds="
+        "lastModified": 1592316626,
+        "narHash": "sha256-CoV/5DmZyJlxoWo97IG9MN6iaOVIvkA0SvjWaMn6fNE="
       },
       "locked": {
         "owner": "srid",
         "repo": "neuron",
-        "rev": "3dd9567febed0e56db38993644258070dc9b1053",
+        "rev": "b438d75d1fd8e3058a884a3d97af1a79faf45aa7",
         "type": "github"
       },
       "original": {
@@ -128,14 +128,14 @@
     },
     "nixpkgs_2": {
       "info": {
-        "lastModified": 1591465133,
-        "narHash": "sha256-HdXyiHl8TumxQZhs2/DCSnqbi1GnvqXaZlsJneGf0g0="
+        "lastModified": 1592117084,
+        "narHash": "sha256-jcnJkno/Vt+iWcZhhZ2bBUGABGondsM5UBgnD528npQ="
       },
       "locked": {
-        "lastModified": 1591465133,
-        "narHash": "sha256-HdXyiHl8TumxQZhs2/DCSnqbi1GnvqXaZlsJneGf0g0=",
-        "path": "/nix/store/1a3fddx083bh2kjbfqjji6r6masjp021-source",
-        "rev": "029a5de08390bb03c3f44230b064fd1850c6658a",
+        "lastModified": 1592117084,
+        "narHash": "sha256-jcnJkno/Vt+iWcZhhZ2bBUGABGondsM5UBgnD528npQ=",
+        "path": "/nix/store/c1iikfgrvf0xzn7bpc70vi20z5gg3i27-source",
+        "rev": "0a146054bdf6f70f66de4426f84c9358521be31e",
         "type": "path"
       },
       "original": {
