@@ -23,7 +23,10 @@
       experimental-features = nix-command flakes
     '';
     registry.nixpkgs = {
-      from = { id = "nixpkgs"; type = "indirect"; };
+      from = {
+        id = "nixpkgs";
+        type = "indirect";
+      };
       flake = inputs.nixpkgs;
     };
 
@@ -58,7 +61,41 @@
           rev = "b3c3a0bd1835a3907bf23f5f7bd7c9d18ef163ec";
           sha256 = "0b9n5arqr3pzyg1ws0wf84zlczgllxnhjm1mzddd1qk5w5nw7fcy";
         };
-      in { inherit (nixpkgs-b3c3a0b) quodlibet-full; })
+      in {
+        inherit (nixpkgs-b3c3a0b) quodlibet-full;
+
+        # Patch for NVIDIA on 5.7
+        linuxPackages_latest = super.linuxPackages_latest.extend (self: super: {
+          nvidiaPackages = super.nvidiaPackages // {
+            stable = super.nvidiaPackages.stable.overrideAttrs (old: {
+              patches = [
+                (pkgs.fetchpatch {
+                  name = "nvidia-kernel-5.7.patch";
+                  url = "https://gitlab.com/snippets/1965550/raw";
+                  sha256 =
+                    "03iwxhkajk65phc0h5j7v4gr4fjj6mhxdn04pa57am5qax8i2g9w";
+                })
+              ];
+
+              passthru = {
+                settings = pkgs.callPackage (import (inputs.nixpkgs
+                  + "/pkgs/os-specific/linux/nvidia-x11/settings.nix")
+                  self.nvidiaPackages.stable
+                  "15psxvd65wi6hmxmd2vvsp2v0m07axw613hb355nh15r1dpkr3ma") {
+                    withGtk2 = true;
+                    withGtk3 = false;
+                  };
+
+                persistenced = pkgs.lib.mapNullable (hash:
+                  pkgs.callPackage (import (inputs.nixpkgs
+                    + "/pkgs/os-specific/linux/nvidia-x11/persistenced.nix")
+                    self.nvidiaPackages.stable hash) { })
+                  "13izz9p2kg9g38gf57g3s2sw7wshp1i9m5pzljh9v82c4c22x1fw";
+              };
+            });
+          };
+        });
+      })
 
     (self: super: {
       vaapiIntel = super.vaapiIntel.override { enableHybridCodec = true; };
