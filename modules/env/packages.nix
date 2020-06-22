@@ -64,6 +64,7 @@
       # Apps
       android-studio
       brscan4
+      feedreader
       lazygit
       libreoffice-fresh
       standardnotes
@@ -74,7 +75,6 @@
       qalculate-gtk
       quodlibet-full
       ripcord
-      todoist-electron
       pinta
       vlc
       vscode-with-extensions
