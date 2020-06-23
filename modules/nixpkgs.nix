@@ -120,10 +120,6 @@
 
       my-python3-i3 =
         super.python3.withPackages (pypkgs: with pypkgs; [ i3ipc ]);
-
-      neuron = (import (inputs.neuron + "/project.nix") {
-        inherit (device) system;
-      }).ghc.neuron;
     })
   ];
 }
