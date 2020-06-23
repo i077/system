@@ -12,9 +12,6 @@
     export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
   '';
 
-  # Enable U2F support
-  hardware.u2f.enable = true;
-
   # Manage SSH agent with GPG to use YubiKey with SSH
   programs = {
     ssh.startAgent = false;
