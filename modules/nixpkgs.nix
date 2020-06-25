@@ -1,9 +1,10 @@
 { config, device, inputs, lib, pkgs, ... }:
 
 {
-  # Link nixpkgs and home-manager in /etc
-  environment.etc."sources/nixpkgs".source = inputs.nixpkgs;
-  environment.etc."sources/home-manager".source = inputs.home-manager;
+  # Link each input to /etc/sources
+  environment.etc = (lib.mapAttrs'
+    (name: value: (lib.nameValuePair "sources/${name}" { source = value; }))
+    inputs);
 
   nix = {
     nixPath = lib.mkForce [
