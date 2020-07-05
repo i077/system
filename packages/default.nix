@@ -8,9 +8,9 @@
       write_stylus = self.callPackage ./pkgs/write_stylus.nix { };
       nerdfonts-iosevka = self.callPackage ./pkgs/nerdfonts-iosevka.nix { };
 
-      neuron = (import (inputs.neuron + "/project.nix") {
+      neuron = import inputs.neuron {
         inherit (device) system;
-      }).ghc.neuron;
+      };
 
       vimPlugins = super.vimPlugins // {
         neuron-vim = self.vimUtils.buildVimPluginFrom2Nix {
