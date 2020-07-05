@@ -54,6 +54,3 @@ augroup pencil
 augroup END
 " Suspend formatting when prefixing command with K
 let g:pencil#map#suspend_af = 'K'
-
-" Neuron
-let g:zkdir = '~/zettelkasten'
