@@ -63,8 +63,16 @@
           rev = "b3c3a0bd1835a3907bf23f5f7bd7c9d18ef163ec";
           sha256 = "0b9n5arqr3pzyg1ws0wf84zlczgllxnhjm1mzddd1qk5w5nw7fcy";
         };
+        nixpkgs-ac8f8bd = importNixpkgsRev {
+          rev = "ac8f8bd752378043e1dc702442011587cf6ab4f2";
+          sha256 = "1j2bxlwwrz83yvvlsh78pscjfp5f8ss98lipnkrgymyaq63xxd4q";
+        };
       in {
         inherit (nixpkgs-b3c3a0b) quodlibet-full;
+
+        python3Packages = super.python38Packages // {
+          inherit (nixpkgs-ac8f8bd.python3Packages) notebook;
+        };
 
         # Patch for NVIDIA on 5.7
         linuxPackages_latest = super.linuxPackages_latest.extend (self: super: {
