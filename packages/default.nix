@@ -13,11 +13,11 @@
       };
 
       vimPlugins = super.vimPlugins // {
-        neuron-vim = self.vimUtils.buildVimPluginFrom2Nix {
-          pname = "neuron.vim";
-          version = builtins.substring 0 7 inputs.neuron-vim.rev;
-          src = inputs.neuron-vim;
-        };
+        # neuron-vim = self.vimUtils.buildVimPluginFrom2Nix {
+        #   pname = "neuron.vim";
+        #   version = builtins.substring 0 7 inputs.neuron-vim.rev;
+        #   src = inputs.neuron-vim;
+        # };
       };
     })
   ];

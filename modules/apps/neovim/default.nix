@@ -50,7 +50,7 @@ in {
       # Prose
       goyo                          # Distraction-free editing
       limelight-vim                 # Focus mode for vim
-      neuron-vim                    # Manage neuron zettelkasten in vim
+      # neuron-vim                    # Manage neuron zettelkasten in vim
       vim-pencil                    # Writing tool for vim
     ];
 
