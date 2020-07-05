@@ -83,11 +83,11 @@
     "neuron-vim": {
       "flake": false,
       "locked": {
-        "lastModified": 1593649493,
-        "narHash": "sha256-bjmdSFy9CpI4nbwrPlfIZ2pOorT1jzqu42HHI8X1cFU=",
+        "lastModified": 1593986804,
+        "narHash": "sha256-3V3e16MNpD51Akg3n6IdaJl5koCveTkZbnB6qb4G8fw=",
         "owner": "ihsanturk",
         "repo": "neuron.vim",
-        "rev": "7fab5f75ee1e33d130729db407d953ccb5261da7",
+        "rev": "4ccd13f95a2c9f3dafef2d4adf633e0b18a16019",
         "type": "github"
       },
       "original": {
@@ -114,10 +114,10 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1592841122,
-        "narHash": "sha256-R91sYcQN/c+0txR3KzmP3LItfnbVv3M7E7atiLUr/ZE=",
-        "path": "/nix/store/5sxgi1fxahyw6cb8709114mvxxpb5x5n-source",
-        "rev": "22a81aa5fc15b2d41b12f7160a71cd4a9f3c3fa1",
+        "lastModified": 1593886469,
+        "narHash": "sha256-it7gY5BmUcDr09dUsE6VPnUsSCeBUtU/GfUwqs6twDc=",
+        "path": "/nix/store/gx199xndkzmp5sx1rrr2k856ibbz4nrh-source",
+        "rev": "dc80d7bc4a244120b3d766746c41c0d9c5f81dfa",
         "type": "path"
       },
       "original": {
