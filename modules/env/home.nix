@@ -1,6 +1,42 @@
 { config, device, pkgs, ... }:
 
 {
+  require = [
+    # Base home config
+    ./packages.nix
+    
+    # Shell
+    ./fish.nix
+
+    # Shell tools
+    ./broot.nix
+    ./direnv.nix
+    ./fzf.nix
+    ./git.nix
+    ./password-store.nix
+    ./rclone.nix
+
+    # Development
+    ./python.nix
+
+    # Desktop environment & services
+    ./gnome3.nix
+    ./gpg-agent.nix
+    ./onedrive.nix
+
+    # Apps
+    ../apps/alacritty.nix
+    ../apps/defaults.nix
+    ../apps/everdo.nix
+    ../apps/firefox.nix
+    ../apps/keybase.nix
+    ../apps/neovim
+    ../apps/neuron.nix
+    ../apps/ptpython.nix
+    ../apps/tmux.nix
+    ../apps/zathura.nix
+  ];
+
   home-manager.users.imran = {
     # Import custom home-modules
     imports = with builtins;

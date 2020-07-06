@@ -4,6 +4,13 @@
   # Enable ALSA
   sound.enable = true;
 
+  # Override VAAPI to add hybrid codec
+  nixpkgs.overlays = [
+    (self: super: {
+      vaapiIntel = super.vaapiIntel.override { enableHybridCodec = true; };
+    })
+  ];
+
   hardware = {
     # CPU microcode updates
     cpu.${device.cpu.vendor}.updateMicrocode = true;

@@ -1,6 +1,7 @@
 { config, device, inputs, pkgs, ... }:
 
 let
+  python3-i3 = pkgs.python3.withPackages (ps: with ps; [ i3ipc ]);
   myColors = config.theming.colors;
 
   uiFont = with config.theming.fonts;
@@ -12,7 +13,7 @@ let
   mod = config.home-manager.users.imran.xsession.windowManager.i3.config.modifier;
   termExec = config.defaultApplications.terminal.cmd;
 
-  wsr = "${pkgs.my-python3-i3}/bin/python ${inputs.i3-workspacer}/i3-workspacer.py";
+  wsr = "${python3-i3}/bin/python ${inputs.i3-workspacer}/i3-workspacer.py";
 
   wsrGotoScript = pkgs.writeShellScript "i3-goto-workspace" ''
     i3-input -f "pango:${uiFont}" -F \
@@ -23,6 +24,23 @@ let
     "exec --no-startup-id ${wsr} move --exact --number \"%s\"" -P 'Move container to workspace number: '
   '';
 in {
+  require = [
+    # Notifications
+    ./dunst.nix
+    # Compositing
+    ./picom.nix
+    # Screen config
+    ./autorandr.nix
+    # System bar
+    ./polybar.nix
+    # Shift color temp at night
+    ./redshift.nix
+    # Dmenu interface
+    ./rofi.nix
+    # Random backgrounds
+    ./wallpaper.nix
+  ];
+
   # Window manager
   windowManager.i3 = {
     enable = true;

@@ -22,7 +22,6 @@
     pciutils
     pkg-config
     psmisc
-    my-python3Full
     powertop
     qt5.qtbase
     rclone
@@ -50,7 +49,6 @@
       jq
       lynx
       maim
-      neuron
       niv
       openfortivpn
       pandoc

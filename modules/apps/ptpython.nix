@@ -1,6 +1,10 @@
 { ... }:
 
 {
+  require = [
+    ../env/python.nix
+  ];
+
   home-manager.users.imran.programs.ptpython = {
     enable = true;
 

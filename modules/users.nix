@@ -1,6 +1,9 @@
-{ config, device, pkgs, ... }:
+{ config, device, pkgs, lib, ... }:
 
 {
+  # Require home configuration
+  require = [ ./env/home.nix ];
+
   users = {
     mutableUsers = false;
 
@@ -13,7 +16,7 @@
         "adbusers"
         "wireshark"
         "audio"
-        "pulse" 
+        "pulse"
       ];
       hashedPassword = config.private.hashedLogins.${device.name}.imran;
       uid = 1000;
@@ -34,14 +37,7 @@
   security.pam.services = builtins.listToAttrs (map (name: {
     inherit name;
     value = { u2fAuth = true; };
-  }) [
-    "login"
-    "polkit-1"
-    "su"
-    "sudo"
-    "systemd-user"
-    "xlock"
-  ]);
+  }) [ "login" "polkit-1" "su" "sudo" "systemd-user" "xlock" ]);
 
   # Define home-manager environment
   home-manager.useUserPackages = true;
