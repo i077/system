@@ -19,11 +19,11 @@
     "fish-z": {
       "flake": false,
       "locked": {
-        "lastModified": 1593654761,
-        "narHash": "sha256-w/9Lci/Y2/cjt6ICy26PTqHBygqWHPMrbzXFPcRXWM0=",
+        "lastModified": 1594068189,
+        "narHash": "sha256-1T1w7ahd7ZHmoDQrMTmcKss2dgxXFhetQv63nKyC008=",
         "owner": "jethrokuan",
         "repo": "z",
-        "rev": "34d35b587012e9319dcc25cc73b02adeb11a8ce7",
+        "rev": "5f6c716b49ae24a5b36df18a6eceb7609d3ae81d",
         "type": "github"
       },
       "original": {
@@ -67,11 +67,11 @@
     "neuron": {
       "flake": false,
       "locked": {
-        "lastModified": 1593823091,
-        "narHash": "sha256-jIz4RvHZDU0TfUUmm+0RR2RfDPpubzrqr2ojDpHdxcs=",
+        "lastModified": 1594069017,
+        "narHash": "sha256-DlVY6I4k5ii5Z4MzzAf6WSh9Pj4tTTW0xY5yguh06/8=",
         "owner": "srid",
         "repo": "neuron",
-        "rev": "ce762e5396a8cd0ab75f69ef58c9d9d9b14c5b7c",
+        "rev": "0c1a2296acd532a1cc54c370ddea8d012224c26e",
         "type": "github"
       },
       "original": {
@@ -146,11 +146,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1593596566,
-        "narHash": "sha256-3yo4iZujEmu3JKjdQDOOKdqzZtTirDSX5SpVDN1gf+k=",
+        "lastModified": 1594044250,
+        "narHash": "sha256-pfaZteF82Pw8XxeGVTutadTwVMe++Ve5aJ5VpBCoA7U=",
         "owner": "nix-community",
         "repo": "poetry2nix",
-        "rev": "baa63179b7a1ea7f59ca1d1d68d53729aaaef23d",
+        "rev": "e04e78308a11d7ca88ae52d3594f0c61117e8d67",
         "type": "github"
       },
       "original": {
