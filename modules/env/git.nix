@@ -25,6 +25,7 @@
 
     extraConfig = { 
       core.editor = config.defaultApplications.editor.desktop;
+
       sendemail = with config.private.email; {
         smtpserver = smtpServ;
         smtpserverport = smtpPort;
@@ -32,6 +33,8 @@
         smtpencryption = smtpEncryption;
         smtppass = password;
       };
+
+      pull.rebase = false;
     };
   };
 
