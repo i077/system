@@ -75,7 +75,6 @@
       ripcord
       pinta
       vlc
-      vscode-with-extensions
       write_stylus
       zoom-us
       zotero

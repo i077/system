@@ -34,6 +34,7 @@
     ../apps/neuron.nix
     ../apps/ptpython.nix
     ../apps/tmux.nix
+    ../apps/vscode.nix
     ../apps/zathura.nix
   ];
 
