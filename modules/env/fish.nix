@@ -23,6 +23,9 @@ in {
       ta = "tmux a -t";
       userctl = "systemctl --user";
       v = "nvim";
+
+      # Apparently I mix these up all the time.
+      ":q" = "exit";
     };
 
     shellAliases = {
