@@ -84,8 +84,6 @@
       steam
 
       # Languages & frameworks
-      dart
-      jdk14
       nixfmt
       texlive.combined.scheme-full
       texlab
