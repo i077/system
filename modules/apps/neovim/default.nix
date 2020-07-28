@@ -22,6 +22,7 @@ in {
       vim-indent-object             # Use indents as motions
 
       # Extensions
+      direnv-vim                    # Direnv integration
       fugitive                      # Git wrapper
       vim-dispatch                  # Asynchronous job runner
       fzf-vim                       # Fuzzy entry selection
