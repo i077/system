@@ -70,10 +70,11 @@
       jetbrains.idea-ultimate
       jetbrains.pycharm-professional
       obsidian
+      pinta
       qalculate-gtk
       quodlibet-full
       ripcord
-      pinta
+      todoist-electron
       vlc
       write_stylus
       zoom-us
