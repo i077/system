@@ -2,12 +2,14 @@
 
 " Colorscheme
 set background=dark
-colorscheme gruvbox
-let ayucolor="dark"
-let g:gruvbox_contrast_dark="hard"
 set termguicolors
+let ayucolor="dark"
 let g:oceanic_next_terminal_bold=1
 let g:oceanic_next_terminal_italic=1
+let g:gruvbox_contrast_dark="hard"
+let g:gruvbox_italic=1
+let g:gruvbox_italicize_comments=1
+colorscheme gruvbox
 
 " Remove background from conceal chars
 hi Conceal guibg=None
