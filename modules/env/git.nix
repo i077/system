@@ -27,6 +27,7 @@
     delta.enable = true;
     delta.options = {
       line-numbers = true;
+      syntax-theme = "gruvbox";
       features = "decorations";
       decorations = {
         file-style = "bold white ul";
