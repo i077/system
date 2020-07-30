@@ -34,7 +34,6 @@
   ];
 
   home-manager.users.imran.programs = {
-    bat.enable = true;
     man.enable = true;
   };
 

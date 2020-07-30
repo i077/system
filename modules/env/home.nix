@@ -9,6 +9,7 @@
     ./fish.nix
 
     # Shell tools
+    ./bat.nix
     ./broot.nix
     ./direnv.nix
     ./fzf.nix
