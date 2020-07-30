@@ -76,6 +76,7 @@ function test_
     check
     log_step "Building and activating configuration..."
     sudo nixos-rebuild test
+    clean
 end
 
 function boot
