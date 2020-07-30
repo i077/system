@@ -23,6 +23,18 @@
       st = "status";
     };
 
+    # Use delta for diffs
+    delta.enable = true;
+    delta.options = {
+      line-numbers = true;
+      features = "decorations";
+      decorations = {
+        file-style = "bold white ul";
+        file-decoration-style = "none";
+        whitespace-error-style = "22 reverse";
+      };
+    };
+
     extraConfig = { 
       core.editor = config.defaultApplications.editor.desktop;
 
