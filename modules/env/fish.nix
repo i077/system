@@ -48,6 +48,9 @@ in {
       set -g theme_show_exit_status yes
       set -g theme_display_date no
 
+      # Set fish colorscheme
+      theme_gruvbox dark hard
+
       # Show vi-mode in cursor
       set -g theme_display_vi no
       set -g fish_cursor_default block
@@ -88,6 +91,9 @@ in {
     plugins = [{
       name = "z";
       src = inputs.fish-z;
+    } {
+      name = "gruvbox";
+      src = inputs.fish-gruvbox;
     }];
   };
 }

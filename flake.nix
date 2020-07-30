@@ -26,6 +26,12 @@
       flake = false;
     };
 
+    # Gruvbox colorscheme for fish
+    fish-gruvbox = {
+      url = github:Jomik/fish-gruvbox;
+      flake = false;
+    };
+
     # Jump to directories by frecency with fish
     fish-z = {
       url = github:jethrokuan/z;
