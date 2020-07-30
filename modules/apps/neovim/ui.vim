@@ -2,7 +2,7 @@
 
 " Colorscheme
 set background=dark
-colorscheme nord
+colorscheme gruvbox
 let ayucolor="dark"
 let g:gruvbox_contrast_dark="hard"
 set termguicolors

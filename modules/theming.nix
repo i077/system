@@ -218,7 +218,7 @@ in {
   };
 
   config.theming = {
-    colors = colorschemes.nord;
+    colors = colorschemes.gruvbox-dark;
     fonts = rec {
       sans = {
         family = "Source Sans Pro";

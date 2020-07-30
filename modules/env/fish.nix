@@ -42,7 +42,7 @@ in {
 
     promptInit = ''
       for file in ${inputs.fish-bobthefish}/**.fish; source $file; end
-      set -g theme_color_scheme terminal2
+      set -g theme_color_scheme gruvbox
       set -g theme_nerd_fonts no
       set -g theme_display_jobs_verbose yes
       set -g theme_show_exit_status yes
