@@ -11,9 +11,6 @@
       flake = false;
     };
 
-    # Build python poetry projects under nix
-    poetry2nix.url = "github:nix-community/poetry2nix";
-
     # Tmux configuration
     oh-my-tmux = {
       url = "github:gpakosz/.tmux";
