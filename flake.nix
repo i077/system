@@ -3,55 +3,50 @@
 
   inputs = {
     # Nixpkgs tracks nixos-unstable
-    nixpkgs.url = github:NixOS/nixpkgs/nixos-unstable;
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # Manage user environment
     home-manager = {
-      url = github:rycee/home-manager;
+      url = "github:rycee/home-manager";
       flake = false;
     };
 
     # Build python poetry projects under nix
-    poetry2nix.url = github:nix-community/poetry2nix;
+    poetry2nix.url = "github:nix-community/poetry2nix";
 
     # Tmux configuration
     oh-my-tmux = {
-      url = github:gpakosz/.tmux;
+      url = "github:gpakosz/.tmux";
       flake = false;
     };
 
     # Bobthefish theme for fish
     fish-bobthefish = {
-      url = github:oh-my-fish/theme-bobthefish;
+      url = "github:oh-my-fish/theme-bobthefish";
       flake = false;
     };
 
     # Gruvbox colorscheme for fish
     fish-gruvbox = {
-      url = github:Jomik/fish-gruvbox;
+      url = "github:Jomik/fish-gruvbox";
       flake = false;
     };
 
     # Jump to directories by frecency with fish
     fish-z = {
-      url = github:jethrokuan/z;
+      url = "github:jethrokuan/z";
       flake = false;
     };
 
     # Workspace scripts for i3
     i3-workspacer = {
-      url = github:cameronleger/i3-workspacer;
+      url = "github:cameronleger/i3-workspacer";
       flake = false;
     };
 
     # Neuron zettelkasten
     neuron = {
-      url = github:srid/neuron;
-      flake = false;
-    };
-    # neuron.vim
-    neuron-vim = {
-      url = github:ihsanturk/neuron.vim;
+      url = "github:srid/neuron";
       flake = false;
     };
   };
