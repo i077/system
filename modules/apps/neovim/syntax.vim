@@ -23,6 +23,7 @@ let g:ale_linters = {
 let g:vimtex_enabled = 1
 " vimtex neovim remote support
 let g:vimtex_compiler_progname = 'nvr'
+let g:tex_flavor = 'latex'
 
 " Disable LaTeXBox in favor of vimtex
 let g:polyglot_disabled = ['tex', 'latex']
