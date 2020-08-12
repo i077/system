@@ -16,17 +16,15 @@
 
     # Run every day
     timerConfig = { OnCalendar = "daily"; };
+
+    rcloneConfig = {
+      inherit (config.private.rcloneConf.onedrive)
+        type token drive_id drive_type;
+    };
   };
 
-  # Add rclone to service path
+  # Only run when online
   systemd.services.restic-backups-onedrive = {
-    path = with pkgs; [ rclone ];
-    environment = with config.private.rcloneConf; {
-      RCLONE_CONFIG_ONEDRIVE_TYPE = onedrive.type;
-      RCLONE_CONFIG_ONEDRIVE_TOKEN = onedrive.token;
-      RCLONE_CONFIG_ONEDRIVE_DRIVE_ID = onedrive.drive_id;
-      RCLONE_CONFIG_ONEDRIVE_DRIVE_TYPE = onedrive.drive_type;
-    };
     after = [ "network-online.target" ];
     wants = [ "network-online.target" ];
   };
