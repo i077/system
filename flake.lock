@@ -96,22 +96,6 @@
         "type": "github"
       }
     },
-    "neuron-vim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1596804853,
-        "narHash": "sha256-wq6IJpoNfBZEDVxJAoDOJZIHeSlczN8gHecKb3xsylc=",
-        "owner": "ihsanturk",
-        "repo": "neuron.vim",
-        "rev": "07521a3ef2940bd726e7b4d50b82e46898e686cc",
-        "type": "github"
-      },
-      "original": {
-        "owner": "ihsanturk",
-        "repo": "neuron.vim",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1597057899,
@@ -126,19 +110,6 @@
         "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
-      }
-    },
-    "nixpkgs_2": {
-      "locked": {
-        "lastModified": 1596093760,
-        "narHash": "sha256-7G+1Cfu6lN9qFGe1WI4c2WNcxHT+MxiAiePU5GeuKUQ=",
-        "path": "/nix/store/fvfzh1j12l8clfb6mbjll3y832lp75bs-source",
-        "rev": "a45f68ccac476dc37ddf294530538f2f2cce5a92",
-        "type": "path"
-      },
-      "original": {
-        "id": "nixpkgs",
-        "type": "indirect"
       }
     },
     "oh-my-tmux": {
@@ -157,24 +128,6 @@
         "type": "github"
       }
     },
-    "poetry2nix": {
-      "inputs": {
-        "nixpkgs": "nixpkgs_2"
-      },
-      "locked": {
-        "lastModified": 1595517229,
-        "narHash": "sha256-5eMk3+Twb2fDyFX5sm33JYSRaPAvKe9vHV5w/HjbiHs=",
-        "owner": "nix-community",
-        "repo": "poetry2nix",
-        "rev": "270a0b26b773e566ad59927c51d40a5e9b8ff08d",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "poetry2nix",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "fish-bobthefish": "fish-bobthefish",
@@ -183,10 +136,8 @@
         "home-manager": "home-manager",
         "i3-workspacer": "i3-workspacer",
         "neuron": "neuron",
-        "neuron-vim": "neuron-vim",
         "nixpkgs": "nixpkgs",
-        "oh-my-tmux": "oh-my-tmux",
-        "poetry2nix": "poetry2nix"
+        "oh-my-tmux": "oh-my-tmux"
       }
     }
   },
