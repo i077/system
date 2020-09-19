@@ -18,7 +18,7 @@
     ./rclone.nix
 
     # Development
-    ./python.nix
+    # ./python.nix
 
     # Desktop environment & services
     ./gnome3.nix
@@ -33,7 +33,7 @@
     ../apps/keybase.nix
     ../apps/neovim
     ../apps/neuron.nix
-    ../apps/ptpython.nix
+    # ../apps/ptpython.nix
     ../apps/tmux.nix
     ../apps/vscode.nix
     ../apps/zathura.nix
