@@ -85,6 +85,7 @@
 
       # Languages & frameworks
       nixfmt
+      nix-diff
       texlive.combined.scheme-full
       texlab
 
