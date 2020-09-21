@@ -10,6 +10,10 @@
     signing.key = "211F871962EA405B";
 
     aliases = {
+      ca = "commit --amend";
+      call = "commit -a";
+      credo = "commit --amend --no-edit";
+      credoall = "commit --amend --no-edit -a";
       ci = "commit -v";
       co = "checkout";
       cob = "checkout -b";
