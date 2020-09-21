@@ -29,15 +29,16 @@ in {
     };
 
     shellAliases = {
-      # NixOS management
-      nxs = "sudo nixos-rebuild switch";
-      nxb = "sudo nixos-rebuild boot";
-      nxt = "sudo nixos-rebuild test";
-      nxgc = "sudo nix-collect-garbage";
-
       # Keybase stuff
       cdkb = "cd /keybase/private/i077";
       cdkbp = "cd /keybase/public/i077";
+    };
+
+    functions = {
+      lwhich = {
+        description = "Show the full path of a command, resolving links along the way";
+        body = "readlink -m (which $argv[1])";
+      };
     };
 
     promptInit = ''
