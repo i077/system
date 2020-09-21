@@ -193,3 +193,5 @@ switch $argv[1]
         log_error "Unknown verb: $argv[1]"
         exit 121
 end
+
+# vim: set ft=fish:
