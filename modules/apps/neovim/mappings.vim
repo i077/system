@@ -60,9 +60,11 @@ function! s:denite_my_settings() abort
   \ denite#do_map('toggle_select').'j'
 endfunction
 " Files buffer
-noremap <silent> <c-P> :Files<CR>
+noremap <silent> <C-P> :Files<CR>
 " Lines buffer
 noremap <silent> <m-p> :Lines<CR>
+" Ripgrep
+noremap <silent> <leader>/ :RG<CR>
 
 " Run Dispatch job
 nnoremap <silent> <leader>m :Dispatch!<CR>
