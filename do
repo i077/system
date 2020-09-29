@@ -42,6 +42,7 @@ function help
     echo "        build           Build the current configuration"
     echo "        dry             Show what would be built under the current configuration"
     echo "        update          Update flake inputs"
+    echo "        git             Execute a git command in this repository"
     echo "        gc              Delete unreachable store paths"
     echo "        GC [D]          Delete generations older than D days (60 by default)"
     echo "        install N       Install configuration to /mnt with hostname i077-N"
@@ -113,6 +114,10 @@ function update
     end
 end
 
+function git
+    command git -C $flakeRoot $argv
+end
+
 function upgrade
     update
     switch_
@@ -175,7 +180,7 @@ switch $argv[1]
     case "switch" "test"
         $argv[1]_
     # Functions that take arguments
-    case GC install
+    case git GC install
         $argv[1] $argv[2..-1]
     # Abbreviations
     case s
