@@ -25,8 +25,10 @@ function log_ok
 end
 
 # ----- SETUP -----
-set flakeRoot /etc/nixos
+set flakeRoot (dirname (status filename))
 set flakeAttr (hostname)
+
+pushd $flakeRoot
 
 # ----- SUBCOMMANDS -----
 function help
@@ -60,7 +62,7 @@ function check
     if test -n "$unclean_files"
         log_error "Git working tree is unclean. Commit or stash changes to these files:"
         for f in (git ls-files --exclude-standard -o); echo " $f"; end
-        git diff --stat
+        git diff --name-only
         exit 1
     end
     log_ok "Everything looks good."
@@ -88,7 +90,7 @@ end
 function build
     check
     log_step "Building configuration..."
-    nixos-rebuild build --flake "$prefix$flakeRoot#$flakeAttr"
+    nixos-rebuild build --flake "$flakeRoot#$flakeAttr"
 end
 
 function dry
@@ -139,19 +141,22 @@ function install
     end
 
     set prefix /mnt
+    # Check for device config
     log_step "Bootstrapping configuration for this device..."
     if not mountpoint -q $prefix
         log_error "Nothing mounted at /mnt."
         exit 1
-    else if not test -f $prefix$flakeRoot/hosts/$argv[1]/default.nix
+    else if not test -f $flakeRoot/hosts/$argv[1]/default.nix
         log_error "No device configuration found for $argv[1]."
     end
 
     log_minor "Unlocking private module..."
     git-crypt unlock
+
     log_minor "Generating hardware configuration..."
-    nixos-generate-config --show-hardware-config > $prefix$flakeRoot/hosts/$argv[1]/hardware-configuration.nix
+    nixos-generate-config --show-hardware-config > $flakeRoot/hosts/$argv[1]/hardware-configuration.nix
     # Commit since tree needs to be clean
+    git add hosts/$argv[1]/hardware-configuration.nix
     git commit -m "temp: Add device config for $argv[1]"
 
     # Build and install config
@@ -159,6 +164,7 @@ function install
     log_step "Installing system closure to $prefix..."
     sudo nixos-install --root $prefix --system ./result
     log_ok "Done installing. You can reboot into the installed system."
+    clean
 end
 
 # Parse arguments

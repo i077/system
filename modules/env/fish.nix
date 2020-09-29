@@ -29,6 +29,8 @@ in {
     };
 
     shellAliases = {
+      sysdo = "/etc/nixos/do";
+
       # Keybase stuff
       cdkb = "cd /keybase/private/i077";
       cdkbp = "cd /keybase/public/i077";
