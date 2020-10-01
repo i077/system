@@ -140,10 +140,12 @@ end
 
 function install
     # Validate arguments
-    if not set -q argv
+    if test -z $argv[1]
         log_error "No device name given."
         exit 121
     end
+
+    check
 
     set prefix /mnt
     # Check for device config
@@ -162,14 +164,12 @@ function install
     nixos-generate-config --show-hardware-config > $flakeRoot/hosts/$argv[1]/hardware-configuration.nix
     # Commit since tree needs to be clean
     git add hosts/$argv[1]/hardware-configuration.nix
-    git commit -m "temp: Add device config for $argv[1]"
+    git commit -m "Add device config for $argv[1]"
 
     # Build and install config
-    build
-    log_step "Installing system closure to $prefix..."
-    sudo nixos-install --root $prefix --system ./result
+    log_step "Building config and installing to to $prefix..."
+    sudo nixos-install --root $prefix --flake $flakeRoot#i077-$argv[1]
     log_ok "Done installing. You can reboot into the installed system."
-    clean
 end
 
 # Parse arguments
