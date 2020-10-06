@@ -32,10 +32,9 @@
       flake = inputs.nixpkgs;
     };
 
-    binaryCaches = [ "https://cache.nixos.org" "https://srid.cachix.org" ];
+    binaryCaches = [ "https://cache.nixos.org" ];
     binaryCachePublicKeys = [
       "hydra.nixos.org-1:CNHJZBh9K4tP3EKF6FkkgeVYsS3ohTl+oS0Qa8bezVs="
-      "srid.cachix.org-1:MTQ6ksbfz3LBMmjyPh0PLmos+1x+CdtJxA/J2W+PQxI="
     ];
   };
 

@@ -32,7 +32,7 @@
     ../apps/firefox.nix
     ../apps/keybase.nix
     ../apps/neovim
-    ../apps/neuron.nix
+    # ../apps/neuron.nix
     # ../apps/ptpython.nix
     ../apps/tmux.nix
     ../apps/vscode.nix
