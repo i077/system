@@ -7,8 +7,8 @@
 
     # Manage user environment
     home-manager = {
-      url = "github:rycee/home-manager";
-      flake = false;
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Tmux configuration
@@ -74,7 +74,7 @@
             (import (./hosts + "/${name}" + /hardware-configuration.nix))
 
             # Use home-manager, which is not yet a flake
-            (import (home-manager + "/nixos"))
+            home-manager.nixosModules.home-manager
 
             # Import custom packages module
             (import ./packages)
