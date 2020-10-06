@@ -49,17 +49,21 @@
       }
     },
     "home-manager": {
-      "flake": false,
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
       "locked": {
-        "lastModified": 1601584113,
-        "narHash": "sha256-4gLn43KG5KzJatEul+/TfsiMnj3FK3ZU6VMdXdPpdRY=",
-        "owner": "rycee",
+        "lastModified": 1601924802,
+        "narHash": "sha256-J2QbHvIa2DcCs9OqRQ+SIrhsHAdVrb9gxlK3/VeVGFA=",
+        "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "9ff2188c5d2c65b20ded3f2e7a759319866313d3",
+        "rev": "0006da1381b87844c944fe8b925ec864ccf19348",
         "type": "github"
       },
       "original": {
-        "owner": "rycee",
+        "owner": "nix-community",
         "repo": "home-manager",
         "type": "github"
       }
@@ -77,22 +81,6 @@
       "original": {
         "owner": "cameronleger",
         "repo": "i3-workspacer",
-        "type": "github"
-      }
-    },
-    "neuron": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1601428590,
-        "narHash": "sha256-fD1zAj95wS/2ZeyatuIV1BRIVOECPYKjCxByk09kHEo=",
-        "owner": "srid",
-        "repo": "neuron",
-        "rev": "8d46c5829297ac5a0030b712d9fc74819198b39f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "srid",
-        "repo": "neuron",
         "type": "github"
       }
     },
@@ -115,11 +103,11 @@
     "oh-my-tmux": {
       "flake": false,
       "locked": {
-        "lastModified": 1601672673,
-        "narHash": "sha256-rJqhhibBdygW3im1L7lhdObRy6PR0S2saAqo+41qdXs=",
+        "lastModified": 1601965792,
+        "narHash": "sha256-I3W/SdZw6m5E2WvrO9Rlko9HPl5YPHgb9hB9PIJrjEE=",
         "owner": "gpakosz",
         "repo": ".tmux",
-        "rev": "8e2502abb391ca475fcde0fce4d9844503aad73f",
+        "rev": "8ffeb1d809dd67b7617622239f328d3c5d96829a",
         "type": "github"
       },
       "original": {
@@ -135,7 +123,6 @@
         "fish-z": "fish-z",
         "home-manager": "home-manager",
         "i3-workspacer": "i3-workspacer",
-        "neuron": "neuron",
         "nixpkgs": "nixpkgs",
         "oh-my-tmux": "oh-my-tmux"
       }
