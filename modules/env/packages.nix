@@ -26,6 +26,7 @@
     qt5.qtbase
     rclone
     ripgrep
+    ripgrep-all
     unzip
     wget
 
