@@ -3,11 +3,11 @@
     "fish-bobthefish": {
       "flake": false,
       "locked": {
-        "lastModified": 1603057287,
-        "narHash": "sha256-0wLm44mmfPOZrAR/Gohs+zDF+NWndTQaE/OndrXWUUg=",
+        "lastModified": 1603295643,
+        "narHash": "sha256-7I4Nf2K7+ATwe/alJEMY/v5aif5yXVSfPEft5PzPSRI=",
         "owner": "oh-my-fish",
         "repo": "theme-bobthefish",
-        "rev": "64366ed6580a700548352c8b81831ffd58a79da8",
+        "rev": "57d172882f61a4d896ed584cc7e7bf1bd13a08ea",
         "type": "github"
       },
       "original": {
@@ -55,11 +55,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1603146532,
-        "narHash": "sha256-+SfwrIHt4bI3LEEy80qU0fNJngxxwsTHrl5UrFr1FQE=",
+        "lastModified": 1603403461,
+        "narHash": "sha256-1BBTgps384veCOtCuHLdg8vuRNYyYPssWDQxsYQ5Lg8=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "dc5239b5cef1f52fbf9c136529954282ee717866",
+        "rev": "9bf1f40af124573a54fd208b1f539eb694ef31a6",
         "type": "github"
       },
       "original": {
@@ -86,11 +86,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1602891742,
-        "narHash": "sha256-rsDcBC0ceCw9c9d+W8tdc0hXHZZLCj7eRAO4whRMMeQ=",
+        "lastModified": 1603153815,
+        "narHash": "sha256-uCav0CJ0Zm0vbqJiS9NUYD4XZg4Ww9bbsFzcDUzh2+U=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "8133b9cb5f7c00d4fe31c8c2c4b525bc2650bfc0",
+        "rev": "007126eef72271480cb7670e19e501a1ad2c1ff2",
         "type": "github"
       },
       "original": {
