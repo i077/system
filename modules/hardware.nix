@@ -47,6 +47,9 @@
     # Graphics
     bumblebee.enable = (device.gpu == "optimus");
 
+    # HiDPI
+    video.hidpi.enable = device.isHiDPI;
+
     steam-hardware.enable = true;
   };
 
