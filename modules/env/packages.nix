@@ -34,6 +34,8 @@
     stdmanpages
   ];
 
+  programs.steam.enable = true;
+
   home-manager.users.imran.programs = {
     man.enable = true;
   };
@@ -82,7 +84,6 @@
 
       # Games
       minecraft
-      steam
 
       # Languages & frameworks
       nixfmt

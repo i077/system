@@ -49,8 +49,6 @@
 
     # HiDPI
     video.hidpi.enable = device.isHiDPI;
-
-    steam-hardware.enable = true;
   };
 
   # Allow backlight control
