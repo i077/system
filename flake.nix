@@ -42,28 +42,34 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, ... }: {
-    # Map each directory in ./hosts to a nixos system
+  outputs = inputs@{ self, nixpkgs, home-manager, ... }:
+  let
+    inherit (builtins) attrNames elem filter readDir;
+    inherit (nixpkgs.lib) filterAttrs platforms;
+
+    # Get each host in ./hosts (a list of names)
+    hostnames = attrNames (filterAttrs (_: type: type == "directory") (readDir ./hosts));
+
+    # Function to check if a host runs on a given platform
+    hostIsPlatform = name: platform: elem (import (./hosts + "/${name}")).system platform;
+
+    # List of hosts running NixOS
+    nixosHostnames = filter (name: hostIsPlatform name platforms.linux) hostnames;
+  in {
+    # Map each NixOS host to a NixOS system
     nixosConfigurations = let
-      inherit (builtins) attrNames readDir;
-      inherit (nixpkgs.lib) filterAttrs genAttrs removePrefix nixosSystem;
+      inherit (nixpkgs.lib) genAttrs nixosSystem;
 
-      hosts = let
-        hostDirs = attrNames
-          (filterAttrs (_: type: type == "directory") (readDir ./hosts));
-      in map (name: "i077-" + name) hostDirs;
-
-      mkHostConfig = hostname:
+      mkNixosSystem = hostname:
         let
-          name = removePrefix "i077-" hostname;
-          device = import (./hosts + "/${name}");
+          device = import (./hosts + "/${hostname}");
         in nixosSystem {
           inherit (device) system;
 
           modules = [
             nixpkgs.nixosModules.notDetected
             {
-              # Set hostname as i077-[host directory name]
+              # Set hostname
               networking.hostName = hostname;
 
               # System revision tracks git commit hash
@@ -71,7 +77,7 @@
 
               system.stateVersion = "19.03";
             }
-            (import (./hosts + "/${name}" + /hardware-configuration.nix))
+            (import (./hosts + "/${hostname}" + /hardware-configuration.nix))
 
             # Use home-manager, which is not yet a flake
             home-manager.nixosModules.home-manager
@@ -85,6 +91,6 @@
           # Pass flake inputs and device parameters to modules
           specialArgs = { inherit inputs device; };
         };
-    in genAttrs hosts mkHostConfig;
+    in genAttrs nixosHostnames mkNixosSystem;
   };
 }

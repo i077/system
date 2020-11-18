@@ -17,7 +17,7 @@ Dependencies of this configuration are specified in `flake.nix` in the `inputs` 
   "dotfile" or config file that belongs in `~` or `/etc` goes in here.
 
 - [`hosts/`](./hosts) specifies device-specific configuration for each of
-  my devices running NixOS, (e.g. [spectre](./hosts/spectre), my current
+  my devices running NixOS, (e.g. [giratina](./hosts/giratina), my current
   laptop). Attributes such as CPU core count and HiDPI are stored here and
   used in other modules' logic (e.g. scale the font size up if the device
   has a HiDPI screen). The results of NixOS's hardware
