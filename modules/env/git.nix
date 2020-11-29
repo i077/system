@@ -22,6 +22,8 @@
       lg = "log --oneline --graph --decorate";
       lga = "log --oneline --graph --decorate --all";
       pd = "pull";
+      pdu = "pull upstream";
+      pdum = "pull upstream master";
       pu = "push";
       pushall = "!git remote | xargs -L1 git push --all";
       st = "status";
