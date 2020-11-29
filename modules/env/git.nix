@@ -6,7 +6,7 @@
     package = pkgs.gitAndTools.gitFull;
 
     userName = "Imran Hossain";
-    userEmail = "contact@imranhossa.in";
+    userEmail = config.private.email.address;
     signing.key = "211F871962EA405B";
 
     aliases = {
@@ -50,7 +50,6 @@
         smtpserverport = smtpPort;
         smtpuser = username;
         smtpencryption = smtpEncryption;
-        smtppass = password;
       };
 
       pull.rebase = false;
