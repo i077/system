@@ -46,8 +46,7 @@ in {
     };
 
     resticPasswordFile = mkOption {
-      description =
-        "Path to file containing password for restic backup repository";
+      description = "Path to file containing password for restic backup repository";
       type = types.path;
     };
 

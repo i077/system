@@ -1,5 +1,5 @@
 {
-  name = "tower";
+  name = "dialga";
   system = "x86_64-linux";
 
   isLaptop = false;

@@ -2,9 +2,8 @@
 
 {
   # Link each input to /etc/sources
-  environment.etc = (lib.mapAttrs'
-    (name: value: (lib.nameValuePair "sources/${name}" { source = value; }))
-    inputs);
+  environment.etc =
+    (lib.mapAttrs' (name: value: (lib.nameValuePair "sources/${name}" { source = value; })) inputs);
 
   nix = {
     nixPath = lib.mkForce [
@@ -16,7 +15,7 @@
     # Auto-optimize nix store
     optimise.automatic = true;
 
-    # Grant suderos rights with the nix daemon
+    # Grant sudoers rights with the nix daemon
     trustedUsers = [ "root" "@wheel" ];
 
     # Use flakes
@@ -33,9 +32,7 @@
     };
 
     binaryCaches = [ "https://cache.nixos.org" ];
-    binaryCachePublicKeys = [
-      "hydra.nixos.org-1:CNHJZBh9K4tP3EKF6FkkgeVYsS3ohTl+oS0Qa8bezVs="
-    ];
+    binaryCachePublicKeys = [ "hydra.nixos.org-1:CNHJZBh9K4tP3EKF6FkkgeVYsS3ohTl+oS0Qa8bezVs=" ];
   };
 
   nixpkgs.config = import ../nixpkgs-config.nix;
@@ -63,8 +60,6 @@
           rev = "b3c3a0bd1835a3907bf23f5f7bd7c9d18ef163ec";
           sha256 = "0b9n5arqr3pzyg1ws0wf84zlczgllxnhjm1mzddd1qk5w5nw7fcy";
         };
-      in {
-        inherit (nixpkgs-b3c3a0b) quodlibet-full;
-      })
+      in { inherit (nixpkgs-b3c3a0b) quodlibet-full; })
   ];
 }

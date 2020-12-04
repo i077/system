@@ -15,8 +15,6 @@
   # Caps2esc for non-flashable keyboards
   services.interception-tools = lib.optionalAttrs (!device.kbFlashable) {
     enable = true;
-    plugins = with pkgs.interception-tools-plugins; [
-      caps2esc
-    ];
+    plugins = with pkgs.interception-tools-plugins; [ caps2esc ];
   };
 }

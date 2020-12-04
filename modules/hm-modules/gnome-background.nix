@@ -25,15 +25,7 @@ in {
       };
 
       display = mkOption {
-        type = types.enum [
-          "none"
-          "wallpaper"
-          "centered"
-          "scaled"
-          "stretched"
-          "zoom"
-          "spanned"
-        ];
+        type = types.enum [ "none" "wallpaper" "centered" "scaled" "stretched" "zoom" "spanned" ];
         default = "zoom";
         description = "Determines how the background is rendered.";
       };

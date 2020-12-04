@@ -1,8 +1,6 @@
 { config, inputs, lib, ... }:
 
-let
-  colors = with lib;
-    mapAttrs (_: value: (removePrefix "#" value)) config.theming.colors;
+let colors = with lib; mapAttrs (_: value: (removePrefix "#" value)) config.theming.colors;
 in {
   programs.fish.enable = true;
 
@@ -91,12 +89,15 @@ in {
       fzf_key_bindings
     '';
 
-    plugins = [{
-      name = "z";
-      src = inputs.fish-z;
-    } {
-      name = "gruvbox";
-      src = inputs.fish-gruvbox;
-    }];
+    plugins = [
+      {
+        name = "z";
+        src = inputs.fish-z;
+      }
+      {
+        name = "gruvbox";
+        src = inputs.fish-gruvbox;
+      }
+    ];
   };
 }

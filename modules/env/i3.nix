@@ -5,8 +5,7 @@ let
   myColors = config.theming.colors;
 
   uiFont = with config.theming.fonts;
-    ui.family + " "
-    + toString (ui.size * (if device.isHiDPI then 1 else 2));
+    ui.family + " " + toString (ui.size * (if device.isHiDPI then 1 else 2));
 
   lockCommand = "${pkgs.xlockmore}/bin/xlock -mode fiberlamp -delay 50000 -erasedelay 0";
 
@@ -56,7 +55,7 @@ in {
       outer = 2;
     };
 
-    bars = [];
+    bars = [ ];
 
     colors = with myColors; {
       background = bg0;
@@ -196,9 +195,12 @@ in {
       "XF86MonBrightnessDown" = "exec light -U 10";
 
       # Printscreen
-      "Print" = "exec ${pkgs.maim}/bin/maim | ${pkgs.xclip}/bin/xclip -selection clipboard -t image/png";
-      "Shift+Print" = "exec ${pkgs.maim}/bin/maim -s | ${pkgs.xclip}/bin/xclip -selection clipboard -t image/png";
-      "Shift+Ctrl+Print" = "exec ${pkgs.maim}/bin/maim -s ~/Pictures/scregion-$(date +%Y-%m-%dT%H-%M-%S).png";
+      "Print" =
+        "exec ${pkgs.maim}/bin/maim | ${pkgs.xclip}/bin/xclip -selection clipboard -t image/png";
+      "Shift+Print" =
+        "exec ${pkgs.maim}/bin/maim -s | ${pkgs.xclip}/bin/xclip -selection clipboard -t image/png";
+      "Shift+Ctrl+Print" =
+        "exec ${pkgs.maim}/bin/maim -s ~/Pictures/scregion-$(date +%Y-%m-%dT%H-%M-%S).png";
       "Ctrl+Print" = "exec ${pkgs.maim}/bin/maim ~/Pictures/screen-$(date +%Y-%m-%dT%H-%M-%S).png";
 
       # Mode switching
@@ -251,16 +253,13 @@ in {
       };
     };
 
-    floating = {
-      criteria = [
-        { class = "^AlacrittyFloat$"; }
-        { class = "^everdo$"; }
-      ];
-    };
+    floating = { criteria = [ { class = "^AlacrittyFloat$"; } { class = "^everdo$"; } ]; };
 
-    startup = [
-      { command = "systemctl --user restart polybar"; always = true; notification = false; }
-    ];
+    startup = [{
+      command = "systemctl --user restart polybar";
+      always = true;
+      notification = false;
+    }];
 
     workspaceAutoBackAndForth = true;
   };

@@ -5,11 +5,8 @@
   sound.enable = true;
 
   # Override VAAPI to add hybrid codec
-  nixpkgs.overlays = [
-    (self: super: {
-      vaapiIntel = super.vaapiIntel.override { enableHybridCodec = true; };
-    })
-  ];
+  nixpkgs.overlays =
+    [ (self: super: { vaapiIntel = super.vaapiIntel.override { enableHybridCodec = true; }; }) ];
 
   hardware = {
     # CPU microcode updates
@@ -19,12 +16,8 @@
       enable = true;
       driSupport = true;
       driSupport32Bit = true;
-      extraPackages = lib.optionals (device.gpu == "optimus") (with pkgs; [
-        vaapiIntel
-        vaapiVdpau
-        libvdpau-va-gl
-        intel-media-driver
-      ]);
+      extraPackages = lib.optionals (device.gpu == "optimus")
+        (with pkgs; [ vaapiIntel vaapiVdpau libvdpau-va-gl intel-media-driver ]);
     };
 
     # Audio

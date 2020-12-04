@@ -9,15 +9,7 @@
 
     users.imran = {
       isNormalUser = true;
-      extraGroups = [
-        "wheel"
-        "video"
-        "networkmanager"
-        "adbusers"
-        "wireshark"
-        "audio"
-        "pulse"
-      ];
+      extraGroups = [ "wheel" "video" "networkmanager" "adbusers" "wireshark" "audio" "pulse" ];
       hashedPassword = config.private.hashedLogins.${device.name}.imran;
       uid = 1000;
       description = "Imran Hossain";

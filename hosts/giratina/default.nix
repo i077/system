@@ -1,5 +1,5 @@
 {
-  name = "spectre";
+  name = "giratina";
   system = "x86_64-linux";
 
   isLaptop = true;

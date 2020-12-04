@@ -4,23 +4,15 @@
   services.restic.backups.onedrive = {
     repository = "rclone:onedrive:backup";
     paths = [ "/home/imran" "/etc" ];
-    extraBackupArgs = [
-      "-e /home/imran/.cache"
-      ''--iexclude ".cache"''
-      ''-e "Music/"''
-      "-x"
-      "--exclude-caches"
-    ];
+    extraBackupArgs =
+      [ "-e /home/imran/.cache" ''--iexclude ".cache"'' ''-e "Music/"'' "-x" "--exclude-caches" ];
 
     passwordFile = config.private.resticPasswordFile;
 
     # Run every day
     timerConfig = { OnCalendar = "daily"; };
 
-    rcloneConfig = {
-      inherit (config.private.rcloneConf.onedrive)
-        type token drive_id drive_type;
-    };
+    rcloneConfig = { inherit (config.private.rcloneConf.onedrive) type token drive_id drive_type; };
   };
 
   # Only run when online

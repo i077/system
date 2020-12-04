@@ -9,12 +9,7 @@ let
   attrsToPyStmts = attrs:
     concatStringsSep "\n    " (mapAttrsToList (n: v:
       "repl.${n} = ${
-        if (isBool v) then
-          (boolToPyBool v)
-        else if (isInt v) then
-          "${v}"
-        else
-          ''"${v}"''
+        if (isBool v) then (boolToPyBool v) else if (isInt v) then "${v}" else ''"${v}"''
       }") attrs);
 
 in {

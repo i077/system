@@ -16,9 +16,10 @@
       paperwm
     ]);
 
-  environment.gnome3.excludePackages = with pkgs.gnome3; [
-    gnome-software # No need for this since we use declarative nix
-  ];
+  environment.gnome3.excludePackages = with pkgs.gnome3;
+    [
+      gnome-software # No need for this since we use declarative nix
+    ];
 
   home-manager.users.imran.home.packages = with pkgs; [ gnome3.gnome-tweaks ];
 

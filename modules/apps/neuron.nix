@@ -13,6 +13,5 @@
 
   # Add vim plugin
   home-manager.users.imran.programs.neovim.plugins =
-    lib.mkIf config.home-manager.users.imran.programs.neovim.enable
-    [ pkgs.vimPlugins.neuron-vim ];
+    lib.mkIf config.home-manager.users.imran.programs.neovim.enable [ pkgs.vimPlugins.neuron-vim ];
 }

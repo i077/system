@@ -42,7 +42,7 @@
       };
     };
 
-    extraConfig = { 
+    extraConfig = {
       core.editor = config.defaultApplications.editor.desktop;
 
       sendemail = with config.private.email; {

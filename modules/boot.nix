@@ -14,7 +14,7 @@
     # Plymouth boot screen
     plymouth.enable = true;
 
-    extraModulePackages = with config.boot.kernelPackages; [];
+    extraModulePackages = with config.boot.kernelPackages; [ ];
 
     # Clean up /tmp on boot
     cleanTmpDir = true;

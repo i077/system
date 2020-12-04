@@ -1,4 +1,5 @@
 { stdenv, lib, qt5, libglvnd, fetchurl, makeDesktopItem }:
+
 stdenv.mkDerivation rec {
   name = "write_stylus-${version}";
   version = "209";
@@ -31,10 +32,10 @@ stdenv.mkDerivation rec {
   '';
   preFixup = let
     libPath = lib.makeLibraryPath [
-      qt5.qtbase        # libQt5PrintSupport.so.5
-      qt5.qtsvg         # libQt5Svg.so.5
-      stdenv.cc.cc.lib  # libstdc++.so.6
-      libglvnd          # ibGL.so.1
+      qt5.qtbase # libQt5PrintSupport.so.5
+      qt5.qtsvg # libQt5Svg.so.5
+      stdenv.cc.cc.lib # libstdc++.so.6
+      libglvnd # ibGL.so.1
     ];
   in ''
     patchelf \
@@ -44,7 +45,7 @@ stdenv.mkDerivation rec {
   '';
 
   meta = with stdenv.lib; {
-    homepage = http://www.styluslabs.com/;
+    homepage = "http://www.styluslabs.com/";
     description = "Write is a word processor for handwriting.";
     platforms = platforms.linux;
     license = stdenv.lib.licenses.unfree;

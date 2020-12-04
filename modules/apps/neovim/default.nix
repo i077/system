@@ -8,8 +8,7 @@ in {
     enable = true;
 
     withNodeJs = true;
-    extraPython3Packages =
-      (ps: with ps; [ black jedi pylint python-language-server ]);
+    extraPython3Packages = (ps: with ps; [ black jedi pylint python-language-server ]);
 
     plugins = with pkgs.vimPlugins; [
       # Editor

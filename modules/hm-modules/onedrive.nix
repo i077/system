@@ -12,8 +12,7 @@ in {
     monitor = mkOption {
       type = types.bool;
       default = false;
-      description =
-        "Whether to monitor OneDrive for changes in the background.";
+      description = "Whether to monitor OneDrive for changes in the background.";
     };
 
     settings = mkOption {
@@ -47,8 +46,7 @@ in {
       };
 
       Service = {
-        ExecStart =
-          "${pkg}/bin/onedrive --monitor --confdir=/home/%u/.config/onedrive";
+        ExecStart = "${pkg}/bin/onedrive --monitor --confdir=/home/%u/.config/onedrive";
 
         Restart = "on-failure";
         RestartSec = 3;
@@ -61,8 +59,7 @@ in {
     # We have to write to a writable directory,
     # since onedrive writes to a database in the config directory at runtime.
     xdg.configFile."onedrive/config" = mkIf (cfg.settings != { }) {
-      text = concatStringsSep "\n"
-        (mapAttrsToList (n: v: ''${n} = "${v}"'') cfg.settings);
+      text = concatStringsSep "\n" (mapAttrsToList (n: v: ''${n} = "${v}"'') cfg.settings);
     };
   };
 }

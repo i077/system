@@ -6,8 +6,7 @@ in {
     enable = true;
 
     package = pkgs.polybar.override {
-      i3GapsSupport =
-        config.home-manager.users.imran.xsession.windowManager.i3.enable;
+      i3GapsSupport = config.home-manager.users.imran.xsession.windowManager.i3.enable;
       pulseSupport = true;
     };
 
@@ -31,10 +30,8 @@ in {
         module-margin-left = 1;
         module-margin-right = 1;
 
-        font-0 = with config.theming.fonts;
-          "${mono.family}:size=${toString mono.size}";
-        font-1 = with config.theming.fonts;
-          "Iosevka Nerd Font:size=${toString mono.size}";
+        font-0 = with config.theming.fonts; "${mono.family}:size=${toString mono.size}";
+        font-1 = with config.theming.fonts; "Iosevka Nerd Font:size=${toString mono.size}";
         wm-restack = "i3";
 
         tray-position = "right";

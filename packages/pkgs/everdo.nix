@@ -7,14 +7,11 @@ let
   name = "${pname}-${version}";
 
   src = fetchurl {
-    url =
-      "https://d11l8siwmn8w36.cloudfront.net/${version}/Everdo-${version}.AppImage";
+    url = "https://d11l8siwmn8w36.cloudfront.net/${version}/Everdo-${version}.AppImage";
     sha256 = "09djcxpy99zdmzn83ni5kvzdm2rw9lwwmb9cvcw401hv5s29yan0";
   };
 
-  appimageContents = appimageTools.extract {
-    inherit name src;
-  };
+  appimageContents = appimageTools.extract { inherit name src; };
 in appimageTools.wrapType2 rec {
   inherit name src;
 
@@ -24,17 +21,15 @@ in appimageTools.wrapType2 rec {
   '';
 
   multiPkgs = null; # no 32bit needed
-  extraPkgs = p:
-    (appimageTools.defaultFhsEnvArgs.multiPkgs p)
-    ++ [ p.at-spi2-atk p.at-spi2-core ];
-    extraInstallCommands = ''
-      mv $out/bin/{${name},${pname}}
-      install -m 444 -D ${appimageContents}/everdo.desktop $out/share/applications/everdo.desktop
-      install -m 444 -D ${appimageContents}/usr/share/icons/hicolor/1024x1024/apps/everdo.png \
-        $out/share/icons/hicolor/1024x1024/apps/everdo.png
-      substituteInPlace $out/share/applications/everdo.desktop \
-        --replace 'Exec=AppRun' 'Exec=${pname}'
-    '';
+  extraPkgs = p: (appimageTools.defaultFhsEnvArgs.multiPkgs p) ++ [ p.at-spi2-atk p.at-spi2-core ];
+  extraInstallCommands = ''
+    mv $out/bin/{${name},${pname}}
+    install -m 444 -D ${appimageContents}/everdo.desktop $out/share/applications/everdo.desktop
+    install -m 444 -D ${appimageContents}/usr/share/icons/hicolor/1024x1024/apps/everdo.png \
+      $out/share/icons/hicolor/1024x1024/apps/everdo.png
+    substituteInPlace $out/share/applications/everdo.desktop \
+      --replace 'Exec=AppRun' 'Exec=${pname}'
+  '';
 
   meta = with lib; {
     description = "Todo list and Getting Things Done app";

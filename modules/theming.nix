@@ -179,28 +179,26 @@ let
 in {
   options.theming = {
     colors = mkOption {
-      description =
-        "16-color palette for theming various apps. Based on the base16 scheme.";
+      description = "16-color palette for theming various apps. Based on the base16 scheme.";
       type = types.submodule {
-        options = builtins.listToAttrs
-          (map (name: nameValuePair name (mkColorOption name)) [
-            "bg0"
-            "bg1"
-            "bg2"
-            "bg3"
-            "fg0"
-            "fg1"
-            "fg2"
-            "fg3"
-            "alert"
-            "primary"
-            "secondary"
-            "tertiary"
-            "quaternary"
-            "quinary"
-            "senary"
-            "septary"
-          ]);
+        options = builtins.listToAttrs (map (name: nameValuePair name (mkColorOption name)) [
+          "bg0"
+          "bg1"
+          "bg2"
+          "bg3"
+          "fg0"
+          "fg1"
+          "fg2"
+          "fg3"
+          "alert"
+          "primary"
+          "secondary"
+          "tertiary"
+          "quaternary"
+          "quinary"
+          "senary"
+          "septary"
+        ]);
       };
     };
 

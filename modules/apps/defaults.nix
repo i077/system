@@ -51,14 +51,11 @@
         desktop = "Zoom";
       };
 
-      gsconnect = {
-        desktop = "org.gnome.Shell.Extensions.GSConnect";
-      };
+      gsconnect = { desktop = "org.gnome.Shell.Extensions.GSConnect"; };
     };
 
     home-manager.users.imran.xdg.mimeApps.enable = false;
-    home-manager.users.imran.xdg.mimeApps.defaultApplications =
-      with config.defaultApplications;
+    home-manager.users.imran.xdg.mimeApps.defaultApplications = with config.defaultApplications;
       builtins.mapAttrs (n: v: "${v.desktop}.desktop") {
         "text/html" = browser;
         "x-scheme-handler/http" = browser;

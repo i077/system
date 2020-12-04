@@ -43,54 +43,53 @@
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, ... }:
-  let
-    inherit (builtins) attrNames elem filter readDir;
-    inherit (nixpkgs.lib) filterAttrs platforms;
+    let
+      inherit (builtins) attrNames elem filter readDir;
+      inherit (nixpkgs.lib) filterAttrs platforms;
 
-    # Get each host in ./hosts (a list of names)
-    hostnames = attrNames (filterAttrs (_: type: type == "directory") (readDir ./hosts));
+      # Get each host in ./hosts (a list of names)
+      hostnames = attrNames (filterAttrs (_: type: type == "directory") (readDir ./hosts));
 
-    # Function to check if a host runs on a given platform
-    hostIsPlatform = name: platform: elem (import (./hosts + "/${name}")).system platform;
+      # Function to check if a host runs on a given platform
+      hostIsPlatform = name: platform: elem (import (./hosts + "/${name}")).system platform;
 
-    # List of hosts running NixOS
-    nixosHostnames = filter (name: hostIsPlatform name platforms.linux) hostnames;
-  in {
-    # Map each NixOS host to a NixOS system
-    nixosConfigurations = let
-      inherit (nixpkgs.lib) genAttrs nixosSystem;
+      # List of hosts running NixOS
+      nixosHostnames = filter (name: hostIsPlatform name platforms.linux) hostnames;
+    in {
+      # Map each NixOS host to a NixOS system
+      nixosConfigurations = let
+        inherit (nixpkgs.lib) genAttrs nixosSystem;
 
-      mkNixosSystem = hostname:
-        let
-          device = import (./hosts + "/${hostname}");
-        in nixosSystem {
-          inherit (device) system;
+        mkNixosSystem = hostname:
+          let device = import (./hosts + "/${hostname}");
+          in nixosSystem {
+            inherit (device) system;
 
-          modules = [
-            nixpkgs.nixosModules.notDetected
-            {
-              # Set hostname
-              networking.hostName = hostname;
+            modules = [
+              nixpkgs.nixosModules.notDetected
+              {
+                # Set hostname
+                networking.hostName = hostname;
 
-              # System revision tracks git commit hash
-              system.configurationRevision = self.rev;
+                # System revision tracks git commit hash
+                system.configurationRevision = self.rev;
 
-              system.stateVersion = "19.03";
-            }
-            (import (./hosts + "/${hostname}" + /hardware-configuration.nix))
+                system.stateVersion = "19.03";
+              }
+              (import (./hosts + "/${hostname}" + /hardware-configuration.nix))
 
-            # Use home-manager, which is not yet a flake
-            home-manager.nixosModules.home-manager
+              # Use home-manager
+              home-manager.nixosModules.home-manager
 
-            # Import custom packages module
-            (import ./packages)
+              # Import custom packages module
+              (import ./packages)
 
-            (import ./modules)
-          ];
+              (import ./modules)
+            ];
 
-          # Pass flake inputs and device parameters to modules
-          specialArgs = { inherit inputs device; };
-        };
-    in genAttrs nixosHostnames mkNixosSystem;
-  };
+            # Pass flake inputs and device parameters to modules
+            specialArgs = { inherit inputs device; };
+          };
+      in genAttrs nixosHostnames mkNixosSystem;
+    };
 }

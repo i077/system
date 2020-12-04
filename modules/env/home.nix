@@ -4,7 +4,7 @@
   require = [
     # Base home config
     ./packages.nix
-    
+
     # Shell
     ./fish.nix
 
@@ -42,8 +42,7 @@
   home-manager.users.imran = {
     # Import custom home-modules
     imports = with builtins;
-      map (name: ../hm-modules + "/${name}")
-      (attrNames (readDir ../hm-modules));
+      map (name: ../hm-modules + "/${name}") (attrNames (readDir ../hm-modules));
 
     # Let Home Manager install and manage itself
     programs.home-manager.enable = true;

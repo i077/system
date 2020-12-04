@@ -8,9 +8,7 @@
     xdg.configFile."rclone/rclone.conf.hm".text = let
       rcloneINI = with lib.generators;
         toINI {
-          mkKeyValue =
-            mkKeyValueDefault { mkValueString = v: mkValueStringDefault { } v; }
-            "=";
+          mkKeyValue = mkKeyValueDefault { mkValueString = v: mkValueStringDefault { } v; } "=";
         };
     in rcloneINI config.private.rcloneConf;
 

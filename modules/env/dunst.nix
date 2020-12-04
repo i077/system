@@ -24,8 +24,7 @@ in {
         separator_color = "auto";
 
         font = with config.theming.fonts;
-          ui.family + " "
-          + toString (ui.size * (if device.isHiDPI then 1 else 2));
+          ui.family + " " + toString (ui.size * (if device.isHiDPI then 1 else 2));
 
         # Sort by urgency
         sort = true;

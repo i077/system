@@ -16,8 +16,7 @@ in {
     device = import (./hosts + "/${devicename}");
 
     # Read in flake inputs from /etc/sources
-    inputs =
-      lib.mapAttrs (n: v: "/etc/sources/${n}") (builtins.readDir /etc/sources);
+    inputs = lib.mapAttrs (n: v: "/etc/sources/${n}") (builtins.readDir /etc/sources);
   };
 
   networking.hostName = hostname;

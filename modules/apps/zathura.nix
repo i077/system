@@ -30,8 +30,7 @@ in {
       statusbar-fg = colors.fg0;
 
       font = with config.theming.fonts;
-        ui.family + " "
-        + toString (ui.size * (if device.isHiDPI then 1 else 2));
+        ui.family + " " + toString (ui.size * (if device.isHiDPI then 1 else 2));
     };
   };
 }

@@ -36,8 +36,7 @@ in {
     };
 
     font = with config.theming.fonts;
-      ui.family + " "
-      + toString (12 * (if device.isHiDPI then 2 else 1));
+      ui.family + " " + toString (12 * (if device.isHiDPI then 2 else 1));
 
     extraConfig = ''
       rofi.dpi = ${toString (96 * (if device.isHiDPI then 2 else 1))}

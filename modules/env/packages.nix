@@ -36,9 +36,7 @@
 
   programs.steam.enable = true;
 
-  home-manager.users.imran.programs = {
-    man.enable = true;
-  };
+  home-manager.users.imran.programs = { man.enable = true; };
 
   home-manager.users.imran.home.packages = with pkgs;
     [

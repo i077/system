@@ -1,4 +1,6 @@
-{ config, device, lib, pkgs, ... }: {
+{ config, device, lib, pkgs, ... }:
+
+{
   services.udev.extraRules = lib.optionalString device.isLaptop ''
     ACTION=="add|change", KERNEL=="sd*[!0-9]|sr*", ATTR{queue/scheduler}="bfq"
     ACTION=="change", SUBSYSTEM=="power_supply", ATTR{online}=="0", RUN+="${pkgs.systemd}/bin/systemctl start battery"
