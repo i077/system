@@ -28,7 +28,7 @@
     # Apps
     ../apps/alacritty.nix
     ../apps/defaults.nix
-    ../apps/everdo.nix
+    # ../apps/everdo.nix
     ../apps/firefox.nix
     ../apps/keybase.nix
     ../apps/neovim
