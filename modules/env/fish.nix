@@ -27,7 +27,7 @@ in {
     };
 
     shellAliases = {
-      sysdo = "/etc/nixos/do";
+      sysdo = "nix develop /etc/nixos -c /etc/nixos/do";
 
       # Keybase stuff
       cdkb = "cd /keybase/private/i077";
