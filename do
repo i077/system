@@ -39,17 +39,17 @@ cd $flakeRoot
 
 # ----- SUBCOMMANDS -----
 function help
-    echo -e "Usage: ./do [verb] [options]\n"
-    echo "Options:"
-    echo "        -f, --format    Format .nix files with nixfmt when running checks"
+    echo -e $bold"Usage:"$resf" ./do [flags] [verb] [options]\n"
+    echo $bold"Flags:"$resf
+    echo "    -f, --format        Format .nix files with nixfmt when running checks"
     echo
-    echo "Possible verbs:"
+    echo $bold"Possible verbs:"$resf
     echo "        help            Print this help message"
     echo "        clean           Clean up nix build outputs"
     echo "        check           Run checks on this repository"
-    echo "        switch,s        Build, activate, and add boot entry for the current configuration"
-    echo "        boot,b          Build and add boot entry for the current configuration"
-    echo "        test,t          Build and activate the current configuration"
+    echo "     s, switch          Build, activate, and add boot entry for the current configuration"
+    echo "     b, boot            Build and add boot entry for the current configuration"
+    echo "     t, test            Build and activate the current configuration"
     echo "        build           Build the current configuration"
     echo "        dry             Show what would be built under the current configuration"
     echo "        update          Update flake inputs"
@@ -57,7 +57,7 @@ function help
     echo "        gc              Delete unreachable store paths"
     echo "        GC [D]          Delete generations older than D days (60 by default)"
     echo "        install N       Install configuration to /mnt with hostname i077-N"
-    echo "        upgrade,up      Run update and switch"
+    echo "    up, upgrade         Run update and switch"
     echo "        ub              Run update and boot"
     echo "        ut              Run update and test"
 end
