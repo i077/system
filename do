@@ -1,5 +1,5 @@
 #!/usr/bin/env nix-shell
-#!nix-shell -p fish gnupg git git-crypt utillinux -i fish
+#!nix-shell -p fish gnupg git git-crypt nixfmt utillinux -i fish
 
 # ----- FORMATTING -----
 set red (tput setaf 1)
@@ -28,14 +28,21 @@ end
 set flakeRoot (dirname (status filename))
 set flakeAttr (hostname)
 
-pushd $flakeRoot
+# Format to 100 columns becauase this is the 21st century
+set nixfmt_width 100
+
+cd $flakeRoot
 
 # ----- SUBCOMMANDS -----
 function help
     echo -e "Usage: ./do [verb] [options]\n"
+    echo "Options:"
+    echo "        -f, --format    Format .nix files with nixfmt when running checks"
+    echo
     echo "Possible verbs:"
     echo "        help            Print this help message"
     echo "        clean           Clean up nix build outputs"
+    echo "        check           Run checks on this repository"
     echo "        switch,s        Build, activate, and add boot entry for the current configuration"
     echo "        boot,b          Build and add boot entry for the current configuration"
     echo "        test,t          Build and activate the current configuration"
@@ -58,14 +65,45 @@ end
 
 function check
     log_step "Running checks..."
+
+    # Check flake outputs
+    log_minor "Checking flake outputs..."
+    nix flake check
+    if test $status -gt 0
+        log_error "A flake output didn't evaluate properly. Check the nix output above."
+        exit 1
+    end
+
+    # Check that nix files are formatted properly (or format if -f is passed)
+    if test -z $_flag_format
+        set format_logmsg "Checking formatting with nixfmt..."
+        set nixfmt_check "-c"
+    else
+        set format_logmsg "Formatting with nixfmt..."
+    end
+    log_minor $format_logmsg
+    set -l unformatted_files \
+        (find . -name '*.nix' \
+            # Exclude files not handled well by nixfmt
+            ! -path ./modules/apps/neovim/default.nix \
+            -exec nixfmt $nixfmt_check -w $nixfmt_width {} + &| \
+            grep "not formatted" | sed -e "s/\(.*\): not formatted/\1/")
+    if test -z $flag_format && test (count $unformatted_files) -gt 0
+        log_error "The files below aren't formatted properly. Run nixfmt on them or pass '--format'."
+        for f in $unformatted_files; echo " $f"; end
+        exit 1
+    end
+
+    # Check that working tree is clean
     log_minor "Checking for uncommitted changes..."
-    set unclean_files (git ls-files -m -o -d --exclude-standard)
+    set -l unclean_files (git ls-files -m -o -d --exclude-standard)
     if test -n "$unclean_files"
         log_error "Git working tree is unclean. Commit or stash changes to these files:"
         for f in (git ls-files --exclude-standard -o); echo " $f"; end
-        git diff --name-only
+        git diff --name-only | sed -e "s/\(.*\)/ \1/"
         exit 1
     end
+
     log_ok "Everything looks good."
 end
 
@@ -172,7 +210,11 @@ function install
     log_ok "Done installing. You can reboot into the installed system."
 end
 
-# Parse arguments
+# Parse flags and make them global
+argparse "f/format" -- $argv
+set -g _flag_format $_flag_format
+
+# Parse rest of arguments
 switch $argv[1]
     case help clean check boot build dry update upgrade gc
         $argv[1]
