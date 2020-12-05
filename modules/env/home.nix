@@ -55,8 +55,8 @@
     # Manage fonts
     fonts.fontconfig.enable = true;
 
+    # Autostart user systemd services
     systemd.user.startServices = true;
-    services.lorri.enable = true;
 
     # Cursor
     xsession.pointerCursor = {
