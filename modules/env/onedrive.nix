@@ -2,15 +2,13 @@
 
 {
   home-manager.users.imran.services.onedrive = {
-    enable = device.name == "spectre";
+    # TODO Add onedrive config for palkia
+    enable = device.name == "giratina";
     monitor = true;
     settings = {
       skip_file = "desktop.ini|Thumbs.db|*.url";
       skip_dir = "backup|Apps|Pictures";
-      sync_dir = {
-        spectre = "~/OneDrive";
-        tower = "TODO"; # TODO
-      }.${device.name};
+      sync_dir = { giratina = "~/OneDrive"; }.${device.name};
     };
   };
 

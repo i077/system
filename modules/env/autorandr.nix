@@ -5,7 +5,7 @@
 
   # Define display profiles per-device
   home-manager.users.imran.programs.autorandr.profiles = {
-    spectre = {
+    giratina = {
       "main" = {
         fingerprint = {
           eDP1 =
@@ -43,7 +43,7 @@
       };
     };
 
-    tower = {
+    palkia = {
       "main" = {
         fingerprint = {
           DP-4 =
