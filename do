@@ -215,7 +215,7 @@ function install
 end
 
 # Parse flags and make them global
-argparse "f/format" -- $argv
+argparse -s "f/format" -- $argv
 set -g _flag_format $_flag_format
 
 # Parse rest of arguments
