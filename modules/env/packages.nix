@@ -49,6 +49,7 @@
       jq
       lynx
       maim
+      manix
       niv
       openfortivpn
       pandoc
