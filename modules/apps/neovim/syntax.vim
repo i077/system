@@ -24,6 +24,8 @@ let g:vimtex_enabled = 1
 " vimtex neovim remote support
 let g:vimtex_compiler_progname = 'nvr'
 let g:tex_flavor = 'latex'
+" Enable folding
+let g:vimtex_fold_enabled = 1
 
 " Disable LaTeXBox in favor of vimtex
 let g:polyglot_disabled = ['tex', 'latex']
