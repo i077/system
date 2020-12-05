@@ -1,5 +1,4 @@
-#!/usr/bin/env nix-shell
-#!nix-shell -p fish gnupg git git-crypt nixfmt utillinux -i fish
+#!/usr/bin/env fish
 
 # ----- FORMATTING -----
 set red (tput setaf 1)
@@ -17,7 +16,7 @@ function log_minor
 end
 
 function log_error
-    echo $bold$red":: error: "$resf$argv[1]
+    echo $bold$red":: error: "$resf$red$argv[1]$resf
 end
 
 function log_ok
@@ -27,6 +26,11 @@ end
 # ----- SETUP -----
 set flakeRoot (dirname (status filename))
 set flakeAttr (hostname)
+
+if not set -q IN_NIX_SHELL
+    log_step "\$IN_NIX_SHELL not set. Rerunning in a nix shell..."
+    exec nix-shell $flakeRoot/shell.nix --run (status filename)" $argv"
+end
 
 # Format to 100 columns becauase this is the 21st century
 set nixfmt_width 100

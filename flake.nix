@@ -11,6 +11,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Common functions for flakes
+    flake-utils.url = "github:numtide/flake-utils";
+
     # Tmux configuration
     oh-my-tmux = {
       url = "github:gpakosz/.tmux";
@@ -42,7 +45,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, ... }:
+  outputs = inputs@{ self, nixpkgs, flake-utils, home-manager, ... }:
     let
       inherit (builtins) attrNames elem filter readDir;
       inherit (nixpkgs.lib) filterAttrs platforms;
@@ -91,5 +94,12 @@
             specialArgs = { inherit inputs device; };
           };
       in genAttrs nixosHostnames mkNixosSystem;
-    };
+    } // (flake-utils.lib.eachDefaultSystem (system:
+      let pkgs = nixpkgs.legacyPackages.${system};
+      in {
+        # Expose environment with dependencies for script
+        devShell = pkgs.mkShell {
+          buildInputs = with pkgs; [ fish git git-crypt gnupg nixFlakes nixfmt utillinux ];
+        };
+      }));
 }
