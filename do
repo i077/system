@@ -41,7 +41,7 @@ cd $flakeRoot
 function help
     echo -e $bold"Usage:"$resf" ./do [flags] [verb] [options]\n"
     echo $bold"Flags:"$resf
-    echo "    -f, --format        Format .nix files with nixfmt when running checks"
+    echo "    -f, --format        Format .nix files with nixfmt & re-commit them when running checks"
     echo
     echo $bold"Possible verbs:"$resf
     echo "        help            Print this help message"
@@ -70,18 +70,9 @@ end
 function check
     log_step "Running checks..."
 
-    # Check flake outputs
-    log_minor "Checking flake outputs..."
-    nix flake check
-    if test $status -gt 0
-        log_error "A flake output didn't evaluate properly. Check the nix output above."
-        exit 1
-    end
-
     # Check that nix files are formatted properly (or format if -f is passed)
     if test -z $_flag_format
         set format_logmsg "Checking formatting with nixfmt..."
-        set nixfmt_check "-c"
     else
         set format_logmsg "Formatting with nixfmt..."
     end
@@ -90,12 +81,21 @@ function check
         (find . -name '*.nix' \
             # Exclude files not handled well by nixfmt
             ! -path ./modules/apps/neovim/default.nix \
-            -exec nixfmt $nixfmt_check -w $nixfmt_width {} + &| \
+            -exec nixfmt -c -w $nixfmt_width {} + &| \
             grep "not formatted" | sed -e "s/\(.*\): not formatted/\1/")
-    if test -z $flag_format && test (count $unformatted_files) -gt 0
-        log_error "The files below aren't formatted properly. Run nixfmt on them or pass '--format'."
-        for f in $unformatted_files; echo " $f"; end
-        exit 1
+    # If there are any unformatted files...
+    if test (count $unformatted_files) -gt 0
+        # ...and -f is not set, just error out
+        if test -z $_flag_format
+            log_error "The files below aren't formatted properly. Run nixfmt on them or pass '--format'."
+            for f in $unformatted_files; echo " $f"; end
+            exit 1
+        # Otherwise, run nixfmt, then amend the last commit
+        else
+            nixfmt -w $nixfmt_width $unformatted_files
+            git add $unformatted_files
+            git commit --amend --no-edit
+        end
     end
 
     # Check that working tree is clean
