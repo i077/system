@@ -210,7 +210,7 @@ function install
 
     # Build and install config
     log_step "Building config and installing to to $prefix..."
-    sudo nixos-install --root $prefix --flake $flakeRoot#i077-$argv[1]
+    sudo nixos-install --root $prefix --flake $flakeRoot#$argv[1]
     log_ok "Done installing. You can reboot into the installed system."
 end
 
