@@ -120,8 +120,7 @@ end
 function test_
     check
     log_step "Building and activating configuration..."
-    sudo nixos-rebuild test
-    clean
+    sudo nixos-rebuild --fast test
 end
 
 function boot
