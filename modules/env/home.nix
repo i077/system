@@ -46,6 +46,7 @@
 
     # Let Home Manager install and manage itself
     programs.home-manager.enable = true;
+    home.stateVersion = "20.09";
 
     xdg.configFile."nixpkgs/config.nix".source = ../../nixpkgs-config.nix;
 
