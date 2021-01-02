@@ -48,6 +48,11 @@ in {
           white = fg1;
         };
       };
+
+      window = {
+        dimensions.columns = 120;
+        decorations = "none";
+      };
     };
   };
 }
