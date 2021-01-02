@@ -55,6 +55,7 @@
       };
       password-store.enable = true;
       rclone.enable = true;
+      starship.enable = true;
       tmux.enable = true;
     };
 
