@@ -48,21 +48,6 @@
         "type": "github"
       }
     },
-    "flake-utils": {
-      "locked": {
-        "lastModified": 1605370193,
-        "narHash": "sha256-YyMTf3URDL/otKdKgtoMChu4vfVL3vCMkRqpGifhUn0=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "5021eac20303a61fafe17224c087f5519baed54d",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -136,7 +121,6 @@
         "fish-bobthefish": "fish-bobthefish",
         "fish-gruvbox": "fish-gruvbox",
         "fish-z": "fish-z",
-        "flake-utils": "flake-utils",
         "home-manager": "home-manager",
         "i3-workspacer": "i3-workspacer",
         "nixpkgs": "nixpkgs",

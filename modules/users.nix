@@ -1,37 +1,32 @@
-{ config, device, pkgs, lib, ... }:
+# modules/users.nix -- Define user (and some base home-manager) configuration.
 
-{
-  # Require home configuration
-  require = [ ./env/home.nix ];
+{ config, inputs, lib, ... }:
 
-  users = {
-    mutableUsers = false;
+let inherit (lib.mine.files) mapFilesRecToList;
+in {
+  users.mutableUsers = false;
 
-    users.imran = {
-      isNormalUser = true;
-      extraGroups = [ "wheel" "video" "networkmanager" "adbusers" "wireshark" "audio" "pulse" ];
-      hashedPassword = config.private.hashedLogins.${device.name}.imran;
-      uid = 1000;
-      description = "Imran Hossain";
-      shell = pkgs.fish;
-    };
-
-    users.root.hashedPassword = config.private.hashedLogins.${device.name}.root;
+  user = {
+    isNormalUser = true;
+    uid = 1000;
+    extraGroups = [ "wheel" ];
+    name = "imran";
+    description = "Imran Hossain";
+    hashedPassword = config.private.hashedLogins.${config.networking.hostName}.imran;
   };
 
-  # Allow authentication through U2F
-  security.pam.u2f = {
-    enable = true;
-    cue = true;
-    control = "sufficient";
-    authFile = config.private.u2fAuthFile;
-  };
-  security.pam.services = builtins.listToAttrs (map (name: {
-    inherit name;
-    value = { u2fAuth = true; };
-  }) [ "login" "polkit-1" "su" "sudo" "systemd-user" "xlock" ]);
+  users.users.root.hashedPassword = config.private.hashedLogins.${config.networking.hostName}.root;
 
-  # Define home-manager environment
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
+  hm.programs.home-manager.enable = true;
+
+  # Import custom home-manager modules
+  hm.imports = mapFilesRecToList import ../hm-modules;
+
+  # Autostart user systemd services
+  hm.systemd.user.startServices = true;
+
+  # Grant sudoers rights with the nix daemon
+  nix.trustedUsers = [ "root" "@wheel" ];
 }

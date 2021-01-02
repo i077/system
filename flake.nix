@@ -11,9 +11,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Common functions for flakes
-    flake-utils.url = "github:numtide/flake-utils";
-
     # Tmux configuration
     oh-my-tmux = {
       url = "github:gpakosz/.tmux";
@@ -45,61 +42,58 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, flake-utils, home-manager, ... }:
+  outputs = inputs@{ self, nixpkgs, ... }:
     let
-      inherit (builtins) attrNames elem filter readDir;
-      inherit (nixpkgs.lib) filterAttrs platforms;
+      inherit (lib) mkDefault nixosSystem removeSuffix;
+      inherit (lib.mine.files) mapFiles mapFilesRec mapFilesRecToList;
 
-      # Get each host in ./hosts (a list of names)
-      hostnames = attrNames (filterAttrs (_: type: type == "directory") (readDir ./hosts));
+      # List of systems supported by this flake
+      supportedSystems = [ "x86_64-linux" ];
 
-      # Function to check if a host runs on a given platform
-      hostIsPlatform = name: platform: elem (import (./hosts + "/${name}")).system platform;
+      # Function to generate set based on supported systems,
+      # e.g. { x86_64-linux = f "x86_64-linux"; }
+      forAllSystems = f: nixpkgs.lib.genAttrs supportedSystems (system: f system);
 
-      # List of hosts running NixOS
-      nixosHostnames = filter (name: hostIsPlatform name platforms.linux) hostnames;
-    in {
-      # Map each NixOS host to a NixOS system
-      nixosConfigurations = let
-        inherit (nixpkgs.lib) genAttrs nixosSystem;
+      # Memoize nixpkgs for each supported system
+      nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
 
-        mkNixosSystem = hostname:
-          let device = import (./hosts + "/${hostname}");
-          in nixosSystem {
-            inherit (device) system;
+      # Extend nixpkgs.lib with my own helper functions
+      lib = nixpkgs.lib.extend (final: prev: { mine = import ./lib final; });
 
-            modules = [
-              nixpkgs.nixosModules.notDetected
-              {
-                # Set hostname
-                networking.hostName = hostname;
-
-                # System revision tracks git commit hash
-                system.configurationRevision = self.rev;
-
-                system.stateVersion = "19.03";
-              }
-              (import (./hosts + "/${hostname}" + /hardware-configuration.nix))
-
-              # Use home-manager
-              home-manager.nixosModules.home-manager
-
-              # Import custom packages module
-              (import ./packages)
-
-              (import ./modules)
-            ];
-
-            # Pass flake inputs and device parameters to modules
-            specialArgs = { inherit inputs device; };
-          };
-      in genAttrs nixosHostnames mkNixosSystem;
-    } // (flake-utils.lib.eachDefaultSystem (system:
-      let pkgs = nixpkgs.legacyPackages.${system};
-      in {
-        # Expose environment with dependencies for script
-        devShell = pkgs.mkShell {
-          buildInputs = with pkgs; [ fish git git-crypt gnupg nixFlakes nixfmt utillinux ];
+      # Generate a NixOS configuration given a path to a host's config
+      mkNixosHost = path:
+        nixosSystem {
+          system = import (path + "/system.nix");
+          specialArgs = { inherit inputs lib; };
+          modules = [
+            {
+              networking.hostName = mkDefault (removeSuffix ".nix" (baseNameOf path));
+              nixpkgs.overlays = [ self.overlay ];
+            }
+            (import path)
+          ] ++ mapFilesRecToList import ./modules;
         };
-      }));
+
+      # Generate a set of derivations for all packages defined in ./packages
+      mkMyPkgs = pkgs: mapFiles (p: pkgs.callPackage p { }) ./packages;
+    in {
+      lib = lib.mine;
+
+      nixosConfigurations = mapFiles mkNixosHost ./hosts;
+
+      nixosModules = mapFilesRec import ./modules;
+
+      homeManagerModules = mapFiles import ./hm-modules;
+
+      packages = forAllSystems (system: mkMyPkgs nixpkgsFor.${system});
+
+      overlay = final: prev: mkMyPkgs final;
+
+      # Shell with dependencies for do script
+      devShell = forAllSystems (system:
+        let pkgs = nixpkgsFor.${system};
+        in pkgs.mkShell {
+          buildInputs = with pkgs; [ fish git git-crypt gnupg nixFlakes nixfmt utillinux ];
+        });
+    };
 }

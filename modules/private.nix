@@ -1,8 +1,8 @@
 # A module that defines the structure of all the private info in this repo.
 { config, lib, pkgs, ... }:
 
-with lib;
 let
+  inherit (lib) mkOption types;
   mkPrivOption = description:
     mkOption {
       inherit description;
@@ -37,6 +37,12 @@ in {
         Hashed passwords for each device in this configuration.
         Each attribute is a set and corresponds to a specific device's passwords.
       '';
+      example = {
+        host1 = {
+          root = "(output of mkpasswd -m sha-512)";
+          user = "(output of mkpasswd -m sha-512)";
+        };
+      };
       type = with types; attrsOf (attrsOf str);
     };
 
@@ -66,6 +72,11 @@ in {
 
     u2fAuthFile = mkOption {
       description = "Path to file containing u2f keys";
+      type = types.path;
+    };
+
+    authorizedYubikeysFile = mkOption {
+      description = "Path to file containing yubikey tokens";
       type = types.path;
     };
   };

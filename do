@@ -80,7 +80,7 @@ function check
     set -l unformatted_files \
         (find . -name '*.nix' \
             # Exclude files not handled well by nixfmt
-            ! -path ./modules/apps/neovim/default.nix \
+            ! -path ./modules/editors/neovim/default.nix \
             -exec nixfmt -c -w $nixfmt_width {} + &| \
             grep "not formatted" | sed -e "s/\(.*\): not formatted/\1/")
     # If there are any unformatted files...
