@@ -31,6 +31,9 @@ in {
     cleanTmpDir = true;
 
     initrd.luks.devices."cryptroot" = { preLVM = true; };
+
+    # Allow cross-compilation of AArch64 configurations
+    binfmt.emulatedSystems = [ "aarch64-linux" ];
   };
 
   # Networking
