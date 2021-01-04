@@ -45,7 +45,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, ... }:
+  outputs = inputs@{ self, nixpkgs, home-manager, sops-nix, ... }:
     let
       inherit (lib) mkDefault nixosSystem removeSuffix;
       inherit (lib.mine.files) mapFiles mapFilesRec mapFilesRecToList;
@@ -96,7 +96,11 @@
       devShell = forAllSystems (system:
         let pkgs = nixpkgsFor.${system};
         in pkgs.mkShell {
-          buildInputs = with pkgs; [ fish git git-crypt gnupg nixFlakes nixfmt utillinux ];
+          # Export PGP keys for sops
+          sopsPGPKeyDirs = [ "./secrets/pubkeys/hosts" "./secrets/pubkeys/users" ];
+          nativeBuildInputs = [ sops-nix.packages.${system}.sops-pgp-hook ];
+
+          buildInputs = with pkgs; [ fish git git-crypt gnupg nixFlakes nixfmt sops utillinux ];
         });
     };
 }
