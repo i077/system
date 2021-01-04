@@ -18,6 +18,8 @@ in {
           port = 22;
         }];
       };
+
+      programs.ssh.startAgent = true;
     }
     (mkIf cfg.enable {
       services.openssh.listenAddresses = [ ];

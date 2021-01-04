@@ -52,10 +52,7 @@
         enable = true;
         sendemail = true;
       };
-      gnupg = {
-        enable = true;
-        sshAgent = true;
-      };
+      gnupg.enable = true;
       password-store.enable = true;
       rclone.enable = true;
       starship.enable = true;
