@@ -40,24 +40,23 @@ Dependencies of this configuration are specified in `flake.nix` in the `inputs` 
   These packages are exposed as flake outputs under `packages`, and an overlay is defined
   that adds these packages in under `overlay`.
 
-- `private.nix`, as the name implies, holds private info, and is encrypted
-  with [git-crypt](https://github.com/AGWA/git-crypt). You can view the
-  structure of this file in the [module](./modules/private.nix) where the respective options are
-  declared.
+- Secrets are managed and provisioned by [sops-nix](https://github.com/Mic92/sops-nix/),
+  which reads and decrypts `secrets/secrets.yaml`.
 
 ## Installing
 
 [Partition and format](https://nixos.org/nixos/manual/index.html#sec-installation-partitioning),
-then mount the target filesystem to `/mnt`, import the GPG key, and clone this repo:
+then mount the target filesystem to `/mnt`, import a supported SSH key, and clone this repo:
 
 ```sh
 mkdir -p /mnt/etc/nixos
-nix-shell -p gnupg --run "gpg --import /path/to/key"
 git clone https://github.com/i077/system /mnt/etc/nixos
 ```
 
 For a new device, create a new directory under `hosts/` and add
 `default.nix` (see the other hosts' configs for structure).
+Then, generate a new SSH host keypair, rotate sops secrets,
+and place in `/mnt/etc/ssh`.
 
 Finally, install the configuration,
 passing the name of the device:
