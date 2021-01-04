@@ -32,11 +32,6 @@ in {
       };
     };
 
-    rcloneConf = mkOption {
-      description = "Config attribute set for rclone";
-      type = types.attrs;
-    };
-
     everdo = mkOption {
       description = ''
         Everdo configuration.

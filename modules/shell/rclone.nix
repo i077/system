@@ -7,23 +7,20 @@ in {
   options.modules.shell.rclone.enable = mkEnableOption "rclone";
 
   config = mkIf cfg.enable {
+    # Base rclone.conf to copy from
+    sops.secrets.rclone-conf.owner = config.user.name;
+
     # Add rclone to home environment
     hm.home.packages = [ pkgs.rclone ];
-
-    hm.xdg.configFile."rclone/rclone.conf.hm".text = let
-      rcloneINI = with lib.generators;
-        toINI {
-          mkKeyValue = mkKeyValueDefault { mkValueString = v: mkValueStringDefault { } v; } "=";
-        };
-    in rcloneINI config.private.rcloneConf;
 
     # Copy and set appropriate permissions
     hm.home.activation."rcloneConf" = {
       before = [ ];
       after = [ "linkGeneration" ];
       data = ''
-        cp $XDG_CONFIG_HOME/rclone/rclone{.conf.hm,.conf}
-        chmod 700 $XDG_CONFIG_HOME/rclone/rclone.conf
+        cp ${config.sops.secrets.rclone-conf.path} $XDG_CONFIG_HOME/rclone/rclone.conf
+        chown ${config.user.name} $XDG_CONFIG_HOME/rclone/rclone.conf
+        chmod 600 $XDG_CONFIG_HOME/rclone/rclone.conf
       '';
     };
   };
