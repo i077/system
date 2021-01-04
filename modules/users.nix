@@ -9,7 +9,7 @@ in {
   user = {
     isNormalUser = true;
     uid = 1000;
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "wheel" config.users.groups.keys.name ];
     name = "imran";
     description = "Imran Hossain";
   };

@@ -3,13 +3,13 @@
 {
   require = [ ../profiles/personal.nix ./hardware-configuration.nix ];
 
-  users.users.root.initialHashedPassword = 
+  users.users.root.initialHashedPassword =
     "$6$U432DHy9wMaAyiiC$l.1J5mpNJpfIN9dL74jbQY07Wy9v1iBsUSTW8.A4HI2mA7TnHeqyIJmjwJzeaBQvJIXvX2csdfGukOLauab3U.";
 
-  modules = {
-    user.initialHashedPassword = 
-      "$6$94Ai90YZt$HPNB1HuOVlJ/owkyFtUINk3WGAxgKwMDTYNjL4c8zlqdO9mreQFfTWOMtOo4vL1ioaRbtSkX5gaQ41Ncl.gpo.";
+  user.initialHashedPassword =
+    "$6$94Ai90YZt$HPNB1HuOVlJ/owkyFtUINk3WGAxgKwMDTYNjL4c8zlqdO9mreQFfTWOMtOo4vL1ioaRbtSkX5gaQ41Ncl.gpo.";
 
+  modules = {
     desktop = {
       utils = {
         autorandr.profiles = {
