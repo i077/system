@@ -10,28 +10,6 @@ let
     };
 in {
   options.private = {
-    email = mkOption {
-      description = "Email configuration";
-      type = types.submodule {
-        options = {
-          address = mkPrivOption "Email address";
-          imapServ = mkPrivOption "IMAP server address";
-          imapPort = mkOption {
-            description = "IMAP server port number";
-            type = types.int;
-          };
-          smtpServ = mkPrivOption "SMTP server address";
-          smtpPort = mkOption {
-            description = "SMTP server port number";
-            type = types.int;
-          };
-          smtpEncryption = mkPrivOption "SMTP encryption method";
-          username = mkPrivOption "Email account username";
-          password = mkPrivOption "Email account password";
-        };
-      };
-    };
-
     everdo = mkOption {
       description = ''
         Everdo configuration.

@@ -48,7 +48,10 @@
       broot.enable = true;
       direnv.enable = true;
       fzf.enable = true;
-      git.enable = true;
+      git = {
+        enable = true;
+        sendemail = true;
+      };
       gnupg = {
         enable = true;
         sshAgent = true;

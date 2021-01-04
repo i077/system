@@ -13,7 +13,7 @@ in {
     };
 
     userEmail = mkOption {
-      default = config.private.email.address;
+      default = "hi" + "@" + "imranh.xyz";
       type = types.str;
     };
 
@@ -82,12 +82,9 @@ in {
     })
 
     (mkIf cfg.sendemail {
-      hm.programs.git.extraConfig.sendemail = with config.private.email; {
-        smtpserver = smtpServ;
-        smtpserverport = smtpPort;
-        smtpuser = username;
-        smtpencryption = smtpEncryption;
-      };
+      sops.secrets.git-sendemail.owner = config.user.name;
+
+      hm.programs.git.includes = [{ path = config.sops.secrets.git-sendemail.path; }];
     })
   ]);
 }
