@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 
 {
   require = [ ../profiles/personal.nix ./hardware-configuration.nix ];
@@ -72,7 +72,7 @@
       backup = { excludes = [ "Music/" ]; };
       onedrive = {
         enable = true;
-        sync_dir = "$HOME/OneDrive";
+        sync_dir = "/home/${config.user.name}/OneDrive";
       };
     };
   };

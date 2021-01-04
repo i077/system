@@ -1,7 +1,7 @@
 { config, options, lib, pkgs, ... }:
 let
   cfg = config.modules.services.backup;
-  inherit (lib) mkEnableOption mkOption mkIf types;
+  inherit (lib) concatStringsSep mkEnableOption mkOption mkIf types;
 in {
   options.modules.services.backup = {
     enable = mkEnableOption "Restic backup service";
@@ -17,7 +17,7 @@ in {
       description = "File patterns to exclude.";
       type = types.listOf types.str;
       example = [ ".cache" "foo/**/bar" ];
-      apply = pkgs.writeText "backup-excludes.txt";
+      apply = l: pkgs.writeText "backup-excludes.txt" (concatStringsSep "\n" l);
     };
 
     calendar = mkOption {
