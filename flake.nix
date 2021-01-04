@@ -11,6 +11,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Secrets management
+    sops-nix.url = "github:Mic92/sops-nix";
+
     # Tmux configuration
     oh-my-tmux = {
       url = "github:gpakosz/.tmux";

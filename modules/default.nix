@@ -4,7 +4,7 @@
 
 let inherit (lib.mine.files) mapFilesRecToList;
 in {
-  imports = [ inputs.home-manager.nixosModules.home-manager ];
+  imports = [ inputs.home-manager.nixosModules.home-manager inputs.sops-nix.nixosModules.sops ];
 
   # System revision tracks git commit hash
   system.configurationRevision = lib.mkIf (inputs.self ? rev) inputs.self.rev;
