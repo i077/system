@@ -37,11 +37,6 @@ in {
       type = types.attrs;
     };
 
-    resticPasswordFile = mkOption {
-      description = "Path to file containing password for restic backup repository";
-      type = types.path;
-    };
-
     everdo = mkOption {
       description = ''
         Everdo configuration.

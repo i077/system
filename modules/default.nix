@@ -36,6 +36,9 @@ in {
     binfmt.emulatedSystems = [ "aarch64-linux" ];
   };
 
+  # Default secrets file
+  sops.defaultSopsFile = ../secrets/secrets.yaml;
+
   # Networking
   networking.networkmanager.enable = true;
   user.extraGroups = [ "networkmanager" ];

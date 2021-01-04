@@ -28,9 +28,13 @@ in {
   };
 
   config = mkIf cfg.enable {
-    # TODO switch to onsite backups
-    services.restic.backups.onedrive = {
-      repository = "rclone:onedrive:backup";
+    # Declare secrets
+    sops.secrets.restic-pass = { };
+
+    services.restic.backups.minidepot = {
+      repository = "rest:https://minidepot.imranh.xyz:6053/";
+      passwordFile = config.sops.secrets.restic-pass.path;
+
       inherit (cfg) paths;
       extraBackupArgs = [
         "--exclude-caches"
@@ -40,16 +44,13 @@ in {
         ++ (lib.optional config.modules.services.onedrive.enable
           "-e ${config.modules.services.onedrive.sync_dir}");
 
-      rcloneConfig = {
-        inherit (config.private.rcloneConf.onedrive) type token drive_id drive_type;
-      };
-
-      passwordFile = config.private.resticPasswordFile;
-
       timerConfig = { OnCalendar = cfg.calendar; };
     };
 
     # Only run when online
-    systemd.services.restic-backups-onedrive = { after = [ "NetworkManager-wait-online.target" ]; };
+    systemd.services.restic-backups-minidepot = {
+      serviceConfig.SupplementaryGroups = config.users.groups.keys.name;
+      after = [ "NetworkManager-wait-online.target" ];
+    };
   };
 }
