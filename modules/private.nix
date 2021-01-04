@@ -32,20 +32,6 @@ in {
       };
     };
 
-    hashedLogins = mkOption {
-      description = ''
-        Hashed passwords for each device in this configuration.
-        Each attribute is a set and corresponds to a specific device's passwords.
-      '';
-      example = {
-        host1 = {
-          root = "(output of mkpasswd -m sha-512)";
-          user = "(output of mkpasswd -m sha-512)";
-        };
-      };
-      type = with types; attrsOf (attrsOf str);
-    };
-
     rcloneConf = mkOption {
       description = "Config attribute set for rclone";
       type = types.attrs;

@@ -12,10 +12,7 @@ in {
     extraGroups = [ "wheel" ];
     name = "imran";
     description = "Imran Hossain";
-    hashedPassword = config.private.hashedLogins.${config.networking.hostName}.imran;
   };
-
-  users.users.root.hashedPassword = config.private.hashedLogins.${config.networking.hostName}.root;
 
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
