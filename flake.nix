@@ -88,7 +88,12 @@
 
       homeManagerModules = mapFiles import ./hm-modules;
 
-      packages = forAllSystems (system: mkMyPkgs nixpkgsFor.${system});
+      packages = forAllSystems (system:
+        # Evaluate packages with an unfree-enabled nixpkgs
+        mkMyPkgs (import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        }));
 
       overlay = final: prev: mkMyPkgs final;
 
