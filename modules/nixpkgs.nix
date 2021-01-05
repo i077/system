@@ -30,6 +30,10 @@
       };
       flake = inputs.nixpkgs;
     };
+
+    # Add personal cachix cache
+    binaryCaches = [ "https://i077.cachix.org" ];
+    binaryCachePublicKeys = [ "i077.cachix.org-1:v28tOFUfUjtVXdPol5FfEO/6wC/VKWnHkD32/aMJJBk=" ];
   };
 
   # Allow unfree evaluation
