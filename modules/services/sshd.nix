@@ -20,6 +20,8 @@ in {
       };
 
       programs.ssh.startAgent = true;
+
+      programs.mosh.enable = true;
     }
     (mkIf cfg.enable {
       services.openssh.listenAddresses = [ ];
