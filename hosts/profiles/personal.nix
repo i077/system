@@ -36,7 +36,12 @@
       backup = {
         enable = true;
         paths = [ "/home/${config.user.name}" "/etc" ];
-        excludes = [ "${config.environment.variables.XDG_CACHE_HOME}" ];
+        excludes = [
+          "${config.environment.variables.XDG_CACHE_HOME}"
+          # Exclude Keybase caches -- too much useless data
+          "${config.environment.variables.XDG_DATA_HOME}/keybase/*.leveldb"
+          "${config.environment.variables.XDG_DATA_HOME}/keybase/*cache"
+        ];
       };
       printing.enable = true;
     };
