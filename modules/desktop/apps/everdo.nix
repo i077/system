@@ -18,9 +18,9 @@ in {
       before = [ ];
       after = [ "linkGeneration" ];
       data = with config.sops.secrets; ''
-        cp ${everdo-key.path} $XDG_CONFIG_HOME/everdo/everdo.key
-        cp ${everdo-encryptionkey.path} $XDG_CONFIG_HOME/everdo/encryption-key
-        cp ${everdo-jwt.path} $XDG_CONFIG_HOME/everdo/jwt
+        ln -sf ${everdo-key.path} $XDG_CONFIG_HOME/everdo/everdo.key
+        ln -sf ${everdo-encryptionkey.path} $XDG_CONFIG_HOME/everdo/encryption-key
+        ln -sf ${everdo-jwt.path} $XDG_CONFIG_HOME/everdo/jwt
       '';
     };
   };

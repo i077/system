@@ -33,7 +33,7 @@ in {
         before = [ ];
         after = [ "linkGeneration" ];
         data = ''
-          cp ${config.sops.secrets.authorized_yubikeys.path} $HOME/.yubico/authorized_yubikeys
+          ln -sf ${config.sops.secrets.authorized_yubikeys.path} $HOME/.yubico/authorized_yubikeys
           chmod 444 $HOME/.yubico/authorized_yubikeys
         '';
       };
