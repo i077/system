@@ -23,12 +23,14 @@ jobs:
         git config --local user.email "flakebot@users.noreply.github.com"
         git config --local user.name "flakebot"
         git checkout -b flakebot || git checkout flakebot
+        git rebase master
         nix flake update --recreate-lock-file --commit-lock-file
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         branch: flakebot
+        force: true
     - name: pull-request-action
       uses: vsoch/pull-request-action@1.0.12
       env:
@@ -38,4 +40,4 @@ jobs:
         MAINTAINER_CANT_MODIFY: true
         PASS_IF_EXISTS: true
         PASS_ON_ERROR: true
-        PULL_REQUEST_TITLE: "Update Flake Inputs"
+        PULL_REQUEST_TITLE: "Update flake inputs"
