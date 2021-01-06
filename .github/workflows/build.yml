@@ -1,7 +1,7 @@
 name: "Build and cache NixOS configurations"
 on:
   push:
-    branches: [master]
+    branches: [master, flakebot]
   pull_request:
 jobs:
   build:
