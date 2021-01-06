@@ -1,8 +1,11 @@
 name: "Build and cache NixOS configurations"
 on:
   push:
-    branches: [master, flakebot]
+    branches: 
+      - master
   pull_request:
+    branches:
+      - master
 jobs:
   build:
     runs-on: ubuntu-latest
