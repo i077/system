@@ -27,6 +27,6 @@ jobs:
           name: i077
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
       - name: Build giratina
-        run: nix build .#nixosConfigurations.giratina.config.system.build.toplevel
+        run: nix build -v .#nixosConfigurations.giratina.config.system.build.toplevel
       - name: Build dialga
-        run: nix build .#nixosConfigurations.dialga.config.system.build.toplevel
+        run: nix build -v .#nixosConfigurations.dialga.config.system.build.toplevel
