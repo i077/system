@@ -27,7 +27,7 @@ jobs:
         git config --local user.email "flakebot@users.noreply.github.com"
         git config --local user.name "flakebot"
         git rev-parse --verify --quiet flakebot && git branch -D flakebot
-        git checkout flakebot
+        git checkout -b flakebot
         nix flake update --recreate-lock-file --commit-lock-file
     - name: Push changes
       uses: ad-m/github-push-action@master
