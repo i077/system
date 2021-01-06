@@ -1,4 +1,4 @@
-name: Auto Update Flake Inputs
+name: Update flake inputs
 
 on:
   # Allows you to run this workflow manually from the Actions tab
@@ -9,6 +9,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - name: Cancel previous runs
+      uses: styfle/cancel-workflow-action@0.6.0
+      with:
+        access_token: ${{ github.token }}
     - uses: actions/checkout@v2
       with:
         persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
@@ -22,19 +26,19 @@ jobs:
       run: |
         git config --local user.email "flakebot@users.noreply.github.com"
         git config --local user.name "flakebot"
-        git checkout -b flakebot || git checkout flakebot
-        git rebase master
+        git rev-parse --verify --quiet flakebot && git branch -D flakebot
+        git checkout flakebot
         nix flake update --recreate-lock-file --commit-lock-file
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.FLAKEBOT_PR_TOKEN }}
         branch: flakebot
         force: true
     - name: pull-request-action
       uses: vsoch/pull-request-action@1.0.12
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.FLAKEBOT_PR_TOKEN }}
         PULL_REQUEST_FROM_BRANCH: "flakebot"
         PULL_REQUEST_BRANCH: "master"
         MAINTAINER_CANT_MODIFY: true
