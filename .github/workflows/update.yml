@@ -28,8 +28,7 @@ jobs:
       run: |
         git config --local user.email "flakebot@users.noreply.github.com"
         git config --local user.name "flakebot"
-        git checkout -b flakebot || git checkout flakebot
-        git reset --hard master
+        git checkout -B flakebot
     - name: Update & commit lockfile
       run: nix flake update --recreate-lock-file --commit-lock-file
     - name: Push changes
