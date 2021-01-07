@@ -1,5 +1,7 @@
 # NixOS Configuration
 
+![Build and cache NixOS configurations](https://github.com/i077/system/workflows/Build%20and%20cache%20NixOS%20configurations/badge.svg)
+
 This repository stores my configuration files for all my machines running
 [NixOS](https://nixos.org/).
 
@@ -94,6 +96,21 @@ Here's a table of all the verbs I implemented:
 | `git ...`       | Run a git command in the repo                              |
 
 You can also check the help function in the script itself.
+
+## Continuous Integration
+
+Workflows are setup via GitHub Actions to:
+
+- Evaluate the NixOS configurations present in this flake and push them to a binary cache,
+  so that when I evaluate on my machines, they pull from that cache rather than doing the builds
+  themselves. This runs against new commits pushed to the `master` branch and new pull requests.
+  This workflow is specified in [`.github/workflows/build.yml`](./.github/workflows/build.yml).
+- Update flake inputs every day (and upon manual trigger).
+  If any of the inputs have updated, push the update commit to a new branch and open a pull request
+  (if one does not already exist).
+  GitHub will run the first workflow against this new PR, caching the evaluations so that they are
+  ready when the commit is merged.
+  This workflow is specified in [`.github/workflows/update.yml`](./.github/workflows/update.yml).
 
 ## Helpful references for Nix flakes
 
