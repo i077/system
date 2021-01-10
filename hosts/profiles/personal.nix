@@ -9,6 +9,7 @@
     desktop = {
       gnome3.enable = true;
       apps = {
+        everdo.enable = true;
         firefox.enable = true;
         keybase.enable = true;
         vscode.enable = true;
