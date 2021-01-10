@@ -2,13 +2,13 @@
 
 let
   pname = "everdo";
-  version = "1.3.9";
+  version = "1.5.3";
 
   name = "${pname}-${version}";
 
   src = fetchurl {
-    url = "https://d11l8siwmn8w36.cloudfront.net/${version}/Everdo-${version}.AppImage";
-    sha256 = "09djcxpy99zdmzn83ni5kvzdm2rw9lwwmb9cvcw401hv5s29yan0";
+    url = "https://d11l8siwmn8w36.cloudfront.net/1.5.3/Everdo-1.5.3.AppImage";
+    sha256 = "03rlr7krys7hmdn19wvda21if4l8n4vn95hx7n1vcffp9s33zkna";
   };
 
   appimageContents = appimageTools.extract { inherit name src; };
