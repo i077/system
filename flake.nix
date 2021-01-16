@@ -102,7 +102,8 @@
         let pkgs = nixpkgsFor.${system};
         in pkgs.mkShell {
           # Export PGP keys for sops
-          sopsPGPKeyDirs = [ "./secrets/pubkeys/hosts" "./secrets/pubkeys/users" ];
+          sopsPGPKeyDirs =
+            [ "/etc/nixos/secrets/pubkeys/hosts" "/etc/nixos/secrets/pubkeys/users" ];
           nativeBuildInputs = [ sops-nix.packages.${system}.sops-pgp-hook ];
 
           buildInputs = with pkgs; [ fish git git-crypt gnupg nixFlakes nixfmt sops utillinux ];
