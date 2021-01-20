@@ -32,7 +32,6 @@ in {
       environment.shellInit = ''
         export GPG_TTY="$(tty)"
         gpg-connect-agent /bye
-        export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
       '';
 
       hm.programs.gpg.enable = true;
@@ -46,6 +45,10 @@ in {
     (mkIf cfg.sshAgent {
       programs.gnupg.agent.enableSSHSupport = true;
       programs.ssh.startAgent = false;
+
+      environment.shellInit = ''
+        export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
+      '';
 
       hm.services.gpg-agent = {
         enableSshSupport = true;
