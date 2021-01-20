@@ -2,7 +2,8 @@
 
 { config, pkgs, ... }:
 
-{
+let inherit (config.home-manager.users.${config.user.name}) xdg;
+in {
   modules = {
     security.yubikey.enable = true;
 
@@ -38,10 +39,10 @@
         enable = true;
         paths = [ "/home/${config.user.name}" "/etc" ];
         excludes = [
-          "${config.environment.variables.XDG_CACHE_HOME}"
+          "${xdg.cacheHome}"
           # Exclude Keybase caches -- too much useless data
-          "${config.environment.variables.XDG_DATA_HOME}/keybase/*.leveldb"
-          "${config.environment.variables.XDG_DATA_HOME}/keybase/*cache"
+          "${xdg.dataHome}/keybase/*.leveldb"
+          "${xdg.dataHome}/keybase/*cache"
         ];
         calendar = "*-*-* 00/3:00:00";
       };
