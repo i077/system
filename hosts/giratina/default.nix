@@ -69,10 +69,7 @@
     };
 
     services = {
-      backup = {
-        excludes = [ "Music/" ];
-        calendar = "22:00";
-      };
+      backup = { excludes = [ "Music/" ]; };
       onedrive = {
         enable = true;
         sync_dir = "/home/${config.user.name}/OneDrive";

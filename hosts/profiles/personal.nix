@@ -43,6 +43,7 @@
           "${config.environment.variables.XDG_DATA_HOME}/keybase/*.leveldb"
           "${config.environment.variables.XDG_DATA_HOME}/keybase/*cache"
         ];
+        calendar = "*-*-* 00/3:00:00";
       };
       printing.enable = true;
     };
