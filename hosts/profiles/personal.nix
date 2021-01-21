@@ -17,8 +17,8 @@ in {
         zathura.enable = true;
       };
       term = {
-        alacritty.enable = true;
-        default = "alacritty";
+        kitty.enable = true;
+        default = "kitty";
       };
     };
 
