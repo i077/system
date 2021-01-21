@@ -99,14 +99,18 @@
 
       # Shell with dependencies for do script
       devShell = forAllSystems (system:
-        let pkgs = nixpkgsFor.${system};
+        let
+          pkgs = nixpkgsFor.${system};
+          nixBin = pkgs.writeShellScriptBin "nix" ''
+            ${pkgs.nixFlakes}/bin/nix --option experimental-features "nix-command flakes" "$@"
+          '';
         in pkgs.mkShell {
           # Export PGP keys for sops
           sopsPGPKeyDirs =
             [ "/etc/nixos/secrets/pubkeys/hosts" "/etc/nixos/secrets/pubkeys/users" ];
           nativeBuildInputs = [ sops-nix.packages.${system}.sops-pgp-hook ];
 
-          buildInputs = with pkgs; [ fish git git-crypt gnupg nixFlakes nixfmt sops utillinux ];
+          buildInputs = with pkgs; [ fish git git-crypt gnupg nixBin nixfmt sops utillinux ];
         });
     };
 }
