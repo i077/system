@@ -54,6 +54,7 @@ function help
     echo "        dry             Show what would be built under the current configuration"
     echo "        update          Update flake inputs"
     echo "    sh, shell           Spawn a devShell (use -c to specify a command)"
+    echo "        repl            Start nix repl with flake"
     echo "        git             Execute a git command in this repository"
     echo "        gc              Delete unreachable store paths"
     echo "        GC [D]          Delete generations older than D days (60 by default)"
@@ -160,6 +161,10 @@ function shell
     nix develop $flakeRoot $argv
 end
 
+function repl
+    nix repl https://github.com/edolstra/flake-compat/archive/master.tar.gz --arg src $flakeRoot
+end
+
 function git
     command git -C $flakeRoot $argv
 end
@@ -224,7 +229,7 @@ set -g _flag_format $_flag_format
 
 # Parse rest of arguments
 switch $argv[1]
-    case help clean check boot build dry update upgrade gc
+    case help clean check boot build dry update upgrade gc repl
         $argv[1]
     # Case for reserved keywords
     case "switch" "test"

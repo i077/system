@@ -87,6 +87,7 @@ Here's a table of all the verbs I implemented:
 | `build`         | Just build the configuration to `./result`                 |
 | `update`        | Update flake inputs and commit `flake.lock`                |
 | `shell`, `sh`   | Spawn this flake's `devShell`                              |
+| `repl`          | Start nix repl with this flake's attributes                |
 | `gc`            | Garbage-collect unreachable nix-store paths                |
 | `GC [D]`        | Remove generations older than `D` days and garbage-collect |
 | `upgrade`, `up` | Update and switch                                          |
