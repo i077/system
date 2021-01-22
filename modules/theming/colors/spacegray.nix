@@ -72,39 +72,27 @@ in mkIf (cfg.colorscheme == "spacegray") {
   # kitty
   hm.programs.kitty = {
     extraConfig = ''
-      background #2b303b
-      foreground #c0c5ce
-      selection_background #c0c5ce
-      selection_foreground #2b303b
-      url_color #a7adba
-      cursor #c0c5ce
-      active_border_color #65737e
-      inactive_border_color #343d46
-      active_tab_background #2b303b
-      active_tab_foreground #c0c5ce
-      inactive_tab_background #343d46
-      inactive_tab_foreground #a7adba
-      tab_bar_background #343d46
-
-      # normal
-      color0 #2b303b
-      color1 #bf616a
-      color2 #a3be8c
-      color3 #ebcb8b
-      color4 #8fa1b3
-      color5 #b48ead
-      color6 #96b5b4
-      color7 #c0c5ce
-
-      # bright
-      color8 #65737e
-      color9 #d08770
-      color10 #343d46
-      color11 #4f5b66
-      color12 #a7adba
-      color13 #dfe1e8
-      color14 #ab7967
-      color15 #eff1f5
+      background            #111314
+      foreground            #b7bbb7
+      cursor                #b7bbb7
+      selection_background  #15171e
+      selection_foreground  #111314
+      color0                #2c2f33
+      color8                #4b5056
+      color1                #b04c50
+      color9                #b04c50
+      color2                #919652
+      color10               #94985b
+      color3                #e2995c
+      color11               #e2995c
+      color4                #66899d
+      color12               #66899d
+      color5                #8d6494
+      color13               #8d6494
+      color6                #527c77
+      color14               #527c77
+      color7                #606360
+      color15               #dde3dc
     '';
   };
 }
