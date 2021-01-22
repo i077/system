@@ -82,9 +82,9 @@ in {
           pkg = pkgs.source-serif-pro;
         };
         mono = {
-          family = "Iosevka";
+          family = "Victor Mono";
           size = 8;
-          pkg = pkgs.iosevka-bin;
+          pkg = pkgs.victor-mono;
         };
         ui = sans;
       };
