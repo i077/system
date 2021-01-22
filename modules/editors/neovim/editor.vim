@@ -35,15 +35,3 @@ set inccommand=nosplit
 
 " Do case insentitive search unless capital letter present
 set smartcase
-
-" Compatibility with COC
-" set shell=/bin/sh
-
-" Easymotion
-let g:EasyMotion_startofline = 0 " keep cursor column on easymotion-{j,k}
-
-" Pencil
-let g:pencil#textwidth = 100
-let g:pencil#wrapModeDefault = 'hard'
-" Suspend formatting when prefixing command with K
-let g:pencil#map#suspend_af = 'K'

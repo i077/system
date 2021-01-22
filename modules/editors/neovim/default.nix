@@ -1,10 +1,16 @@
 { config, pkgs, lib, ... }:
 
 let
-  cfg = config.modules.editors.neovim;
+  inherit (builtins) readFile;
   inherit (lib) mkEnableOption mkIf mkMerge;
 
-  readVimSection = file: builtins.readFile (./. + "/${file}.vim");
+  cfg = config.modules.editors.neovim;
+
+  readVimSection = file: readFile (./. + "/${file}.vim");
+  pluginWithCfg = name: {
+    plugin = pkgs.vimPlugins.${name};
+    config = readVimSection "plugins/${name}";
+  };
 in {
   options.modules.editors.neovim = {
     enable = mkEnableOption "Neovim editor";
@@ -24,52 +30,51 @@ in {
         # TODO separate plugin config
         plugins = with pkgs.vimPlugins; [
           # Editor
-          sensible                      # Sensible defaults
-          repeat                        # Repeatable plugin actions
-          surround                      # Surround text
-          commentary                    # Comment code with 'gcc'
-          easy-align                    # Alignment plugin
-          easymotion                    # Enhanced motions
-          vim-indent-object             # Use indents as motions
+          sensible                          # Sensible defaults
+          repeat                            # Repeatable plugin actions
+          surround                          # Surround text
+          commentary                        # Comment code with 'gcc'
+          easy-align                        # Alignment plugin
+          (pluginWithCfg "easymotion")      # Enhanced motions
+          vim-indent-object                 # Use indents as motions
 
           # Extensions
-          direnv-vim                    # Direnv integration
-          fugitive                      # Git wrapper
-          vim-dispatch                  # Asynchronous job runner
-          fzf-vim                       # Fuzzy entry selection
-          denite-nvim                   # Async unite interface
-          nvim-yarp                     # Remote plugin framework
+          direnv-vim                        # Direnv integration
+          (pluginWithCfg "fugitive")        # Git wrapper
+          (pluginWithCfg "vim-dispatch")    # Asynchronous job runner
+          (pluginWithCfg "fzf-vim")         # Fuzzy entry selection
+          (pluginWithCfg "denite-nvim")     # Async unite interface
+          nvim-yarp                         # Remote plugin framework
 
           # UI + Colorschemes
-          airline                       # Smarter tabline
-          vim-airline-themes            # Airline themes (automatches colorscheme)
-          base16-vim                    # Base16
-          falcon                        # Falcon
-          vim-monokai-pro               # Monokai Pro
-          awesome-vim-colorschemes      # Collection of colorschemes
-          solarized                     # Solarized
+          (pluginWithCfg "airline")         # Smarter tabline
+          vim-airline-themes                # Airline themes (automatches colorscheme)
+          base16-vim                        # Base16
+          falcon                            # Falcon
+          vim-monokai-pro                   # Monokai Pro
+          awesome-vim-colorschemes          # Collection of colorschemes
+          solarized                         # Solarized
 
           # Languages
-          ale                           # Async linting framework
-          coc-nvim                      # Conquerer of Completion (VSCode-based completion)
-          coc-git                       # Git gutter
-          polyglot                      # Multiple language support
-          vim-addon-nix                 # Nix language support
-          vim-pandoc                    # Pandoc support
-          vim-pandoc-syntax             # Pandoc syntax support
-          vim-slime                     # Scheme support
+          (pluginWithCfg "ale")             # Async linting framework
+          (pluginWithCfg "coc-nvim")        # Conquerer of Completion (VSCode-based completion)
+          coc-git                           # Git gutter
+          polyglot                          # Multiple language support
+          vim-addon-nix                     # Nix language support
+          vim-pandoc                        # Pandoc support
+          vim-pandoc-syntax                 # Pandoc syntax support
+          (pluginWithCfg "vim-slime")       # Scheme support
 
           # Prose
-          goyo                          # Distraction-free editing
-          limelight-vim                 # Focus mode for vim
-          vim-pencil                    # Writing tool for vim
+          goyo                              # Distraction-free editing
+          limelight-vim                     # Focus mode for vim
+          (pluginWithCfg "vim-pencil")      # Writing tool for vim
         ];
 
         extraConfig = ''
           ${readVimSection "editor"}
           ${readVimSection "ui"}
           ${readVimSection "mappings"}
-          ${readVimSection "syntax"}
           ${readVimSection "functions"}
         '';
       };
@@ -89,10 +94,7 @@ in {
     # LaTeX-specific stuff
     (mkIf config.modules.devel.latex.enable {
       hm.programs.neovim.plugins = with pkgs.vimPlugins; [
-        {
-          plugin = pkgs.vimPlugins.vimtex;
-          config = readVimSection "vimtex";
-        }
+        (pluginWithCfg "vimtex")
         coc-vimtex
       ];
     })

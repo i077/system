@@ -9,41 +9,6 @@ let g:oceanic_next_terminal_italic=1
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_italic=1
 let g:gruvbox_italicize_comments=1
-colorscheme gruvbox
 
 " Remove background from conceal chars
 hi Conceal guibg=None
-
-"" Airline config
-let g:airline_powerline_fonts = 1
-
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-
-" unicode symbols
-let g:airline_symbols.crypt = '🔒'
-let g:airline_symbols.maxlinenr = ''
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.spell = 'Ꞩ'
-let g:airline_symbols.notexists = '∄'
-let g:airline_symbols.whitespace = 'Ξ'
-
-" powerline symbols
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
-
-" Smarter tabline
-let g:airline#extensions#tabline#enabled = 1
-
-"" FZF
-" Set layout to a floating window
-let g:fzf_layout = {
-            \ 'window': { 'width': 0.9, 'height': 0.7 }
-            \ }
