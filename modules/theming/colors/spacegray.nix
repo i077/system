@@ -44,9 +44,11 @@ in mkIf (cfg.colorscheme == "spacegray") {
 
   # neovim
   hm.programs.neovim = {
-    # colorscheme is provided in base16
+    plugins = [ pkgs.vimPlugins.Spacegray-vim ];
     extraConfig = ''
-      color base16-ocean
+      let g:spacegray_use_italics = 1
+      color spacegray
+      let g:airline_theme = "base16"
     '';
   };
 
