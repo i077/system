@@ -42,8 +42,9 @@ function help
     echo -e $bold"Usage:"$resf" ./do [flags] [verb] [options]\n"
     echo $bold"Flags:"$resf
     echo "    -f, --format        Format .nix files with nixfmt & re-commit them when running checks"
+    echo "    -C, --no-check      Don't run checks when building configuration"
     echo
-    echo $bold"Possible verbs:"$resf
+    echo $bold"Verbs:"$resf
     echo "        help            Print this help message"
     echo "        clean           Clean up nix build outputs"
     echo "        check           Run checks on this repository"
@@ -58,7 +59,7 @@ function help
     echo "        git             Execute a git command in this repository"
     echo "        gc              Delete unreachable store paths"
     echo "        GC [D]          Delete generations older than D days (60 by default)"
-    echo "        install N       Install configuration to /mnt with hostname i077-N"
+    echo "        install N       Install N's configuration to /mnt"
     echo "    up, upgrade         Run update and switch"
     echo "        ub              Run update and boot"
     echo "        ut              Run update and test"
@@ -114,31 +115,31 @@ function check
 end
 
 function switch_
-    check
+    test -z $_flag_no_check && check
     log_step "Building, activating, and adding boot entry for configuration..."
     sudo nixos-rebuild switch
 end
 
 function test_
-    check
+    test -z $_flag_no_check && check
     log_step "Building and activating configuration..."
     sudo nixos-rebuild --fast test
 end
 
 function boot
-    check
+    test -z $_flag_no_check && check
     log_step "Building and adding boot entry for configuration..."
     sudo nixos-rebuild boot
 end
 
 function build
-    check
+    test -z $_flag_no_check && check
     log_step "Building configuration..."
     nixos-rebuild build --flake "$flakeRoot#$flakeAttr"
 end
 
 function dry
-    check
+    test -z $_flag_no_check && check
     nixos-rebuild dry-build
 end
 
@@ -196,7 +197,7 @@ function install
         exit 121
     end
 
-    check
+    test -z $_flag_no_check && check
 
     set prefix /mnt
     # Check for device config
@@ -207,9 +208,6 @@ function install
     else if not test -f $flakeRoot/hosts/$argv[1]/default.nix
         log_error "No device configuration found for $argv[1]."
     end
-
-    log_minor "Unlocking private module..."
-    git-crypt unlock
 
     log_minor "Generating hardware configuration..."
     nixos-generate-config --show-hardware-config > $flakeRoot/hosts/$argv[1]/hardware-configuration.nix
@@ -224,8 +222,9 @@ function install
 end
 
 # Parse flags and make them global
-argparse -s "f/format" -- $argv
+argparse -s "f/format" "C/no-check" -- $argv
 set -g _flag_format $_flag_format
+set -g _flag_no_check $_flag_no_check
 
 # Parse rest of arguments
 switch $argv[1]
