@@ -45,6 +45,19 @@ in {
           description = "Show the full path of a command, resolving links along the way";
           body = "readlink -m (which $argv[1])";
         };
+
+        # Greeting taken from bobthefish
+        fish_greeting = {
+          body = ''
+            set_color $fish_color_autosuggestion
+            uname -nmsr
+
+            command -s uptime >/dev/null
+            and command uptime
+
+            set_color normal
+          '';
+        };
       };
 
       plugins = [{
