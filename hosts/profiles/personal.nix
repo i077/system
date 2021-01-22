@@ -84,7 +84,7 @@ in {
         mono = {
           family = "Iosevka";
           size = 8;
-          pkg = pkgs.iosevka;
+          pkg = pkgs.iosevka-bin;
         };
         ui = sans;
       };
