@@ -11,5 +11,12 @@ in {
       enable = true;
       config = { pager = "less -FR"; };
     };
+
+    # Rebuild cache upon activation (for custom themes)
+    hm.home.activation."batCacheBuild" = {
+      before = [ ];
+      after = [ "linkGeneration" ];
+      data = "${pkgs.bat}/bin/bat cache --build";
+    };
   };
 }
