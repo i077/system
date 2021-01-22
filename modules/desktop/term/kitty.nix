@@ -17,15 +17,13 @@ in {
 
       settings = {
         bold_font = "auto";
-        italic = "auto";
+        italic_font = "auto";
         bold_italic_font = "auto";
         font_size = 12;
         term = "xterm-256color";
         cursor_blink_interval = 0;
         hide_window_decorations = true;
       };
-
-      # TODO colors
     };
   };
 }
