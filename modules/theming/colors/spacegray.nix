@@ -77,7 +77,7 @@ in mkIf (cfg.colorscheme == "spacegray") {
       background            #111314
       foreground            #b7bbb7
       cursor                #b7bbb7
-      selection_background  #15171e
+      selection_background  #606360
       selection_foreground  #111314
       color0                #2c2f33
       color8                #4b5056
