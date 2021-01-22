@@ -68,7 +68,7 @@ in {
     };
 
     theming = {
-      colorscheme = "gruvbox";
+      colorscheme = "spacegray";
 
       fonts = rec {
         sans = {
