@@ -68,10 +68,7 @@ in {
     };
 
     theming = {
-      colorscheme = "gruvbox-dark";
-      vimColorscheme = "gruvbox";
-      batTheme = "gruvbox";
-      gitDeltaTheme = "gruvbox";
+      colorscheme = "gruvbox";
 
       fonts = rec {
         sans = {

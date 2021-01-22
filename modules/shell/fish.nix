@@ -3,8 +3,6 @@
 let
   cfg = config.modules.shell.fish;
   inherit (lib) mkEnableOption mkOption mkIf types;
-
-  colors = with lib; mapAttrs (_: value: (removePrefix "#" value)) config.modules.theming.colors;
 in {
   options.modules.shell.fish = { enable = mkEnableOption "Fish shell"; };
 
@@ -49,21 +47,12 @@ in {
         };
       };
 
-      plugins = [
-        {
-          name = "z";
-          src = inputs.fish-z;
-        }
-        {
-          name = "gruvbox";
-          src = inputs.fish-gruvbox;
-        }
-      ];
+      plugins = [{
+        name = "z";
+        src = inputs.fish-z;
+      }];
 
       promptInit = ''
-        # Set fish colorscheme
-        theme_gruvbox dark hard
-
         # Show vi-mode in cursor
         set -g fish_cursor_default block
         set -g fish_cursor_insert line

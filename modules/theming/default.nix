@@ -47,7 +47,6 @@ in {
     # This option is controlled by cfg.colorscheme
     colors = mkOption {
       description = "16-color palette for theming various apps. Based on the base16 scheme.";
-      readOnly = true;
       type = types.submodule {
         options = builtins.listToAttrs (map (name: nameValuePair name (mkColorOption name)) [
           "bg0"
@@ -70,22 +69,6 @@ in {
       };
     };
 
-    vimColorscheme = mkOption {
-      description = "Colorscheme to use in (neo)vim. Should roughly match the colorscheme option.";
-      type = types.str;
-    };
-
-    batTheme = mkOption {
-      description = "Theme to use with bat. Should roughly match the colorscheme option.";
-      type = types.str;
-    };
-
-    gitDeltaTheme = mkOption {
-      description =
-        "Theme to use with delta, the git-diff drop-in. Should roughly match the colorscheme option.";
-      type = types.str;
-    };
-
     fonts = mkOption {
       description = "Fonts to use throughout various apps.";
       type = types.submodule {
@@ -97,9 +80,5 @@ in {
         };
       };
     };
-  };
-
-  config = {
-    modules.theming.colors = mkIf (cfg.colorscheme != null) (cfg.colorschemes.${cfg.colorscheme});
   };
 }

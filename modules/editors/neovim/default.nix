@@ -66,7 +66,6 @@ in {
         ];
 
         extraConfig = ''
-          color ${config.modules.theming.vimColorscheme}
           ${readVimSection "editor"}
           ${readVimSection "ui"}
           ${readVimSection "mappings"}

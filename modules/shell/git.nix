@@ -70,7 +70,6 @@ in {
         enable = true;
         options = {
           line-numbers = true;
-          syntax-theme = config.modules.theming.gitDeltaTheme;
           features = "decorations";
           decorations = {
             file-style = "bold white ul";
