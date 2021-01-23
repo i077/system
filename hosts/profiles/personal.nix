@@ -10,6 +10,10 @@ in {
     desktop = {
       gnome3.enable = true;
       apps = {
+        bitwarden = {
+          enable = true;
+          cli.enable = true;
+        };
         everdo.enable = true;
         firefox.enable = true;
         keybase.enable = true;
