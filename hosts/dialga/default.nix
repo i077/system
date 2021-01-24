@@ -4,10 +4,10 @@
   require = [ ../profiles/personal.nix ./hardware-configuration.nix ];
 
   users.users.root.initialHashedPassword =
-    "$6$U432DHy9wMaAyiiC$l.1J5mpNJpfIN9dL74jbQY07Wy9v1iBsUSTW8.A4HI2mA7TnHeqyIJmjwJzeaBQvJIXvX2csdfGukOLauab3U.";
+    "$6$vvk.FXMfD$XPSyoB.G/TwvRoSHbaMv9n//rrH10VRlKSeMRsZqPg8S4rW.JBPlThmWmS6apBAms9lqEs18V1d8O8aqOwi2B0";
 
   user.initialHashedPassword =
-    "$6$94Ai90YZt$HPNB1HuOVlJ/owkyFtUINk3WGAxgKwMDTYNjL4c8zlqdO9mreQFfTWOMtOo4vL1ioaRbtSkX5gaQ41Ncl.gpo.";
+    "$6$2spNVGx2GbT3p2$MLaqbmSvWZmE5btWKIztyvSxPQ.bbtPg22dOYrSuqKgaRDOngUD7Fe6qpN0xTjRDHLbTMYETxtsUns0sSRLX10";
 
   modules = {
     desktop = {
