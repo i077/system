@@ -20,12 +20,6 @@
       flake = false;
     };
 
-    # Bobthefish theme for fish
-    fish-bobthefish = {
-      url = "github:oh-my-fish/theme-bobthefish";
-      flake = false;
-    };
-
     # Gruvbox colorscheme for fish
     fish-gruvbox = {
       url = "github:Jomik/fish-gruvbox";

@@ -1,21 +1,5 @@
 {
   "nodes": {
-    "fish-bobthefish": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1606891750,
-        "narHash": "sha256-fIlTC4A/dzbx86CUFWmlHrFjwdwXBNVzsP3mpPoYfgE=",
-        "owner": "oh-my-fish",
-        "repo": "theme-bobthefish",
-        "rev": "12b829e0bfa0b57a155058cdb59e203f9c1f5db4",
-        "type": "github"
-      },
-      "original": {
-        "owner": "oh-my-fish",
-        "repo": "theme-bobthefish",
-        "type": "github"
-      }
-    },
     "fish-gruvbox": {
       "flake": false,
       "locked": {
@@ -134,7 +118,6 @@
     },
     "root": {
       "inputs": {
-        "fish-bobthefish": "fish-bobthefish",
         "fish-gruvbox": "fish-gruvbox",
         "fish-z": "fish-z",
         "home-manager": "home-manager",
