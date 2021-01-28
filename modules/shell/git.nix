@@ -58,6 +58,8 @@ in {
         extraConfig = {
           core.editor = config.modules.editors.default;
           pull.rebase = false;
+
+          init.defaultBranch = "main";
         };
       };
 
