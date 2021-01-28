@@ -14,6 +14,9 @@
     # Secrets management
     sops-nix.url = "github:Mic92/sops-nix";
 
+    # Nix language server
+    rnix-lsp.url = "github:nix-community/rnix-lsp";
+
     # Tmux configuration
     oh-my-tmux = {
       url = "github:gpakosz/.tmux";
