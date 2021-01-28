@@ -29,7 +29,10 @@ in {
     devel = { nix.enable = true; };
 
     editors = {
-      neovim.enable = true;
+      neovim = {
+        enable = true;
+        coc.enable = true;
+      };
       default = "nvim";
     };
 

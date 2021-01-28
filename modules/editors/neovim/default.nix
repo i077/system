@@ -1,10 +1,15 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, inputs, lib, ... }:
 
 let
-  inherit (builtins) readFile;
-  inherit (lib) mkEnableOption mkIf mkMerge;
+  inherit (builtins) readFile toJSON;
+  inherit (lib) mkEnableOption mkIf mkMerge mkOption types;
 
   cfg = config.modules.editors.neovim;
+
+  devPython = config.modules.devel.python.enable;
+  devLatex = config.modules.devel.python.enable;
+
+  inherit (config.nixpkgs) system;
 
   readVimSection = file: readFile (./. + "/${file}.vim");
   pluginWithCfg = name: {
@@ -14,6 +19,13 @@ let
 in {
   options.modules.editors.neovim = {
     enable = mkEnableOption "Neovim editor";
+    coc = {
+      enable = mkEnableOption "Conquerer of completion for neovim";
+      settings = mkOption {
+        type = types.attrs;
+        description = "Contents of coc-settings.json as an attribute set.";
+      };
+    };
   };
 
   config = mkIf cfg.enable (mkMerge [
@@ -82,21 +94,38 @@ in {
       hm.home.packages = with pkgs; [ ctags neovim-remote ];
     }
 
+    (mkIf cfg.coc.enable {
+      hm.programs.neovim = {
+        plugins = with pkgs.vimPlugins; [ (pluginWithCfg "coc-nvim") coc-git ];
+      };
+
+      hm.xdg.configFile."nvim/coc-settings.json".text = toJSON cfg.coc.settings;
+    })
+
     # Python-specific stuff
     (mkIf config.modules.devel.python.enable {
       hm.programs.neovim = {
         # Add Python development tools
         extraPython3Packages = (ps: with ps; [ black jedi pylint python-language-server ]);
-        plugins = with pkgs.vimPlugins; [ coc-python ];
+        plugins = with pkgs.vimPlugins; if cfg.coc.enable then [ coc-python ] else [ ];
       };
     })
 
     # LaTeX-specific stuff
     (mkIf config.modules.devel.latex.enable {
-      hm.programs.neovim.plugins = with pkgs.vimPlugins; [
-        (pluginWithCfg "vimtex")
-        coc-vimtex
-      ];
+      hm.programs.neovim.plugins = with pkgs.vimPlugins;
+        if cfg.coc.enable then [ (pluginWithCfg "vimtex") coc-vimtex ] else [ ];
+    })
+
+    # Nix-specific stuff
+    (mkIf config.modules.devel.nix.enable {
+      modules.editors.neovim.coc.settings.languageserver = {
+        nix = {
+          command = let rnix-lsp = inputs.rnix-lsp.defaultPackage.${system};
+            in "${rnix-lsp}/bin/rnix-lsp";
+          filetypes = [ "nix" ];
+        };
+      };
     })
   ]);
 }
