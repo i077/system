@@ -17,9 +17,11 @@ in {
     (mkIf cfg.touchpad.enable {
       services.xserver.libinput = {
         enable = true;
-        tapping = false;
-        naturalScrolling = true;
-        clickMethod = "clickfinger";
+        touchpad = {
+          tapping = false;
+          naturalScrolling = true;
+          clickMethod = "clickfinger";
+        };
       };
     })
 
