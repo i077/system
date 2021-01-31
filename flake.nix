@@ -3,7 +3,7 @@
 
   inputs = {
     # Nixpkgs tracks nixos-unstable
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
 
     # Manage user environment
     home-manager = {
