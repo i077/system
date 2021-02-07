@@ -15,7 +15,7 @@ in {
         jetbrains.pycharm-professional
 
         # Python environment
-        (python3Full.withPackages (ps: with ps; [ numpy scipy matplotlib bpython ]))
+        (python3Full.withPackages (ps: with ps; [ numpy scipy matplotlib ]))
 
         # Tools
         black
