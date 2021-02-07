@@ -26,7 +26,11 @@ in {
       };
     };
 
-    devel = { nix.enable = true; };
+    devel = {
+      nix.enable = true;
+      python.enable = true;
+      latex.enable = true;
+    };
 
     editors = {
       neovim = {
