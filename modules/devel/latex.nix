@@ -9,5 +9,5 @@ in {
   options.modules.devel.latex.enable = mkEnableOption "LaTeX tools";
 
   config =
-    mkIf cfg.enable { hm.home.packages = with pkgs; [ texlive.combined.scheme-full texlab ]; };
+    mkIf cfg.enable { hm.home.packages = with pkgs; [ texlive.combined.scheme-small texlab ]; };
 }
