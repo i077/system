@@ -42,6 +42,11 @@
     };
   };
 
+  nixConfig = {
+    substituters = [ "https://i077.cachix.org" ];
+    trusted-public-keys = [ "i077.cachix.org-1:v28tOFUfUjtVXdPol5FfEO/6wC/VKWnHkD32/aMJJBk=" ];
+  };
+
   outputs = inputs@{ self, nixpkgs, home-manager, sops-nix, ... }:
     let
       inherit (lib) mkDefault nixosSystem removeSuffix;
