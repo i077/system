@@ -1,6 +1,3 @@
-" Disable LaTeXBox in favor of vimtex
-let g:polyglot_disabled = ['tex', 'latex']
-
 let g:vimtex_enabled = 1
 let g:tex_flavor = 'latex'
 

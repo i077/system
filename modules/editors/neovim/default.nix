@@ -71,7 +71,15 @@ in {
           (pluginWithCfg "ale")             # Async linting framework
           (pluginWithCfg "coc-nvim")        # Conquerer of Completion (VSCode-based completion)
           coc-git                           # Git gutter
-          polyglot                          # Multiple language support
+          {                                 # Multiple language support
+            plugin = polyglot; 
+            optional = true;
+            config = ''
+              " Disable languages other plugins handle better
+              let g:polyglot_disabled = ['tex', 'latex']
+              packadd! vim-polyglot
+            '';
+          }
           vim-addon-nix                     # Nix language support
           vim-pandoc                        # Pandoc support
           vim-pandoc-syntax                 # Pandoc syntax support
