@@ -43,8 +43,11 @@
   };
 
   nixConfig = {
-    substituters = [ "https://i077.cachix.org" ];
-    trusted-public-keys = [ "i077.cachix.org-1:v28tOFUfUjtVXdPol5FfEO/6wC/VKWnHkD32/aMJJBk=" ];
+    substituters = [ "https://i077.cachix.org" "https://cache.nixos.org" ];
+    trusted-public-keys = [
+      "i077.cachix.org-1:v28tOFUfUjtVXdPol5FfEO/6wC/VKWnHkD32/aMJJBk="
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+    ];
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, sops-nix, ... }:
