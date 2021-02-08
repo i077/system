@@ -44,6 +44,7 @@ in {
           co = "checkout";
           cob = "checkout -b";
           f = "fetch";
+          ignore = "!gi() { curl -sL https://www.toptal.com/developers/gitignore/api/$@ ;}; gi";
           l = "log";
           lg = "log --oneline --graph --decorate";
           lga = "log --oneline --graph --decorate --all";
