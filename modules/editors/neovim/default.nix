@@ -6,9 +6,6 @@ let
 
   cfg = config.modules.editors.neovim;
 
-  devPython = config.modules.devel.python.enable;
-  devLatex = config.modules.devel.python.enable;
-
   inherit (config.nixpkgs) system;
 
   readVimSection = file: readFile (./. + "/${file}.vim");
@@ -39,7 +36,6 @@ in {
         withNodeJs = true;
         withPython3 = true;
 
-        # TODO separate plugin config
         plugins = with pkgs.vimPlugins; [
           # Editor
           sensible                          # Sensible defaults
