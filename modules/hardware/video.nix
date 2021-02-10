@@ -36,6 +36,7 @@ in {
       # Enable NVIDIA drivers
       services.xserver.videoDrivers = [ "nvidia" ];
       hardware.opengl.driSupport32Bit = true;
+      hardware.nvidia.modesetting.enable = true;
 
       # Prevent screen tearing
       services.xserver.screenSection = ''
@@ -52,6 +53,7 @@ in {
         };
         services.xserver.videoDrivers = [ "nvidia" ];
         hardware.opengl.driSupport32Bit = true;
+        hardware.nvidia.modesetting.enable = true;
 
         # Add extra packages to openGL to leverage intel hardware decoding
         hardware.opengl.extraPackages = with pkgs; [
