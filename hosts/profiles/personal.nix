@@ -4,6 +4,37 @@
 
 let inherit (config.home-manager.users.${config.user.name}) xdg;
 in {
+  boot = {
+    # Use latest linux kernel (default is LTS)
+    kernelPackages = pkgs.linuxPackages_latest;
+
+    # Plymouth boot screen
+    plymouth.enable = true;
+
+    # Allow cross-compilation of AArch64 configurations
+    binfmt.emulatedSystems = [ "aarch64-linux" ];
+  };
+
+  time.timeZone = "America/New_York";
+
+  # User CLI packages
+  hm.home.packages = with pkgs; [
+    acpi
+    exa
+    htop
+    iotop
+    ix
+    jq
+    libqalculate
+    libsecret # Used by some apps to store secrets
+    openconnect
+    openfortivpn
+    powertop
+    ranger
+    ripgrep
+    ripgrep-all
+  ];
+
   modules = {
     security.yubikey.enable = true;
 

@@ -19,21 +19,10 @@ in {
       efi.canTouchEfiVariables = true;
     };
 
-    # Use latest linux kernel (default is LTS)
-    kernelPackages = pkgs.linuxPackages_latest;
-
-    # Plymouth boot screen
-    plymouth.enable = true;
-
-    extraModulePackages = with config.boot.kernelPackages; [ ];
-
     # Clean up /tmp on boot
     cleanTmpDir = true;
 
     initrd.luks.devices."cryptroot" = { preLVM = true; };
-
-    # Allow cross-compilation of AArch64 configurations
-    binfmt.emulatedSystems = [ "aarch64-linux" ];
   };
 
   # Default secrets file
@@ -42,8 +31,6 @@ in {
   # Networking
   networking.networkmanager.enable = true;
   user.extraGroups = [ "networkmanager" ];
-
-  time.timeZone = "America/New_York";
 
   # For a host with no hardware-configuration.nix
   fileSystems."/".device = lib.mkDefault "/dev/disk/by-label/nixos";
@@ -66,24 +53,5 @@ in {
 
     manpages
     stdmanpages
-  ];
-
-  # User CLI packages
-  hm.home.packages = with pkgs; [
-    acpi
-    exa
-    file
-    htop
-    iotop
-    ix
-    jq
-    libqalculate
-    libsecret # Used by some apps to store secrets
-    openconnect
-    openfortivpn
-    powertop
-    ranger
-    ripgrep
-    ripgrep-all
   ];
 }
