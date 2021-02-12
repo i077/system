@@ -1,0 +1,66 @@
+#!/usr/bin/env fish
+
+# Like https://github.com/Shopify/comma, but using nix flakes.
+
+# ----- FORMATTING -----
+set red (tput setaf 1)
+set green (tput setaf 2)
+set white (tput setaf 15)
+set bold (tput bold)
+set resf (tput sgr0)
+
+function log_step
+    echo $bold$white">> $argv[1]"$resf 1>&2
+end
+
+function log_minor
+    echo $white":: "$argv[1]$resf 1>&2
+end
+
+function log_error
+    echo $bold$red":: error: "$resf$red$argv[1]$resf 1>&2
+end
+
+function log_ok
+    echo $green":: "$argv[1]$resf 1>&2
+end
+
+function help
+    echo "comma: Run software from nixpkgs without installing it."
+    echo
+    echo -e $bold"Usage:"$resf" , [flags] program [args]"
+    echo
+    echo -e $bold"Flags:"$resf
+    echo "    -n, --dry-run     Just print what would be run"
+end
+
+function _run
+    # Use nix-locate to find the right package
+    log_step "Looking for packages with \$out/bin/$argv[1]..."
+    set attr (nix-locate --top-level --minimal --at-root --whole-name "/bin/$argv[1]")
+    if test (count $attr) -eq 0
+        log_error "No match."
+        exit 1
+    else if test (count $attr) -gt 1
+        log_minor "Found multiple packages. Select one."
+        set attr (for a in $attr; echo $a; end | fzf --reverse --height 40)
+    end
+    log_ok "Running with nixpkgs#$attr..."
+
+    if test -z $dry_run
+        nix shell "nixpkgs#$attr" -c $argv
+    else
+        echo nix shell "nixpkgs#$attr" -c $argv
+    end
+end
+
+# Entry point
+argparse -s "n/dry-run" -- $argv
+set -g dry_run $_flag_dry_run
+
+switch $argv[1]
+    case ''
+        help
+    case '*'
+        _run $argv
+end
