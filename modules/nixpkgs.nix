@@ -10,7 +10,6 @@
     nixPath = lib.mkForce [
       "nixpkgs=/etc/sources/nixpkgs"
       "home-manager=/etc/sources/home-manager"
-      "nixos-config=/etc/nixos/configuration.nix"
     ];
 
     # Auto-optimize nix store
