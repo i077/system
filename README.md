@@ -42,6 +42,9 @@ Dependencies of this configuration are specified in `flake.nix` in the `inputs` 
   These packages are exposed as flake outputs under `packages`, and an overlay is defined
   that adds these packages in under `overlay`.
 
+- [`bin/`](./bin) is a collection of shell scripts I find useful.
+  These are usually written with fish.
+
 - Secrets are managed and provisioned by [sops-nix](https://github.com/Mic92/sops-nix/),
   which reads and decrypts `secrets/secrets.yaml`.
 
@@ -65,38 +68,43 @@ passing the name of the device:
 
 ```sh
 # In /mnt/etc/nixos
-./do install devicename
+./bin/sysdo install devicename
 ```
 
 ## Maintenance
 
-[`do`](./do) is a fish script I wrote to help manage common tasks like updating
-this flake and rebuilding the system configuration (`./do up`) or removing
-generations more than a month old (`./do GC 30`).
+[`sysdo`](./bin/sysdo) is a fish script I wrote to help manage common tasks like updating
+this flake and rebuilding the system configuration (`sysdo up`) or removing
+generations more than a month old (`sysdo GC 30`).
 
-I have it aliased to `sysdo` in my fish config, so I can run `sysdo [...]` from anywhere.
-Here's a table of all the verbs I implemented:
+Here's the help text:
+```
+Usage: ./do [flags] [verb] [options]
 
-| Verb            | What it does                                               |
-| --------------- | ---------------------------------------------------------- |
-| `clean`         | Clean up build outputs                                     |
-| `check`         | Run checks on the repo                                     |
-| `switch`, `s`   | Rebuild configuration and switch                           |
-| `boot`, `b`     | Rebuild configuration and add boot entry                   |
-| `test`, `t`     | Rebuild configuration and activate                         |
-| `build`         | Just build the configuration to `./result`                 |
-| `update`        | Update flake inputs and commit `flake.lock`                |
-| `shell`, `sh`   | Spawn this flake's `devShell`                              |
-| `repl`          | Start nix repl with this flake's attributes                |
-| `gc`            | Garbage-collect unreachable nix-store paths                |
-| `GC [D]`        | Remove generations older than `D` days and garbage-collect |
-| `upgrade`, `up` | Update and switch                                          |
-| `ub`            | Update and boot                                            |
-| `ut`            | Update and test                                            |
-| `install name`  | Install `name`'s configuation to `/mnt`                    |
-| `git ...`       | Run a git command in the repo                              |
+Flags:
+    -f, --format        Format .nix files with nixfmt & re-commit them when running checks
+    -C, --no-check      Don't run checks when building configuration
 
-You can also check the help function in the script itself.
+Verbs:
+        help            Print this help message
+        clean           Clean up nix build outputs
+        check           Run checks on this repository
+     s, switch          Build, activate, and add boot entry for the current configuration
+     b, boot            Build and add boot entry for the current configuration
+     t, test            Build and activate the current configuration
+        build           Build the current configuration
+        dry             Show what would be built under the current configuration
+        update          Update flake inputs
+    sh, shell           Spawn a devShell (use -c to specify a command)
+        repl            Start nix repl with flake
+        git             Execute a git command in this repository
+        gc              Delete unreachable store paths
+        GC [D]          Delete generations older than D days (60 by default)
+        install N       Install N's configuration to /mnt
+    up, upgrade         Run update and switch
+        ub              Run update and boot
+        ut              Run update and test
+```
 
 ## Continuous Integration
 

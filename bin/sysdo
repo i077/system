@@ -24,7 +24,7 @@ function log_ok
 end
 
 # ----- SETUP -----
-set flakeRoot (dirname (status filename))
+set flakeRoot (dirname ..)
 set flakeAttr (hostname)
 
 if not set -q IN_NIX_SHELL
@@ -39,7 +39,7 @@ cd $flakeRoot
 
 # ----- SUBCOMMANDS -----
 function help
-    echo -e $bold"Usage:"$resf" ./do [flags] [verb] [options]\n"
+    echo -e $bold"Usage:"$resf" sysdo [flags] [verb] [options]\n"
     echo $bold"Flags:"$resf
     echo "    -f, --format        Format .nix files with nixfmt & re-commit them when running checks"
     echo "    -C, --no-check      Don't run checks when building configuration"

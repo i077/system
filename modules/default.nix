@@ -2,7 +2,9 @@
 
 { config, inputs, lib, pkgs, ... }:
 
-let inherit (lib.mine.files) mapFilesRecToList;
+let 
+  inherit (lib) concatStringsSep;
+  inherit (lib.mine.files) mapFilesRecToList;
 in {
   imports = [ inputs.home-manager.nixosModules.home-manager inputs.sops-nix.nixosModules.sops ];
 
@@ -54,4 +56,7 @@ in {
     manpages
     stdmanpages
   ];
+
+  # Add bin to PATH
+  environment.extraInit = "export PATH=/etc/nixos/bin:$PATH";
 }
