@@ -2,7 +2,7 @@
 
 { config, inputs, lib, pkgs, ... }:
 
-let 
+let
   inherit (lib) concatStringsSep;
   inherit (lib.mine.files) mapFilesRecToList;
 in {

@@ -7,10 +7,8 @@
 
   nix = {
     # Set nix path
-    nixPath = lib.mkForce [
-      "nixpkgs=/etc/sources/nixpkgs"
-      "home-manager=/etc/sources/home-manager"
-    ];
+    nixPath =
+      lib.mkForce [ "nixpkgs=/etc/sources/nixpkgs" "home-manager=/etc/sources/home-manager" ];
 
     # Auto-optimize nix store
     optimise.automatic = true;

@@ -8,9 +8,12 @@ let
 in {
   options.modules.devel.nix.enable = mkEnableOption "Nix development tools";
 
-  config =
-    mkIf cfg.enable { hm.home.packages = with pkgs; [
-      manix niv nixfmt nix-diff
+  config = mkIf cfg.enable {
+    hm.home.packages = with pkgs; [
+      manix
+      niv
+      nixfmt
+      nix-diff
 
       # Shell script to update nix-index database from Mic92's repo
       (pkgs.writeShellScriptBin "nix-index-update" ''
