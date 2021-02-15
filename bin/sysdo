@@ -4,6 +4,7 @@
 set red (tput setaf 1)
 set green (tput setaf 2)
 set white (tput setaf 15)
+set purple (tput setaf 5)
 set bold (tput bold)
 set resf (tput sgr0)
 
@@ -23,8 +24,19 @@ function log_ok
     echo $green":: "$argv[1]$resf
 end
 
+function ask_yesno
+    # Workaround to remove the mode indicator
+    function fish_mode_prompt; end
+
+    read -n 1 -P $purple"?? "$argv[1]" (y/N) "$resf reply
+    if test $reply = y
+        return 0
+    end
+    return 1
+end
+
 # ----- SETUP -----
-set flakeRoot (dirname ..)
+set flakeRoot (dirname (dirname (status filename)))
 set flakeAttr (hostname)
 
 if not set -q IN_NIX_SHELL
@@ -38,11 +50,11 @@ set nixfmt_width 100
 cd $flakeRoot
 
 # ----- SUBCOMMANDS -----
-function help
+function usage
     echo -e $bold"Usage:"$resf" sysdo [flags] [verb] [options]\n"
     echo $bold"Flags:"$resf
-    echo "    -f, --format        Format .nix files with nixfmt & re-commit them when running checks"
     echo "    -C, --no-check      Don't run checks when building configuration"
+    echo "    -r, --review        Review changes in configuration before activating"
     echo
     echo $bold"Verbs:"$resf
     echo "        help            Print this help message"
@@ -52,7 +64,6 @@ function help
     echo "     b, boot            Build and add boot entry for the current configuration"
     echo "     t, test            Build and activate the current configuration"
     echo "        build           Build the current configuration"
-    echo "        dry             Show what would be built under the current configuration"
     echo "        update          Update flake inputs"
     echo "    sh, shell           Spawn a devShell (use -c to specify a command)"
     echo "        repl            Start nix repl with flake"
@@ -73,13 +84,12 @@ end
 function check
     log_step "Running checks..."
 
-    # Check that nix files are formatted properly (or format if -f is passed)
+    # Check that nix files are formatted properly (and offer to reformat)
     if test -z $_flag_format
-        set format_logmsg "Checking formatting with nixfmt..."
+        log_minor "Checking formatting with nixfmt..."
     else
-        set format_logmsg "Formatting with nixfmt..."
+        log_minor "Formatting with nixfmt..."
     end
-    log_minor $format_logmsg
     set -l unformatted_files \
         (find . -name '*.nix' \
             # Exclude files not handled well by nixfmt
@@ -88,16 +98,15 @@ function check
             grep "not formatted" | sed -e "s/\(.*\): not formatted/\1/")
     # If there are any unformatted files...
     if test (count $unformatted_files) -gt 0
-        # ...and -f is not set, just error out
-        if test -z $_flag_format
-            log_error "The files below aren't formatted properly. Run nixfmt on them or pass '--format'."
-            for f in $unformatted_files; echo " $f"; end
-            exit 1
-        # Otherwise, run nixfmt, then amend the last commit
-        else
+        log_error "The files below aren't formatted properly:"
+        for f in $unformatted_files; echo "  $f"; end
+        if ask_yesno "Format these files and amend last commit?"
+            log_step "Formatting files..."
             nixfmt -w $nixfmt_width $unformatted_files
             git add $unformatted_files
             git commit --amend --no-edit
+        else
+            exit 1
         end
     end
 
@@ -114,33 +123,51 @@ function check
     log_ok "Everything looks good."
 end
 
-function switch_
+function _rebuild_after_review
     test -z $_flag_no_check && check
-    log_step "Building, activating, and adding boot entry for configuration..."
-    sudo nixos-rebuild switch
+    # If the step involves activating, run dry-activate first
+    if contains $argv[1] "test" "boot" "switch"
+        log_step "Building configuration..."
+        nixos-rebuild dry-activate # This will leave a ./result symlink
+        if not ask_yesno "Continue with the above changes?"
+            exit 1
+        end
+
+        switch $argv[1]
+            case "switch"
+                log_step "Adding boot entry for and activating configuration..."
+                sudo ./result/bin/switch-to-configuration switch
+            case "boot"
+                log_step "Adding boot entry for configuration..."
+                sudo ./result/bin/switch-to-configuration boot
+            case "test"
+                log_step "Activating configuration..."
+                sudo ./result/bin/switch-to-configuration test
+        end
+        clean
+        exit 0
+    end
+
+    # Otherwise, just pass to _rebuild
+    _rebuild $argv[1]
 end
 
-function test_
+function _rebuild
     test -z $_flag_no_check && check
-    log_step "Building and activating configuration..."
-    sudo nixos-rebuild --fast test
-end
-
-function boot
-    test -z $_flag_no_check && check
-    log_step "Building and adding boot entry for configuration..."
-    sudo nixos-rebuild boot
-end
-
-function build
-    test -z $_flag_no_check && check
-    log_step "Building configuration..."
-    nixos-rebuild build --flake "$flakeRoot#$flakeAttr"
-end
-
-function dry
-    test -z $_flag_no_check && check
-    nixos-rebuild dry-build
+    switch $argv[1]
+        case "switch"
+            log_step "Building, activating, and adding boot entry for configuration..."
+            sudo nixos-rebuild switch
+        case "boot"
+            log_step "Building and adding boot entry for configuration..."
+            sudo nixos-rebuild boot
+        case "test"
+            log_step "Building and activating configuration..."
+            sudo nixos-rebuild --fast test
+        case "build"
+            log_step "Building configuration..."
+            nixos-rebuild build --flake "$flakeRoot#$flakeAttr"
+    end
 end
 
 function update
@@ -222,40 +249,43 @@ function install
 end
 
 # Parse flags and make them global
-argparse -s "f/format" "C/no-check" -- $argv
-set -g _flag_format $_flag_format
+argparse -s "C/no-check" "r/review" -- $argv
 set -g _flag_no_check $_flag_no_check
+
+# Set rebuild function based on -r flag
+if test -z $_flag_review
+    set rebuild _rebuild
+else
+    set rebuild _rebuild_after_review
+end
 
 # Parse rest of arguments
 switch $argv[1]
-    case help clean check boot build dry update upgrade gc repl
+    case clean check update upgrade gc repl
         $argv[1]
-    # Case for reserved keywords
-    case "switch" "test"
-        $argv[1]_
-    # Functions that take arguments
     case shell git GC install
         $argv[1] $argv[2..-1]
-    # Abbreviations
+    case "switch" "boot" "test" "build"
+        $rebuild $argv[1]
     case s
-        switch_
+        $rebuild switch
     case b
-        boot
+        $rebuild boot
     case t
-        test_
+        $rebuild test
     case sh
         shell $argv[2..-1]
     case up
         upgrade
+        $rebuild switch
     case ub
         update
-        boot
+        $rebuild boot
     case ut
         update
-        test_
-    case ''
-        help
-        exit 121
+        $rebuild test
+    case help ''
+        usage
     case '*'
         log_error "Unknown verb: $argv[1]"
         exit 121

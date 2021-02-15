@@ -79,11 +79,11 @@ generations more than a month old (`sysdo GC 30`).
 
 Here's the help text:
 ```
-Usage: ./do [flags] [verb] [options]
+Usage: sysdo [flags] [verb] [options]
 
 Flags:
-    -f, --format        Format .nix files with nixfmt & re-commit them when running checks
     -C, --no-check      Don't run checks when building configuration
+    -r, --review        Review changes in configuration before activating
 
 Verbs:
         help            Print this help message
@@ -93,7 +93,6 @@ Verbs:
      b, boot            Build and add boot entry for the current configuration
      t, test            Build and activate the current configuration
         build           Build the current configuration
-        dry             Show what would be built under the current configuration
         update          Update flake inputs
     sh, shell           Spawn a devShell (use -c to specify a command)
         repl            Start nix repl with flake
