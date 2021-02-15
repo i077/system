@@ -44,8 +44,8 @@ jobs:
         PULL_REQUEST_FROM_BRANCH: flakebot
         PULL_REQUEST_BRANCH: master
         PULL_REQUEST_ASSIGNEES: i077
+        PULL_REQUEST_UPDATE: true
         MAINTAINER_CANT_MODIFY: true
-        PASS_IF_EXISTS: true
         PASS_ON_ERROR: true
         PULL_REQUEST_TITLE: Update flake inputs
         PULL_REQUEST_BODY: |
