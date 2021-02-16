@@ -55,6 +55,7 @@ function usage
     echo $bold"Flags:"$resf
     echo "    -C, --no-check      Don't run checks when building configuration"
     echo "    -r, --review        Review changes in configuration before activating"
+    echo "    -k, --keep-result   Keep nix build output symlinks"
     echo
     echo $bold"Verbs:"$resf
     echo "        help            Print this help message"
@@ -144,7 +145,7 @@ function _rebuild_after_review
                 log_step "Activating configuration..."
                 sudo ./result/bin/switch-to-configuration test
         end
-        clean
+        test -z $_flag_keep_result && clean
         exit 0
     end
 
@@ -164,9 +165,11 @@ function _rebuild
         case "test"
             log_step "Building and activating configuration..."
             sudo nixos-rebuild --fast test
+            test -z $_flag_keep_result && clean
         case "build"
             log_step "Building configuration..."
             nixos-rebuild build --flake "$flakeRoot#$flakeAttr"
+            test -z $_flag_keep_result && clean
     end
 end
 
@@ -249,8 +252,9 @@ function install
 end
 
 # Parse flags and make them global
-argparse -s "C/no-check" "r/review" -- $argv
+argparse -s "C/no-check" "r/review" "k/keep-result" -- $argv
 set -g _flag_no_check $_flag_no_check
+set -g _flag_keep_result $_flag_keep_result
 
 # Set rebuild function based on -r flag
 if test -z $_flag_review
