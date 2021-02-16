@@ -44,7 +44,8 @@ in mkIf config.services.xserver.enable {
       [
         corefonts # Microsoft core fonts for Web
         iosevka
-        nerdfonts-iosevka
+        (nerdfonts.override (_: { fonts = [ "VictorMono" ]; }))
+        ia-writer-duospace
         inter-ui
         latinmodern-math
         open-sans
