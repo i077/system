@@ -10,6 +10,7 @@ in {
     hm.programs.starship = {
       enable = true;
       enableFishIntegration = config.modules.shell.fish.enable;
+      settings = { status.disabled = false; };
     };
   };
 }
