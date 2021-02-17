@@ -45,6 +45,10 @@ function _run
         log_minor "Found multiple packages. Select one."
         set attr (for a in $attr; echo $a; end | fzf --reverse --height 40)
     end
+    if test -z $attr
+        log_error "No package selected."
+        exit 1
+    end
     log_ok "Running with nixpkgs#$attr..."
 
     if test -z $dry_run
