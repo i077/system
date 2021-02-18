@@ -29,7 +29,6 @@ in mkIf config.services.xserver.enable {
     qalculate-gtk
     quodlibet-full
     ripcord
-    todoist-electron
     vlc
     write_stylus
     zoom-us # For now...
