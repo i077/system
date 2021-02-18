@@ -9,7 +9,7 @@ in {
   config = mkIf cfg.enable {
     hardware.bluetooth = {
       enable = true;
-      config = { General.Enable = "Source,Sink,Media,Socket"; };
+      settings = { General.Enable = "Source,Sink,Media,Socket"; };
     };
 
     # PulseAudio support
