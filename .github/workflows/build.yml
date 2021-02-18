@@ -10,6 +10,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        hostname: [giratina, dialga]
     steps:
       - uses: actions/checkout@v2
         with:
@@ -26,7 +29,5 @@ jobs:
         with:
           name: i077
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-      - name: Build giratina
-        run: nix build -v .#nixosConfigurations.giratina.config.system.build.toplevel
-      - name: Build dialga
-        run: nix build -v .#nixosConfigurations.dialga.config.system.build.toplevel
+      - name: Build configuration
+        run: nix build -v .#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel
