@@ -124,9 +124,9 @@ in {
           pkg = pkgs.source-serif-pro;
         };
         mono = {
-          family = "Victor Mono";
+          family = "JetBrains Mono";
           size = 8;
-          pkg = pkgs.victor-mono;
+          pkg = pkgs.jetbrains-mono;
         };
         ui = sans;
       };
