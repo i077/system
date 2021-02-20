@@ -9,7 +9,8 @@ in {
   config = mkIf cfg.enable {
     hm.programs.firefox = {
       enable = true;
-      package = pkgs.firefox.override {
+      package = pkgs.wrapFirefox pkgs.firefox-unwrapped {
+        forceWayland = true;
         extraNativeMessagingHosts = with pkgs; [ passff-host tridactyl-native ];
       };
     };
