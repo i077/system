@@ -23,6 +23,7 @@ in mkIf config.services.xserver.enable {
     pandoc
 
     # GUI apps
+    amazing-marvin
     feedreader
     libreoffice-fresh
     obsidian
