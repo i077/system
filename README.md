@@ -84,6 +84,7 @@ Usage: sysdo [flags] [verb] [options]
 Flags:
     -C, --no-check      Don't run checks when building configuration
     -r, --review        Review changes in configuration before activating
+    -k, --keep-result   Keep nix build output symlinks
 
 Verbs:
         help            Print this help message
@@ -119,6 +120,11 @@ Workflows are setup via GitHub Actions to:
   GitHub will run the first workflow against this new PR, caching the evaluations so that they are
   ready when the commit is merged.
   This workflow is specified in [`.github/workflows/update.yml`](./.github/workflows/update.yml).
+- Bisect the nixpkgs repository to find which commit "broke" my system.
+  If a flake update commit results in a failed system build, this usually happens because something
+  broke in nixpkgs. I can manually trigger this workflow against that update commit,
+  and it will bisect against the old and new hashes of nixpkgs, trying to build my config
+  at each step until git finds the first "bad" commit.
 
 ## Helpful references for Nix flakes
 
