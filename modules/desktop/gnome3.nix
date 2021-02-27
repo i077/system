@@ -47,5 +47,13 @@ in {
       script = "/home/imran/Pictures/walls/selector.py";
       interval = "1h";
     };
+
+    # Extra GNOME settings
+    hm.dconf.settings = {
+      "org/gnome/settings-daemon/plugins/media-keys" = {
+        # Remove max screencast length
+        max-screencast-length = 0;
+      };
+    };
   };
 }
