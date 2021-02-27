@@ -55,6 +55,7 @@ in {
           puf = "push --force-with-lease"; # as in "poof" go your old commits!
           pushall = "!git remote | xargs -L1 git push --all";
           st = "status";
+          whohas = "branch -a --contains";
         };
 
         extraConfig = {
