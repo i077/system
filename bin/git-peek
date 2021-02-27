@@ -9,7 +9,7 @@ source $_dir/_lib.fish
 function usage
     echo "git-peek: Quickly look inside a git repository"
     echo
-    echo -e $bold"Usage:"$resf" git-peek [options] clone-url [directory] [clone args]"
+    echo -e $bold"Usage:"$resf" git peek [options] clone-url [directory] [clone args]"
     echo
     echo -e $bold"Options:"$resf
     echo "    -h, --help            Print this help message"
@@ -74,7 +74,7 @@ set -g _flag_keep $_flag_keep
 # Main procedure
 log_step "Cloning $argv[1] into $clone_dir..."
 pushd $clone_dir
-if ! git clone $argv[1] $clone_dir $branch_arg $depth_arg
+if ! git clone $argv[1] $clone_dir $branch_arg $depth_arg $argv[3..-1]
     log_error "Cloning was not successful."
     _clean
     exit 1
