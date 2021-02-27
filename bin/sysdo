@@ -1,42 +1,9 @@
 #!/usr/bin/env fish
-
-# ----- FORMATTING -----
-set red (tput setaf 1)
-set green (tput setaf 2)
-set white (tput setaf 15)
-set purple (tput setaf 5)
-set bold (tput bold)
-set resf (tput sgr0)
-
-function log_step
-    echo $bold$white">> $argv[1]"$resf
-end
-
-function log_minor
-    echo $white":: "$argv[1]$resf
-end
-
-function log_error
-    echo $bold$red":: error: "$resf$red$argv[1]$resf
-end
-
-function log_ok
-    echo $green":: "$argv[1]$resf
-end
-
-function ask_yesno
-    # Workaround to remove the mode indicator
-    function fish_mode_prompt; end
-
-    read -n 1 -P $purple"?? "$argv[1]" (y/N) "$resf reply
-    if test $reply = y
-        return 0
-    end
-    return 1
-end
+set _dir (dirname (status filename))
+source $_dir/_lib.fish
 
 # ----- SETUP -----
-set flakeRoot (dirname (dirname (status filename)))
+set flakeRoot (dirname $_dir)
 set flakeAttr (hostname)
 
 if not set -q IN_NIX_SHELL
@@ -86,11 +53,7 @@ function check
     log_step "Running checks..."
 
     # Check that nix files are formatted properly (and offer to reformat)
-    if test -z $_flag_format
-        log_minor "Checking formatting with nixfmt..."
-    else
-        log_minor "Formatting with nixfmt..."
-    end
+    log_minor "Checking formatting with nixfmt..."
     set -l unformatted_files \
         (find . -name '*.nix' \
             # Exclude files not handled well by nixfmt

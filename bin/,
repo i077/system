@@ -2,28 +2,8 @@
 
 # Like https://github.com/Shopify/comma, but using nix flakes.
 
-# ----- FORMATTING -----
-set red (tput setaf 1)
-set green (tput setaf 2)
-set white (tput setaf 15)
-set bold (tput bold)
-set resf (tput sgr0)
-
-function log_step
-    echo $bold$white">> $argv[1]"$resf 1>&2
-end
-
-function log_minor
-    echo $white":: "$argv[1]$resf 1>&2
-end
-
-function log_error
-    echo $bold$red":: error: "$resf$red$argv[1]$resf 1>&2
-end
-
-function log_ok
-    echo $green":: "$argv[1]$resf 1>&2
-end
+set _dir (dirname (status filename))
+source $_dir/_lib.fish
 
 function help
     echo "comma: Run software from nixpkgs without installing it."
