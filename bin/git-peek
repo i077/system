@@ -23,7 +23,6 @@ end
 function _clean
     if test -z $_flag_keep
         log_step "Cleaning up..."
-        popd
         rm -rf $clone_dir
     end
 end
@@ -57,14 +56,8 @@ if test -z $argv[2]
     set -g clone_dir (mktemp -d /tmp/git-peek.XXXXXX)
 else
     set -g clone_dir $argv[2]
-    if ! test -e $clone_dir
-        log_minor "Creating directory $clone_dir..."
-        mkdir -p $clone_dir
-    else if test -d $clone_dir
-        log_warn "Directory $clone_dir already exists, will not delete before exiting."
-        set -g _flag_keep '-k'
-    else
-        log_error "$clone_dir exists and is not a directory."
+    if test -e $clone_dir
+        log_error "Path '$clone_dir' already exists."
         exit 1
     end
 end
@@ -73,7 +66,6 @@ set -g _flag_keep $_flag_keep
 
 # Main procedure
 log_step "Cloning $argv[1] into $clone_dir..."
-pushd $clone_dir
 if ! git clone $argv[1] $clone_dir $branch_arg $depth_arg $argv[3..-1]
     log_error "Cloning was not successful."
     _clean
