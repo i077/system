@@ -23,7 +23,7 @@ function _run
         exit 1
     else if test (count $attr) -gt 1
         log_minor "Found multiple packages. Select one."
-        set attr (for a in $attr; echo $a; end | fzf --reverse --height 40)
+        set attr (for a in $attr; echo $a; end | fzf --reverse --height 10)
     end
     if test -z $attr
         log_error "No package selected."
