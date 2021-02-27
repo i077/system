@@ -8,8 +8,18 @@ source $_dir/_lib.fish
 if test -z $argv[1]
     bat
 else if ! test -e $argv[1]
-    log_error "File doesn't exist."
-    exit 2
+    # Maybe I pressed ENTER a little too soon after TAB...
+    # If there were multiple completions, prompt to pick one
+    if stat $argv[1]* > /dev/null
+        set newarg1 (for f in $argv[1]*; echo $f; end | fzf)
+        if test -z $newarg1
+            exit 1
+        end
+        show $newarg1 $argv[2..-1]
+    else
+        log_error "File doesn't exist."
+        exit 2
+    end
 else if test -L $argv[1]
     log_minor "File is a link to "(readlink -m $argv[1])
     show (readlink -m $argv[1]) $argv[2..-1]
