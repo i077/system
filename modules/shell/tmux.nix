@@ -22,6 +22,8 @@ in {
         # Override to fix italics in tmux
         set -g default-terminal "tmux-256color"
 
+        # Move status bar to top
+        set-option -g status-position top
 
         # -- windows & pane creation ---------------------------------------------------
 
