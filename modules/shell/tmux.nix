@@ -19,6 +19,9 @@ in {
         #         without any warranty.
         #         Copyright 2012— Gregory Pakosz (@gpakosz).
 
+        # Override to fix italics in tmux
+        set -g default-terminal "tmux-256color"
+
 
         # -- windows & pane creation ---------------------------------------------------
 
