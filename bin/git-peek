@@ -9,7 +9,7 @@ source $_dir/_lib.fish
 function usage
     echo "git-peek: Quickly look inside a git repository"
     echo
-    echo -e $bold"Usage:"$resf" git peek [options] clone-url [directory] [clone args]"
+    echo -e $bold"Usage:"$resf" git peek [options] clone-url [directory]"
     echo
     echo -e $bold"Options:"$resf
     echo "    -h, --help            Print this help message"
@@ -18,29 +18,31 @@ function usage
     echo "    -k, --keep            Don't delete the clone before exiting"
     echo "                          (implied if existing directory is passed)"
     echo "    -b, --branch <ref>    Clone <ref> instead of the default branch"
+    echo "    -o, --dest <path>     Path to clone repo into"
 end
 
 function _clean
     if test -z $_flag_keep
+        dirs -c
         log_step "Cleaning up..."
         rm -rf $clone_dir
     end
 end
 
-argparse -s 'h/help' 'e/editor=' 'k/keep' 'd/depth=' 'b/branch=' -- $argv
+argparse -s 'h/help' 'e/editor=+' 'k/keep' 'd/depth=' 'b/branch=' 'o/dest=' -- $argv
 
 if test -z $argv[1]; or ! test -z $_flag_help
     usage
     exit 0
 end
 
-if ! test -z $_flag_editor
+if ! test (count $_flag_editor) -eq 0
     set -g EDITOR $_flag_editor
 end
 
 # Parse arguments to git clone
 if ! test -z $_flag_branch
-    set branch_arg "-b $_flag_branch"
+    set branch_arg "--branch=$_flag_branch"
 end
 
 if ! test -z $_flag_depth
@@ -52,10 +54,10 @@ else
     set depth_arg "--depth=1"
 end
 
-if test -z $argv[2]
+if test -z $_flag_dest
     set -g clone_dir (mktemp -d /tmp/git-peek.XXXXXX)
 else
-    set -g clone_dir $argv[2]
+    set -g clone_dir $_flag_dest
     if test -e $clone_dir
         log_error "Path '$clone_dir' already exists."
         exit 1
@@ -66,12 +68,14 @@ set -g _flag_keep $_flag_keep
 
 # Main procedure
 log_step "Cloning $argv[1] into $clone_dir..."
-if ! git clone $argv[1] $clone_dir $branch_arg $depth_arg $argv[3..-1]
+if ! git clone $argv[1] $clone_dir $branch_arg $depth_arg
     log_error "Cloning was not successful."
     _clean
     exit 1
 end
 
 log_step "Opening with $EDITOR..."
+pushd $clone_dir
 $EDITOR $clone_dir
+popd
 _clean
