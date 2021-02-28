@@ -11,7 +11,7 @@ else if ! test -e $argv[1]
     # Maybe I pressed ENTER a little too soon after TAB...
     # If there were multiple completions, prompt to pick one
     if stat $argv[1]* > /dev/null
-        set newarg1 (for f in $argv[1]*; echo $f; end | fzf)
+        set newarg1 (for f in $argv[1]*; echo $f; end | fzf --reverse --height 10)
         if test -z $newarg1
             exit 1
         end
