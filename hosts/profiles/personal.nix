@@ -83,12 +83,13 @@ in {
         excludes = [
           "${xdg.cacheHome}"
           # Exclude Keybase caches -- too much useless data
-          "${xdg.dataHome}/keybase/*.leveldb"
-          "${xdg.dataHome}/keybase/*cache"
+          "${xdg.dataHome}/keybase/*.leveldb" # hey vim... */
+          "${xdg.dataHome}/keybase/*cache" # */
         ];
         calendar = "*-*-* 00/3:00:00";
       };
       printing.enable = true;
+      nix-distributed.enable = true;
     };
 
     shell = {
