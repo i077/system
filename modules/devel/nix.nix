@@ -14,6 +14,7 @@ in {
       niv
       nixfmt
       nix-diff
+      nixpkgs-review
 
       # Shell script to update nix-index database from Mic92's repo
       (pkgs.writeShellScriptBin "nix-index-update" ''
