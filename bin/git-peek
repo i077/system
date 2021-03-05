@@ -19,6 +19,7 @@ function usage
     echo "                          (implied if existing directory is passed)"
     echo "    -b, --branch <ref>    Clone <ref> instead of the default branch"
     echo "    -o, --dest <path>     Path to clone repo into"
+    echo "    -s, --shell           Open a new shell in the clone instead of \$EDITOR"
 end
 
 function _clean
@@ -29,7 +30,7 @@ function _clean
     end
 end
 
-argparse -s 'h/help' 'e/editor=+' 'k/keep' 'd/depth=' 'b/branch=' 'o/dest=' -- $argv
+argparse -s 'h/help' 'e/editor=+' 'k/keep' 'd/depth=' 'b/branch=' 'o/dest=' 's/shell' -- $argv
 
 if test -z $argv[1]; or ! test -z $_flag_help
     usage
@@ -74,8 +75,16 @@ if ! git clone $argv[1] $clone_dir $branch_arg $depth_arg
     exit 1
 end
 
-log_step "Opening with $EDITOR..."
 pushd $clone_dir
-$EDITOR $clone_dir
+if test -z $_flag_shell
+    log_step "Opening with $EDITOR..."
+    $EDITOR $clone_dir
+else
+    log_step "Opening a new shell at $clone_dir..."
+    if test -z $_flag_keep
+        log_minor "Will clean up after the shell exits."
+    end
+    $SHELL
+end
 popd
 _clean
