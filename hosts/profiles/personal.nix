@@ -36,7 +36,10 @@ in {
   ];
 
   modules = {
-    security.yubikey.enable = true;
+    security.yubikey = {
+      enable = true;
+      lock-on-remove = true;
+    };
 
     desktop = {
       gnome3.enable = true;
