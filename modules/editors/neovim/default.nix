@@ -54,6 +54,7 @@ in {
           (pluginWithCfg "fzf-vim")         # Fuzzy entry selection
           (pluginWithCfg "denite-nvim")     # Async unite interface
           nvim-yarp                         # Remote plugin framework
+          auto-session                      # Auto-save and restore sessions
 
           # UI + Colorschemes
           (pluginWithCfg "airline")         # Smarter tabline
