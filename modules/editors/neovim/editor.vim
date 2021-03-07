@@ -35,3 +35,6 @@ set inccommand=nosplit
 
 " Do case insentitive search unless capital letter present
 set smartcase
+
+" Save undo files
+set undofile

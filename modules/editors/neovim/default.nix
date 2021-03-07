@@ -45,6 +45,7 @@ in {
           easy-align                        # Alignment plugin
           (pluginWithCfg "easymotion")      # Enhanced motions
           vim-indent-object                 # Use indents as motions
+          (pluginWithCfg "undotree")        # Visualize the undo tree
 
           # Extensions
           direnv-vim                        # Direnv integration
