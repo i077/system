@@ -29,8 +29,11 @@
     };
 
     # Add personal cachix cache
-    binaryCaches = [ "https://i077.cachix.org" ];
-    binaryCachePublicKeys = [ "i077.cachix.org-1:v28tOFUfUjtVXdPol5FfEO/6wC/VKWnHkD32/aMJJBk=" ];
+    binaryCaches = [ "https://i077.cachix.org" "https://nix-community.cachix.org/" ];
+    binaryCachePublicKeys = [
+      "i077.cachix.org-1:v28tOFUfUjtVXdPol5FfEO/6wC/VKWnHkD32/aMJJBk="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
   };
 
   # Allow unfree evaluation

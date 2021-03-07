@@ -29,6 +29,10 @@ in {
     {
       hm.programs.neovim = {
         enable = true;
+
+        # Use nightly version
+        package = pkgs.neovim-nightly;
+
         vimAlias = true;
         vimdiffAlias = true;
 
