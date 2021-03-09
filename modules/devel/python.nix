@@ -15,11 +15,7 @@ in {
         jetbrains.pycharm-professional
 
         # Python environment
-        (python3Full.withPackages (ps: with ps; [ numpy scipy matplotlib ptpython ]))
-
-        # Tools
-        black
-        poetry
+        (python3Full.withPackages (ps: with ps; [ numpy scipy matplotlib ptpython black ]))
       ];
     }
     (mkIf cfg.ptpython.enable {
