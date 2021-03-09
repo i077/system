@@ -54,6 +54,8 @@ in {
           # Extensions
           direnv-vim                        # Direnv integration
           (pluginWithCfg "fugitive")        # Git wrapper
+          rhubarb                           # :GBrowse for GitHub
+          fugitive-gitlab-vim               #           ...Gitlab
           (pluginWithCfg "vim-dispatch")    # Asynchronous job runner
           (pluginWithCfg "fzf-vim")         # Fuzzy entry selection
           (pluginWithCfg "denite-nvim")     # Async unite interface
