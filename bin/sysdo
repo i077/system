@@ -156,7 +156,7 @@ function shell
 end
 
 function repl
-    nix repl https://github.com/edolstra/flake-compat/archive/master.tar.gz --arg src $flakeRoot
+    nix repl $flakeRoot/repl.nix --argstr hostname (hostname)
 end
 
 function git
