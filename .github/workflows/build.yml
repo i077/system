@@ -1,7 +1,7 @@
 name: "Build and cache NixOS configurations"
 on:
   push:
-    branches: 
+    branches:
       - master
   pull_request:
     branches:
@@ -33,3 +33,29 @@ jobs:
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
       - name: Build configuration
         run: nix build -v .#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel
+
+        # These next steps calculate the diff between the old and new closures for a flakebot PR,
+        # and posts the result for each host in a comment.
+      - name: Calculate diff between closures
+        # Only run if we're in a flakebot PR
+        if: ${{ github.event_name == 'pull_request' && github.head_ref == 'flakebot' }}
+        run: |
+          nix build -v .#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel -o result-new
+          nix build -v .\?ref=$(git rev-parse @~)#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel -o result-old
+          echo "diff_closure<<EOF" >> $GITHUB_ENV
+          # TODO remove pipe to sed when NixOS/nix#4626 is fixed
+          nix store diff-closures ./result-old ./result-new | sed 's/\x1b\[[0-9;]*m//g' >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+      - name: Post diff to PR comment
+        if: ${{ github.event_name == 'pull_request' && github.head_ref == 'flakebot' }}
+        uses: phulsechinmay/rewritable-pr-comment@v0.2.1
+        with:
+          message: |
+            <details>
+            <summary>Diff closure for host <code>${{ matrix.hostname }}</code></summary>
+            <code>
+            ${{ env.diff_closure }}
+            </code>
+            </details>
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COMMENT_IDENTIFIER: closure-diff-${{ matrix.hostname }}
