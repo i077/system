@@ -119,7 +119,7 @@ in {
       hm.programs.neovim = {
         # Add Python development tools
         extraPython3Packages = (ps: with ps; [ black jedi pylint python-language-server ]);
-        plugins = with pkgs.vimPlugins; if cfg.coc.enable then [ coc-python ] else [ ];
+        plugins = with pkgs.vimPlugins; if cfg.coc.enable then [ coc-pyright ] else [ ];
       };
     })
 
