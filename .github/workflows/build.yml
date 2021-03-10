@@ -53,9 +53,9 @@ jobs:
           message: |
             <details>
             <summary>Diff closure for host <code>${{ matrix.hostname }}</code></summary>
-            <code>
+            <pre>
             ${{ env.diff_closure }}
-            </code>
+            </pre>
             </details>
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COMMENT_IDENTIFIER: closure-diff-${{ matrix.hostname }}
