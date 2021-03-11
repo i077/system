@@ -116,7 +116,22 @@ in {
       # Treesitter grammars
       hm.xdg.configFile = let
         # The languages for which I want to use tree-sitter
-        languages = [ "lua" "nix" "python" ];
+        languages = [ 
+          "bash"
+          "c"
+          "cpp"
+          "css"
+          "go"
+          "haskell"
+          "html"
+          "java"
+          "javascript"
+          "json"
+          "lua"
+          "nix"
+          "python"
+          "rust"
+        ];
         # Map each language to its respective tree-sitter package
         grammarPkg = l: pkgs.tree-sitter.builtGrammars.${"tree-sitter-" + l};
         # Map each language to a name-value pair for xdg.configFile
