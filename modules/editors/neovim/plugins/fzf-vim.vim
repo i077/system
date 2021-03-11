@@ -19,3 +19,4 @@ noremap <silent> <leader>fl :BLines<CR>
 noremap <silent> <leader>fL :Lines<CR>
 noremap <silent> <leader>fg :RG<CR>
 noremap <silent> <leader>fw :Windows<CR>
+noremap <silent> <leader>fb :Buffers<CR>
