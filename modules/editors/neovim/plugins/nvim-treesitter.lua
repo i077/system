@@ -13,6 +13,7 @@ require'nvim-treesitter.configs'.setup {
   },
   indent = {
     enable = true,
+    disable = { "lua", "python" }, -- Broken for these languages
   },
 }
 
