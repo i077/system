@@ -54,14 +54,14 @@ in {
 
         plugins = with pkgs.vimPlugins; [
           # Editor
-          sensible                          # Sensible defaults
-          repeat                            # Repeatable plugin actions
-          surround                          # Surround text
-          commentary                        # Comment code with 'gcc'
-          easy-align                        # Alignment plugin
-          (pluginWithCfg easymotion)        # Enhanced motions
-          vim-indent-object                 # Use indents as motions
-          (pluginWithCfg undotree)          # Visualize the undo tree
+          sensible                                    # Sensible defaults
+          repeat                                      # Repeatable plugin actions
+          surround                                    # Surround text
+          commentary                                  # Comment code with 'gcc'
+          easy-align                                  # Alignment plugin
+          (pluginWithCfg easymotion)                  # Enhanced motions
+          vim-indent-object                           # Use indents as motions
+          (pluginWithCfg undotree)                    # Visualize the undo tree
 
           # Extensions
           direnv-vim                                  # Direnv integration
@@ -73,6 +73,7 @@ in {
           (pluginWithCfg denite-nvim)                 # Async unite interface
           nvim-yarp                                   # Remote plugin framework
           auto-session                                # Auto-save and restore sessions
+          (pluginWithCfg vim-which-key)               # Display available keybinds in a popup
 
           # UI + Colorschemes
           (pluginWithCfg airline)                     # Smarter tabline
