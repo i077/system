@@ -67,10 +67,7 @@ in {
     };
 
     editors = {
-      neovim = {
-        enable = true;
-        coc.enable = true;
-      };
+      neovim.enable = true;
       default = "nvim";
     };
 

@@ -3,6 +3,7 @@
 let
   inherit (builtins) listToAttrs readFile toJSON;
   inherit (lib) mkEnableOption mkIf mkMerge mkOption nameValuePair types;
+  inherit (lib.mine.options) mkEnableOpt';
 
   cfg = config.modules.editors.neovim;
 
@@ -28,13 +29,7 @@ let
 in {
   options.modules.editors.neovim = {
     enable = mkEnableOption "Neovim editor";
-    coc = {
-      enable = mkEnableOption "Conquerer of completion for neovim";
-      settings = mkOption {
-        type = types.attrs;
-        description = "Contents of coc-settings.json as an attribute set.";
-      };
-    };
+    lsp.enable = mkEnableOpt' "Neovim's built-in LSP";
   };
 
   config = mkIf cfg.enable (mkMerge [
@@ -87,9 +82,9 @@ in {
           # Languages
           (pluginWithLua nvim-treesitter)             # Better (AST-based) language parsing
           (pluginWithLua nvim-treesitter-textobjects) # ...with text objects
+          (pluginWithLua nvim-lspconfig)              # Config for neovim's built-in LSP client
+          (pluginWithLua lspsaga-nvim)                # LSP plugin with a nice UI
           (pluginWithCfg ale)                         # Async linting framework
-          (pluginWithCfg coc-nvim)                    # Conquerer of Completion (VSCode-based completion)
-          coc-git                                     # Git gutter
           (pluginWithCfg polyglot // {                # Multiple language support
             optional = true;
           })
@@ -110,6 +105,13 @@ in {
           ${readVimSection "mappings"}
           ${readVimSection "functions"}
         '';
+
+        extraPackages = with pkgs; [
+          # Packages used by the LSP client
+          nodePackages.vim-language-server  # vim
+          sumneko-lua-language-server       # lua
+          nodePackages.yaml-language-server # yaml
+        ];
       };
 
       hm.home.packages = with pkgs; [ ctags neovim-remote ];
@@ -117,7 +119,7 @@ in {
       # Treesitter grammars
       hm.xdg.configFile = let
         # The languages for which I want to use tree-sitter
-        languages = [ 
+        languages = [
           "bash"
           "c"
           "cpp"
@@ -144,36 +146,37 @@ in {
       in listToAttrs files;
     }
 
-    (mkIf cfg.coc.enable {
-      hm.programs.neovim = {
-        plugins = with pkgs.vimPlugins; [ (pluginWithCfg coc-nvim) coc-git ];
-      };
-
-      hm.xdg.configFile."nvim/coc-settings.json".text = toJSON cfg.coc.settings;
-    })
-
     # Python-specific stuff
     (mkIf config.modules.devel.python.enable {
       hm.programs.neovim = {
         # Add Python development tools
-        plugins = with pkgs.vimPlugins; if cfg.coc.enable then [ coc-pyright ] else [ ];
+        extraPackages = with pkgs; [ nodePackages.pyright ];
+        extraConfig = wrapLuaConfig ''
+          require'lspconfig'.pyright.setup{}
+        '';
       };
     })
 
     # LaTeX-specific stuff
     (mkIf config.modules.devel.latex.enable {
-      hm.programs.neovim.plugins = with pkgs.vimPlugins;
-        if cfg.coc.enable then [ (pluginWithCfg vimtex) coc-vimtex ] else [ ];
+      hm.programs.neovim = {
+        plugins = with pkgs.vimPlugins; [ (pluginWithCfg vimtex) ];
+
+        # LSP stuff
+        extraPackages = with pkgs; [ texlab ];
+        extraConfig = wrapLuaConfig ''
+          require'lspconfig'.texlab.setup{}
+        '';
+      };
     })
 
     # Nix-specific stuff
     (mkIf config.modules.devel.nix.enable {
-      modules.editors.neovim.coc.settings.languageserver = {
-        nix = {
-          command = let rnix-lsp = inputs.rnix-lsp.defaultPackage.${system};
-            in "${rnix-lsp}/bin/rnix-lsp";
-          filetypes = [ "nix" ];
-        };
+      hm.programs.neovim = {
+        extraPackages = with pkgs; [ rnix-lsp ];
+        extraConfig = wrapLuaConfig ''
+          require'lspconfig'.rnix.setup{}
+        '';
       };
     })
   ]);
