@@ -1,17 +1,29 @@
 { config, pkgs, inputs, lib, ... }:
 
 let
-  inherit (builtins) readFile toJSON;
-  inherit (lib) mkEnableOption mkIf mkMerge mkOption types;
+  inherit (builtins) listToAttrs readFile toJSON;
+  inherit (lib) mkEnableOption mkIf mkMerge mkOption nameValuePair types;
 
   cfg = config.modules.editors.neovim;
 
   inherit (config.nixpkgs) system;
 
   readVimSection = file: readFile (./. + "/${file}.vim");
-  pluginWithCfg = name: {
-    plugin = pkgs.vimPlugins.${name};
-    config = readVimSection "plugins/${name}";
+  pluginWithCfg = plugin: {
+    inherit plugin;
+    config = readVimSection "plugins/${plugin.pname}";
+  };
+
+  # For plugins configured with lua
+  wrapLuaConfig = luaConfig: ''
+    lua<<EOF
+    ${luaConfig}
+    EOF
+  '';
+  readLuaSection = file: wrapLuaConfig (readFile (./. + "/${file}.lua"));
+  pluginWithLua = plugin: {
+    inherit plugin;
+    config = readLuaSection "plugins/${plugin.pname}";
   };
 in {
   options.modules.editors.neovim = {
@@ -72,7 +84,7 @@ in {
           solarized                         # Solarized
 
           # Languages
-          nvim-treesitter                   # Better (AST-based) language parsing
+          (pluginWithLua nvim-treesitter)   # Better (AST-based) language parsing
           nvim-treesitter-textobjects       # ...with text objects
           (pluginWithCfg ale)               # Async linting framework
           (pluginWithCfg coc-nvim)          # Conquerer of Completion (VSCode-based completion)
@@ -100,6 +112,20 @@ in {
       };
 
       hm.home.packages = with pkgs; [ ctags neovim-remote ];
+
+      # Treesitter grammars
+      hm.xdg.configFile = let
+        # The languages for which I want to use tree-sitter
+        languages = [ "lua" "nix" "python" ];
+        # Map each language to its respective tree-sitter package
+        grammarPkg = l: pkgs.tree-sitter.builtGrammars.${"tree-sitter-" + l};
+        # Map each language to a name-value pair for xdg.configFile
+        langToFile = lang: nameValuePair "nvim/parser/${lang}.so" {
+          source = "${grammarPkg lang}/parser";
+        };
+        # The final collection of name-value pairs
+        files = map langToFile languages;
+      in listToAttrs files;
     }
 
     (mkIf cfg.coc.enable {
