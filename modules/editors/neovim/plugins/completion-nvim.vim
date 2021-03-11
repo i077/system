@@ -4,6 +4,10 @@ autocmd BufEnter * lua require'completion'.on_attach()
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
+" Restrict maximum completion height
+set pumheight=16
+set pumblend=15
+
 " Set completeopt to have a better completion experience
 set completeopt=menuone,noinsert,noselect
 
@@ -11,7 +15,8 @@ set completeopt=menuone,noinsert,noselect
 set shortmess+=c
 
 " Completion strategies
-let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy', 'all']
+let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+let g:completion_menu_length = 20
 
 " Complete on backspace
 let g:completion_trigger_on_delete = 1
@@ -19,12 +24,9 @@ let g:completion_trigger_on_delete = 1
 lua<<EOF
 vim.g.completion_chain_complete_list = {
   default = {
-    { complete_items = { 'lsp', 'buffer' } },
+    { complete_items = { 'lsp', 'ts', 'buffer' } },
     { mode = { '<c-p>' } },
     { mode = { '<c-n>' } }
-  },
-  nix = {
-    { complete_items = { 'lsp', 'ts' } }
   },
 }
 EOF
