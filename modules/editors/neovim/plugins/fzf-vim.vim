@@ -13,9 +13,9 @@ function! RipgrepFzf(query, fullscreen)
 endfunction
 com! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 
-" Files buffer
-noremap <silent> <C-P> :Files<CR>
-" Lines buffer
-noremap <silent> <m-p> :Lines<CR>
-" Ripgrep
-noremap <silent> <leader>/ :RG<CR>
+" Keybinds
+noremap <silent> <leader>ff :Files<CR>
+noremap <silent> <leader>fl :BLines<CR>
+noremap <silent> <leader>fL :Lines<CR>
+noremap <silent> <leader>fg :RG<CR>
+noremap <silent> <leader>fw :Windows<CR>
