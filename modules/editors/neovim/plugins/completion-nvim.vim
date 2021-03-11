@@ -19,7 +19,7 @@ let g:completion_trigger_on_delete = 1
 lua<<EOF
 vim.g.completion_chain_complete_list = {
   default = {
-    { complete_items = { 'lsp' } },
+    { complete_items = { 'lsp', 'buffer' } },
     { mode = { '<c-p>' } },
     { mode = { '<c-n>' } }
   },
