@@ -64,43 +64,43 @@ in {
           (pluginWithCfg undotree)          # Visualize the undo tree
 
           # Extensions
-          direnv-vim                        # Direnv integration
-          (pluginWithCfg fugitive)          # Git wrapper
-          rhubarb                           # :GBrowse for GitHub
-          fugitive-gitlab-vim               #           ...Gitlab
-          (pluginWithCfg vim-dispatch)      # Asynchronous job runner
-          (pluginWithCfg fzf-vim)           # Fuzzy entry selection
-          (pluginWithCfg denite-nvim)       # Async unite interface
-          nvim-yarp                         # Remote plugin framework
-          auto-session                      # Auto-save and restore sessions
+          direnv-vim                                  # Direnv integration
+          (pluginWithCfg fugitive)                    # Git wrapper
+          rhubarb                                     # :GBrowse for GitHub
+          fugitive-gitlab-vim                         #           ...Gitlab
+          (pluginWithCfg vim-dispatch)                # Asynchronous job runner
+          (pluginWithCfg fzf-vim)                     # Fuzzy entry selection
+          (pluginWithCfg denite-nvim)                 # Async unite interface
+          nvim-yarp                                   # Remote plugin framework
+          auto-session                                # Auto-save and restore sessions
 
           # UI + Colorschemes
-          (pluginWithCfg airline)           # Smarter tabline
-          vim-airline-themes                # Airline themes (automatches colorscheme)
-          base16-vim                        # Base16
-          falcon                            # Falcon
-          vim-monokai-pro                   # Monokai Pro
-          awesome-vim-colorschemes          # Collection of colorschemes
-          solarized                         # Solarized
+          (pluginWithCfg airline)                     # Smarter tabline
+          vim-airline-themes                          # Airline themes (automatches colorscheme)
+          base16-vim                                  # Base16
+          falcon                                      # Falcon
+          vim-monokai-pro                             # Monokai Pro
+          awesome-vim-colorschemes                    # Collection of colorschemes
+          solarized                                   # Solarized
 
           # Languages
-          (pluginWithLua nvim-treesitter)   # Better (AST-based) language parsing
-          nvim-treesitter-textobjects       # ...with text objects
-          (pluginWithCfg ale)               # Async linting framework
-          (pluginWithCfg coc-nvim)          # Conquerer of Completion (VSCode-based completion)
-          coc-git                           # Git gutter
-          (pluginWithCfg polyglot // {      # Multiple language support
+          (pluginWithLua nvim-treesitter)             # Better (AST-based) language parsing
+          (pluginWithLua nvim-treesitter-textobjects) # ...with text objects
+          (pluginWithCfg ale)                         # Async linting framework
+          (pluginWithCfg coc-nvim)                    # Conquerer of Completion (VSCode-based completion)
+          coc-git                                     # Git gutter
+          (pluginWithCfg polyglot // {                # Multiple language support
             optional = true;
           })
-          vim-addon-nix                     # Nix language support
-          vim-pandoc                        # Pandoc support
-          vim-pandoc-syntax                 # Pandoc syntax support
-          (pluginWithCfg vim-slime)         # Scheme support
+          vim-addon-nix                               # Nix language support
+          vim-pandoc                                  # Pandoc support
+          vim-pandoc-syntax                           # Pandoc syntax support
+          (pluginWithCfg vim-slime)                   # Scheme support
 
           # Prose
-          goyo                              # Distraction-free editing
-          limelight-vim                     # Focus mode for vim
-          (pluginWithCfg vim-pencil)        # Writing tool for vim
+          goyo                                        # Distraction-free editing
+          limelight-vim                               # Focus mode for vim
+          (pluginWithCfg vim-pencil)                  # Writing tool for vim
         ];
 
         extraConfig = ''
