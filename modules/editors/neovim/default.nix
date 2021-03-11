@@ -47,23 +47,23 @@ in {
           surround                          # Surround text
           commentary                        # Comment code with 'gcc'
           easy-align                        # Alignment plugin
-          (pluginWithCfg "easymotion")      # Enhanced motions
+          (pluginWithCfg easymotion)        # Enhanced motions
           vim-indent-object                 # Use indents as motions
-          (pluginWithCfg "undotree")        # Visualize the undo tree
+          (pluginWithCfg undotree)          # Visualize the undo tree
 
           # Extensions
           direnv-vim                        # Direnv integration
-          (pluginWithCfg "fugitive")        # Git wrapper
+          (pluginWithCfg fugitive)          # Git wrapper
           rhubarb                           # :GBrowse for GitHub
           fugitive-gitlab-vim               #           ...Gitlab
-          (pluginWithCfg "vim-dispatch")    # Asynchronous job runner
-          (pluginWithCfg "fzf-vim")         # Fuzzy entry selection
-          (pluginWithCfg "denite-nvim")     # Async unite interface
+          (pluginWithCfg vim-dispatch)      # Asynchronous job runner
+          (pluginWithCfg fzf-vim)           # Fuzzy entry selection
+          (pluginWithCfg denite-nvim)       # Async unite interface
           nvim-yarp                         # Remote plugin framework
           auto-session                      # Auto-save and restore sessions
 
           # UI + Colorschemes
-          (pluginWithCfg "airline")         # Smarter tabline
+          (pluginWithCfg airline)           # Smarter tabline
           vim-airline-themes                # Airline themes (automatches colorscheme)
           base16-vim                        # Base16
           falcon                            # Falcon
@@ -72,27 +72,23 @@ in {
           solarized                         # Solarized
 
           # Languages
-          (pluginWithCfg "ale")             # Async linting framework
-          (pluginWithCfg "coc-nvim")        # Conquerer of Completion (VSCode-based completion)
+          nvim-treesitter                   # Better (AST-based) language parsing
+          nvim-treesitter-textobjects       # ...with text objects
+          (pluginWithCfg ale)               # Async linting framework
+          (pluginWithCfg coc-nvim)          # Conquerer of Completion (VSCode-based completion)
           coc-git                           # Git gutter
-          {                                 # Multiple language support
-            plugin = polyglot; 
+          (pluginWithCfg polyglot // {      # Multiple language support
             optional = true;
-            config = ''
-              " Disable languages other plugins handle better
-              let g:polyglot_disabled = ['tex', 'latex']
-              packadd! vim-polyglot
-            '';
-          }
+          })
           vim-addon-nix                     # Nix language support
           vim-pandoc                        # Pandoc support
           vim-pandoc-syntax                 # Pandoc syntax support
-          (pluginWithCfg "vim-slime")       # Scheme support
+          (pluginWithCfg vim-slime)         # Scheme support
 
           # Prose
           goyo                              # Distraction-free editing
           limelight-vim                     # Focus mode for vim
-          (pluginWithCfg "vim-pencil")      # Writing tool for vim
+          (pluginWithCfg vim-pencil)        # Writing tool for vim
         ];
 
         extraConfig = ''
@@ -108,7 +104,7 @@ in {
 
     (mkIf cfg.coc.enable {
       hm.programs.neovim = {
-        plugins = with pkgs.vimPlugins; [ (pluginWithCfg "coc-nvim") coc-git ];
+        plugins = with pkgs.vimPlugins; [ (pluginWithCfg coc-nvim) coc-git ];
       };
 
       hm.xdg.configFile."nvim/coc-settings.json".text = toJSON cfg.coc.settings;
@@ -118,7 +114,6 @@ in {
     (mkIf config.modules.devel.python.enable {
       hm.programs.neovim = {
         # Add Python development tools
-        extraPython3Packages = (ps: with ps; [ black jedi pylint python-language-server ]);
         plugins = with pkgs.vimPlugins; if cfg.coc.enable then [ coc-pyright ] else [ ];
       };
     })
@@ -126,7 +121,7 @@ in {
     # LaTeX-specific stuff
     (mkIf config.modules.devel.latex.enable {
       hm.programs.neovim.plugins = with pkgs.vimPlugins;
-        if cfg.coc.enable then [ (pluginWithCfg "vimtex") coc-vimtex ] else [ ];
+        if cfg.coc.enable then [ (pluginWithCfg vimtex) coc-vimtex ] else [ ];
     })
 
     # Nix-specific stuff
