@@ -84,7 +84,9 @@ in {
           (pluginWithLua nvim-treesitter-textobjects) # ...with text objects
           (pluginWithLua nvim-lspconfig)              # Config for neovim's built-in LSP client
           (pluginWithLua lspsaga-nvim)                # LSP plugin with a nice UI
-          (pluginWithLua nvim-compe)                  # Autocompletion
+          (pluginWithCfg completion-nvim)             # Autocompletion
+          completion-buffers
+          completion-treesitter
           (pluginWithCfg ale)                         # Async linting framework
           (pluginWithCfg polyglot // {                # Multiple language support
             optional = true;
