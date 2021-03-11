@@ -2,4 +2,5 @@
 let g:ale_linters = {
     \ 'python': [],
     \ 'tex': [],
+    \ 'nix': [],
     \ }

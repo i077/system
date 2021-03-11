@@ -29,7 +29,6 @@ let
 in {
   options.modules.editors.neovim = {
     enable = mkEnableOption "Neovim editor";
-    lsp.enable = mkEnableOpt' "Neovim's built-in LSP";
   };
 
   config = mkIf cfg.enable (mkMerge [
@@ -176,7 +175,7 @@ in {
     # Nix-specific stuff
     (mkIf config.modules.devel.nix.enable {
       hm.programs.neovim = {
-        extraPackages = with pkgs; [ rnix-lsp ];
+        extraPackages = with pkgs; [ inputs.rnix-lsp.defaultPackage.${system} ];
         extraConfig = wrapLuaConfig ''
           require'lspconfig'.rnix.setup{}
         '';
