@@ -18,30 +18,31 @@ cd $flakeRoot
 
 # ----- SUBCOMMANDS -----
 function usage
-    echo -e $bold"Usage:"$resf" sysdo [flags] [verb] [options]\n"
-    echo $bold"Flags:"$resf
-    echo "    -C, --no-check      Don't run checks when building configuration"
-    echo "    -r, --review        Review changes in configuration before activating"
-    echo "    -k, --keep-result   Keep nix build output symlinks"
-    echo
-    echo $bold"Verbs:"$resf
-    echo "        help            Print this help message"
-    echo "        clean           Clean up nix build outputs"
-    echo "        check           Run checks on this repository"
-    echo "     s, switch          Build, activate, and add boot entry for the current configuration"
-    echo "     b, boot            Build and add boot entry for the current configuration"
-    echo "     t, test            Build and activate the current configuration"
-    echo "        build           Build the current configuration"
-    echo "        update          Update flake inputs"
-    echo "    sh, shell           Spawn a devShell (use -c to specify a command)"
-    echo "        repl            Start nix repl with flake"
-    echo "        git             Execute a git command in this repository"
-    echo "        gc              Delete unreachable store paths"
-    echo "        GC [D]          Delete generations older than D days (60 by default)"
-    echo "        install N       Install N's configuration to /mnt"
-    echo "    up, upgrade         Run update and switch"
-    echo "        ub              Run update and boot"
-    echo "        ut              Run update and test"
+    echo $bold"Usage:"$resf" sysdo [flags] [verb] [options]
+
+"$bold"Flags:$resf
+    -C, --no-check      Don't run checks when building configuration
+    -r, --review        Review changes in configuration before activating
+    -k, --keep-result   Keep nix build output symlinks
+
+"$bold"Verbs:"$resf"
+        help            Print this help message
+        clean           Clean up nix build outputs
+        check           Run checks on this repository
+     s, switch          Build, activate, and add boot entry for the current configuration
+     b, boot            Build and add boot entry for the current configuration
+     t, test            Build and activate the current configuration
+        build           Build the current configuration
+        update          Update flake inputs
+    sh, shell           Spawn a devShell (use -c to specify a command)
+        repl            Start nix repl with flake
+        git             Execute a git command in this repository
+        gc              Delete unreachable store paths
+        GC [D]          Delete generations older than D days (60 by default)
+        install N       Install N's configuration to /mnt
+    up, upgrade         Run update and switch
+        ub              Run update and boot
+        ut              Run update and test"
 end
 
 function clean

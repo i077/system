@@ -7,19 +7,19 @@ set _dir (dirname (status filename))
 source $_dir/_lib.fish
 
 function usage
-    echo "git-peek: Quickly look inside a git repository"
-    echo
-    echo -e $bold"Usage:"$resf" git peek [options] clone-url [directory]"
-    echo
-    echo -e $bold"Options:"$resf
-    echo "    -h, --help            Print this help message"
-    echo "    -e, --editor <name>   Open repo in <name> instead of \$EDITOR"
-    echo "    -d, --depth <num>     Only clone <num> commits, or entire tree if 0 (default: 1)"
-    echo "    -k, --keep            Don't delete the clone before exiting"
-    echo "                          (implied if existing directory is passed)"
-    echo "    -b, --branch <ref>    Clone <ref> instead of the default branch"
-    echo "    -o, --dest <path>     Path to clone repo into"
-    echo "    -s, --shell           Open a new shell in the clone instead of \$EDITOR"
+    echo "git-peek: Quickly look inside a git repository
+
+"$bold"Usage:"$resf" git peek [options] clone-url [directory]
+
+"$bold"Options:"$resf"
+    -h, --help            Print this help message
+    -e, --editor <name>   Open repo in <name> instead of \$EDITOR
+    -d, --depth <num>     Only clone <num> commits, or entire tree if 0 (default: 1)
+    -k, --keep            Don't delete the clone before exiting
+                          (implied if existing directory is passed)
+    -b, --branch <ref>    Clone <ref> instead of the default branch
+    -o, --dest <path>     Path to clone repo into
+    -s, --shell           Open a new shell in the clone instead of \$EDITOR"
 end
 
 function _clean

@@ -6,12 +6,12 @@ set _dir (dirname (status filename))
 source $_dir/_lib.fish
 
 function help
-    echo "comma: Run software from nixpkgs without installing it."
-    echo
-    echo -e $bold"Usage:"$resf" , [flags] program [args]"
-    echo
-    echo -e $bold"Flags:"$resf
-    echo "    -n, --dry-run     Just print what would be run"
+    echo "comma: Run software from nixpkgs without installing it.
+
+"$bold"Usage:"$resf" , [flags] program [args]
+
+"$bold"Flags:"$resf"
+    -n, --dry-run     Just print what would be run"
 end
 
 function _run
