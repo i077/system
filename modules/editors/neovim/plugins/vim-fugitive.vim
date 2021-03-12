@@ -1,8 +1,9 @@
 " Keybinds
-map <silent> <leader>gs :Gstatus<CR>
+map <silent> <leader>gs :Git<CR>
 map <silent> <leader>gl :0Glog<CR>
 map <silent> <leader>gL :Glog<CR>
 map <silent> <leader>gd :Gdiffsplit<CR>
+map <silent> <leader>gb :Git blame<CR>
 
 map <silent> <leader>gc :Git commit<CR>
 map <silent> <leader>gC :Git commit %<CR>
