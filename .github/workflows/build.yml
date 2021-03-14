@@ -51,11 +51,9 @@ jobs:
         uses: phulsechinmay/rewritable-pr-comment@v0.3.0
         with:
           message: |
-            <details>
-            <summary>Diff closure for host <code>${{ matrix.hostname }}</code></summary>
-            <pre>
+            ### Closure diff for host `${{ matrix.hostname }}`
+            ```
             ${{ env.diff_closure }}
-            </pre>
-            </details>
+            ```
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COMMENT_IDENTIFIER: closure-diff-${{ matrix.hostname }}
