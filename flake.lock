@@ -1,5 +1,20 @@
 {
   "nodes": {
+    "devshell": {
+      "locked": {
+        "lastModified": 1615943077,
+        "narHash": "sha256-5A3CABXiKPIzU4uETKStQvBtAoZNL1H1B/LAOk4FguU=",
+        "owner": "i077",
+        "repo": "devshell",
+        "rev": "fe73e87cf013966145cc1e7b06de88cd82006555",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "devshell",
+        "type": "github"
+      }
+    },
     "fish-gruvbox": {
       "flake": false,
       "locked": {
@@ -302,6 +317,7 @@
     },
     "root": {
       "inputs": {
+        "devshell": "devshell",
         "fish-gruvbox": "fish-gruvbox",
         "fish-z": "fish-z",
         "home-manager": "home-manager",
