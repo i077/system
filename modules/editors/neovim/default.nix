@@ -111,9 +111,10 @@ in {
 
         extraPackages = with pkgs; [
           # Packages used by the LSP client
-          nodePackages.vim-language-server  # vim
-          sumneko-lua-language-server       # lua
-          nodePackages.yaml-language-server # yaml
+          nodePackages.vim-language-server              # vim
+          sumneko-lua-language-server                   # lua
+          nodePackages.yaml-language-server             # yaml
+          nodePackages.vscode-html-languageserver-bin   # html
         ];
       };
 
