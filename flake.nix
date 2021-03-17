@@ -6,7 +6,8 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
 
     # A nicer `nix develop` experience
-    devshell.url = "github:numtide/devshell";
+    # TODO Change back to upstream when numtide/devshell#105 is merged
+    devshell.url = "github:i077/devshell/patch-1";
 
     # Manage user environment
     home-manager = {
@@ -128,6 +129,10 @@
             # Export PGP keys for sops
             (nv "sopsPGPKeyDirs"
               ''"$DEVSHELL_ROOT/secrets/pubkeys/hosts" "$DEVSHELL_ROOT/secrets/pubkeys/users"'')
+            {
+              name = "PATH";
+              prefix = "bin";
+            }
           ];
 
           packages = with pkgs; [

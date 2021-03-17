@@ -10,7 +10,8 @@
         "type": "github"
       },
       "original": {
-        "owner": "numtide",
+        "owner": "i077",
+        "ref": "patch-1",
         "repo": "devshell",
         "type": "github"
       }
