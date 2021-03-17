@@ -5,6 +5,9 @@
     # Nixpkgs tracks nixos-unstable
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
 
+    # A nicer `nix develop` experience
+    devshell.url = "github:numtide/devshell";
+
     # Manage user environment
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -55,7 +58,7 @@
     ];
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, sops-nix, ... }:
+  outputs = inputs@{ self, nixpkgs, devshell, home-manager, sops-nix, ... }:
     let
       inherit (lib) mkDefault nixosSystem removeSuffix;
       inherit (lib.mine.files) mapFiles mapFilesRec mapFilesRecToList;
@@ -107,20 +110,58 @@
 
       overlay = final: prev: mkMyPkgs final;
 
-      # Shell with dependencies for do script
+      # Shell with dependencies for managing other outputs
       devShell = forAllSystems (system:
         let
-          pkgs = nixpkgsFor.${system};
+          pkgs = import nixpkgs {
+            inherit system;
+            overlays = [ devshell.overlay ];
+          };
           nixBin = pkgs.writeShellScriptBin "nix" ''
             ${pkgs.nixFlakes}/bin/nix --option experimental-features "nix-command flakes" "$@"
           '';
-        in pkgs.mkShell {
-          # Export PGP keys for sops
-          sopsPGPKeyDirs =
-            [ "/etc/nixos/secrets/pubkeys/hosts" "/etc/nixos/secrets/pubkeys/users" ];
-          nativeBuildInputs = [ sops-nix.packages.${system}.sops-pgp-hook ];
+        in pkgs.devshell.mkShell {
+          name = "system-shell";
 
-          buildInputs = with pkgs; [ fish git git-crypt gnupg nixBin nixfmt sops utillinux ];
+          env = let nv = lib.nameValuePair;
+          in [
+            # Export PGP keys for sops
+            (nv "sopsPGPKeyDirs"
+              ''"$DEVSHELL_ROOT/secrets/pubkeys/hosts" "$DEVSHELL_ROOT/secrets/pubkeys/users"'')
+          ];
+
+          packages = with pkgs; [
+            sops-nix.packages.${system}.sops-pgp-hook
+            fish
+            git
+            git-crypt
+            gnupg
+            nixBin
+            utillinux
+          ];
+
+          commands = [
+            # Packages
+            { package = pkgs.sops; }
+            { package = pkgs.nixfmt; }
+            {
+              package = pkgs.gitAndTools.gh;
+            }
+
+            # Custom commands
+            {
+              name = "update-pr";
+              help = "View the latest flakebot PR";
+              category = "maintenance";
+              command = "${pkgs.gitAndTools.gh}/bin/gh pr view -c flakebot";
+            }
+            {
+              name = "secrets";
+              help = "Edit secrets.yaml with sops";
+              category = "maintenance";
+              command = "${pkgs.sops}/bin/sops secrets/secrets.yaml";
+            }
+          ];
         });
     };
 }
