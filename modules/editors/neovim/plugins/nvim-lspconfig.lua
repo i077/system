@@ -1,10 +1,9 @@
-require'lspconfig'.vimls.setup{}
-
-require'lspconfig'.yamlls.setup{}
-
-require'lspconfig'.html.setup{}
-
 local nvim_lsp = require('lspconfig')
+
+nvim_lsp.vimls.setup{}
+nvim_lsp.yamlls.setup{}
+nvim_lsp.html.setup{}
+
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
@@ -57,3 +56,10 @@ local servers = { "pyright", "rnix", "texlab", "vimls" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup { on_attach = on_attach }
 end
+
+-- Don't show hints
+nvim_lsp.util.default_config = vim.tbl_extend(
+  "force",
+  nvim_lsp.util.default_config,
+  { log_level = vim.lsp.protocol.MessageType.Warning }
+)
