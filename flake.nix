@@ -6,8 +6,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
 
     # A nicer `nix develop` experience
-    # TODO Change back to upstream when numtide/devshell#105 is merged
-    devshell.url = "github:i077/devshell/patch-1";
+    devshell.url = "github:numtide/devshell";
 
     # Manage user environment
     home-manager = {

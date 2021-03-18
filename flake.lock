@@ -2,16 +2,15 @@
   "nodes": {
     "devshell": {
       "locked": {
-        "lastModified": 1615943077,
+        "lastModified": 1616093728,
         "narHash": "sha256-5A3CABXiKPIzU4uETKStQvBtAoZNL1H1B/LAOk4FguU=",
-        "owner": "i077",
+        "owner": "numtide",
         "repo": "devshell",
-        "rev": "fe73e87cf013966145cc1e7b06de88cd82006555",
+        "rev": "3663a7dffb94b412cee4cc0c9644fe5f95911101",
         "type": "github"
       },
       "original": {
-        "owner": "i077",
-        "ref": "patch-1",
+        "owner": "numtide",
         "repo": "devshell",
         "type": "github"
       }
