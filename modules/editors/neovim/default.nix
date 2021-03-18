@@ -76,6 +76,7 @@ in {
           vim-monokai-pro                             # Monokai Pro
           awesome-vim-colorschemes                    # Collection of colorschemes
           solarized                                   # Solarized
+          zephyr-nvim                                 # Zephyr
 
           # Languages
           (pluginWithLua nvim-treesitter)             # Better (AST-based) language parsing

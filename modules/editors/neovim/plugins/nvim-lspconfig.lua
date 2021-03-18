@@ -1,8 +1,8 @@
-local nvim_lsp = require('lspconfig')
+local lspconfig = require('lspconfig')
 
-nvim_lsp.vimls.setup{}
-nvim_lsp.yamlls.setup{}
-nvim_lsp.html.setup{}
+lspconfig.vimls.setup{}
+lspconfig.yamlls.setup{}
+lspconfig.html.setup{}
 
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
@@ -25,8 +25,8 @@ local on_attach = function(client, bufnr)
   -- buf_set_keymap('n', '<space>sr', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
   -- buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  -- buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+  -- buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   -- buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
 
   -- Set some keybinds conditional on server capabilities
@@ -54,12 +54,28 @@ end
 -- and map buffer local keybindings when the language server attaches
 local servers = { "pyright", "rnix", "texlab", "vimls" }
 for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup { on_attach = on_attach }
+  lspconfig[lsp].setup { on_attach = on_attach }
 end
 
 -- Don't show hints
-nvim_lsp.util.default_config = vim.tbl_extend(
+lspconfig.util.default_config = vim.tbl_extend(
   "force",
-  nvim_lsp.util.default_config,
+  lspconfig.util.default_config,
   { log_level = vim.lsp.protocol.MessageType.Warning }
+)
+
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics, {
+      -- Enable underline, use default values
+      underline = true,
+      -- Only show virtual text for warnings
+      virtual_text = {
+        severity_limit = "Warning";
+      },
+      signs = {
+        enable = true,
+        priority = 20
+      },
+      update_in_insert = false,
+    }
 )
