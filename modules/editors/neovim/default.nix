@@ -66,7 +66,6 @@ in {
           (pluginWithCfg fzf-vim)                     # Fuzzy entry selection
           (pluginWithCfg denite-nvim)                 # Async unite interface
           nvim-yarp                                   # Remote plugin framework
-          auto-session                                # Auto-save and restore sessions
           (pluginWithCfg vim-which-key)               # Display available keybinds in a popup
 
           # UI + Colorschemes
