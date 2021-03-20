@@ -161,6 +161,16 @@ in {
       };
     })
 
+    # Rust
+    (mkIf config.modules.devel.rust.enable {
+      hm.programs.neovim = {
+        extraPackages = with pkgs; [ rust-analyzer ];
+        extraConfig = wrapLuaConfig ''
+          require'lspconfig'.rust_analyzer.setup{}
+        '';
+      };
+    })
+
     # LaTeX-specific stuff
     (mkIf config.modules.devel.latex.enable {
       hm.programs.neovim = {

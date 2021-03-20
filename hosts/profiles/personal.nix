@@ -64,6 +64,7 @@ in {
       nix.enable = true;
       python.enable = true;
       latex.enable = true;
+      rust.enable = true;
     };
 
     editors = {
