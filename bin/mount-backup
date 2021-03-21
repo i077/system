@@ -1,0 +1,73 @@
+#!/usr/bin/env fish
+
+set _dir (dirname (status filename))
+source $_dir/_lib.fish
+
+check_progs restic
+
+# Mount backup repo to a temporary directory and open a new shell.
+# This is hardcoded to my restic backup repo.
+
+function usage
+    echo "mount-backup: Mount restic backup repository and open a shell
+
+"$bold"Usage:"$resf" mount-backup
+
+"$bold"Options:"$resf"
+    -h, --help            Print this help message
+    -a, --ask-pass        Prompt for restic password"
+end
+
+argparse -s 'h/help' 'a/ask-pass' -- $argv
+
+if ! test -z $_flag_help
+    usage
+    exit 0
+end
+
+if test -z $_flag_ask_pass
+    check_progs rbw
+    log_step "Retrieving password for restic repo..."
+    set -x RESTIC_PASSWORD (rbw get restic)
+else
+    set -x RESTIC_PASSWORD (ask_silent "Enter your restic repo's password:")
+end
+
+set -x RESTIC_REPOSITORY "rest:https://minidepot.imranh.xyz:6053"
+
+set mountpoint (mktemp -d /tmp/restic.XXXXXX)
+log_step "Mounting backup repo to $mountpoint..."
+test -d $mountpoint || mkdir -p $mountpoint
+restic mount $mountpoint &
+
+# No need to keep the password around anymore
+set -e RESTIC_PASSWORD
+set restic_pid (jobs -p %1)
+
+# Wait for mountpoint to be created
+log_minor "Waiting for restic to mount..."
+while not mountpoint -q $mountpoint
+    sleep 1
+    # Check if restic exited
+    if not jobs -q
+        log_error "Restic couldn't mount the repo."
+        exit 1
+    end
+end
+log_ok "Repository was mounted."
+
+log_step "Opening a new shell at $mountpoint..."
+log_minor "Will clean up after this shell exits."
+pushd $mountpoint
+
+# Open a new fish shell with a custom right prompt
+set right_prompt_cmd \
+    "function fish_right_prompt; echo '"$bold$yellow"Restic repo is mounted"$resf"'; end"
+fish -C $right_prompt_cmd
+popd
+
+# Clean up
+log_step "Cleaning up..."
+kill -2 $restic_pid
+wait $restic_pid
+rmdir $mountpoint
