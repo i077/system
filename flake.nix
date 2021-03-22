@@ -60,7 +60,7 @@
 
   outputs = inputs@{ self, nixpkgs, devshell, home-manager, sops-nix, ... }:
     let
-      inherit (lib) mkDefault nixosSystem removeSuffix;
+      inherit (lib) mkDefault mkIf nixosSystem removeSuffix;
       inherit (lib.mine.files) mapFiles mapFilesRec mapFilesRecToList;
 
       # List of systems supported by this flake
@@ -83,6 +83,7 @@
           specialArgs = { inherit inputs lib; };
           modules = [
             {
+              system.configurationRevision = mkIf (self ? rev) self.rev;
               networking.hostName = mkDefault (removeSuffix ".nix" (baseNameOf path));
               nixpkgs.overlays = [ self.overlay inputs.neovim-nightly-overlay.overlay ];
             }
