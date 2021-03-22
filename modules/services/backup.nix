@@ -52,5 +52,8 @@ in {
       serviceConfig.SupplementaryGroups = config.users.groups.keys.name;
       after = [ "NetworkManager-wait-online.target" ];
     };
+
+    # Add restic to environment
+    environment.systemPackages = [ pkgs.restic ];
   };
 }
