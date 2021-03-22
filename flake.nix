@@ -141,6 +141,7 @@
             git-crypt
             gnupg
             nixBin
+            restic
             utillinux
           ];
 
