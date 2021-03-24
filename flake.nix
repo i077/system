@@ -46,6 +46,9 @@
       url = "github:cameronleger/i3-workspacer";
       flake = false;
     };
+
+    # CLI for formatting the entire tree
+    treefmt.url = "github:numtide/treefmt";
   };
 
   nixConfig = {
@@ -58,7 +61,7 @@
     ];
   };
 
-  outputs = inputs@{ self, nixpkgs, devshell, home-manager, sops-nix, ... }:
+  outputs = inputs@{ self, nixpkgs, devshell, home-manager, sops-nix, treefmt, ... }:
     let
       inherit (lib) mkDefault mkIf nixosSystem removeSuffix;
       inherit (lib.mine.files) mapFiles mapFilesRec mapFilesRecToList;
@@ -144,14 +147,20 @@
             nixBin
             restic
             utillinux
+
+            # Formatters (used by treefmt)
+            nixfmt
+            nodePackages.prettier
           ];
 
           commands = [
             # Packages
             { package = pkgs.sops; }
-            { package = pkgs.nixfmt; }
+            { package = pkgs.gitAndTools.gh; }
             {
-              package = pkgs.gitAndTools.gh;
+              help = "Format the entire code tree";
+              category = "formatters";
+              package = treefmt.defaultPackage.${system};
             }
 
             # Custom commands
