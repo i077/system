@@ -1,0 +1,13 @@
+# One CLI to format the code tree - https://github.com/numtide/treefmt
+
+[formatter.nix]
+command = "nixfmt"
+options = ["--width=100"]
+includes = ["*.nix"]
+# Exclude files that nixfmt doesn't handle well
+excludes = ["modules/editors/neovim/default.nix"]
+
+[formatter.prettier]
+command = "prettier"
+options = ["--write"]
+includes = ["*.md"]
