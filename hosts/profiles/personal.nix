@@ -103,6 +103,7 @@ in {
       git = {
         enable = true;
         sendemail = true;
+        gh.enable = true;
       };
       gnupg.enable = true;
       password-store.enable = true;

@@ -24,6 +24,8 @@ in {
     };
 
     sendemail = mkEnableOption "git-sendemail config";
+
+    gh.enable = mkEnableOption "GitHub CLI tool";
   };
 
   config = mkIf cfg.enable (mkMerge [
@@ -67,7 +69,7 @@ in {
       };
 
       # Add git extensions & utilities
-      hm.home.packages = with pkgs; [ gitAndTools.gh git-crypt lazygit sublime-merge ];
+      hm.home.packages = with pkgs; [ git-crypt lazygit sublime-merge ];
     }
 
     (mkIf cfg.delta {
@@ -89,6 +91,18 @@ in {
       sops.secrets.git-sendemail.owner = config.user.name;
 
       hm.programs.git.includes = [{ path = config.sops.secrets.git-sendemail.path; }];
+    })
+
+    (mkIf cfg.gh.enable {
+      hm.programs.gh = {
+        enable = true;
+
+        aliases = {
+          co = "pr checkout";
+        };
+
+        gitProtocol = "ssh";
+      };
     })
   ]);
 }
