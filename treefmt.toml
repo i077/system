@@ -11,3 +11,17 @@ excludes = ["modules/editors/neovim/default.nix"]
 command = "prettier"
 options = ["--write"]
 includes = ["*.md"]
+
+[formatter.fish]
+command = "fish_indent"
+options = ["--write"]
+# Scripts don't have extensions, so we have to list them one by one
+# See numtide/treefmt#33 for more info
+includes = [
+    "*.fish",
+    "bin/,",
+    "bin/git-peek",
+    "bin/mount-backup",
+    "bin/show",
+    "bin/sysdo",
+]

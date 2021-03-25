@@ -148,7 +148,7 @@
             restic
             utillinux
 
-            # Formatters (used by treefmt)
+            # Formatters used by treefmt
             nixfmt
             nodePackages.prettier
           ];
