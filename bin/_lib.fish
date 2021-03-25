@@ -29,7 +29,8 @@ end
 
 function ask_yesno
     # Workaround to remove the mode indicator
-    function fish_mode_prompt; end
+    function fish_mode_prompt
+    end
 
     read -n 1 -P $purple"?? "$argv[1]" (y/N) "$resf reply
     if test $reply = y
@@ -40,14 +41,15 @@ end
 
 function ask_silent
     # Workaround to remove the mode indicator
-    function fish_mode_prompt; end
+    function fish_mode_prompt
+    end
 
     read --silent -P $purple"?? "$argv[1]" "$resf
 end
 
 # Check if a list of programs is in $PATH
 function check_progs
-    for p in $argv;
+    for p in $argv
         if not command -q $p
             log_error "Command '$p' not found in PATH."
             exit 127
