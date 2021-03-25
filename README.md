@@ -78,6 +78,7 @@ this flake and rebuilding the system configuration (`sysdo up`) or removing
 generations more than a month old (`sysdo GC 30`).
 
 Here's the help text:
+
 ```
 Usage: sysdo [flags] [verb] [options]
 

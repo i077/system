@@ -39,7 +39,7 @@ function _run
 end
 
 # Entry point
-argparse -s "n/dry-run" -- $argv
+argparse -s n/dry-run -- $argv
 set -g dry_run $_flag_dry_run
 
 switch $argv[1]

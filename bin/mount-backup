@@ -18,7 +18,7 @@ function usage
     -a, --ask-pass        Prompt for restic password"
 end
 
-argparse -s 'h/help' 'a/ask-pass' -- $argv
+argparse -s h/help a/ask-pass -- $argv
 
 if ! test -z $_flag_help
     usage

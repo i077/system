@@ -58,7 +58,9 @@ function check
     set -l unclean_files (git ls-files -m -o -d --exclude-standard)
     if test -n "$unclean_files"
         log_error "Git working tree is unclean. Commit or stash changes to these files:"
-        for f in $unclean_files; echo "- $f"; end
+        for f in $unclean_files
+            echo "- $f"
+        end
         exit 1
     end
 
@@ -69,7 +71,9 @@ function check
     if not treefmt -q --fail-on-change
         set -l reformatted_files (git ls-files -m -o -d --exclude-standard)
         log_warn "The files below were re-formatted:"
-        for f in $reformatted_files; echo "- $f"; end
+        for f in $reformatted_files
+            echo "- $f"
+        end
         if ask_yesno "Amend the last commit with these changes?"
             git add $reformatted_files
             git commit --amend --no-edit
@@ -84,7 +88,7 @@ end
 function _rebuild_after_review
     test -z $_flag_no_check && check
     # If the step involves activating, run dry-activate first
-    if contains $argv[1] "test" "boot" "switch"
+    if contains $argv[1] test boot switch
         log_step "Building configuration..."
         nixos-rebuild dry-activate # This will leave a ./result symlink
         if not ask_yesno "Continue with the above changes?"
@@ -92,13 +96,13 @@ function _rebuild_after_review
         end
 
         switch $argv[1]
-            case "switch"
+            case switch
                 log_step "Adding boot entry for and activating configuration..."
                 sudo ./result/bin/switch-to-configuration switch
-            case "boot"
+            case boot
                 log_step "Adding boot entry for configuration..."
                 sudo ./result/bin/switch-to-configuration boot
-            case "test"
+            case test
                 log_step "Activating configuration..."
                 sudo ./result/bin/switch-to-configuration test
         end
@@ -113,17 +117,17 @@ end
 function _rebuild
     test -z $_flag_no_check && check
     switch $argv[1]
-        case "switch"
+        case switch
             log_step "Building, activating, and adding boot entry for configuration..."
             sudo nixos-rebuild switch
-        case "boot"
+        case boot
             log_step "Building and adding boot entry for configuration..."
             sudo nixos-rebuild boot
-        case "test"
+        case test
             log_step "Building and activating configuration..."
             sudo nixos-rebuild --fast test
             test -z $_flag_keep_result && clean
-        case "build"
+        case build
             log_step "Building configuration..."
             nixos-rebuild build --flake "$flakeRoot#$flakeAttr"
             test -z $_flag_keep_result && clean
@@ -137,8 +141,7 @@ function update
     if test lastCommit != (git log --format=%h -1)
         # Print which inputs were updated
         log_ok "Updated inputs:"
-        git log --format=%B -1 | grep "Updated" | \
-            sed "s/\* Updated '\(.*\)': '.*\([0-9a-f]\{7\}\)[0-9a-f]\{33\}' -> '.*\([0-9a-f]\{7\}\)[0-9a-f]\{33\}'/     \1: \2 -> \3/"
+        git log --format=%B -1 | grep Updated | sed "s/\* Updated '\(.*\)': '.*\([0-9a-f]\{7\}\)[0-9a-f]\{33\}' -> '.*\([0-9a-f]\{7\}\)[0-9a-f]\{33\}'/     \1: \2 -> \3/"
     else
         # No flake inputs were changed
         log_ok "No flake inputs were updated."
@@ -197,7 +200,7 @@ function install
     end
 
     log_minor "Generating hardware configuration..."
-    nixos-generate-config --show-hardware-config > $flakeRoot/hosts/$argv[1]/hardware-configuration.nix
+    nixos-generate-config --show-hardware-config >$flakeRoot/hosts/$argv[1]/hardware-configuration.nix
     # Commit since tree needs to be clean
     git add hosts/$argv[1]/hardware-configuration.nix
     git commit -m "Add device config for $argv[1]"
@@ -209,7 +212,7 @@ function install
 end
 
 # Parse flags and make them global
-argparse -s "C/no-check" "r/review" "k/keep-result" -- $argv
+argparse -s C/no-check r/review k/keep-result -- $argv
 set -g _flag_no_check $_flag_no_check
 set -g _flag_keep_result $_flag_keep_result
 
@@ -226,7 +229,7 @@ switch $argv[1]
         $argv[1]
     case shell git GC install
         $argv[1] $argv[2..-1]
-    case "switch" "boot" "test" "build"
+    case switch boot test build
         $rebuild $argv[1]
     case s
         $rebuild switch
