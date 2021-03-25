@@ -53,36 +53,29 @@ end
 function check
     log_step "Running checks..."
 
-    # Check that nix files are formatted properly (and offer to reformat)
-    log_minor "Checking formatting with nixfmt..."
-    set -l unformatted_files \
-        (find . -name '*.nix' \
-            # Exclude files not handled well by nixfmt
-            ! -path ./modules/editors/neovim/default.nix \
-            -exec nixfmt -c -w $nixfmt_width {} + &| \
-            grep "not formatted" | sed -e "s/\(.*\): not formatted/\1/")
-    # If there are any unformatted files...
-    if test (count $unformatted_files) -gt 0
-        log_error "The files below aren't formatted properly:"
-        for f in $unformatted_files; echo "  $f"; end
-        if ask_yesno "Format these files and amend last commit?"
-            log_step "Formatting files..."
-            nixfmt -w $nixfmt_width $unformatted_files
-            git add $unformatted_files
-            git commit --amend --no-edit
-        else
-            exit 1
-        end
-    end
-
     # Check that working tree is clean
     log_minor "Checking for uncommitted changes..."
     set -l unclean_files (git ls-files -m -o -d --exclude-standard)
     if test -n "$unclean_files"
         log_error "Git working tree is unclean. Commit or stash changes to these files:"
-        for f in (git ls-files --exclude-standard -o); echo " $f"; end
-        git diff --name-only | sed -e "s/\(.*\)/ \1/"
+        for f in $unclean_files; echo "- $f"; end
         exit 1
+    end
+
+    # Reformat files (and ask to amend commit)
+    # This comes after the git check since treefmt formats in-place
+    log_minor "Formatting files..."
+    # If there are any unformatted files...
+    if not treefmt -q --fail-on-change
+        set -l reformatted_files (git ls-files -m -o -d --exclude-standard)
+        log_warn "The files below were re-formatted:"
+        for f in $reformatted_files; echo "- $f"; end
+        if ask_yesno "Amend the last commit with these changes?"
+            git add $reformatted_files
+            git commit --amend --no-edit
+        else
+            exit 1
+        end
     end
 
     log_ok "Everything looks good."
