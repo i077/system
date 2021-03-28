@@ -55,10 +55,10 @@
             overlays = [ ];
           };
 
-        nixpkgs-25420cd = importNixpkgsRev {
-          rev = "25420cd7876abeb4eae04912db700de79e51121b";
-          sha256 = "140j5fllh8646a9cisnhhm0kmjny9ag9i0a8p783kbvlbgks0n5g";
+        nixpkgs-f5e8bdd = importNixpkgsRev {
+          rev = "f5e8bdd07d1afaabf6b37afc5497b1e498b8046f";
+          sha256 = "1fmwkb2wjfrpx8fis4x457vslam0x8vqlpfwqii6p9vm33dyxhzk";
         };
-      in { onedrive = nixpkgs-25420cd.onedrive; })
+      in { nix-diff = nixpkgs-f5e8bdd.nix-diff; })
   ];
 }
