@@ -46,7 +46,7 @@ in mkIf config.services.xserver.enable {
         iosevka
         (nerdfonts.override (_: { fonts = [ "JetBrainsMono" ]; }))
         ia-writer-duospace
-        inter-ui
+        inter
         latinmodern-math
         open-sans
         roboto
