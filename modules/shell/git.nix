@@ -97,9 +97,7 @@ in {
       hm.programs.gh = {
         enable = true;
 
-        aliases = {
-          co = "pr checkout";
-        };
+        aliases = { co = "pr checkout"; };
 
         gitProtocol = "ssh";
       };
