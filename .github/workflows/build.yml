@@ -1,4 +1,4 @@
-name: "Build and cache NixOS configurations"
+name: "Build flake outputs"
 on:
   push:
     branches:
@@ -12,7 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        hostname: [giratina, dialga]
+        output:
+          - nixosConfigurations.giratina.config.system.build.toplevel
+          - nixosConfigurations.dialga.config.system.build.toplevel
+          - devShell.x86_64-linux
     steps:
       - uses: actions/checkout@v2
         with:
@@ -31,8 +34,8 @@ jobs:
         with:
           name: i077
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-      - name: Build configuration
-        run: nix build -v .#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel
+      - name: Build flake output
+        run: nix build -v .#${{ matrix.output }}
 
         # These next steps calculate the diff between the old and new closures for a flakebot PR,
         # and posts the result for each host in a comment.
@@ -40,8 +43,8 @@ jobs:
         # Only run if we're in a flakebot PR
         if: ${{ github.event_name == 'pull_request' && github.head_ref == 'flakebot' }}
         run: |
-          nix build -v .#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel -o result-new
-          nix build -v .\?ref=$(git rev-parse @~)#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel -o result-old
+          nix build -v .#${{ matrix.output }} -o result-new
+          nix build -v .\?ref=$(git rev-parse @~)#${{ matrix.output }} -o result-old
           echo "diff_closure<<EOF" >> $GITHUB_ENV
           # TODO remove pipe to sed when NixOS/nix#4626 is fixed
           nix store diff-closures ./result-old ./result-new | sed 's/\x1b\[[0-9;]*m//g' >> $GITHUB_ENV
@@ -51,9 +54,9 @@ jobs:
         uses: phulsechinmay/rewritable-pr-comment@v0.3.0
         with:
           message: |
-            ### Closure diff for host `${{ matrix.hostname }}`
+            ### Closure diff for `${{ matrix.output }}`
             ```
             ${{ env.diff_closure }}
             ```
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          COMMENT_IDENTIFIER: closure-diff-${{ matrix.hostname }}
+          COMMENT_IDENTIFIER: closure-diff-${{ matrix.output }}
