@@ -41,6 +41,12 @@
       flake = false;
     };
 
+    # Async fish prompt
+    fish-tide = {
+      url = "github:IlanCosman/tide";
+      flake = false;
+    };
+
     # Workspace scripts for i3
     i3-workspacer = {
       url = "github:cameronleger/i3-workspacer";

@@ -60,10 +60,16 @@ in {
         };
       };
 
-      plugins = [{
-        name = "z";
-        src = inputs.fish-z;
-      }];
+      plugins = [
+        {
+          name = "z";
+          src = inputs.fish-z;
+        }
+        {
+          name = "tide";
+          src = inputs.fish-tide;
+        }
+      ];
 
       promptInit = ''
         # Show vi-mode in cursor

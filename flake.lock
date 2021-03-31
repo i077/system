@@ -46,6 +46,22 @@
         "type": "github"
       }
     },
+    "fish-tide": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1618436545,
+        "narHash": "sha256-XTpkjQOdFXBO9NlEwOMX26bbuxojVmdtxDcfLKXFUdE=",
+        "owner": "IlanCosman",
+        "repo": "tide",
+        "rev": "630ae9f7d93c5f53880e7d59ae4e61f6390b71a1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "IlanCosman",
+        "repo": "tide",
+        "type": "github"
+      }
+    },
     "fish-z": {
       "flake": false,
       "locked": {
@@ -355,6 +371,7 @@
       "inputs": {
         "devshell": "devshell",
         "fish-gruvbox": "fish-gruvbox",
+        "fish-tide": "fish-tide",
         "fish-z": "fish-z",
         "home-manager": "home-manager",
         "i3-workspacer": "i3-workspacer",
