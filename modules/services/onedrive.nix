@@ -2,7 +2,10 @@
 
 let
   cfg = config.modules.services.onedrive;
-  inherit (lib) mkEnableOption mkIf mkOption types;
+  inherit (lib) concatStringsSep mkEnableOption mkIf mkOption types;
+
+  # For specifying patterns to skip in syncing
+  multiPattern = concatStringsSep "|";
 in {
   options.modules.services.onedrive = {
     enable = mkEnableOption "OneDrive syncing";
@@ -17,8 +20,8 @@ in {
       enable = true;
       monitor = true;
       settings = {
-        skip_file = "desktop.ini|Thumbs.db|*.url";
-        skip_dir = "backup|Apps|Pictures";
+        skip_file = multiPattern [ "desktop.ini" "Thumbs.db" "*.url" ];
+        skip_dir = multiPattern [ "backup" "Apps" "Pictures" "Documents/Rainmeter" ];
         inherit (cfg) sync_dir;
       };
     };
