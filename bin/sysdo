@@ -137,7 +137,7 @@ end
 function update
     log_step "Updating flake inputs..."
     set lastCommit (git log --format=%h -1)
-    nix flake update --recreate-lock-file --commit-lock-file
+    nix flake update --commit-lock-file
     if test lastCommit != (git log --format=%h -1)
         # Print which inputs were updated
         log_ok "Updated inputs:"
