@@ -32,8 +32,7 @@ function ask_yesno
     function fish_mode_prompt
     end
 
-    read -n 1 -P $purple"?? "$argv[1]" (y/N) "$resf reply
-    if test $reply = y
+    if test (read -n 1 -P $purple"?? "$argv[1]" (y/N) "$resf) = y
         return 0
     end
     return 1
