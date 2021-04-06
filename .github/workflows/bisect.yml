@@ -27,7 +27,7 @@ jobs:
         extra_nix_config: |
           experimental-features = nix-command flakes
     - name: Configure Cachix
-      uses: cachix/cachix-action@v8
+      uses: cachix/cachix-action@v9
       with:
         name: i077
         # No need to push useless builds to the cache
