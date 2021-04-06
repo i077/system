@@ -58,6 +58,23 @@ in {
             set_color normal
           '';
         };
+
+        fish_command_not_found = {
+          body = ''
+            source ${inputs.self}/bin/_lib.fish
+            # If nix-index can locate the package, offer to use it
+            if , -c $argv
+                function fish_mode_prompt; end # Remove mode indicator for prompt
+                read -n 1 -P $purple"?? nixpkgs has a match for /bin/"$argv[1]". Use it? (y/N) "$resf reply
+                if test $reply = y
+                    , $argv
+                end
+            else
+                echo "$argv[1]: command not found"
+                return 127
+            end
+          '';
+        };
       };
 
       plugins = [{

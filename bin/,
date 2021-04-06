@@ -11,7 +11,8 @@ function help
 "$bold"Usage:"$resf" , [flags] program [args]
 
 "$bold"Flags:"$resf"
-    -n, --dry-run     Just print what would be run"
+    -n, --dry-run     Print what would be run
+    -c, --check       Just quietly check if a package is available"
 end
 
 function _run
@@ -23,7 +24,7 @@ function _run
         exit 1
     else if test (count $attr) -gt 1
         log_minor "Found multiple packages. Select one."
-        set attr (for a in $attr; echo $a; end | fzf --reverse --height 10)
+        set attr (string split0 $attr | fzf --reverse --height 10)
     end
     if test -z $attr
         log_error "No package selected."
@@ -38,13 +39,26 @@ function _run
     end
 end
 
+function _check
+    set attr (nix-locate --top-level --minimal --at-root --whole-name "/bin/$argv[1]")
+    if test (count $attr) -eq 0
+        exit 1
+    else
+        exit 0
+    end
+end
+
 # Entry point
-argparse -s n/dry-run -- $argv
+argparse -s n/dry-run c/check -- $argv
 set -g dry_run $_flag_dry_run
 
 switch $argv[1]
     case ''
         help
     case '*'
-        _run $argv
+        if test -z $_flag_check
+            _run $argv
+        else
+            _check $argv
+        end
 end
