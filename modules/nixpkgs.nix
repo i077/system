@@ -54,11 +54,6 @@
             inherit (config.nixpkgs) config system;
             overlays = [ ];
           };
-
-        nixpkgs-f5e8bdd = importNixpkgsRev {
-          rev = "f5e8bdd07d1afaabf6b37afc5497b1e498b8046f";
-          sha256 = "1fmwkb2wjfrpx8fis4x457vslam0x8vqlpfwqii6p9vm33dyxhzk";
-        };
-      in { nix-diff = nixpkgs-f5e8bdd.nix-diff; })
+      in { })
   ];
 }
