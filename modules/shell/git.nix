@@ -77,7 +77,7 @@ in {
           pu = "push";
           puf = "push --force-with-lease"; # as in "poof" go your old commits!
           puu =
-            "head() { git rev-parse --abbrev-ref HEAD ;}; git push --set-upstream origin $(head)";
+            "!head() { git rev-parse --abbrev-ref HEAD ;}; git push --set-upstream origin $(head)";
 
           # Rebase
           rb = "rebase";
