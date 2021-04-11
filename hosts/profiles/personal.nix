@@ -1,4 +1,4 @@
-# hosts/personal.nix -- Modules to enable for a personal machine
+# hosts/profiles/personal.nix -- Modules to enable for a personal machine
 
 { config, pkgs, ... }:
 
@@ -21,6 +21,7 @@ in {
   hm.home.packages = with pkgs; [
     acpi
     exa
+    fd
     htop
     iotop
     ix
