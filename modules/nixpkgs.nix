@@ -40,8 +40,8 @@
   nixpkgs.config.allowUnfree = true;
   environment.variables.NIXPKGS_ALLOW_UNFREE = "1";
 
-  # Overlay for temporary fixes to broken packages on nixos-unstable
   nixpkgs.overlays = [
+    # Overlay for temporary fixes to broken packages on nixos-unstable
     (final: prev:
       let
         # Import nixpkgs at a specified commit
@@ -55,5 +55,17 @@
             overlays = [ ];
           };
       in { })
+
+    # General package overrides
+    (final: prev: {
+      # Patch ranger to run with PyPy instead of CPython.
+      # This offers about a 2-3x speedup when working with directories with lots of entries,
+      # e.g. the nix store.
+      ranger = prev.ranger.overrideAttrs (oa: {
+        postFixup = oa.postFixup + ''
+          sed -i "s_#!/nix/store/.*_#!${pkgs.pypy3}/bin/pypy3_" $out/bin/.ranger-wrapped
+        '';
+      });
+    })
   ];
 }
