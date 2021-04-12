@@ -23,13 +23,13 @@ in mkIf config.services.xserver.enable {
     pandoc
 
     # GUI apps
-    amazing-marvin
     feedreader
     libreoffice-fresh
     obsidian
     qalculate-gtk
     quodlibet-full
     ripcord
+    todoist-electron
     vlc
     write_stylus
     zoom-us # For now...
