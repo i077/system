@@ -5,8 +5,8 @@
 let inherit (config.home-manager.users.${config.user.name}) xdg;
 in {
   boot = {
-    # Use latest linux kernel (default is LTS)
-    kernelPackages = pkgs.linuxPackages_latest;
+    # Use Liquorix kernel, achieves better performance for desktops
+    kernelPackages = pkgs.linuxPackages_lqx;
 
     # Plymouth boot screen
     plymouth.enable = true;
