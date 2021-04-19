@@ -73,7 +73,6 @@ in {
 
       interactiveShellInit = ''
         # Custom bindings
-        bind -M insert -k btab pager-toggle-search
         bind -M insert \cs accept-autosuggestion repaint
         bind -M insert \cc kill-whole-line repaint
       '';
