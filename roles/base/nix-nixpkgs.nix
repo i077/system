@@ -28,17 +28,16 @@
       flake = inputs.nixpkgs;
     };
 
-    # Add personal cachix cache
+    # Add other binary caches
     binaryCaches = [ "https://i077.cachix.org" "https://nix-community.cachix.org/" ];
     binaryCachePublicKeys = [
       "i077.cachix.org-1:v28tOFUfUjtVXdPol5FfEO/6wC/VKWnHkD32/aMJJBk="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     ];
-  };
 
-  # Allow unfree evaluation
-  nixpkgs.config.allowUnfree = true;
-  environment.variables.NIXPKGS_ALLOW_UNFREE = "1";
+    # Grant sudoers rights with the nix daemon
+    trustedUsers = [ "root" "@wheel" ];
+  };
 
   nixpkgs.overlays = [
     # Overlay for temporary fixes to broken packages on nixos-unstable
@@ -56,7 +55,7 @@
           };
       in { })
 
-    # General package overrides
+    # General package patches
     (final: prev: {
       # Patch ranger to run with PyPy instead of CPython.
       # This offers about a 2-3x speedup when working with directories with lots of entries,

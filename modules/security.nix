@@ -12,10 +12,6 @@ in {
   };
 
   config = (mkMerge [
-    {
-      # Disable kernel command-line editing
-      boot.loader.systemd-boot.editor = false;
-    }
     (mkIf cfg.yubikey.enable (mkMerge [
       {
         sops.secrets = {

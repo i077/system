@@ -1,4 +1,4 @@
-# modules/xdg.nix -- Move everything into XDG directories to keep ~ as neat as possible
+# roles/personal/xdg.nix -- Move everything into XDG directories to keep ~ as neat as possible
 
 { ... }:
 

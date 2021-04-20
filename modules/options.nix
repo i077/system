@@ -11,6 +11,7 @@ in {
     };
 
     hm = mkOption {
+      description = "Primary user's home-manager configuration";
       type = types.attrs;
       default = { };
     };

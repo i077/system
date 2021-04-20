@@ -18,18 +18,20 @@ Dependencies of this configuration are specified in `flake.nix` in the `inputs` 
 
   Each module is exposed as a flake output under `nixosModules`.
 
-- [`hm-modules`](./hm-modules) stores home-manager modules that I use in my configuration,
+- [`hm-modules/`](./hm-modules) stores home-manager modules that I use in my configuration,
   like one for [rotating the wallpaper](./hm-modules/gnome-background.nix) in GNOME.
   They could potentially be merged upstream into home-manager.
 
   Each of these modules is exposed as a flake output under `homeManagerModules`.
 
+- [`roles/`](./roles) stores configuration for high-level attributes for my machines.
+  For example, a personal role is defined that adds personal packages.
+  These roles enable specific config from `modules/` as well as NixOS options.
+
 - Each directory in [`hosts/`](./hosts) stores device-specific configuration
   such as for [giratina](./hosts/giratina), my current laptop.
   Essentially each host's config enables specific modules from `modules/`,
   which in turn changes specific NixOS options.
-  `hosts/profiles/` is an exception, and stores baseline configuration for types of machines
-  (e.g. personal machines or servers).
 
   Each host's configuration is exposed as a flake output under `nixosConfigurations`.
 

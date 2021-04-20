@@ -1,9 +1,14 @@
-# hosts/profiles/personal.nix -- Modules to enable for a personal machine
+# roles/personal.nix -- Modules to enable for a personal machine
 
-{ config, pkgs, ... }:
+{ config, inputs, lib, pkgs, ... }:
 
 let inherit (config.home-manager.users.${config.user.name}) xdg;
 in {
+  imports = [ ./home-manager.nix ./xdg.nix ];
+
+  # Add bin to PATH
+  environment.extraInit = "export PATH=/etc/nixos/bin:$PATH";
+
   boot = {
     # Use Liquorix kernel, achieves better performance for desktops
     kernelPackages = pkgs.linuxPackages_lqx;
@@ -13,9 +18,16 @@ in {
 
     # Allow cross-compilation of AArch64 configurations
     binfmt.emulatedSystems = [ "aarch64-linux" ];
+
+    # Support mounting other filesystems
+    supportedFilesystems = [ "ntfs" "exfat" ];
   };
 
   time.timeZone = "America/New_York";
+
+  # Allow unfree evaluation
+  nixpkgs.config.allowUnfree = true;
+  environment.variables.NIXPKGS_ALLOW_UNFREE = "1";
 
   # User CLI packages
   hm.home.packages = with pkgs; [
@@ -35,6 +47,8 @@ in {
     ripgrep
     ripgrep-all
   ];
+
+  programs.ssh.startAgent = true;
 
   modules = {
     security.yubikey = {
@@ -85,8 +99,8 @@ in {
         excludes = [
           "${xdg.cacheHome}"
           # Exclude Keybase caches -- too much useless data
-          "${xdg.dataHome}/keybase/*.leveldb"
-          "${xdg.dataHome}/keybase/*cache"
+          "${xdg.dataHome}/keybase/*.leveldb" # */
+          "${xdg.dataHome}/keybase/*cache" # */
         ];
         calendar = "*-*-* 00/3:00:00";
       };

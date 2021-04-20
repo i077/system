@@ -1,7 +1,9 @@
 { config, ... }:
 
 {
-  require = [ ../profiles/personal.nix ./hardware-configuration.nix ];
+  require = [ ../../roles/personal ./hardware-configuration.nix ];
+
+  boot.initrd.luks.devices."cryptroot" = { preLVM = true; };
 
   users.users.root.initialHashedPassword =
     "$6$tCSaAe5ySE$xQn/3EZn/3Big2IrGmJSbgmisJMiOe4XtfUlr/5ZSzX9Q8OnBR9Ufnxl0IFk28GhPbRIhYkrBcfp2lMUXfPYi0";

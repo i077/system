@@ -15,18 +15,14 @@ in {
   };
 
   config = (mkMerge [
-    {
-      # Add some packages for mounting other filesystems
-      environment.systemPackages = with pkgs; [ ntfs3g exfat ];
-
+    (mkIf (cfg.swapsize > 0) {
       # Define swap
-      swapDevices = [
-        (mkIf (cfg.swapsize > 0) {
-          device = "/var/swapfile";
-          size = cfg.swapsize;
-        })
-      ];
-    }
+      swapDevices = [{
+        device = "/var/swapfile";
+        size = cfg.swapsize;
+      }];
+    })
+
     (mkIf cfg.ssd.enable {
       services.fstrim.enable = true;
       boot.initrd.luks.devices."cryptroot".allowDiscards = true;

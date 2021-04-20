@@ -91,6 +91,7 @@
               nixpkgs.overlays = [ self.overlay inputs.neovim-nightly-overlay.overlay ];
             }
             (import path)
+            (import ./roles/base)
           ] ++ mapFilesRecToList import ./modules;
         };
 

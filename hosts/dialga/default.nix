@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  require = [ ../profiles/personal.nix ./hardware-configuration.nix ];
+  require = [ ../../roles/personal ./hardware-configuration.nix ];
 
   users.users.root.initialHashedPassword =
     "$6$vvk.FXMfD$XPSyoB.G/TwvRoSHbaMv9n//rrH10VRlKSeMRsZqPg8S4rW.JBPlThmWmS6apBAms9lqEs18V1d8O8aqOwi2B0";

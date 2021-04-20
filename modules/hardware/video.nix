@@ -29,7 +29,6 @@ in {
       }];
 
       hardware.video.hidpi.enable = cfg.hidpi.enable;
-      user.extraGroups = [ "video" ];
     }
 
     (mkIf (cfg.gpu == "nvidia") {
