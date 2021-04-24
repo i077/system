@@ -135,7 +135,7 @@ in {
           "javascript"
           "json"
           # "lua" # Currently broken on tree-sitter 0.19
-          # "nix"
+          "nix"
           "python"
           "rust"
         ];
