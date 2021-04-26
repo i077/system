@@ -53,7 +53,7 @@ in {
           surround                                    # Surround text
           commentary                                  # Comment code with 'gcc'
           easy-align                                  # Alignment plugin
-          (pluginWithCfg easymotion)                  # Enhanced motions
+          (pluginWithLua hop-nvim)                    # Enhanced motions
           vim-indent-object                           # Use indents as motions
           (pluginWithCfg undotree)                    # Visualize the undo tree
 
