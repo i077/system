@@ -20,3 +20,10 @@ noremap <silent> <leader>fL :Lines<CR>
 noremap <silent> <leader>fg :RG<CR>
 noremap <silent> <leader>fw :Windows<CR>
 noremap <silent> <leader>fb :Buffers<CR>
+noremap <silent> <leader>fc :Commands<CR>
+noremap <silent> <leader>fh :Helptags<CR>
+
+" Ctrl-P-like keybinds
+noremap <silent> <C-p> :Files<CR>
+noremap <silent> <M-p> :BLines<CR>
+noremap <silent> <M-c> :Commands<CR>
