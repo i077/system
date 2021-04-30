@@ -35,6 +35,7 @@ in pkgs.devshell.mkShell {
     utillinux
 
     # Formatters used by treefmt
+    luaformatter
     nixfmt
     nodePackages.prettier
   ];

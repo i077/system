@@ -25,3 +25,8 @@ includes = [
     "bin/show",
     "bin/sysdo",
 ]
+
+[formatter.lua]
+command = "lua-format"
+options = ["-i"]
+includes = ["*.lua"]
