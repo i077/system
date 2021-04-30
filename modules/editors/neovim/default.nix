@@ -79,7 +79,8 @@ in {
           zephyr-nvim                                 # Zephyr
 
           # Languages
-          (pluginWithLua nvim-treesitter)             # Better (AST-based) language parsing
+          (pluginWithLua (nvim-treesitter.withPlugins # Better (AST-based) language parsing
+            (_: pkgs.tree-sitter.allGrammars)))
           (pluginWithLua nvim-treesitter-textobjects) # ...with text objects
           (pluginWithLua nvim-lspconfig)              # Config for neovim's built-in LSP client
           (pluginWithLua lspsaga-nvim)                # LSP plugin with a nice UI
@@ -119,35 +120,6 @@ in {
       };
 
       hm.home.packages = with pkgs; [ ctags neovim-remote ];
-
-      # Treesitter grammars
-      hm.xdg.configFile = let
-        # The languages for which I want to use tree-sitter
-        languages = [
-          "bash"
-          "c"
-          "cpp"
-          "css"
-          "go"
-          "haskell"
-          "html"
-          "java"
-          "javascript"
-          "json"
-          # "lua" # Currently broken on tree-sitter 0.19
-          "nix"
-          "python"
-          "rust"
-        ];
-        # Map each language to its respective tree-sitter package
-        grammarPkg = l: pkgs.tree-sitter.builtGrammars.${"tree-sitter-" + l};
-        # Map each language to a name-value pair for xdg.configFile
-        langToFile = lang: nameValuePair "nvim/parser/${lang}.so" {
-          source = "${grammarPkg lang}/parser";
-        };
-        # The final collection of name-value pairs
-        files = map langToFile languages;
-      in listToAttrs files;
     }
 
     # Python-specific stuff
