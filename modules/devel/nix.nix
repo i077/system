@@ -19,6 +19,13 @@ in {
         nix-index
       ];
 
+      # Update manix's cache upon activation if necessary
+      home.activation."manixCacheUpdate" = {
+        before = [ ];
+        after = [ "linkGeneration" ];
+        data = "${pkgs.manix}/bin/manix not-a-query";
+      };
+
       # Service to periodically update the nix-index database
       systemd.user.services.nix-index-update = {
         Unit = {
