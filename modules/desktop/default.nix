@@ -43,6 +43,8 @@ in mkIf config.services.xserver.enable {
     fonts = with pkgs;
       [
         corefonts # Microsoft core fonts for Web
+        fira
+        fira-mono
         iosevka
         (nerdfonts.override (_: { fonts = [ "JetBrainsMono" ]; }))
         ia-writer-duospace
