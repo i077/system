@@ -1,4 +1,4 @@
-# lib/modules.nix -- Helper functions regarding config modules.
+# lib/files.nix -- Helper functions regarding working with trees of files
 
 lib:
 
@@ -25,7 +25,7 @@ in rec {
   # Example: Given a directory dir/ with the following files:
   #   dir/one.nix dir/two.nix dir/three.nix dir/four/default.nix dir/four/foo.nix
   # and some function fn :: path -> any,
-  #   mapFiles ./dir fn ==> {
+  #   mapFiles fn ./dir ==> {
   #     one = fn dir/one.nix;
   #     two = fn dir/two.nix;
   #     three = fn dir/three.nix;
@@ -47,11 +47,11 @@ in rec {
     (readDirNix dir);
 
   # Same as mapFiles, but apply recursively onto each directory
-  # 
+  #
   # Example: Given a directory dir/ with the following files:
   #   dir/one.nix dir/two.nix dir/three.nix dir/four/default.nix dir/four/foo.nix
   # and some function fn :: path -> any,
-  #   mapFiles ./dir fn ==> {
+  #   mapFiles fn ./dir ==> {
   #     one = fn dir/one.nix;
   #     two = fn dir/two.nix;
   #     three = fn dir/three.nix;
