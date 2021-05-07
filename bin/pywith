@@ -1,0 +1,77 @@
+#!/usr/bin/env fish
+
+# Spawn a python environment (and run it) with the given list of packages.
+
+set _dir (dirname (status filename))
+source $_dir/_lib.fish
+
+set FLAKE "github:DavHau/mach-nix"
+
+function usage
+    echo "pywith: Quickly spawn Python environments
+
+"$bold"Usage:"$resf"
+    pywith [options] packages...
+    pywith [options] -r file
+
+"$bold"Options:"$resf"
+    -h, --help              Print this help message
+    -c, --command=<cmd>     Run <cmd> in the built shell (default: python)
+    -r, --requirements      Read packages from a text file
+    -R                      Same as '-r ./requirements.txt'
+"
+end
+
+argparse h/help 'c/command=' 'r/requirements=' R -- $argv; or exit 127
+
+if set -q _flag_help; or test (count $argv) -eq 0
+    usage
+    exit 0
+end
+
+# Give a default command if none was given
+if set -q _flag_command
+    set cmd $_flag_command
+else
+    set cmd python
+end
+
+if set -q _flag_requirements; or set -q _flag_R
+    # If -r or -R was passed, read from the given requirements file
+    if set -q _flag_R
+        set reqfile './requirements.txt'
+    else
+        set reqfile $_flag_requirements
+    end
+    set currentSystem (nix-instantiate --eval -E 'builtins.currentSystem')
+
+    log_step "Reading packages from "$reqfile"..."
+
+    # Build the python environment with requirements.txt, and capture the JSON output
+    # Unforunately 'mach-nix gen -r <file>' isn't working right now, so I have to
+    # use the mkPython function in a nix expression.
+    set build_json (nix build --impure --no-link --json \
+       --expr '(builtins.getFlake "'$FLAKE'").lib.x86_64-linux.mkPython {
+          requirements = builtins.readFile '$reqfile'; }')
+    # If the build didn't succeed, stop
+    if test -z build_json
+        log_error "mach-nix couldn't build the Python environment"
+        exit 1
+    end
+    # Otherwise, grab the outPath from the JSON
+    set outPath (echo $build_json | jq -r 'first | .outputs.out')
+    # TODO spawn a shell with this environment instead
+    $outPath/bin/$cmd
+else
+    # No -r/-R was passsed, so continue with mach-nix's pythonWith
+
+    # If ptpython is present, we probably want that instead of python
+    if contains ptpython $argv; and ! set -q _flag_command
+        log_minor "Found ptpython in args, running that instead of python."
+        set cmd ptpython
+    end
+
+    # Read in the packages to a chain of attributes
+    set attrlist (for pkg in $argv; printf ".%s" $pkg; end)
+    nix shell $FLAKE\#gen.python$attrlist --command $cmd
+end
