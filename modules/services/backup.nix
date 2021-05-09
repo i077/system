@@ -49,7 +49,11 @@ in {
 
     # Only run when online
     systemd.services.restic-backups-minidepot = {
-      serviceConfig.SupplementaryGroups = config.users.groups.keys.name;
+      serviceConfig = {
+        SupplementaryGroups = config.users.groups.keys.name;
+        Restart = "on-failure";
+        RestartSec = 15;
+      };
       after = [ "NetworkManager-wait-online.target" ];
     };
 
