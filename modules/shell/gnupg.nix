@@ -59,7 +59,7 @@ in {
     (mkIf config.modules.security.yubikey.enable { services.pcscd.enable = true; })
 
     # If using GNOME 3, use its pinentry
-    (mkIf config.modules.desktop.gnome3.enable {
+    (mkIf config.modules.desktop.gnome.enable {
       hm.services.gpg-agent.pinentryFlavor = "gnome3";
       services.dbus.packages = [ pkgs.gcr ];
     })

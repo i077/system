@@ -1,11 +1,11 @@
 { config, lib, pkgs, ... }:
 
 let
-  cfg = config.modules.desktop.gnome3;
+  cfg = config.modules.desktop.gnome;
   inherit (builtins) elem;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.modules.desktop.gnome3 = { enable = mkEnableOption "GNOME 3"; };
+  options.modules.desktop.gnome = { enable = mkEnableOption "GNOME Desktop"; };
 
   config = mkIf cfg.enable {
     services.xserver = {
@@ -15,13 +15,13 @@ in {
         # Enable Wayland w/ NVIDIA graphics if necessary
         nvidiaWayland = elem config.modules.hardware.video.gpu [ "optimus" "nvidia" ];
       };
-      desktopManager.gnome3.enable = true;
+      desktopManager.gnome.enable = true;
     };
 
-    services.dbus.packages = [ pkgs.gnome3.dconf ];
+    services.dbus.packages = [ pkgs.gnome.dconf ];
 
     # GNOME tools
-    environment.systemPackages = (with pkgs.gnome3; [ dconf-editor ]) ++
+    environment.systemPackages = (with pkgs.gnome; [ dconf-editor ]) ++
       # Extensions
       (with pkgs.gnomeExtensions; [
         appindicator
@@ -31,15 +31,15 @@ in {
         paperwm
       ]);
 
-    environment.gnome3.excludePackages = with pkgs.gnome3;
+    environment.gnome.excludePackages = with pkgs.gnome;
       [
         gnome-software # No need for this since we use declarative nix
       ];
 
-    hm.home.packages = with pkgs; [ gnome3.gnome-tweaks ];
+    hm.home.packages = with pkgs; [ gnome.gnome-tweaks ];
 
     # Enable gnome-settings-daemon udev rules
-    services.udev.packages = with pkgs; [ gnome3.gnome-settings-daemon ];
+    services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
 
     # Background selector
     hm.services.gnome-background = {

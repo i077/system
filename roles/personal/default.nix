@@ -57,7 +57,7 @@ in {
     };
 
     desktop = {
-      gnome3.enable = true;
+      gnome.enable = true;
       apps = {
         bitwarden = {
           enable = true;
