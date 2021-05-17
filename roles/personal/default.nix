@@ -77,6 +77,7 @@ in {
 
     devel = {
       nix.enable = true;
+      haskell.enable = true;
       python.enable = true;
       python.ptpython.enable = true;
       latex.enable = true;

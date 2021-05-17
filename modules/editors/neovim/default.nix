@@ -159,9 +159,18 @@ in {
     # Nix-specific stuff
     (mkIf config.modules.devel.nix.enable {
       hm.programs.neovim = {
-        extraPackages = with pkgs; [ inputs.rnix-lsp.defaultPackage.${system} ];
+        extraPackages = [ inputs.rnix-lsp.defaultPackage.${system} ];
         extraConfig = wrapLuaConfig ''
           require'lspconfig'.rnix.setup{}
+        '';
+      };
+    })
+
+    (mkIf config.modules.devel.haskell.enable {
+      hm.programs.neovim = {
+        extraPackages = with pkgs; [ haskell-language-server ];
+        extraConfig = wrapLuaConfig ''
+          require'lspconfig'.hls.setup{}
         '';
       };
     })
