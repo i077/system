@@ -46,6 +46,18 @@ in {
           body = "readlink -m (which $argv[1])";
         };
 
+        mkcd = {
+          description = "Make and enter a directory";
+          body = ''
+            if test (count $argv) -ne 1
+                echo "mkcd: Expected exactly one argument."
+                return 127
+            else
+                mkdir $argv[1] && cd $argv[1]
+            end
+          '';
+        };
+
         # Greeting taken from bobthefish
         fish_greeting = {
           body = ''
