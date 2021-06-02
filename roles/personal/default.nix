@@ -107,7 +107,6 @@ in {
         calendar = "*-*-* 00/3:00:00";
       };
       printing.enable = true;
-      nix-distributed.enable = true;
     };
 
     shell = {
