@@ -17,7 +17,7 @@ in {
       buildMachines = [{
         hostName = "machamp";
         system = "x86_64-linux";
-        maxJobs = 16;
+        maxJobs = 8;
         supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
         speedFactor = 2;
         sshKey = config.sops.secrets.builder-sshkey.path;
