@@ -82,6 +82,7 @@ in {
       python.ptpython.enable = true;
       latex.enable = true;
       rust.enable = true;
+      android.enable = true;
     };
 
     editors = {
