@@ -9,7 +9,10 @@ in {
   config = mkIf cfg.enable {
     hm.programs.direnv = {
       enable = true;
-      enableNixDirenvIntegration = true;
+      nix-direnv = {
+        enable = true;
+        enableFlakes = true;
+      };
 
       enableFishIntegration = config.modules.shell.fish.enable;
 
