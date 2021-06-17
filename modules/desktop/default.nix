@@ -46,7 +46,7 @@ in mkIf config.services.xserver.enable {
         fira
         fira-mono
         iosevka
-        (nerdfonts.override (_: { fonts = [ "JetBrainsMono" ]; }))
+        (nerdfonts.override (_: { fonts = [ "Iosevka" ]; }))
         ia-writer-duospace
         inter
         latinmodern-math
