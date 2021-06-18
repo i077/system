@@ -16,9 +16,9 @@ in {
       };
 
       settings = {
-        bold_font = "auto";
-        italic_font = "auto";
-        bold_italic_font = "auto";
+        bold_font = fonts.mono.family + " Bold";
+        italic_font = fonts.mono.family + " Italic";
+        bold_italic_font = fonts.mono.family + " Bold Italic";
         font_size = 12;
         term = "xterm-256color";
         cursor_blink_interval = 0;
