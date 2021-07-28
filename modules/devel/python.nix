@@ -11,12 +11,11 @@ in {
 
   config = mkIf cfg.enable (mkMerge [
     {
-      hm.home.packages = with pkgs; [
-        jetbrains.pycharm-professional
-
-        # Python environment
-        (python3Full.withPackages (ps: with ps; [ numpy scipy matplotlib ptpython black ]))
-      ];
+      hm.home.packages = with pkgs;
+        [
+          # Python environment
+          (python3Full.withPackages (ps: with ps; [ numpy scipy matplotlib ptpython black ]))
+        ];
     }
     (mkIf cfg.ptpython.enable {
       hm.programs.ptpython = {
