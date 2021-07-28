@@ -63,7 +63,6 @@ in {
           enable = true;
           cli.enable = true;
         };
-        everdo.enable = true;
         firefox.enable = true;
         keybase.enable = true;
         vscode.enable = true;
