@@ -26,7 +26,7 @@ in pkgs.devshell.mkShell {
   ];
 
   packages = with pkgs; [
-    sops-nix.packages.${system}.sops-pgp-hook
+    sops-nix.packages.${system}.sops-import-keys-hook
     fish
     git
     gnupg
