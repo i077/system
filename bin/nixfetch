@@ -1,0 +1,46 @@
+#!/usr/bin/env fish
+
+# Fetch a file, add it to the nix store, and output its path.
+# Essentially a wrapper around `nix store prefetch-file`.
+# The nix store is used to avoid storing duplicates of the same file.
+
+set _dir (dirname (status filename))
+source $_dir/_lib.fish
+
+function usage
+    echo "nixfetch: Add a file to /nix/store and output its path
+
+"$bold"Usage:"$resf" nixfetch [options] url
+
+"$bold"Options:"$resf"
+    -h, --help            Print this help message
+    -x, --executable      Set the file's executable bit
+        --unpack          Unpack the file (url can also be a flakeref)"
+end
+
+argparse -s h/help x/executable unpack -- $argv
+
+if test -z $argv[1]; or set -q _flag_help
+    usage
+    exit 125
+end
+
+# -x and --unpack cannot be used together
+if set -q _flag_executable; and set -q _flag_unpack
+    log_error $_flag_executable" and "$_flag_unpack" cannot be used together"
+    exit 125
+end
+
+# Prefetching a tarball is exposed under `nix flake prefetch`
+if set -q _flag_unpack
+    set nixargs flake prefetch
+else
+    set nixargs store prefetch-file
+    if set -q _flag_executable
+        set -a nixargs "--executable"
+    end
+end
+
+# Fetch (+unpack) the file!
+set storepath (nix $nixargs --json $argv[1] | jq -r .storePath)
+echo $storepath
