@@ -7,7 +7,7 @@ This repository stores my configuration files for all my machines running
 
 ## Structure
 
-This repository is a [flake](https://github.com/tweag/rfcs/blob/flakes/rfcs/0049-flakes.md).
+This repository is a [flake](https://www.tweag.io/blog/2020-05-25-flakes/).
 Dependencies of this configuration are specified in `flake.nix` in the `inputs` set.
 
 - [`modules/`](./modules) stores NixOS modules that abstract existing NixOS and
