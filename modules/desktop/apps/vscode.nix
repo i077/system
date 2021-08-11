@@ -9,7 +9,7 @@ in {
   config = mkIf cfg.enable {
     hm.programs.vscode = {
       enable = true;
-      extensions = with pkgs.vscode-extensions; [ ms-python.python bbenoist.Nix ];
+      extensions = with pkgs.vscode-extensions; [ ms-python.python bbenoist.nix ];
     };
   };
 }
