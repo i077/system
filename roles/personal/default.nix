@@ -46,6 +46,8 @@ in {
     ranger
     ripgrep
     ripgrep-all
+
+    thunderbird
   ];
 
   programs.ssh.startAgent = true;
