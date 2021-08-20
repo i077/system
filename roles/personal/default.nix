@@ -52,6 +52,14 @@ in {
 
   programs.ssh.startAgent = true;
 
+  # Geolocation
+  services.geoclue2.enable = true;
+
+  services.logind.extraConfig = ''
+    # Suspend on power key pressed
+    HandlePowerKey=suspend
+  '';
+
   modules = {
     security.yubikey = {
       enable = true;
