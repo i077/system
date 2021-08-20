@@ -2,7 +2,7 @@
 
 let
   inherit (builtins) listToAttrs readFile toJSON;
-  inherit (lib) mkEnableOption mkIf mkMerge mkOption nameValuePair types;
+  inherit (lib) mkBefore mkEnableOption mkIf mkMerge mkOption nameValuePair types;
   inherit (lib.mine.options) mkEnableOpt';
 
   cfg = config.modules.editors.neovim;
@@ -103,13 +103,6 @@ in {
           (pluginWithCfg vim-pencil)                  # Writing tool for vim
         ];
 
-        extraConfig = ''
-          ${readVimSection "editor"}
-          ${readVimSection "ui"}
-          ${readVimSection "mappings"}
-          ${readVimSection "functions"}
-        '';
-
         extraPackages = with pkgs; [
           # Packages used by the LSP client
           nodePackages.vim-language-server              # vim
@@ -120,6 +113,14 @@ in {
       };
 
       hm.home.packages = with pkgs; [ ctags neovim-remote ];
+
+      hm.xdg.configFile."nvim/init.vim".text = mkBefore ''
+        ${readVimSection "editor"}
+        ${readVimSection "ui"}
+        ${readVimSection "mappings"}
+        ${readVimSection "functions"}
+      '';
+
     }
 
     # Python-specific stuff
