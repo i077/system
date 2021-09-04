@@ -53,7 +53,7 @@ in {
           surround                                    # Surround text
           commentary                                  # Comment code with 'gcc'
           easy-align                                  # Alignment plugin
-          (pluginWithLua hop-nvim)                    # Enhanced motions
+          lightspeed-nvim                             # Enhanced motions
           vim-indent-object                           # Use indents as motions
           (pluginWithCfg undotree)                    # Visualize the undo tree
 
@@ -64,8 +64,6 @@ in {
           fugitive-gitlab-vim                         #           ...Gitlab
           (pluginWithCfg vim-dispatch)                # Asynchronous job runner
           (pluginWithCfg fzf-vim)                     # Fuzzy entry selection
-          (pluginWithCfg denite-nvim)                 # Async unite interface
-          nvim-yarp                                   # Remote plugin framework
           (pluginWithCfg vim-which-key)               # Display available keybinds in a popup
 
           # UI + Colorschemes
