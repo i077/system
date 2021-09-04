@@ -6,10 +6,5 @@ let
 in {
   options.modules.desktop.apps.vscode.enable = mkEnableOption "Visual Studio Code";
 
-  config = mkIf cfg.enable {
-    hm.programs.vscode = {
-      enable = true;
-      extensions = with pkgs.vscode-extensions; [ ms-python.python bbenoist.nix ];
-    };
-  };
+  config = mkIf cfg.enable { hm.programs.vscode = { enable = true; }; };
 }
