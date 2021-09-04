@@ -77,8 +77,7 @@ in {
           zephyr-nvim                                 # Zephyr
 
           # Languages
-          (pluginWithLua (nvim-treesitter.withPlugins # Better (AST-based) language parsing
-            (_: pkgs.tree-sitter.allGrammars)))
+          (pluginWithLua nvim-treesitter)            # Better (AST-based) language parsing
           (pluginWithLua nvim-treesitter-textobjects) # ...with text objects
           (pluginWithLua nvim-lspconfig)              # Config for neovim's built-in LSP client
           (pluginWithLua lspsaga-nvim)                # LSP plugin with a nice UI
@@ -119,6 +118,8 @@ in {
         ${readVimSection "functions"}
       '';
 
+      # Treesitter parsers
+      hm.xdg.configFile."nvim/parser".source = pkgs.tree-sitter.withPlugins (_: pkgs.tree-sitter.allGrammars);
     }
 
     # Python-specific stuff
