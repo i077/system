@@ -10,10 +10,7 @@ in {
     hm.programs.kitty = {
       enable = true;
 
-      font = {
-        package = fonts.mono.pkg;
-        name = fonts.mono.family;
-      };
+      font.name = fonts.mono.family;
 
       settings = {
         bold_font = fonts.mono.family + " Bold";
