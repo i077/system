@@ -40,14 +40,10 @@ in {
     jq
     libqalculate
     libsecret # Used by some apps to store secrets
-    openconnect
-    openfortivpn
     powertop
     ranger
     ripgrep
     ripgrep-all
-
-    thunderbird
   ];
 
   programs.ssh.startAgent = true;

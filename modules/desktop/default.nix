@@ -16,19 +16,17 @@ in mkIf config.services.xserver.enable {
 
   hm.home.packages = with pkgs; [
     # No point in having these without a desktop...
-    maim
     xdotool
     xsel
 
     pandoc
 
     # GUI apps
-    feedreader
-    libreoffice-fresh
     obsidian
     qalculate-gtk
     quodlibet-full
     ripcord
+    thunderbird
     todoist-electron
     vlc
     write_stylus
