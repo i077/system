@@ -52,6 +52,12 @@
 
     # CLI for formatting the entire tree
     treefmt.url = "github:numtide/treefmt";
+
+    # PaperWM next-release branch
+    paperwm-next = {
+      url = "github:PaperWM/PaperWM/next-release";
+      flake = false;
+    };
   };
 
   nixConfig = {

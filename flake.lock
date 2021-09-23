@@ -247,6 +247,23 @@
         "type": "github"
       }
     },
+    "paperwm-next": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1617616509,
+        "narHash": "sha256-gZbS2Xy+CuQfzzZ5IwMahr3VLtyTiLxJTJVawml9sXE=",
+        "owner": "PaperWM",
+        "repo": "PaperWM",
+        "rev": "e9f714846b9eac8bdd5b33c3d33f1a9d2fbdecd4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "PaperWM",
+        "ref": "next-release",
+        "repo": "PaperWM",
+        "type": "github"
+      }
+    },
     "rnix-lsp": {
       "inputs": {
         "naersk": "naersk",
@@ -277,6 +294,7 @@
         "i3-workspacer": "i3-workspacer",
         "nixpkgs": "nixpkgs",
         "oh-my-tmux": "oh-my-tmux",
+        "paperwm-next": "paperwm-next",
         "rnix-lsp": "rnix-lsp",
         "sops-nix": "sops-nix",
         "treefmt": "treefmt"

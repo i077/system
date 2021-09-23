@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, inputs, lib, pkgs, ... }:
 
 let
   cfg = config.modules.desktop.gnome;
@@ -28,8 +28,13 @@ in {
             dash-to-dock
             gsconnect
             night-theme-switcher
-            paperwm
             vertical-overview
+
+            # Use paperwm next-release branch
+            (paperwm.overrideAttrs (oa: {
+              version = "pre-40.0";
+              src = inputs.paperwm-next;
+            }))
           ]);
       };
     };
