@@ -20,9 +20,6 @@
     # Nix language server
     rnix-lsp.url = "github:nix-community/rnix-lsp";
 
-    # Neovim nightly
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-
     # Tmux configuration
     oh-my-tmux = {
       url = "github:gpakosz/.tmux";
@@ -94,7 +91,7 @@
             {
               system.configurationRevision = mkIf (self ? rev) self.rev;
               networking.hostName = mkDefault (removeSuffix ".nix" (baseNameOf path));
-              nixpkgs.overlays = [ self.overlay inputs.neovim-nightly-overlay.overlay ];
+              nixpkgs.overlays = [ self.overlay ];
             }
             (import path)
             (import ./roles/base)
