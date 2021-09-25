@@ -22,6 +22,8 @@ includes = [
     "bin/,",
     "bin/git-peek",
     "bin/mount-backup",
+    "bin/nixfetch",
+    "bin/pywith",
     "bin/show",
     "bin/sysdo",
 ]

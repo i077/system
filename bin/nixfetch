@@ -37,7 +37,7 @@ if set -q _flag_unpack
 else
     set nixargs store prefetch-file
     if set -q _flag_executable
-        set -a nixargs "--executable"
+        set -a nixargs --executable
     end
 end
 
