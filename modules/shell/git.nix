@@ -134,12 +134,14 @@ in {
       hm.programs.gh = {
         enable = true;
 
-        aliases = {
-          co = "pr checkout";
-          cl = "repo clone";
+        settings = {
+          aliases = {
+            co = "pr checkout";
+            cl = "repo clone";
+          };
+          git_protocol = "ssh";
         };
 
-        gitProtocol = "ssh";
       };
     })
   ]);
