@@ -11,7 +11,6 @@ in {
       enable = true;
       nix-direnv = {
         enable = true;
-        enableFlakes = true;
       };
 
       enableFishIntegration = config.modules.shell.fish.enable;
