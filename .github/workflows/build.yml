@@ -14,8 +14,6 @@ jobs:
       fail-fast: false
       matrix:
         output:
-          - nixosConfigurations.giratina.config.system.build.toplevel
-          - nixosConfigurations.dialga.config.system.build.toplevel
           - devShell.x86_64-linux
     steps:
       - uses: actions/checkout@v2.4.0
