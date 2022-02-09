@@ -50,6 +50,7 @@
   # OpenSSH configuration
   services.openssh = {
     enable = true;
+    ports = [ 22 2255 ];
     passwordAuthentication = false;
     permitRootLogin = "no";
   };
