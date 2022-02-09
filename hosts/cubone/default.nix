@@ -29,7 +29,7 @@
   
   time.timeZone = "America/New_York";
 
-  nix.trustedUsers = [ "@wheel" ];
+  nix.settings.trusted-users = [ "@wheel" ];
   security.sudo.wheelNeedsPassword = false;
   
   # Use nix flakes for local flake evaluation
@@ -63,4 +63,7 @@
     # Use CloudFlare's DNS servers
     servers = [ "1.1.1.1" "1.0.0.1" ];
   };
+  # Open port 53 to accept DNS requests
+  networking.firewall.allowedTCPPorts = [ 53 ];
+  networking.firewall.allowedUDPPorts = [ 53 ];
 }
