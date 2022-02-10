@@ -13,11 +13,8 @@
   };
 
   nixConfig = {
-    substituters = [
-      "https://i077.cachix.org"
-      "https://cache.nixos.org"
-      "https://nix-community.cachix.org/"
-    ];
+    substituters =
+      [ "https://i077.cachix.org" "https://cache.nixos.org" "https://nix-community.cachix.org/" ];
     trusted-public-keys = [
       "i077.cachix.org-1:v28tOFUfUjtVXdPol5FfEO/6wC/VKWnHkD32/aMJJBk="
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
@@ -28,8 +25,7 @@
   outputs = { self, nixpkgs, deploy-rs, devshell, ... }@inputs:
     let
       # Systems supported by this flake
-      systems =
-        [ "aarch64-darwin" "aarch64-linux" "x86_64-darwin" "x86_64-linux" ];
+      systems = [ "aarch64-darwin" "aarch64-linux" "x86_64-darwin" "x86_64-linux" ];
       forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f system);
     in {
       nixosConfigurations = {
@@ -47,14 +43,13 @@
           profiles.system = {
             sshUser = "imran";
             user = "root";
-            path = deploy-rs.lib.aarch64-linux.activate.nixos
-              self.nixosConfigurations.cubone;
+            path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.cubone;
           };
         };
       };
 
-      checks = builtins.mapAttrs
-        (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+      checks =
+        builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
 
       devShell = forAllSystems (system:
         let
