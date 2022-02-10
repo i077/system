@@ -52,6 +52,7 @@
     enable = true;
     ports = [ 22 2255 ];
     passwordAuthentication = false;
+    kbdInteractiveAuthentication = false;
     permitRootLogin = "no";
   };
   
