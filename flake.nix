@@ -10,6 +10,9 @@
 
     # Easily deploy changes to systems
     deploy-rs.url = "github:serokell/deploy-rs";
+
+    # Format the entire code tree in one command
+    treefmt.url = "github:numtide/treefmt";
   };
 
   nixConfig = {
@@ -22,7 +25,7 @@
     ];
   };
 
-  outputs = { self, nixpkgs, deploy-rs, devshell, ... }@inputs:
+  outputs = { self, nixpkgs, deploy-rs, devshell, treefmt, ... }@inputs:
     let
       # Systems supported by this flake
       systems = [ "aarch64-darwin" "aarch64-linux" "x86_64-darwin" "x86_64-linux" ];
@@ -62,12 +65,23 @@
           packages = with pkgs; [
             # Wrap nix to support flakes
             (writeShellScriptBin "nix" ''
-              ${pkgs.nix}/bin/nix --option experimental-features "nix-command flakes" "$@"
+              ${pkgs.nix}/bin/nix --extra-experimental-features "nix-command flakes" "$@"
             '')
-            nixfmt
             deploy-rs.defaultPackage.${system}
             cachix
+
+            # Formatters used by treefmt
+            fish
+            luaformatter
+            nixfmt
+            nodePackages.prettier
           ];
+
+          commands = [{
+            help = "Format the entire code tree";
+            category = "formatters";
+            package = treefmt.defaultPackage.${system};
+          }];
         });
     };
 }
