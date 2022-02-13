@@ -3,6 +3,7 @@
 let
   mySSHKeys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBsq7jgT0egpEZ4QpgaFHRRxrwk7vzWVvZE0w7Bhk9hK imran@NTC-MacBook"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID1YIyqTUGvH71i6MWCsYPVoijYLZWfapmuMSR4aGAh9 Shortcuts on Geodude"
   ];
 
   blocklistPath = "/var/lib/dnsmasq/blocklist";
