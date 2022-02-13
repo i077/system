@@ -91,9 +91,9 @@ in {
   # Update the blocklist from notracking's repo every night
   systemd.services.dnsmasq-update-blocklist = {
     startAt = "*-*-* 03:00:00";
-    before = [ "dnsmasq.service" ];
     script = ''
       ${pkgs.curl}/bin/curl -sSL -o ${blocklistPath} ${blocklistUrl}
+      systemctl restart dnsmasq.service
     '';
   };
 }
