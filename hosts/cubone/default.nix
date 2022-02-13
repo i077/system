@@ -7,8 +7,7 @@ let
   ];
 
   blocklistPath = "/var/lib/dnsmasq/blocklist";
-  blocklistUrl =
-    "https://github.com/notracking/hosts-blocklists/raw/master/dnsmasq/dnsmasq.blacklist.txt";
+  blocklistUrl = "https://dnsmasq.oisd.nl/";
 in {
   imports = [ ./hardware-configuration.nix ];
 
