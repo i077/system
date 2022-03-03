@@ -9,7 +9,7 @@ let
   blocklistPath = "/var/lib/dnsmasq/blocklist";
   blocklistUrl = "https://dnsmasq.oisd.nl/";
 in {
-  imports = [ ./hardware-configuration.nix ];
+  imports = [ ./hardware-configuration.nix ./unbound.nix ];
 
   system.stateVersion = "20.09";
 
@@ -61,39 +61,26 @@ in {
     kbdInteractiveAuthentication = false;
     permitRootLogin = "no";
   };
+  programs.mosh.enable = true;
 
   services.tailscale.enable = true;
 
-  # Pihole-like functionality with dnsmasq
-  services.dnsmasq = {
-    enable = true;
-
-    # Use CloudFlare's DNS servers
-    servers = [ "1.1.1.1" "1.0.0.1" "2606:4700:4700::1111" "2606:4700:4700::1001" ];
-    alwaysKeepRunning = true;
-
-    # Block ads & trackers with dnsmasq
-    extraConfig = ''
-      conf-file=${blocklistPath}
-    '';
+  # Pihole
+  # Open ports 53 to accept DNS requests, 80 for pihole portal, 67 for DHCP
+  networking.firewall.allowedTCPPorts = [ 53 80 ];
+  networking.firewall.allowedUDPPorts = [ 53 67 ];
+  virtualisation.oci-containers.containers.pihole = {
+    autoStart = true;
+    image = "pihole/pihole:latest";
+    ports = [ "53:53/tcp" "53:53/udp" "80:80" ];
+    volumes = [ "/var/lib/pihole/:/etc/pihole/" "/var/lib/dnsmasq.d:/etc/dnsmasq.d/" ];
+    environment = {
+      TZ = "America/NewYork";
+      DNSSEC = "true";
+    };
+    extraOptions = [ "--cap-add=NET_ADMIN" "--net=host" ];
+    workdir = "/var/lib/pihole/";
   };
-  # Open port 53 to accept DNS requests
-  networking.firewall.allowedTCPPorts = [ 53 ];
-  networking.firewall.allowedUDPPorts = [ 53 ];
-
-  # Ensure at least an empty blocklist exists before starting dnsmasq,
-  # otherwise it might fail to start
-  systemd.services.dnsmasq.preStart = ''
-    mkdir -p $(dirname ${blocklistPath})
-    touch ${blocklistPath}
-  '';
-
-  # Update the blocklist from notracking's repo every night
-  systemd.services.dnsmasq-update-blocklist = {
-    startAt = "*-*-* 03:00:00";
-    script = ''
-      ${pkgs.curl}/bin/curl -sSL -o ${blocklistPath} ${blocklistUrl}
-      systemctl restart dnsmasq.service
-    '';
-  };
+  
+  environment.systemPackages = with pkgs; [ dig nmap ];
 }
