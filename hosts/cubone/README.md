@@ -1,0 +1,6 @@
+![cubone sprite](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAABGdBTUEAAK/INwWK6QAAACpQTFRFAAAA+Pj46Ojo8ODI+NCgyMiw4LCI2LhowJhIiIhokGgwWFgwUDAYKCgo2AlFGQAAAAF0Uk5TAEDm2GYAAAGTSURBVHja7ZbLjoMwDEWJwSR+3P//3ZGTAK00autKMyvuigX3xPELluXWrVv/KpGvDGJm8WBSyHL+UsJLITMphQgpgBGRlNB8SPqDYKUchFKIs4AF5QIQsaXTbk9+zkdgdNq/Ati0AjBjzhMw/RpCAOwbP0MVrpwn2BEAQKRs2TvIzICBUIqySQogcmbfIgURgACZOXgoPzNLMn6bfh7Vs3QCegIFfEjSTWCRPcThIwb0+7v7x00wY1fvmMije/TTkiAA0LCi+1trrpppRCwLXPd934c9AMlh8IatK8xByI6j+7au6yCgh5Dza8O6DsI+CakQtNYTcFwiA/A6AzgAaC1TxgXkzwAlT/WBRQ1Of9QRn/hFbHzOiFBnEbdt81prU+BtKwsXQriJUetJ0FY7IZbb2zE+Z/gC7BHABOjrgcKxBADU2hr2Lj/8MRuv+8nGDuqz28s2ANFEOgGvU4lr9Xh3+CConv7XmxEPq2e4EEHgAODtYr3eiGXej+s21dQ6maiH46BEyWH8hXf/aN669bf6AVTHFxZ8V1oPAAAAAElFTkSuQmCC)
+
+cubone is a Raspberry Pi 4 Model B.
+Its primary function is to act as a [Tailnet](https://tailscale.com)-wide ad-blocker using
+[Pi-hole](https://pi-hole.net/).
+For now, Pi-hole runs in an OCI container pulled from the Docker Hub registry.
