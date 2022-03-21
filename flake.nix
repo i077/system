@@ -5,6 +5,18 @@
     # Use unstable-small branch for quicker updates
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
 
+    # Manage macOS systems with Nix
+    darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Manage user environment with Nix
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # A nicer developer env experience
     devshell.url = "github:numtide/devshell";
 
@@ -25,7 +37,7 @@
     ];
   };
 
-  outputs = { self, nixpkgs, deploy-rs, devshell, treefmt, ... }@inputs:
+  outputs = { self, nixpkgs, darwin, deploy-rs, devshell, treefmt, ... }@inputs:
     let
       # Systems supported by this flake
       systems = [ "aarch64-darwin" "aarch64-linux" "x86_64-darwin" "x86_64-linux" ];
@@ -35,6 +47,14 @@
         cubone = nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
           modules = [ ./hosts/cubone ];
+          specialArgs = { inherit inputs; };
+        };
+      };
+
+      darwinConfigurations = {
+        venusaur = darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          modules = [ ./hosts/venusaur ];
           specialArgs = { inherit inputs; };
         };
       };
@@ -77,11 +97,11 @@
             nodePackages.prettier
           ];
 
-          commands = [{
-            help = "Format the entire code tree";
-            category = "formatters";
-            package = treefmt.defaultPackage.${system};
-          }];
+          #commands = [{
+          #  help = "Format the entire code tree";
+          #  category = "formatters";
+          #  package = treefmt.defaultPackage.${system};
+          #}];
         });
     };
 }

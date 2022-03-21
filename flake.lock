@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "darwin": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1647173930,
+        "narHash": "sha256-8oca3Pc68VrCp8HeOtHmzs5g0rdQnPO9beDEEZJ02W0=",
+        "owner": "LnL7",
+        "repo": "nix-darwin",
+        "rev": "17fbc68a6110edbff67e55f7450230a697ecb17e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "LnL7",
+        "repo": "nix-darwin",
+        "type": "github"
+      }
+    },
     "deploy-rs": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -85,6 +105,26 @@
         "type": "github"
       }
     },
+    "home-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1647821523,
+        "narHash": "sha256-NAIY357pAOcxK6bAt83kKEJ2LxZhLCiPIlmQ2iTQbk4=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "835797f3a4a59459a316ae8d4ab91fa59faf61a4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1643472818,
@@ -151,8 +191,10 @@
     },
     "root": {
       "inputs": {
+        "darwin": "darwin",
         "deploy-rs": "deploy-rs",
         "devshell": "devshell",
+        "home-manager": "home-manager",
         "nixpkgs": "nixpkgs_3",
         "treefmt": "treefmt"
       }
