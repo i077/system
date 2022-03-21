@@ -4,6 +4,8 @@ let
   mySSHKeys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBsq7jgT0egpEZ4QpgaFHRRxrwk7vzWVvZE0w7Bhk9hK imran@NTC-MacBook"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID1YIyqTUGvH71i6MWCsYPVoijYLZWfapmuMSR4aGAh9 Shortcuts on Geodude"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHQRxhrUwCg/DcNQfG8CwIMdJsHu0jZWI2BZV/T6ka5N imran@venusaur"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIGGsm2JWPKT+pUJHs7l7el4OJFxQZjkC3T/oxkLUlG9 Shortcuts on venusaur"
   ];
 
   blocklistPath = "/var/lib/dnsmasq/blocklist";
