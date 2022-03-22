@@ -1,5 +1,7 @@
 { lib, pkgs, ... }:
 {
+  imports = [ ./brew.nix ];
+
   # Add administrators to trusted users
   nix.trustedUsers = [ "@admin" ];
   users.nix.configureBuildUsers = true;

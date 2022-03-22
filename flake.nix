@@ -52,7 +52,7 @@
       };
 
       darwinConfigurations = {
-        venusaur = darwin.lib.darwinSystem {
+        Venusaur = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           modules = [ ./hosts/venusaur ];
           specialArgs = { inherit inputs; };
