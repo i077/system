@@ -42,6 +42,12 @@
       # Systems supported by this flake
       systems = [ "aarch64-darwin" "aarch64-linux" "x86_64-darwin" "x86_64-linux" ];
       forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f system);
+
+      mkDarwinConfig = system: path: darwin.lib.darwinSystem {
+        inherit system;
+        modules = [ ./modules/darwin path ];
+        specialArgs = { inherit inputs; };
+      };
     in {
       nixosConfigurations = {
         cubone = nixpkgs.lib.nixosSystem {
@@ -52,11 +58,7 @@
       };
 
       darwinConfigurations = {
-        Venusaur = darwin.lib.darwinSystem {
-          system = "aarch64-darwin";
-          modules = [ ./hosts/venusaur ];
-          specialArgs = { inherit inputs; };
-        };
+        Venusaur = mkDarwinConfig "aarch64-darwin" ./hosts/venusaur;
       };
 
       deploy.nodes = {

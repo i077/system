@@ -6,6 +6,11 @@
   nix.trustedUsers = [ "@admin" ];
   users.nix.configureBuildUsers = true;
 
+  networking.hostName = "Venusaur";
+
+  # Enable touch ID for sudo
+  security.pam.enableSudoTouchIdAuth = true;
+
   # Enable flakes, x86 emulation
   nix.extraOptions = ''
     build-users-group = nixbld
