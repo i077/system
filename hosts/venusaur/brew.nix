@@ -21,6 +21,7 @@
       "contexts"
       "firefox"
       "karabiner-elements"
+      "keybase"
       "plexamp"
       "raycast"
       "stats"
@@ -28,5 +29,11 @@
       "visual-studio-code"
       "zotero"
     ];
+
+    masApps = {
+      Xcode = 497799835;
+      "Reeder 5" = 1529448980;
+      Tailscale = 1475387142;
+    };
   };
 }
