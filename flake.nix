@@ -4,11 +4,12 @@
   inputs = {
     # Use unstable-small branch for quicker updates
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     # Manage macOS systems with Nix
     darwin = {
       url = "github:LnL7/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
 
     # Manage user environment with Nix
@@ -82,6 +83,8 @@
             inherit system;
             overlays = [ devshell.overlay ];
           };
+          inherit (pkgs) lib;
+          systemIsPlatform = platforms: builtins.elem system platforms;
         in pkgs.devshell.mkShell {
           name = "system";
           packages = with pkgs; [
@@ -99,11 +102,11 @@
             nodePackages.prettier
           ];
 
-          #commands = [{
-          #  help = "Format the entire code tree";
-          #  category = "formatters";
-          #  package = treefmt.defaultPackage.${system};
-          #}];
+          commands = lib.optional (systemIsPlatform lib.platforms.x86_64) [{
+            help = "Format the entire code tree";
+            category = "formatters";
+            package = treefmt.defaultPackage.${system};
+          }];
         });
     };
 }
