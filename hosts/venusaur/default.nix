@@ -1,12 +1,17 @@
-{ lib, pkgs, ... }:
-{
+{ config, lib, pkgs, ... }:
+let
+  hostName = "Venusaur";
+in {
   imports = [ ./brew.nix ];
 
   # Add administrators to trusted users
   nix.trustedUsers = [ "@admin" ];
   users.nix.configureBuildUsers = true;
 
-  networking.hostName = "Venusaur";
+  networking = {
+    computerName = hostName;
+    inherit hostName;
+  };
 
   # Enable touch ID for sudo
   security.pam.enableSudoTouchIdAuth = true;
@@ -22,7 +27,12 @@
 
   services.nix-daemon.enable = true;
 
+  programs.zsh.enable = true;
   programs.fish.enable = true;
+
+  environment.systemPath = [
+    "${config.homebrew.brewPrefix}"
+  ];
 
   nixpkgs.config = {
     allowUnfree = true;
