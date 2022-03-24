@@ -44,23 +44,23 @@
       systems = [ "aarch64-darwin" "aarch64-linux" "x86_64-darwin" "x86_64-linux" ];
       forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f system);
 
-      mkDarwinConfig = system: path: darwin.lib.darwinSystem {
-        inherit system;
-        modules = [ ./modules/darwin path ];
-        specialArgs = { inherit inputs; };
-      };
-    in {
-      nixosConfigurations = {
-        cubone = nixpkgs.lib.nixosSystem {
-          system = "aarch64-linux";
-          modules = [ ./hosts/cubone ];
+      mkDarwinConfig = system: path:
+        darwin.lib.darwinSystem {
+          inherit system;
+          modules = [ ./modules/darwin path ];
           specialArgs = { inherit inputs; };
         };
-      };
 
-      darwinConfigurations = {
-        Venusaur = mkDarwinConfig "aarch64-darwin" ./hosts/venusaur;
-      };
+      mkNixosConfig = system: path:
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [ path ];
+          specialArgs = { inherit inputs; };
+        };
+    in {
+      nixosConfigurations = { cubone = mkNixosConfig "aarch64-linux" ./hosts/cubone; };
+
+      darwinConfigurations = { Venusaur = mkDarwinConfig "aarch64-darwin" ./hosts/venusaur; };
 
       deploy.nodes = {
         cubone = {
@@ -84,7 +84,13 @@
             overlays = [ devshell.overlay ];
           };
           inherit (pkgs) lib;
-          systemIsPlatform = platforms: builtins.elem system platforms;
+
+          # Helper function to get x86_64-darwin macOS binary if aarch64-darwin is not available
+          rosetta = pkgSet:
+            if system == "aarch64-darwin" && !(builtins.hasAttr system pkgSet) then
+              pkgSet."x86_64-darwin"
+            else
+              pkgSet.system;
         in pkgs.devshell.mkShell {
           name = "system";
           packages = with pkgs; [
@@ -102,10 +108,10 @@
             nodePackages.prettier
           ];
 
-          commands = lib.optional (systemIsPlatform lib.platforms.x86_64) [{
+          commands = [{
             help = "Format the entire code tree";
             category = "formatters";
-            package = treefmt.defaultPackage.${system};
+            package = rosetta treefmt.defaultPackage;
           }];
         });
     };
