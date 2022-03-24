@@ -1,10 +1,7 @@
 { ... }:
 
 {
-  imports = [
-    ./pam.nix
-    ./brew.nix
-  ];
+  imports = [ ./pam.nix ./brew.nix ];
 
   # Enable flakes
   nix.extraOptions = ''

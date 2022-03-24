@@ -1,6 +1,5 @@
 { config, lib, pkgs, ... }:
-let
-  hostName = "Venusaur";
+let hostName = "Venusaur";
 in {
   imports = [ ./brew.nix ];
 
@@ -27,7 +26,5 @@ in {
 
   # Fonts
   fonts.enableFontDir = true;
-  fonts.fonts = with pkgs; [
-    input-fonts
-  ];
+  fonts.fonts = with pkgs; [ input-fonts ];
 }

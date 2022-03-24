@@ -83,6 +83,6 @@ in {
     extraOptions = [ "--cap-add=NET_ADMIN" "--net=host" ];
     workdir = "/var/lib/pihole/";
   };
-  
+
   environment.systemPackages = with pkgs; [ dig nmap ];
 }
