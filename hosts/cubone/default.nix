@@ -11,7 +11,7 @@ let
   blocklistPath = "/var/lib/dnsmasq/blocklist";
   blocklistUrl = "https://dnsmasq.oisd.nl/";
 in {
-  imports = [ ./hardware-configuration.nix ./unbound.nix ];
+  imports = [ ./hardware-configuration.nix ./unbound.nix ./time-machine.nix ];
 
   system.stateVersion = "20.09";
 
