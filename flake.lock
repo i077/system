@@ -59,6 +59,38 @@
         "type": "github"
       }
     },
+    "fish-tide": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1632265328,
+        "narHash": "sha256-kqbdI69zVjNTi5vbz3sMcGDPXi6ueyqd628FgcOK+gM=",
+        "owner": "IlanCosman",
+        "repo": "tide",
+        "rev": "3787c725f7f6a0253f59a2c0e9fde03202689c6c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "IlanCosman",
+        "repo": "tide",
+        "type": "github"
+      }
+    },
+    "fish-z": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1626157139,
+        "narHash": "sha256-pWkEhjbcxXduyKz1mAFo90IuQdX7R8bLCQgb0R+hXs4=",
+        "owner": "jethrokuan",
+        "repo": "z",
+        "rev": "45a9ff6d0932b0e9835cbeb60b9794ba706eef10",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jethrokuan",
+        "repo": "z",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -179,6 +211,8 @@
         "darwin": "darwin",
         "deploy-rs": "deploy-rs",
         "devshell": "devshell",
+        "fish-tide": "fish-tide",
+        "fish-z": "fish-z",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-darwin": "nixpkgs-darwin"

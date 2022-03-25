@@ -1,7 +1,8 @@
 { config, lib, pkgs, ... }:
-let hostName = "Venusaur";
+let
+  hostName = "Venusaur";
 in {
-  imports = [ ./brew.nix ./home.nix ];
+  imports = [ ./brew.nix ./home.nix ../../modules/darwin/fish.nix ];
 
   networking = {
     computerName = hostName;
@@ -17,7 +18,6 @@ in {
   '';
 
   programs.zsh.enable = true;
-  programs.fish.enable = true;
 
   nixpkgs.config = {
     allowUnfree = true;

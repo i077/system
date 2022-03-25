@@ -17,9 +17,7 @@
 
   services.nix-daemon.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    coreutils
-  ];
+  environment.systemPackages = with pkgs; [ coreutils ];
 
   # Enable home-manager
   home-manager = {
