@@ -67,6 +67,7 @@
     '';
 
     interactiveShellInit = ''
+      test -d ~/system/bin; and set -p PATH ~/system/bin
       # Show vi-mode in cursor
       set -g fish_cursor_default block
       set -g fish_cursor_insert line
