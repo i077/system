@@ -23,9 +23,6 @@
 
     # Easily deploy changes to systems
     deploy-rs.url = "github:serokell/deploy-rs";
-
-    # Format the entire code tree in one command
-    treefmt.url = "github:numtide/treefmt";
   };
 
   nixConfig = {
@@ -111,7 +108,7 @@
           commands = [{
             help = "Format the entire code tree";
             category = "formatters";
-            package = rosetta treefmt.defaultPackage;
+            package = pkgs.treefmt;
           }];
         });
     };
