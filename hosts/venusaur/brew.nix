@@ -6,6 +6,7 @@
       "contexts"
       "discord"
       "firefox"
+      "fork"
       "karabiner-elements"
       "keybase"
       "plexamp"
