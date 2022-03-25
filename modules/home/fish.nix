@@ -1,4 +1,4 @@
-{ inputs, ... }: {
+{ inputs, lib, pkgs, ... }: {
   programs.fish = {
     enable = true;
 
@@ -61,6 +61,10 @@
         src = inputs.fish-tide;
       }
     ];
+
+    shellInit = lib.optionalString pkgs.stdenvNoCC.isDarwin ''
+      test -d /opt/homebrew/bin; and eval (/opt/homebrew/bin/brew shellenv)
+    '';
 
     interactiveShellInit = ''
       # Show vi-mode in cursor

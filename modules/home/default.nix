@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   programs.home-manager.enable = true;
 
   home = {
@@ -6,5 +6,8 @@
       EDITOR = "nvim";
       HOMEBREW_NO_AUTO_UPDATE = 1;
     };
+    packages = with pkgs; [
+      exa bat
+    ];
   };
 }

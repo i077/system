@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, pkgs, ... }:
 
 {
   imports = [ ./pam.nix ./brew.nix ];
@@ -16,6 +16,10 @@
   users.nix.configureBuildUsers = true;
 
   services.nix-daemon.enable = true;
+
+  environment.systemPackages = with pkgs; [
+    coreutils
+  ];
 
   # Enable home-manager
   home-manager = {

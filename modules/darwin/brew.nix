@@ -1,6 +1,4 @@
 { config, ... }: {
-  environment.systemPath = [ "${config.homebrew.brewPrefix}" ];
-
   homebrew = {
     # Enable homebrew & global bundle management
     enable = true;
