@@ -1,4 +1,4 @@
-{ ... }:
+{ inputs, ... }:
 
 {
   imports = [ ./pam.nix ./brew.nix ];
@@ -16,4 +16,12 @@
   users.nix.configureBuildUsers = true;
 
   services.nix-daemon.enable = true;
+
+  # Enable home-manager
+  home-manager = {
+    extraSpecialArgs = { inherit inputs; };
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    backupFileExtension = "bak";
+  };
 }

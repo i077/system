@@ -23,6 +23,18 @@
 
     # Easily deploy changes to systems
     deploy-rs.url = "github:serokell/deploy-rs";
+
+    # Jump to directories by frecency with fish
+    fish-z = {
+      url = "github:jethrokuan/z";
+      flake = false;
+    };
+
+    # Async fish prompt
+    fish-tide = {
+      url = "github:IlanCosman/tide";
+      flake = false;
+    };
   };
 
   nixConfig = {
@@ -35,8 +47,9 @@
     ];
   };
 
-  outputs = { self, nixpkgs, darwin, deploy-rs, devshell, treefmt, ... }@inputs:
+  outputs = { self, nixpkgs, darwin, deploy-rs, devshell, home-manager, ... }@inputs:
     let
+      inherit (nixpkgs) lib;
       # Systems supported by this flake
       systems = [ "aarch64-darwin" "aarch64-linux" "x86_64-darwin" "x86_64-linux" ];
       forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f system);
@@ -44,7 +57,7 @@
       mkDarwinConfig = system: path:
         darwin.lib.darwinSystem {
           inherit system;
-          modules = [ ./modules/darwin path ];
+          modules = [ home-manager.darwinModule ./modules/darwin path ];
           specialArgs = { inherit inputs; };
         };
 

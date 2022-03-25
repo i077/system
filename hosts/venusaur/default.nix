@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 let hostName = "Venusaur";
 in {
-  imports = [ ./brew.nix ];
+  imports = [ ./brew.nix ./home.nix ];
 
   networking = {
     computerName = hostName;

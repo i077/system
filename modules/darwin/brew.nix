@@ -1,4 +1,4 @@
-{ ... }: {
+{ config, ... }: {
   environment.systemPath = [ "${config.homebrew.brewPrefix}" ];
 
   homebrew = {
