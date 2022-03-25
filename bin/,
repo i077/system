@@ -5,6 +5,8 @@
 set _dir (dirname (status filename))
 source $_dir/_lib.fish
 
+check_progs nix-locate
+
 function help
     echo "comma: Run software from nixpkgs without installing it.
 
