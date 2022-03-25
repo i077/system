@@ -18,6 +18,7 @@
     ];
 
     masApps = {
+      Bitwarden = 1352778147;
       "Microsoft Remote Desktop" = 1295203466;
       "Reeder 5" = 1529448980;
       Tailscale = 1475387142;
