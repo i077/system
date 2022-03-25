@@ -7,7 +7,7 @@
       ../../modules/home/fzf.nix
       ../../modules/home/git.nix
     ];
-    
+
     programs.broot.enable = true;
   };
 }
