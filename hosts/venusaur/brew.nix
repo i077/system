@@ -7,6 +7,7 @@
       "discord"
       "firefox"
       "fork"
+      "iterm2"
       "karabiner-elements"
       "keybase"
       "plexamp"
