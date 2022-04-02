@@ -41,6 +41,9 @@ in {
       vim-indent-object # Use indents as motions
       (pluginWithCfg undotree) # Visualize the undo tree
 
+      # Extensions
+      direnv-vim # Direnv integration
+
       # Syntax
       (pluginWithLua nvim-treesitter) # Better (AST-based) language parsing
 
@@ -50,7 +53,7 @@ in {
       vim-monokai-pro # Monokai Pro
       awesome-vim-colorschemes # Collection of colorschemes
     ];
-    
+
     extraConfig = ''
       colorscheme falcon
     '';
@@ -62,7 +65,7 @@ in {
     ${readVimSection "mappings"}
     ${readVimSection "functions"}
   '';
-  
+
   # Treesitter parsers
   xdg.configFile."nvim/parser".source =
     pkgs.tree-sitter.withPlugins (_: pkgs.tree-sitter.allGrammars);

@@ -13,8 +13,11 @@
       "plexamp"
       "raycast"
       "stats"
+      "steam"
       "skim"
+      "the-unarchiver"
       "visual-studio-code"
+      "wireshark"
       "zoom"
       "zotero"
     ];
