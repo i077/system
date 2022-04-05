@@ -1,11 +1,5 @@
 { ... }: {
   homebrew = {
-    casks = [
-      "apache-directory-studio"
-      "docker"
-      "google-earth-pro"
-      "google-chrome"
-      "zoom"
-    ];
+    casks = [ "apache-directory-studio" "docker" "google-earth-pro" "google-chrome" "zoom" ];
   };
 }

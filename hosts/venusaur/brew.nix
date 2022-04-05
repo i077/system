@@ -1,15 +1,6 @@
 { ... }: {
   homebrew = {
-    casks = [
-      "altserver"
-      "discord"
-      "steam"
-      "skim"
-      "the-unarchiver"
-      "wireshark"
-      "zoom"
-      "zotero"
-    ];
+    casks = [ "altserver" "discord" "steam" "skim" "the-unarchiver" "wireshark" "zoom" "zotero" ];
 
     masApps = {
       "Microsoft Remote Desktop" = 1295203466;
