@@ -90,7 +90,7 @@
       checks =
         builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
 
-      devShell = forAllSystems (system:
+      devShells = forAllSystems (system:
         let
           pkgs = import nixpkgs {
             inherit system;
@@ -104,28 +104,30 @@
               pkgSet."x86_64-darwin"
             else
               pkgSet.system;
-        in pkgs.devshell.mkShell {
-          name = "system";
-          packages = with pkgs; [
-            # Wrap nix to support flakes
-            (writeShellScriptBin "nix" ''
-              ${pkgs.nix}/bin/nix --extra-experimental-features "nix-command flakes" "$@"
-            '')
-            deploy-rs.defaultPackage.${system}
-            cachix
+        in {
+          default = pkgs.devshell.mkShell {
+            name = "system";
+            packages = with pkgs; [
+              # Wrap nix to support flakes
+              (writeShellScriptBin "nix" ''
+                ${pkgs.nix}/bin/nix --extra-experimental-features "nix-command flakes" "$@"
+              '')
+              deploy-rs.defaultPackage.${system}
+              cachix
 
-            # Formatters used by treefmt
-            fish
-            luaformatter
-            nixfmt
-            nodePackages.prettier
-          ];
+              # Formatters used by treefmt
+              fish
+              luaformatter
+              nixfmt
+              nodePackages.prettier
+            ];
 
-          commands = [{
-            help = "Format the entire code tree";
-            category = "formatters";
-            package = pkgs.treefmt;
-          }];
+            commands = [{
+              help = "Format the entire code tree";
+              category = "formatters";
+              package = pkgs.treefmt;
+            }];
+          };
         });
     };
 }
