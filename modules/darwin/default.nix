@@ -24,6 +24,8 @@
     supportedFeatures = [ "benchmark" "big-parallel" ];
   }];
 
+  programs.zsh.enable = true;
+
   services.nix-daemon.enable = true;
 
   environment.systemPackages = with pkgs; [ coreutils ];

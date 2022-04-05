@@ -20,4 +20,6 @@
     enable = true;
     config = { pager = "less -FR"; };
   };
+
+  programs.broot.enable = true;
 }

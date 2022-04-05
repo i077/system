@@ -70,7 +70,10 @@
     in {
       nixosConfigurations = { cubone = mkNixosConfig "aarch64-linux" ./hosts/cubone; };
 
-      darwinConfigurations = { Venusaur = mkDarwinConfig "aarch64-darwin" ./hosts/venusaur; };
+      darwinConfigurations = { 
+        NTC-MacBook = mkDarwinConfig "x86_64-darwin" ./hosts/ntc-macbook;
+        Venusaur = mkDarwinConfig "aarch64-darwin" ./hosts/venusaur; 
+      };
 
       deploy.nodes = {
         cubone = {

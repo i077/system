@@ -1,5 +1,5 @@
 { config, lib, pkgs, ... }:
-let hostName = "Venusaur";
+let hostName = "NTC-MacBook";
 in {
   imports = [ ./brew.nix ./home.nix ../../modules/darwin/fish.nix ];
 
