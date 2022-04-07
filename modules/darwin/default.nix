@@ -36,22 +36,25 @@
       "home-manager=/etc/sources/home-manager"
       "darwin=/etc/sources/darwin"
     ];
-    registry = {
+    registry = let
+      # Helper to copy a list of given flake inputs to the registry
+      copyFlakeInputs = inputList:
+        lib.genAttrs inputList (name: {
+          from = {
+            id = name;
+            type = "indirect";
+          };
+          flake = inputs.${name};
+        });
+    in {
       nixpkgs = {
         from = {
           id = "nixpkgs";
           type = "indirect";
         };
-        flake = inputs.nixpkgs;
+        flake = inputs.nixpkgs-darwin;
       };
-      darwin = {
-        from = {
-          id = "darwin";
-          type = "indirect";
-        };
-        flake = inputs.darwin;
-      };
-    };
+    } // copyFlakeInputs [ "self" "darwin" "home-manager" ];
 
     # Add other binary caches
     binaryCaches = [ "https://i077.cachix.org" "https://nix-community.cachix.org/" ];
