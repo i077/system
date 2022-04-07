@@ -10,11 +10,11 @@ jobs:
       matrix:
         hostname: [giratina, dialga]
     steps:
-    - uses: actions/checkout@v2.4.0
+    - uses: actions/checkout@v3
       with:
         path: system
     - name: Checkout nixpkgs
-      uses: actions/checkout@v2.4.0
+      uses: actions/checkout@v3
       with:
         repository: NixOS/nixpkgs
         fetch-depth: 0
