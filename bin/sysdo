@@ -7,14 +7,11 @@ set flakeRoot (dirname $_dir)
 set flakeAttr (hostname)
 
 if not set -q IN_NIX_SHELL
-    log_step "\$IN_NIX_SHELL not set. Rerunning in a nix shell..."
-    exec nix-shell $flakeRoot/shell.nix --run (status filename)" $argv"
+    log_minor "\$IN_NIX_SHELL not set. Rerunning in a nix shell..."
+    exec nix develop $flakeRoot --command (status filename) $argv
 end
 
-# Format to 100 columns becauase this is the 21st century
-set nixfmt_width 100
-
-cd $flakeRoot
+pushd $flakeRoot
 
 # ----- SUBCOMMANDS -----
 function usage
@@ -39,10 +36,20 @@ function usage
         git             Execute a git command in this repository
         gc              Delete unreachable store paths
         GC [D]          Delete generations older than D days (60 by default)
-        install N       Install N's configuration to /mnt
     up, upgrade         Run update and switch
         ub              Run update and boot
         ut              Run update and test"
+end
+    
+function get_platform
+    set uname (uname)
+    if test $uname = "Darwin"
+        set platform "macOS"
+    else
+        set platform "Linux"
+        [ -e /etc/NIXOS ] && set platform "NixOS"
+    end
+    echo $platform
 end
 
 function clean
@@ -86,6 +93,10 @@ function check
 end
 
 function _rebuild_after_review
+    if test (get_platform) != "NixOS"
+        log_error "Review only supported on NixOS."
+        exit 1
+    end
     test -z $_flag_no_check && check
     # If the step involves activating, run dry-activate first
     if contains $argv[1] test boot switch
@@ -115,21 +126,34 @@ function _rebuild_after_review
 end
 
 function _rebuild
+    test (get_platform) = "NixOS" && set REBUILD sudo nixos-rebuild
+    test (get_platform) = "macOS" && set REBUILD darwin-rebuild
+    test (get_platform) = "Linux" && set REBUILD home-manager
+
     test -z $_flag_no_check && check
     switch $argv[1]
         case switch
-            log_step "Building, activating, and adding boot entry for configuration..."
-            sudo nixos-rebuild switch
+            log_step "Building, activating, and adding entry for configuration..."
+            $REBUILD --flake $flakeRoot switch
+            test -z $_flag_keep_result && clean
         case boot
+            if test (get_platform) != "NixOS"
+                log_error "Adding boot entry only supported on NixOS."
+                exit 1
+            end
             log_step "Building and adding boot entry for configuration..."
             sudo nixos-rebuild boot
         case test
+            if test (get_platform) != "NixOS"
+                log_error "Test activations only supported on NixOS."
+                exit 1
+            end
             log_step "Building and activating configuration..."
             sudo nixos-rebuild --fast test
             test -z $_flag_keep_result && clean
         case build
             log_step "Building configuration..."
-            nixos-rebuild build --flake "$flakeRoot#$flakeAttr"
+            $REBUILD build --flake "$flakeRoot#$flakeAttr"
             test -z $_flag_keep_result && clean
     end
 end
@@ -141,7 +165,7 @@ function update
     if test lastCommit != (git log --format=%h -1)
         # Print which inputs were updated
         log_ok "Updated inputs:"
-        git log --format=%B -1 | grep Updated | sed "s/\* Updated '\(.*\)': '.*\([0-9a-f]\{7\}\)[0-9a-f]\{33\}' -> '.*\([0-9a-f]\{7\}\)[0-9a-f]\{33\}'/     \1: \2 -> \3/"
+        git log --format=%B -1
     else
         # No flake inputs were changed
         log_ok "No flake inputs were updated."
@@ -180,37 +204,6 @@ function GC
     sudo nix-collect-garbage --delete-older-than {$period}d
 end
 
-function install
-    # Validate arguments
-    if test -z $argv[1]
-        log_error "No device name given."
-        exit 121
-    end
-
-    test -z $_flag_no_check && check
-
-    set prefix /mnt
-    # Check for device config
-    log_step "Bootstrapping configuration for this device..."
-    if not mountpoint -q $prefix
-        log_error "Nothing mounted at /mnt."
-        exit 1
-    else if not test -f $flakeRoot/hosts/$argv[1]/default.nix
-        log_error "No device configuration found for $argv[1]."
-    end
-
-    log_minor "Generating hardware configuration..."
-    nixos-generate-config --show-hardware-config >$flakeRoot/hosts/$argv[1]/hardware-configuration.nix
-    # Commit since tree needs to be clean
-    git add hosts/$argv[1]/hardware-configuration.nix
-    git commit -m "Add device config for $argv[1]"
-
-    # Build and install config
-    log_step "Building config and installing to to $prefix..."
-    sudo nixos-install --root $prefix --flake $flakeRoot#$argv[1]
-    log_ok "Done installing. You can reboot into the installed system."
-end
-
 # Parse flags and make them global
 argparse -s C/no-check r/review k/keep-result -- $argv
 set -g _flag_no_check $_flag_no_check
@@ -227,7 +220,7 @@ end
 switch $argv[1]
     case clean check update upgrade gc repl
         $argv[1]
-    case shell git GC install
+    case shell git GC
         $argv[1] $argv[2..-1]
     case switch boot test build
         $rebuild $argv[1]
