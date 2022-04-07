@@ -73,7 +73,7 @@ in {
   networking.firewall.allowedUDPPorts = [ 53 67 ];
   virtualisation.oci-containers.containers.pihole = {
     autoStart = true;
-    image = "pihole/pihole:latest";
+    image = "pihole/pihole:2022.04.2";
     ports = [ "53:53/tcp" "53:53/udp" "80:80" ];
     volumes = [ "/var/lib/pihole/:/etc/pihole/" "/var/lib/dnsmasq.d:/etc/dnsmasq.d/" ];
     environment = {
