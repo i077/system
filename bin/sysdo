@@ -40,14 +40,14 @@ function usage
         ub              Run update and boot
         ut              Run update and test"
 end
-    
+
 function get_platform
     set uname (uname)
-    if test $uname = "Darwin"
-        set platform "macOS"
+    if test $uname = Darwin
+        set platform macOS
     else
-        set platform "Linux"
-        [ -e /etc/NIXOS ] && set platform "NixOS"
+        set platform Linux
+        [ -e /etc/NIXOS ] && set platform NixOS
     end
     echo $platform
 end
@@ -93,7 +93,7 @@ function check
 end
 
 function _rebuild_after_review
-    if test (get_platform) != "NixOS"
+    if test (get_platform) != NixOS
         log_error "Review only supported on NixOS."
         exit 1
     end
@@ -126,9 +126,9 @@ function _rebuild_after_review
 end
 
 function _rebuild
-    test (get_platform) = "NixOS" && set REBUILD sudo nixos-rebuild
-    test (get_platform) = "macOS" && set REBUILD darwin-rebuild
-    test (get_platform) = "Linux" && set REBUILD home-manager
+    test (get_platform) = NixOS && set REBUILD sudo nixos-rebuild
+    test (get_platform) = macOS && set REBUILD darwin-rebuild
+    test (get_platform) = Linux && set REBUILD home-manager
 
     test -z $_flag_no_check && check
     switch $argv[1]
@@ -137,14 +137,14 @@ function _rebuild
             $REBUILD --flake $flakeRoot switch
             test -z $_flag_keep_result && clean
         case boot
-            if test (get_platform) != "NixOS"
+            if test (get_platform) != NixOS
                 log_error "Adding boot entry only supported on NixOS."
                 exit 1
             end
             log_step "Building and adding boot entry for configuration..."
             sudo nixos-rebuild boot
         case test
-            if test (get_platform) != "NixOS"
+            if test (get_platform) != NixOS
                 log_error "Test activations only supported on NixOS."
                 exit 1
             end
