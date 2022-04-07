@@ -25,7 +25,7 @@ jobs:
       - name: Cleanup disk
         uses: curoky/cleanup-disk-action@v2.0
       - name: Install Nix
-        uses: cachix/install-nix-action@v16
+        uses: cachix/install-nix-action@v17
         with:
           extra_nix_config: |
             experimental-features = nix-command flakes
