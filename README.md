@@ -21,6 +21,7 @@ this flake and rebuilding the system configuration (`sysdo up`) or removing
 generations more than a month old (`sysdo GC 30`).
 
 `$ sysdo help`
+
 ```
 Usage: sysdo [flags] [verb] [options]
 
