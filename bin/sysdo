@@ -186,7 +186,7 @@ end
 
 function upgrade
     update
-    switch_
+    _rebuild switch
 end
 
 function gc
