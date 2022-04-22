@@ -1,0 +1,61 @@
+#!/usr/bin/env fish
+
+# CLI for my private shortlinking service, mark.
+
+set _dir (dirname (status filename))
+source $_dir/_lib.fish
+
+function usage
+    echo "mark: Shorten a URL or open a shortened one
+
+"$bold"Usage:"$resf" mark url
+       mark [-p] shortcode
+
+"$bold"Options:"$resf"
+    -h, --help            Print this help message
+    -p, --print           Print the URL to stdout instead of opening it"
+end
+
+argparse -s h/help o/open p/print -- $argv
+
+if test -z $argv[1]; or ! test -z $_flag_help
+    usage
+    exit 0
+end
+
+# Helper function to check if argument is a valid URL
+function is_url
+    string match --quiet --regex '^https?://' $argv[1]
+    return $status
+end
+
+if is_url $argv[1]
+    # Get the authentication key first
+    set AUTHKEY (ask_silent "Enter the authkey:")
+
+    set response (curl --silent -X POST \
+        --data '{ "authkey": "'$AUTHKEY'", "url": "'$argv[1]'"}' -H 'Content-Type: application/json'\
+        "https://mark.imranh.org/new")
+
+    if is_url $response
+        echo $response
+    else
+        log_error $response
+        exit 1
+    end
+else
+    set link (curl --silent --dump-header - "https://mark.imranh.org/"$argv[1] | \
+        # Get the location header and strip the trailing newline
+        grep -i "^location:" | cut -d " " -f 2 | tr -d '\r')
+
+    if test -z $link
+        log_error "No link with this key."
+        exit 1
+    end
+    
+    if test $_flag_print
+        echo $link
+    else
+        open $link
+    end
+end
