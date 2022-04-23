@@ -10,18 +10,10 @@
 
     cleanup = "zap";
 
-    taps = [
-      "1password/tap"
-      "homebrew/bundle"
-      "homebrew/cask"
-      "homebrew/cask-fonts"
-      "homebrew/cask-versions"
-      "homebrew/core"
-    ];
+    taps = [ "homebrew/bundle" "homebrew/cask" "homebrew/cask-fonts" "homebrew/core" ];
 
     # Some default packages
     casks = [
-      "1password-beta"
       "bartender"
       "contexts"
       "firefox"

@@ -6,7 +6,7 @@
       EDITOR = "nvim";
       HOMEBREW_NO_AUTO_UPDATE = 1;
     };
-    packages = with pkgs; [ _1password bitwarden-cli curlie exa nix-index ripgrep ripgrep-all ];
+    packages = with pkgs; [ bitwarden-cli curlie exa nix-index ripgrep ripgrep-all ];
 
     # Rebuild cache upon activation (for custom themes)
     activation."batCacheBuild" = {
