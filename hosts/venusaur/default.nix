@@ -26,6 +26,6 @@ in {
   };
 
   # Fonts
-  fonts.enableFontDir = true;
+  fonts.fontDir.enable = true;
   fonts.fonts = with pkgs; [ input-fonts ];
 }
