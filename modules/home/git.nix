@@ -65,6 +65,8 @@
       ignore = "!gi() { curl -sL https://www.toptal.com/developers/gitignore/api/$@ ;}; gi";
     };
 
+    ignores = [ ".DS_Store" ];
+
     extraConfig = {
       pull.rebase = false;
       init.defaultBranch = "main";
