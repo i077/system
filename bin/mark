@@ -31,7 +31,12 @@ end
 
 if is_url $argv[1]
     # Get the authentication key first
-    set AUTHKEY (ask_silent "Enter the authkey:")
+    log_step "Getting authkey from 1Password..."
+    set AUTHKEY (op item get mark --field password)
+    if test -z $AUTHKEY
+        log_error "Couldn't get authkey."
+        exit 1
+    end
 
     set response (curl --silent -X POST \
         --data '{ "authkey": "'$AUTHKEY'", "url": "'$argv[1]'"}' -H 'Content-Type: application/json'\
@@ -56,6 +61,7 @@ else
     if test $_flag_print
         echo $link
     else
+        log_ok "Opening $link in browser..."
         open $link
     end
 end
