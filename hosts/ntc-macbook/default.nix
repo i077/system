@@ -3,6 +3,9 @@ let hostName = "NTC-MacBook";
 in {
   imports = [ ./brew.nix ./home.nix ../../modules/darwin/fish.nix ];
 
+  # User config
+  users.users.imran.home = "/Users/imran";
+
   networking = {
     computerName = hostName;
     inherit hostName;

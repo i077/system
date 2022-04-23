@@ -4,6 +4,9 @@ in {
   imports =
     [ ./brew.nix ./home.nix ../../modules/darwin/fish.nix ../../modules/darwin/1password.nix ];
 
+  # User config
+  users.users.imran.home = "/Users/imran";
+
   networking = {
     computerName = hostName;
     inherit hostName;
