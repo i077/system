@@ -7,6 +7,7 @@
       ../../modules/home/fzf.nix
       ../../modules/home/git.nix
       ../../modules/home/neovim
+      ../../modules/home/1password.nix
     ];
   };
 }
