@@ -71,6 +71,34 @@
       pull.rebase = false;
       init.defaultBranch = "main";
     };
+
+    # Delta diff viewer
+    delta = {
+      enable = true;
+      options = {
+        line-numbers = true;
+        features = "decorations";
+        decorations = {
+          file-style = "bold white ul";
+          file-decoration-style = "none";
+          whitespace-error-style = "22 reverse";
+        };
+      };
+    };
+  };
+
+  # GitHub CLI
+  programs.gh = {
+    enable = true;
+
+    settings = {
+      aliases = {
+        co = "pr checkout";
+        cl = "repo clone";
+      };
+      git_protocol = "ssh";
+    };
+
   };
 
   # Add git extensions & utilities
