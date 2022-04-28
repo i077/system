@@ -28,7 +28,6 @@
     ];
 
     masApps = {
-      Bitwarden = 1352778147;
       Tailscale = 1475387142;
       Xcode = 497799835;
     };
