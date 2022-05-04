@@ -70,6 +70,10 @@
 
   environment.systemPackages = with pkgs; [ coreutils ];
 
+  # Fonts
+  fonts.fontDir.enable = true;
+  fonts.fonts = with pkgs; [ input-fonts ];
+
   # Enable home-manager
   home-manager = {
     extraSpecialArgs = { inherit inputs; };

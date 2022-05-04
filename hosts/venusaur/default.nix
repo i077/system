@@ -24,8 +24,4 @@ in {
     allowUnfree = true;
     input-fonts.acceptLicense = true;
   };
-
-  # Fonts
-  fonts.fontDir.enable = true;
-  fonts.fonts = with pkgs; [ input-fonts ];
 }
