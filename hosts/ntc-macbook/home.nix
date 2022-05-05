@@ -12,6 +12,6 @@
 
     programs.git.userEmail = lib.mkForce ("imran.hossain" + "@" + "saic.com");
 
-    home.packages = with pkgs; [ awscli2 nodePackages.pnpm ];
+    home.packages = with pkgs; [ awscli2 nodePackages.pnpm nodejs-16_x ];
   };
 }
