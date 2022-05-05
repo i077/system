@@ -18,7 +18,10 @@
 
   programs.bat = {
     enable = true;
-    config = { pager = "less -FR"; theme = "Nord"; };
+    config = {
+      pager = "less -FR";
+      theme = "Nord";
+    };
   };
 
   programs.broot.enable = true;

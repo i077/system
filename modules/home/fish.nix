@@ -24,7 +24,7 @@
     functions = {
       lwhich = {
         description = "Show the full path of a command, resolving links along the way";
-        body = "readlink -m (which $argv[1])";
+        body = "readlink -f (which $argv[1])";
       };
 
       mkcd = {
