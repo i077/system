@@ -21,6 +21,7 @@
       "iterm2"
       "karabiner-elements"
       "keybase"
+      "logseq"
       "plexamp"
       "raycast"
       "stats"
