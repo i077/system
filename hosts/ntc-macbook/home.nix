@@ -10,7 +10,10 @@
       ../../modules/home/1password.nix
     ];
 
-    programs.git.userEmail = lib.mkForce ("imran.hossain" + "@" + "saic.com");
+    programs.git = {
+      lfs.enable = true;
+      userEmail = lib.mkForce ("imran.hossain" + "@" + "saic.com");
+    };
 
     home.packages = with pkgs; [ awscli2 nodePackages.pnpm nodejs-16_x ];
   };
