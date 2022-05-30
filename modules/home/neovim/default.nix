@@ -43,6 +43,7 @@ in {
 
       # Extensions
       direnv-vim # Direnv integration
+      (pluginWithCfg fzf-vim) # Fuzzy entry selection
 
       # Syntax
       (pluginWithLua nvim-treesitter) # Better (AST-based) language parsing
@@ -55,7 +56,7 @@ in {
     ];
 
     extraConfig = ''
-      colorscheme falcon
+      colorscheme nord
     '';
   };
 
