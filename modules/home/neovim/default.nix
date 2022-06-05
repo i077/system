@@ -40,6 +40,7 @@ in {
       lightspeed-nvim # Enhanced motions
       vim-indent-object # Use indents as motions
       (pluginWithCfg undotree) # Visualize the undo tree
+      vim-nixhash # Automated TOFU hash fetching for Nix derivations
 
       # Extensions
       direnv-vim # Direnv integration
