@@ -7,32 +7,44 @@ source $_dir/_lib.fish
 
 check_progs nix-locate
 
+set dict _comma_choice
+
 function help
     echo "comma: Run software from nixpkgs without installing it.
 
-"$bold"Usage:"$resf" , [flags] program [args]
+"$bold"Usage:"$resf" , [flags] cmd [args]
 
 "$bold"Flags:"$resf"
-    -n, --dry-run     Just print what would be run"
+    -k, --forget cmd    Forget package used for cmd (or all if cmd is '!')
+    -n, --dry-run       Just print what would be run"
 end
 
-function _run
+function locate_attr
     # Use nix-locate to find the right package
-    log_step "Looking for packages with \$out/bin/$argv[1]..."
-    set attr (nix-locate --top-level --minimal --at-root --whole-name "/bin/$argv[1]")
+    set -g attr (nix-locate --top-level --minimal --at-root --whole-name "/bin/$argv[1]")
     if test (count $attr) -eq 0
         log_error "No match."
         exit 1
     else if test (count $attr) -gt 1
-        log_minor "Found multiple packages. Select one."
-        set attr (for a in $attr; echo $a; end | fzf --reverse --height 10)
+        # If there are multiple candidates, first check if we've tried to run this binary before
+        # Useful for running the same command several times
+        if dict_query $dict $input && ask_yesno -y "Use nixpkgs#"(dict_get $dict $input)" from before?"
+            set -g attr (dict_get $dict $input)
+        else
+            log_minor "Found multiple packages. Select one."
+            set -g attr (for a in $attr; echo $a; end | fzf --reverse --height 10)
+            # Remember this selection for next time
+            dict_set $dict $input $attr
+        end
     end
     if test -z $attr
         log_error "No package selected."
         exit 1
     end
-    log_ok "Running with nixpkgs#$attr..."
+end
 
+function exec_attr
+    log_ok "Running with nixpkgs#$attr..."
     if test -z $dry_run
         nix shell "nixpkgs#$attr" -c $argv
     else
@@ -40,9 +52,27 @@ function _run
     end
 end
 
+function _run
+    set -g input $argv[1]
+    log_step "Looking for packages with /bin/$input..."
+    locate_attr $input
+    exec_attr $argv
+end
+
+
 # Entry point
-argparse -s n/dry-run -- $argv
+argparse -s n/dry-run 'k/forget=' -- $argv
+or return
 set -g dry_run $_flag_dry_run
+
+if not test -z $_flag_forget
+    if test $_flag_forget = '!'
+        dict_clear $dict
+    else
+        dict_clear $dict $_flag_forget
+    end
+    exit 0
+end
 
 switch $argv[1]
     case ''
