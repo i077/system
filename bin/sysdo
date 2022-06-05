@@ -76,16 +76,19 @@ function check
     log_minor "Formatting files..."
     # If there are any unformatted files...
     if not treefmt -q --fail-on-change
+        git update-index
         set -l reformatted_files (git ls-files -m -o -d --exclude-standard)
-        log_warn "The files below were re-formatted:"
-        for f in $reformatted_files
-            echo "- $f"
-        end
-        if ask_yesno "Amend the last commit with these changes?"
-            git add $reformatted_files
-            git commit --amend --no-edit
-        else
-            exit 1
+        if test (count $reformatted_files) -gt 0
+            log_warn "The files below were re-formatted:"
+            for f in $reformatted_files
+                echo "- $f"
+            end
+            if ask_yesno "Amend the last commit with these changes?"
+                git add $reformatted_files
+                git commit --amend --no-edit
+            else
+                exit 1
+            end
         end
     end
 
