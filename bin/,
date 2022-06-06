@@ -34,7 +34,7 @@ function locate_attr
             log_minor "Found multiple packages. Select one."
             set -g attr (for a in $attr; echo $a; end | fzf --reverse --height 10)
             # Remember this selection for next time
-            dict_set $dict $input $attr
+            not test -z $attr; and dict_set $dict $input $attr
         end
     end
     if test -z $attr
