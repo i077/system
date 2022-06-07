@@ -1,6 +1,6 @@
 require'nvim-treesitter.configs'.setup {
     highlight = {
-        enable = true,
+        enable = vim.g.vscode == nil,
         disable = {"latex"} -- vimtex is good enough
     },
     incremental_selection = {

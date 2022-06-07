@@ -57,7 +57,11 @@ in {
     ];
 
     extraConfig = ''
-      colorscheme nord
+      if exists('g:vscode')
+        syntax off
+      else
+        colorscheme nord
+      endif
     '';
   };
 
