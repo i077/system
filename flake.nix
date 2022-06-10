@@ -23,6 +23,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    utils.url = "github:numtide/flake-utils";
+
     # A nicer developer env experience
     devshell.url = "github:numtide/devshell";
 
@@ -52,12 +54,9 @@
     ];
   };
 
-  outputs = { self, nixpkgs, darwin, deploy-rs, devshell, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, darwin, deploy-rs, devshell, home-manager, utils, ... }@inputs:
     let
       inherit (nixpkgs) lib;
-      # Systems supported by this flake
-      systems = [ "aarch64-darwin" "aarch64-linux" "x86_64-darwin" "x86_64-linux" ];
-      forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f system);
 
       mkDarwinConfig = system: path:
         darwin.lib.darwinSystem {
@@ -95,7 +94,7 @@
       checks =
         builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
 
-      devShells = forAllSystems (system:
+      devShells = utils.lib.eachDefaultSystemMap (system:
         let
           pkgs = import nixpkgs {
             inherit system;
