@@ -26,7 +26,12 @@ else if test -L $argv[1]
 else if test -d $argv[1]
     exa -l $argv
 else if test -f $argv[1]
-    bat $argv
+    # If the file is a binary, just pass it to file instead
+    if file --brief --mime $argv[1] | grep -q "charset=binary"
+        file $argv
+    else
+        bat $argv
+    end
 else
     # Not sure how to handle other types at this point, so just pass them to stat
     stat $argv[1]
