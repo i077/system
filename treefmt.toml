@@ -28,5 +28,9 @@ includes = [
 
 [formatter.lua]
 command = "lua-format"
-options = ["-i"]
+options = [
+    "-i",
+    "--column-limit=100",
+    "--indent-width=2",
+]
 includes = ["*.lua"]
