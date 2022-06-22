@@ -22,6 +22,7 @@
       "karabiner-elements"
       "keybase"
       "logseq"
+      "neovide"
       "plexamp"
       "raycast"
       "stats"
@@ -31,6 +32,7 @@
     masApps = {
       Tailscale = 1475387142;
       Xcode = 497799835;
+      "Things 3" = 904280696;
     };
   };
 }
