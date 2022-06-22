@@ -12,3 +12,9 @@ let g:gruvbox_italicize_comments=1
 
 " Remove background from conceal chars
 hi Conceal guibg=None
+
+" Neovide/other GUI stuff
+if exists('g:neovide')
+    " Set guifont
+    set guifont=Berkeley\ Mono:10
+endif

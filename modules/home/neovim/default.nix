@@ -43,11 +43,15 @@ in {
       vim-nixhash # Automated TOFU hash fetching for Nix derivations
 
       # Extensions
+      (pluginWithCfg vim-fugitive) # Git integration
       direnv-vim # Direnv integration
       (pluginWithCfg fzf-vim) # Fuzzy entry selection
 
       # Syntax
       (pluginWithLua nvim-treesitter) # Better (AST-based) language parsing
+      
+      # Writing
+      (pluginWithCfg vim-pencil) # Better prose support
 
       # UI
       base16-vim # Base16
