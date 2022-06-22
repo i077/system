@@ -42,7 +42,8 @@ in {
       # Extensions
       (pluginWithCfg vim-fugitive) # Git integration
       direnv-vim # Direnv integration
-      (pluginWithCfg fzf-vim) # Fuzzy entry selection
+      plenary-nvim # Library of Lua functions
+      (pluginWithCfg telescope-nvim) # Fuzzy entry selection
 
       # Syntax
       (pluginWithLua nvim-treesitter) # Better (AST-based) language parsing
