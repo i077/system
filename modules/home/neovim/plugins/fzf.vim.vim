@@ -15,6 +15,7 @@ com! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 
 " Keybinds
 noremap <silent> <leader>ff :Files<CR>
+noremap <silent> <leader>fF :GitFiles<CR>
 noremap <silent> <leader>fl :BLines<CR>
 noremap <silent> <leader>fL :Lines<CR>
 noremap <silent> <leader>fg :RG<CR>
@@ -22,6 +23,7 @@ noremap <silent> <leader>fw :Windows<CR>
 noremap <silent> <leader>fb :Buffers<CR>
 noremap <silent> <leader>fc :Commands<CR>
 noremap <silent> <leader>fh :Helptags<CR>
+noremap <silent> <leader>fr :History<CR>
 
 " Ctrl-P-like keybinds
 noremap <silent> <C-p> :Files<CR>
