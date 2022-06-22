@@ -6,18 +6,15 @@ let
   readVimSection = file: readFile (./. + "/${file}.vim");
   pluginWithCfg = plugin: {
     inherit plugin;
+    type = "viml";
     config = readVimSection "plugins/${plugin.pname}";
   };
 
   # For plugins configured with lua
-  wrapLuaConfig = luaConfig: ''
-    lua<<EOF
-    ${luaConfig}
-    EOF
-  '';
-  readLuaSection = file: wrapLuaConfig (readFile (./. + "/${file}.lua"));
+  readLuaSection = file: readFile (./. + "/${file}.lua");
   pluginWithLua = plugin: {
     inherit plugin;
+    type = "lua";
     config = readLuaSection "plugins/${plugin.pname}";
   };
 in {
@@ -49,7 +46,7 @@ in {
 
       # Syntax
       (pluginWithLua nvim-treesitter) # Better (AST-based) language parsing
-      
+
       # Writing
       (pluginWithCfg vim-pencil) # Better prose support
 
@@ -58,6 +55,7 @@ in {
       falcon # Falcon
       vim-monokai-pro # Monokai Pro
       awesome-vim-colorschemes # Collection of colorschemes
+      (pluginWithLua lualine-nvim) # A nicer statusline
     ];
 
     extraConfig = ''
