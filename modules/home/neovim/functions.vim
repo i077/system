@@ -10,3 +10,11 @@ function! s:DiffWithSaved()
     exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
 endfunction
 com! DiffSaved call s:DiffWithSaved()
+
+" Use the 'z' command in fish to jump to a directory
+function s:Z(str)
+    let dir = system(['fish', '-c', 'z -e ' . a:str])
+    echo "" . dir
+    execute 'cd ' . dir
+endfunction
+com! -nargs=1 Z call s:Z("<args>")
