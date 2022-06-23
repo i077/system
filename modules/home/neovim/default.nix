@@ -47,7 +47,17 @@ in {
       (pluginWithCfg nerdtree) # File browser
 
       # Syntax
+      vim-polyglot # A bunch of languages
       (pluginWithLua nvim-treesitter) # Better (AST-based) language parsing
+      # (pluginWithLua nvim-lspconfig) # Configs for the builtin LSP client
+
+      # Autocomplete
+      (pluginWithLua nvim-cmp) # Auto-completion
+      cmp-nvim-lsp # LSP completion source
+      # cmp-git # Git/GitHub completion source
+      cmp-buffer # Suggest completions from the current buffer
+      cmp-cmdline # Completions for :
+      cmp-path # Filepath completion source
 
       # Writing
       (pluginWithCfg vim-pencil) # Better prose support

@@ -2,6 +2,8 @@
   programs.home-manager.enable = true;
 
   home = {
+    stateVersion = "20.09";
+
     sessionVariables = {
       EDITOR = "nvim";
       HOMEBREW_NO_AUTO_UPDATE = 1;
