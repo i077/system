@@ -17,4 +17,5 @@ hi Conceal guibg=None
 if exists('g:neovide')
     " Set guifont
     set guifont=Berkeley\ Mono:10
+    let g:neovide_cursor_trail_size=0
 endif
