@@ -44,6 +44,7 @@ in {
       direnv-vim # Direnv integration
       plenary-nvim # Library of Lua functions
       (pluginWithCfg telescope-nvim) # Fuzzy entry selection
+      (pluginWithCfg nerdtree) # File browser
 
       # Syntax
       (pluginWithLua nvim-treesitter) # Better (AST-based) language parsing
