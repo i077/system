@@ -3,32 +3,65 @@ set _dir (dirname (status filename))
 source $_dir/_lib.fish
 
 # Show the contents of $argv[1], depending on the type.
-# If nothing is passed, act like bat (and read from STDIN)
+# I wrote this because I didn't want to switch between `ls` and `cat` when previewing things in
+# the terminal.
+
+function help
+    echo "show: Show the contents of a file, depending on the type
+
+"$bold"Usage:"$resf" show FILE [ARGS...]
+
+All ARGS after FILE get passed to the program used to show FILE.
+For example, if FILE is a directory, the resulting command run becomes:
+
+    exa -l FILE [ARGS...]"
+end
+
+
 
 if test -z $argv[1]
-    bat
-else if ! test -e $argv[1]
+    # If no argument is passed and we're in a pipe, act like a pager.
+    if test -t 0 # Check if stdout is a terminal (heuristic for pipe)
+        help
+        exit 127
+    else
+        bat
+    end
+else if not test -e $argv[1]
     # Maybe I pressed ENTER a little too soon after TAB...
     # If there were multiple completions, prompt to pick one
-    if stat $argv[1]* >/dev/null
+    if test (count $argv[1]*) -gt 1
         set newarg1 (for f in $argv[1]*; echo $f; end | fzf --reverse --height 10)
         if test -z $newarg1
             exit 1
         end
+        log_minor "Showing '"$newarg1"'..."
         show $newarg1 $argv[2..-1]
     else
-        log_error "File doesn't exist."
+        log_error "No such file: '"$argv[1]"'."
         exit 2
     end
 else if test -L $argv[1]
-    log_minor "File is a link to "(readlink -f $argv[1])
-    show (readlink -f $argv[1]) $argv[2..-1]
+    set linkto (readlink -f $argv[1])
+    log_minor "File is a link to "$linkto
+    show $linkto $argv[2..-1]
 else if test -d $argv[1]
-    exa -l $argv
+    # If the listing ends up being long, use less as a pager
+    exa --color=always -l $argv | less -FR
 else if test -f $argv[1]
-    # If the file is a binary, just pass it to file instead
-    if file --brief --mime $argv[1] | grep -q "charset=binary"
-        file $argv
+    set mimetype (file --brief --mime-type $argv[1])
+    set mimeencoding (file --brief --mime-encoding $argv[1])
+    # If the file is a binary, try to display its contents using other programs
+    if test $mimeencoding = binary
+        # Display images if we're in iTerm
+        if string match -q "image/*" $mimetype; and set -q TERM_PROGRAM; and test $TERM_PROGRAM = "iTerm.app"
+            $_dir/imgcat -f $argv
+        else if test $mimetype = application/gzip
+            # TODO Split file reading branch into separate function that takes in mime-type, encoding, then args
+            file --uncompress --brief $argv
+        else
+            file --brief $argv
+        end
     else
         bat $argv
     end
