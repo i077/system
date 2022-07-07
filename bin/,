@@ -16,6 +16,7 @@ function help
 
 "$bold"Flags:"$resf"
     -k, --forget cmd    Forget package used for cmd (or all if cmd is '!')
+    -y, --yes           Use remembered choice for cmd
     -n, --dry-run       Just print what would be run"
 end
 
@@ -28,8 +29,10 @@ function locate_attr
     else if test (count $attr) -gt 1
         # If there are multiple candidates, first check if we've tried to run this binary before
         # Useful for running the same command several times
-        if dict_query $dict $input && ask_yesno -y "Use nixpkgs#"(dict_get $dict $input)" from before?"
-            set -g attr (dict_get $dict $input)
+        if dict_query $dict $input
+            if not test -z $yes; or ask_yesno -y "Use nixpkgs#"(dict_get $dict $input)" from before?"
+                set -g attr (dict_get $dict $input)
+            end
         else
             log_minor "Found multiple packages. Select one."
             set -g attr (for a in $attr; echo $a; end | fzf --reverse --height 10)
@@ -61,9 +64,10 @@ end
 
 
 # Entry point
-argparse -s n/dry-run 'k/forget=' -- $argv
+argparse -s n/dry-run 'k/forget=' y/yes -- $argv
 or return
 set -g dry_run $_flag_dry_run
+set -g yes $_flag_yes
 
 if not test -z $_flag_forget
     if test $_flag_forget = '!'
