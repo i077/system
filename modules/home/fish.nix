@@ -24,7 +24,14 @@
     functions = {
       lwhich = {
         description = "Show the full path of a command, resolving links along the way";
-        body = "readlink -f (which $argv[1])";
+        body = ''
+          if test (count $argv) -ne 1
+              echo "lwhich: Expected exactly one argument."
+              return 127
+          end
+          which $argv[1]; or return 1
+          readlink -f (which $argv[1])
+        '';
       };
 
       mkcd = {
@@ -33,9 +40,8 @@
           if test (count $argv) -ne 1
               echo "mkcd: Expected exactly one argument."
               return 127
-          else
-              mkdir $argv[1] && cd $argv[1]
           end
+          mkdir $argv[1] && cd $argv[1]
         '';
       };
 
