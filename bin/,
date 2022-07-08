@@ -9,15 +9,23 @@ check_progs nix-locate
 
 set dict _comma_choice
 
-function help
-    echo "comma: Run software from nixpkgs without installing it.
+function usage
+    echo ", (comma) - Search for and run a command from nixpkgs
 
-"$bold"Usage:"$resf" , [flags] cmd [args]
+"$bold"Usage:"$resf"
+    , [-y | --yes] [-n | --dry-run] <command> [args...]
+    , (-k | --forget) <command>
 
-"$bold"Flags:"$resf"
+"$bold"Options:"$resf"
+    -h, --help          Print this help message
     -k, --forget cmd    Forget package used for cmd (or all if cmd is '!')
     -y, --yes           Use remembered choice for cmd
-    -n, --dry-run       Just print what would be run"
+    -n, --dry-run       Just print what would be run
+
+"$bold"Examples:"$resf"
+    , fd foo                # Run 'fd' from nixpkgs#fd with argument 'foo'
+    , -k dog                # Forgot what package was chosen for command 'dog'
+    , -y dog google.com     # Run 'dog', using the package chosen from before"
 end
 
 function locate_attr
@@ -64,10 +72,15 @@ end
 
 
 # Entry point
-argparse -s n/dry-run 'k/forget=' y/yes -- $argv
+argparse -s n/dry-run 'k/forget=' y/yes h/help -- $argv
 or return
 set -g dry_run $_flag_dry_run
 set -g yes $_flag_yes
+
+if not test -z $_flag_help
+    usage
+    exit 0
+end
 
 if not test -z $_flag_forget
     if test $_flag_forget = '!'
@@ -80,7 +93,8 @@ end
 
 switch $argv[1]
     case ''
-        help
+        usage
+        exit 127
     case '*'
         _run $argv
 end

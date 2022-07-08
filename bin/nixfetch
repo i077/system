@@ -8,9 +8,9 @@ set _dir (dirname (status filename))
 source $_dir/_lib.fish
 
 function usage
-    echo "nixfetch: Add a file to /nix/store and output its path
+    echo "nixfetch - Add a file to /nix/store and output its path
 
-"$bold"Usage:"$resf" nixfetch [options] url
+"$bold"Usage:"$resf" nixfetch [options..] <url>
 
 "$bold"Options:"$resf"
     -h, --help            Print this help message

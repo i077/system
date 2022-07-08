@@ -6,10 +6,11 @@ set _dir (dirname (status filename))
 source $_dir/_lib.fish
 
 function usage
-    echo "mark: Shorten a URL or open a shortened one
+    echo "mark - Shorten a URL or open a shortened one
 
-"$bold"Usage:"$resf" mark url
-       mark [-p] shortcode
+"$bold"Usage:"$resf"
+    mark <url>
+    mark [-p | --print] <shortcode>
 
 "$bold"Options:"$resf"
     -h, --help            Print this help message

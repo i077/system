@@ -1,3 +1,5 @@
+# Some helper functions used throughout the other fish scripts.
+
 # ----- FORMATTING -----
 set red (tput setaf 1)
 set green (tput setaf 2)

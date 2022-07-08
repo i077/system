@@ -8,17 +8,22 @@ source $_dir/_lib.fish
 set FLAKE "github:DavHau/mach-nix"
 
 function usage
-    echo "pywith: Quickly spawn Python environments
+    echo "pywith - Quickly spawn Python environments
 
 "$bold"Usage:"$resf"
-    pywith [options] packages...
-    pywith [options] -r file
+    pywith [options...] <package>...
+    pywith [options...] (-r | --requirements) <file>
 
 "$bold"Options:"$resf"
     -h, --help              Print this help message
     -c, --command=<cmd>     Run <cmd> in the built shell (default: python)
     -r, --requirements      Read packages from a text file
     -R                      Same as '-r ./requirements.txt'
+
+"$bold"Examples:"$resf"
+    pywith numpy scipy          # Open python with the numpy and scipy libraries available
+    pywith -c fish requests     # Open a shell with a python that has the requests library
+    pywith -R                   # Open python with packages from ./requirements.txt
 "
 end
 

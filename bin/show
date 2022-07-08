@@ -9,7 +9,7 @@ source $_dir/_lib.fish
 function help
     echo "show: Show the contents of a file, depending on the type
 
-"$bold"Usage:"$resf" show FILE [ARGS...]
+"$bold"Usage:"$resf" show <file> [args...]
 
 All ARGS after FILE get passed to the program used to show FILE.
 For example, if FILE is a directory, the resulting command run becomes:

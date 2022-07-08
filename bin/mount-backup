@@ -1,17 +1,15 @@
 #!/usr/bin/env fish
 
-set _dir (dirname (status filename))
-source $_dir/_lib.fish
-
-check_progs restic
-
 # Mount backup repo to a temporary directory and open a new shell.
 # This is hardcoded to my restic backup repo.
 
-function usage
-    echo "mount-backup: Mount restic backup repository and open a shell
+set _dir (dirname (status filename))
+source $_dir/_lib.fish
 
-"$bold"Usage:"$resf" mount-backup
+function usage
+    echo "mount-backup - Mount restic backup repository and open a shell
+
+"$bold"Usage:"$resf" mount-backup [options...]
 
 "$bold"Options:"$resf"
     -h, --help            Print this help message
@@ -24,6 +22,8 @@ if ! test -z $_flag_help
     usage
     exit 0
 end
+
+check_progs restic
 
 if test -z $_flag_ask_pass
     check_progs rbw

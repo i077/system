@@ -15,9 +15,9 @@ pushd $flakeRoot
 
 # ----- SUBCOMMANDS -----
 function usage
-    echo $bold"Usage:"$resf" sysdo [flags] [verb] [options]
+    echo $bold"Usage:"$resf" sysdo [options] <command> [<args>]
 
-"$bold"Flags:$resf
+"$bold"Options:$resf
     -C, --no-check      Don't run checks when building configuration
     -r, --review        Review changes in configuration before activating
     -k, --keep-result   Keep nix build output symlinks
