@@ -49,7 +49,8 @@ in {
       # Syntax
       vim-polyglot # A bunch of languages
       (pluginWithLua nvim-treesitter) # Better (AST-based) language parsing
-      # (pluginWithLua nvim-lspconfig) # Configs for the builtin LSP client
+      (pluginWithLua diaglist-nvim) # Add LSP diagnostics to quickfix list
+      # See ./lsp for nvim-lspconfig configuration
 
       # Autocomplete
       (pluginWithLua nvim-cmp) # Auto-completion
@@ -89,4 +90,7 @@ in {
   # Treesitter parsers
   xdg.configFile."nvim/parser".source =
     pkgs.tree-sitter.withPlugins (_: pkgs.tree-sitter.allGrammars);
+
+  # LSP
+  imports = [ ./lsp ];
 }
