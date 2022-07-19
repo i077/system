@@ -29,7 +29,7 @@ end
 
 argparse h/help 'c/command=' 'r/requirements=' R -- $argv; or exit 127
 
-if set -q _flag_help; or test (count $argv) -eq 0
+if set -q _flag_help
     usage
     exit 0
 end
