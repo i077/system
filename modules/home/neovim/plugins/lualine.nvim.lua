@@ -4,7 +4,7 @@ if (vim.g['vscode'] == nil) then
 
     sections = {
       lualine_a = {
-        -- Only show the first character of the current mode  
+        -- Only show the first character of the current mode
         {'mode', fmt = function(str) return str:sub(1, 1) end}
       },
       lualine_b = {'branch'},

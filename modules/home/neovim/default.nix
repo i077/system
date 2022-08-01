@@ -51,6 +51,7 @@ in {
       (pluginWithLua nvim-treesitter) # Better (AST-based) language parsing
       (pluginWithLua diaglist-nvim) # Add LSP diagnostics to quickfix list
       # See ./lsp for nvim-lspconfig configuration
+      (pluginWithLua lspsaga-nvim) # LSP UI
 
       # Autocomplete
       (pluginWithLua nvim-cmp) # Auto-completion
