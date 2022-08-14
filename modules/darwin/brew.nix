@@ -10,7 +10,13 @@
 
     cleanup = "zap";
 
-    taps = [ "homebrew/bundle" "homebrew/cask" "homebrew/cask-fonts" "homebrew/core" ];
+    taps = [
+      "homebrew/bundle"
+      "homebrew/cask"
+      "homebrew/cask-fonts"
+      "homebrew/core"
+      "homebrew/cask-drivers"
+    ];
 
     # Some default packages
     casks = [
@@ -22,6 +28,7 @@
       "karabiner-elements"
       "keybase"
       "logseq"
+      "logi-options-plus"
       "neovide"
       "plexamp"
       "raycast"
