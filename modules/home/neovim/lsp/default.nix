@@ -33,5 +33,5 @@ in {
   };
 
   # Import language-specific configs
-  imports = [ ./lua.nix ./nix.nix ./terraform.nix ./typescript.nix ];
+  imports = [ ./lua.nix ./nix.nix ./python.nix ./terraform.nix ./typescript.nix ];
 }
