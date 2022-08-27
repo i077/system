@@ -3,13 +3,12 @@
 {
   imports = [ ./pam.nix ./brew.nix ];
 
-  users.nix.configureBuildUsers = true;
-
   # Link each input to /etc/sources
   environment.etc =
     (lib.mapAttrs' (name: value: (lib.nameValuePair "sources/${name}" { source = value; })) inputs);
 
   nix = {
+    configureBuildUsers = true;
     # Enable flakes
     extraOptions = ''
       build-users-group = nixbld
@@ -18,8 +17,17 @@
       max-jobs = auto
     '';
 
-    # Add administrators to trusted users
-    trustedUsers = [ "@admin" ];
+    settings = {
+
+      # Add administrators to trusted users
+      trusted-users = [ "@admin" ];
+      # Add other binary caches
+      binary-caches = [ "https://i077.cachix.org" "https://nix-community.cachix.org/" ];
+      binary-cache-public-keys = [
+        "i077.cachix.org-1:v28tOFUfUjtVXdPol5FfEO/6wC/VKWnHkD32/aMJJBk="
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      ];
+    };
 
     # Add remote builders
     distributedBuilds = true;
@@ -56,12 +64,6 @@
       };
     } // copyFlakeInputs [ "self" "darwin" "home-manager" ];
 
-    # Add other binary caches
-    binaryCaches = [ "https://i077.cachix.org" "https://nix-community.cachix.org/" ];
-    binaryCachePublicKeys = [
-      "i077.cachix.org-1:v28tOFUfUjtVXdPol5FfEO/6wC/VKWnHkD32/aMJJBk="
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-    ];
   };
 
   programs.zsh.enable = true;
