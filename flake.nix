@@ -6,6 +6,9 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
+    # NixOS modules for running on certain hardware
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
+
     flake-compat = {
       url = "github:edolstra/flake-compat";
       flake = false;
@@ -68,7 +71,7 @@
       mkNixosConfig = system: path:
         nixpkgs.lib.nixosSystem {
           inherit system;
-          modules = [ path ];
+          modules = [ ./modules/nixos path ];
           specialArgs = { inherit inputs; };
         };
     in {
