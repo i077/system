@@ -45,6 +45,12 @@
       url = "github:IlanCosman/tide";
       flake = false;
     };
+
+    # Utilities for the Argon One Raspi case
+    argonone-utils = {
+      url = "github:mgdm/argonone-utils";
+      flake = false;
+    };
   };
 
   nixConfig = {

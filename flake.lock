@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "argonone-utils": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1633889965,
+        "narHash": "sha256-v098KH8TgzGgCc7+59SVWy19xW456eXX/BDdt9zzVhk=",
+        "owner": "mgdm",
+        "repo": "argonone-utils",
+        "rev": "b6b960eb492224012680f56e3c6fba13502e542c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mgdm",
+        "repo": "argonone-utils",
+        "type": "github"
+      }
+    },
     "darwin": {
       "inputs": {
         "nixpkgs": [
@@ -240,6 +256,7 @@
     },
     "root": {
       "inputs": {
+        "argonone-utils": "argonone-utils",
         "darwin": "darwin",
         "deploy-rs": "deploy-rs",
         "devshell": "devshell",
