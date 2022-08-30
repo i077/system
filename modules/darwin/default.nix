@@ -12,13 +12,11 @@
     # Enable flakes
     extraOptions = ''
       build-users-group = nixbld
-      auto-optimise-store = true
       experimental-features = nix-command flakes
       max-jobs = auto
     '';
 
     settings = {
-
       # Add administrators to trusted users
       trusted-users = [ "@admin" ];
       # Add other binary caches
