@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  imports = [ ./hardware-configuration.nix ./time-machine.nix ];
+  imports = [ ./hardware-configuration.nix ./argonone.nix ./time-machine.nix ];
 
   boot = {
     loader.grub.enable = false;
