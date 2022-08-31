@@ -9,6 +9,8 @@ let
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIGGsm2JWPKT+pUJHs7l7el4OJFxQZjkC3T/oxkLUlG9 Shortcuts on venusaur"
   ];
 in {
+  imports = [ ../broken-overlay.nix ];
+
   system.stateVersion = "20.09";
 
   time.timeZone = "America/New_York";

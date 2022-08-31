@@ -1,7 +1,7 @@
 { inputs, lib, pkgs, ... }:
 
 {
-  imports = [ ./pam.nix ./brew.nix ];
+  imports = [ ./pam.nix ./brew.nix ../broken-overlay.nix ];
 
   # Link each input to /etc/sources
   environment.etc =
