@@ -125,7 +125,6 @@
               (writeShellScriptBin "nix" ''
                 ${pkgs.nix}/bin/nix --extra-experimental-features "nix-command flakes" "$@"
               '')
-              deploy-rs.defaultPackage.${system}
               cachix
 
               # Formatters used by treefmt
@@ -135,11 +134,17 @@
               nodePackages.prettier
             ];
 
-            commands = [{
-              help = "Format the entire code tree";
-              category = "formatters";
-              package = pkgs.treefmt;
-            }];
+            commands = [
+              {
+                help = "Format the entire code tree";
+                package = pkgs.treefmt;
+              }
+              {
+                name = "deploy";
+                help = "Deploy profiles to servers";
+                package = deploy-rs.defaultPackage.${system};
+              }
+            ];
           };
         });
     };
