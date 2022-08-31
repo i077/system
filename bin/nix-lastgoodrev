@@ -51,11 +51,11 @@ function getrev -a double
     set latest_build_json \
         (curl -sL -H "accept: application/json" "$HYDRA_URL/job/$hydra_proj/$hydra_jobset/$hydra_job/latest")
     set latest_build_eval_id (echo $latest_build_json | jq -r ".jobsetevals[0]")
-    set latest_build_date (date --date="@"(echo $latest_build_json | jq -r .timestamp) -I)
     if string match -q "null" $latest_build_eval_id
         log_error "Couldn't find a successful build."
         return
     end
+    set latest_build_date (date --date="@"(echo $latest_build_json | jq -r .timestamp) -I)
 
     set pname (echo $latest_build_json | jq -r ".nixname")
     log_minor "Found a successful build in Hydra from $latest_build_date. Getting nixpkgs revision..."
