@@ -126,6 +126,7 @@
                 ${pkgs.nix}/bin/nix --extra-experimental-features "nix-command flakes" "$@"
               '')
               cachix
+              jo
 
               # Formatters used by treefmt
               fish
