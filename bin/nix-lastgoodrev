@@ -1,0 +1,109 @@
+#!/usr/bin/env fish
+
+# Get the last known good evaluation of a package in nixpkgs, according to Hydra.
+
+set _dir (dirname (status filename))
+source $_dir/_lib.fish
+
+set _flake (dirname $_dir)
+set supported_systems {x86_64,aarch64}-{darwin,linux}
+
+set HYDRA_URL "https://hydra.nixos.org"
+
+function usage
+    echo "nix-lastgoodrev - Get the nixpkgs commit with the last good eval of a package, according to Hydra
+
+"$bold"Usage:"$resf"
+    nix-lastgoodrev [options...] <attr>
+
+"$bold"Options:"$resf"
+    -h, --help             Print this help message
+    -u, --update           Update system's list of broken packages
+    -s, --system=<double>  Get revision for system <double> (repeat for multiple systems)
+                           (default: builtins.currentSystem)"
+end
+
+argparse h/help s/system=+ u/update -- $argv; or exit 127
+
+if set -q _flag_help; or test (count $argv) -lt 1
+    usage
+    exit 0
+else if not set -q _flag_system
+    set _flag_system (nix eval --impure --raw --expr builtins.currentSystem)
+end
+
+check_progs curl jo
+
+set attr $argv[1]
+
+function getrev -a double
+    log_step "Getting last good revision for nixpkgs#$double.$attr..."
+    # Get Hydra project & jobset, which varies by system
+    set hydra_proj nixpkgs
+    if string match -q "aarch64-darwin" $double
+        set hydra_jobset nixpkgs-unstable-aarch64-darwin
+    else
+        set hydra_jobset trunk
+    end
+
+    # Get latest successful build info
+    set hydra_job $attr.$double
+    set latest_build_json \
+        (curl -sL -H "accept: application/json" "$HYDRA_URL/job/$hydra_proj/$hydra_jobset/$hydra_job/latest")
+    set latest_build_eval_id (echo $latest_build_json | jq -r ".jobsetevals[0]")
+    set latest_build_date (date --date="@"(echo $latest_build_json | jq -r .timestamp) -I)
+    if string match -q "null" $latest_build_eval_id
+        log_error "Couldn't find a successful build."
+        return
+    end
+
+    set pname (echo $latest_build_json | jq -r ".nixname")
+    log_minor "Found a successful build in Hydra from $latest_build_date. Getting nixpkgs revision..."
+
+    # Determine which revision of nixpkgs was used to build latest successful build
+    # The eval info is quite large, so we take what we need immediately without storing the entire
+    # output of /eval/:id
+    set nixpkgs_rev \
+        (curl -s -H "accept: application/json" "$HYDRA_URL/eval/$latest_build_eval_id" | jq -r ".jobsetevalinputs.nixpkgs.revision")
+    set nixpkgs_hash (nix flake prefetch --json "github:NixOS/nixpkgs/$nixpkgs_rev" | jq -r ".hash")
+
+    # Build a JSON object with all collected info
+    jo -- \
+        -s nixpkgs_rev="$nixpkgs_rev" \
+        -s nixpkgs_hash="$nixpkgs_hash" \
+        -s pname="$pname" \
+        -n hydra_build=$latest_build_eval_id \
+        -s build_date=$latest_build_date
+end
+
+# Build up a JSON object with info for each system
+for double in $_flag_system
+    if not contains $double $supported_systems
+        log_error "Unsupported system: $double"
+        continue
+    end
+    set hydra_info (getrev $double)
+    if test -z $hydra_info
+        continue
+    end
+    set -a jo_opts $double=$hydra_info
+end
+
+set result_json (jo -e -- $jo_opts)
+if set -q _flag_update
+    set json_path $_flake/modules/broken-overlay-data.json
+    # Check if there's already an existing key for $attr, since jo doesn't merge objects
+    # If we don't do this, we'll lose information about the last good revision for another system.
+    set old_attr_result (cat $json_path | jq -r .$attr)
+    if not string match -q null "$old_attr_result"
+        set result_json (echo $old_attr_result | jo -e -f - -- $jo_opts)
+    end
+
+    # Update file with new results
+    set tmpfile (mktemp)
+    jo -p -D -f $json_path -- $attr=$result_json > $tmpfile
+    mv $tmpfile $json_path
+    log_ok "File updated."
+else
+    jo -p -e -- $jo_opts
+end
