@@ -1,7 +1,6 @@
 { pkgs, ... }: {
   programs.git = {
     enable = true;
-    package = pkgs.gitAndTools.gitFull;
 
     userName = "Imran Hossain";
     userEmail = "hi" + "@" + "imranh.org";
