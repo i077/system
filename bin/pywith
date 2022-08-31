@@ -67,7 +67,7 @@ if set -q _flag_requirements; or set -q _flag_R
     # Unforunately 'mach-nix gen -r <file>' isn't working right now, so I have to
     # use the mkPython function in a nix expression.
     set build_json (nix build --impure --no-link --json \
-       --expr '(builtins.getFlake "'$FLAKE'").lib.x86_64-linux.mkPython {
+       --expr '(builtins.getFlake "'$FLAKE'").lib.'$currentSystem'.mkPython {
           requirements = builtins.readFile '$reqfile'; }')
     # If the build didn't succeed, stop
     if test -z build_json
