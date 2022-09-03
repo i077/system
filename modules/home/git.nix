@@ -69,6 +69,12 @@
     extraConfig = {
       pull.rebase = false;
       init.defaultBranch = "main";
+
+      # Sign with SSH key
+      user.signingkey =
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHQRxhrUwCg/DcNQfG8CwIMdJsHu0jZWI2BZV/T6ka5N";
+      gpg.format = "ssh";
+      commit.gpgsign = true;
     };
 
     # Delta diff viewer
