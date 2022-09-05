@@ -2,6 +2,11 @@
   programs.git = {
     enable = true;
 
+    package = pkgs.git.override (old: {
+      sendEmailSupport = true;
+      withSsh = true;
+    });
+
     userName = "Imran Hossain";
     userEmail = "hi" + "@" + "imranh.org";
 
@@ -74,6 +79,7 @@
       user.signingkey =
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHQRxhrUwCg/DcNQfG8CwIMdJsHu0jZWI2BZV/T6ka5N";
       gpg.format = "ssh";
+      gpg.ssh.allowedSignersFile = "~/.config/git/allowed-signers";
       commit.gpgsign = true;
     };
 
