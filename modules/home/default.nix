@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ lib, pkgs, ... }: {
   programs.home-manager.enable = true;
 
   home = {
@@ -14,7 +14,7 @@
     activation."batCacheBuild" = {
       before = [ ];
       after = [ "linkGeneration" ];
-      data = "${pkgs.bat}/bin/bat cache --build";
+      data = "${lib.getExe pkgs.bat} cache --build";
     };
   };
 

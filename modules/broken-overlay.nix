@@ -46,7 +46,7 @@ let
   packageStillBroken = prevpkgs: attr:
     let drvPath = prevpkgs.${attr}.drvPath;
     in import (pkgs.runCommand "try-build-${attr}" { } ''
-      ${pkgs.nix}/bin/nix-build ${
+      ${lib.getExe pkgs.nix} build ${
         builtins.unsafeDiscardStringContext drvPath
       } && echo false > $out || echo true > $out
     '');

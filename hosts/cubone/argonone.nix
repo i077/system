@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ inputs, lib, pkgs, ... }:
 
 let
   fancontrol-pkg = pkgs.buildGoModule {
@@ -27,7 +27,7 @@ in {
     serviceConfig = {
       dynamicUser = true;
       Group = "i2c";
-      ExecStart = "${fancontrol-pkg}/bin/argonone-fancontrold";
+      ExecStart = lib.getExe fancontrol-pkg;
     };
   };
 }

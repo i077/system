@@ -117,7 +117,7 @@
             packages = with pkgs; [
               # Wrap nix to support flakes
               (writeShellScriptBin "nix" ''
-                ${pkgs.nix}/bin/nix --extra-experimental-features "nix-command flakes" "$@"
+                ${lib.getExe pkgs.nix} --extra-experimental-features "nix-command flakes" "$@"
               '')
               cachix
               jo

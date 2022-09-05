@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, lib, pkgs, ... }: {
   services.unbound = {
     enable = true;
     settings = {
@@ -41,9 +41,13 @@
   systemd.services.unbound.preStart = ''
     set -euo pipefail
     # Update DNSSEC root anchor
-    ${pkgs.unbound}/bin/unbound-anchor -a ${config.services.unbound.stateDir}/root.key || echo "Root anchor updated!"
+    ${
+      lib.getExe pkgs.unbound
+    } -a ${config.services.unbound.stateDir}/root.key || echo "Root anchor updated!"
     # Download root hints
-    ${pkgs.curl}/bin/curl -fsSL -o ${config.services.unbound.stateDir}/named.root https://www.internic.net/domain/named.root
+    ${
+      lib.getExe pkgs.curl
+    } -fsSL -o ${config.services.unbound.stateDir}/named.root https://www.internic.net/domain/named.root
   '';
 
   networking.resolvconf.useLocalResolver = false;
