@@ -111,13 +111,6 @@
             overlays = [ devshell.overlay ];
           };
           inherit (pkgs) lib;
-
-          # Helper function to get x86_64-darwin macOS binary if aarch64-darwin is not available
-          rosetta = pkgSet:
-            if system == "aarch64-darwin" && !(builtins.hasAttr system pkgSet) then
-              pkgSet."x86_64-darwin"
-            else
-              pkgSet.system;
         in {
           default = pkgs.devshell.mkShell {
             name = "system";
