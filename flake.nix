@@ -88,14 +88,15 @@
         Venusaur = mkDarwinConfig "aarch64-darwin" ./hosts/venusaur;
       };
 
-      deploy.nodes = {
-        cubone = {
-          hostname = "cubone";
-          fastConnection = true;
-          profiles.system = {
-            sshUser = "imran";
-            user = "root";
-            path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.cubone;
+      deploy = {
+        fastConnection = true;
+        sshUser = "imran";
+        user = "root";
+        nodes = {
+          cubone = {
+            hostname = "cubone";
+            profiles.system.path =
+              deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.cubone;
           };
         };
       };
