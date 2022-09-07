@@ -63,6 +63,7 @@ in {
 
       # Writing
       (pluginWithCfg vim-pencil) # Better prose support
+      goyo # Focused writing
 
       # UI
       base16-vim # Base16
