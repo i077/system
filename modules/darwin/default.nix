@@ -3,10 +3,6 @@
 {
   imports = [ ./pam.nix ./brew.nix ../broken-overlay.nix ];
 
-  # Link each input to /etc/sources
-  environment.etc =
-    (lib.mapAttrs' (name: value: (lib.nameValuePair "sources/${name}" { source = value; })) inputs);
-
   nix = {
     configureBuildUsers = true;
     # Enable flakes
@@ -38,9 +34,9 @@
 
     # Add inputs to registry & nix path
     nixPath = lib.mkForce [
-      "nixpkgs=/etc/sources/nixpkgs"
-      "home-manager=/etc/sources/home-manager"
-      "darwin=/etc/sources/darwin"
+      "nixpkgs=${inputs.nixpkgs-darwin}"
+      "home-manager=${inputs.home-manager}"
+      "darwin=${inputs.darwin}"
     ];
     registry = let
       # Helper to copy a list of given flake inputs to the registry
