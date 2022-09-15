@@ -17,18 +17,20 @@ function usage
 "$bold"Options:"$resf"
     -h, --help              Print this help message
     -c, --command=<cmd>     Run <cmd> in the built shell (default: python)
+    -s, --shell             Same as '-c $SHELL'
     -f, --file=<file>       Interpret <file> with built Python env
     -r, --requirements      Read packages from a text file
     -R                      Same as '-r ./requirements.txt'
 
 "$bold"Examples:"$resf"
-    pywith numpy scipy          # Open python with the numpy and scipy libraries available
-    pywith -c fish requests     # Open a shell with a python that has the requests library
-    pywith -R                   # Open python with packages from ./requirements.txt
+    pywith numpy scipy          # Open a python REPL with the numpy and scipy packages available
+    pywith -R                   # Open a python REPL with packages from ./requirements.txt
+    pywith -s requests          # Open a shell with a python that has the requests library
+    pywith -f script.py numpy   # Interpret script.py using a python with numpy available
 "
 end
 
-argparse h/help 'c/command=' 'f/file=' 'r/requirements=' R -- $argv; or exit 127
+argparse h/help 'c/command=' s/shell 'f/file=' 'r/requirements=' R -- $argv; or exit 127
 
 if set -q _flag_help
     usage
@@ -36,11 +38,15 @@ if set -q _flag_help
 end
 
 # Give a default command if none was given
-if set -q _flag_command; and set -q _flag_file
-    log_error "Options --file and --command are mutually exclusive."
+if set -q _flag_command; and begin
+        set -q _flag_file; or set -q _flag_shell
+    end
+    log_error "Options --command, --file, and --shell are mutually exclusive."
     exit 127
 else if set -q _flag_command
     set cmd $_flag_command
+else if set -q _flag_shell
+    set cmd $SHELL
 else if set -q _flag_file
     if not stat $_flag_file >/dev/null
         log_error "Couldn't read file: "$_flag_file
