@@ -2,13 +2,15 @@
   homebrew = {
     # Enable homebrew & global bundle management
     enable = true;
-    autoUpdate = false;
     global = {
       brewfile = true;
-      noLock = true;
+      autoUpdate = false;
     };
 
-    cleanup = "zap";
+    onActivation = {
+      autoUpdate = false;
+      cleanup = "zap";
+    };
 
     taps = [
       "homebrew/bundle"
