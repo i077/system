@@ -7,6 +7,7 @@
       "steam"
       "skim"
       "the-unarchiver"
+      "whatsapp"
       "wireshark"
       "zoom"
       "zotero"
