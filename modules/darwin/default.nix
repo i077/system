@@ -1,7 +1,7 @@
 { inputs, lib, pkgs, ... }:
 
 {
-  imports = [ ./pam.nix ./brew.nix ../broken-overlay.nix ];
+  imports = [ ./brew.nix ../broken-overlay.nix ];
 
   nix = {
     configureBuildUsers = true;
