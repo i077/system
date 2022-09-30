@@ -82,7 +82,7 @@ in {
     '';
   };
 
-  xdg.configFile."nvim/init.vim".text = mkBefore ''
+  xdg.configFile."nvim/init-home-manager.vim".text = mkBefore ''
     ${readVimSection "editor"}
     ${readVimSection "ui"}
     ${readVimSection "mappings"}
