@@ -1,18 +1,1 @@
-{
-   "curlie": {
-      "x86_64-darwin": {
-         "nixpkgs_rev": "65fae659e31098ca4ac825a6fef26d890aaf3f4e",
-         "nixpkgs_hash": "sha256-GnwJoFBTPfW3+mz7QEeJEEQ9OMHZOiIJ/qDhZxrlKh8=",
-         "pname": "curlie-1.6.9",
-         "hydra_build": 1771618,
-         "build_date": "2022-07-08"
-      },
-      "aarch64-darwin": {
-         "nixpkgs_rev": "7eebf23dc6bba6cba1a48b7c59a0ad73d4ed574a",
-         "nixpkgs_hash": "sha256-DvKDJLBpal1jNk2SHdtzmYZfD85tZxiphuw7l/CWn68=",
-         "pname": "curlie-1.6.9",
-         "hydra_build": 1771622,
-         "build_date": "2022-07-08"
-      }
-   }
-}
+{}
