@@ -28,7 +28,7 @@ jobs:
           extra_nix_config: |
             experimental-features = nix-command flakes
       - name: Configure Cachix
-        uses: cachix/cachix-action@v10
+        uses: cachix/cachix-action@v11
         with:
           name: i077
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
