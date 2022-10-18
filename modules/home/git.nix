@@ -83,19 +83,8 @@
       commit.gpgsign = true;
     };
 
-    # Delta diff viewer
-    delta = {
-      enable = true;
-      options = {
-        line-numbers = true;
-        features = "decorations";
-        decorations = {
-          file-style = "bold white ul";
-          file-decoration-style = "none";
-          whitespace-error-style = "22 reverse";
-        };
-      };
-    };
+    # Difftastic, a syntactic diff tool
+    difftastic.enable = true;
   };
 
   # GitHub CLI
