@@ -1,0 +1,46 @@
+env:
+  CACHIX_AUTH_TOKEN: ENCRYPTED[!5b9226401f61dbae39295591ce5115a7f499fa0c24fd6e8a46df6188eda5e03de499c8adfea6a86dd4c0e284e107f3e0!]
+  CACHIX_NAME: i077
+  DARWIN_BUILD_IMAGE: ghcr.io/cirruslabs/macos-monterey-base:latest
+  LINUX_BUILD_IMAGE: nixos/nix:latest
+  NIX_INSTALL_URL: https://nixos.org/nix.install
+
+build_template: &BUILD_TEMPLATE
+  only_if: $CIRRUS_BRANCH == $CIRRUS_DEFAULT_BRANCH || $CIRRUS_TAG != '' || $CIRRUS_PR != '' || $CIRRUS_BUILD_SOURCE == ""
+  name: build_${CIRRUS_OS}_${ARCH}
+  timeout_in: 120m
+  enable_flake_script: echo "experimental-features = nix-command flakes" | sudo tee -a /etc/nix/nix.conf
+  install_cachix_script: nix-env -iA cachix -f https://cachix.org/api/v1/install && cachix use $CACHIX_NAME
+  build_script: cachix watch-exec $CACHIX_NAME -- nix build -j auto $OUTPUTS -v --show-trace
+
+build_darwin_profiles_task:
+  macos_instance:
+    image: $DARWIN_BUILD_IMAGE
+  matrix:
+    - env:
+        ARCH: arm64
+        OUTPUTS: darwinConfigurations.venusaur.config.system.build.toplevel
+    - env:
+        ARCH: x86_64
+        OUTPUTS: darwinConfigurations.NTC-MacBook.config.system.build.toplevel
+  install_rosetta_script: softwareupdate --install-rosetta --agree-to-license
+  install_nix_script: arch -$ARCH bash <(curl -L "$NIX_INSTALL_URL") --daemon
+  enable_trusted_users_script: echo "trusted-users = root admin" | sudo tee -a /etc/nix/nix.conf && sudo launchctl kickstart -k system/org.nixos.nix-daemon
+  <<: *BUILD_TEMPLATE
+
+build_nixos_profiles_task:
+  matrix:
+    - arm_container:
+        image: $LINUX_BUILD_IMAGE
+        cpu: 4
+        memory: 12G
+      env:
+        ARCH: arm64
+        OUTPUTS: nixosConfigurations.cubone.config.system.build.toplevel
+    # - container:
+    #     image: $LINUX_BUILD_IMAGE
+    #     cpu: 4
+    #     memory: 12G
+    #   env:
+    #     ARCH: x86_64
+  <<: *BUILD_TEMPLATE
