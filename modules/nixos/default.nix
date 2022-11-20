@@ -19,11 +19,6 @@ in {
   nix.settings.trusted-users = [ "@wheel" ];
   security.sudo.wheelNeedsPassword = false;
 
-  # Use nix flakes for local flake evaluation
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes
-  '';
-
   # Add user
   users.users.imran = {
     isNormalUser = true;

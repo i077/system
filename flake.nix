@@ -89,7 +89,6 @@
       };
 
       deploy = {
-        fastConnection = true;
         sshUser = "imran";
         user = "root";
         nodes = {
