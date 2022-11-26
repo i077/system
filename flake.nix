@@ -28,6 +28,11 @@
 
     utils.url = "github:numtide/flake-utils";
 
+    treefmt-nix = {
+      url = "github:kclejeune/treefmt-nix/kclejeune";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # A nicer developer env experience
     devshell.url = "github:numtide/devshell";
 
@@ -120,18 +125,28 @@
               '')
               cachix
               jo
-
-              # Formatters used by treefmt
-              fish
-              luaformatter
-              nixfmt
-              nodePackages.prettier
             ];
 
             commands = [
               {
                 help = "Format the entire code tree";
-                package = pkgs.treefmt;
+                package = inputs.treefmt-nix.lib.mkWrapper pkgs {
+                  projectRootFile = ".git/config";
+                  programs.alejandra.enable = true;
+                  programs.prettier.enable = true;
+                  settings.formatter.fish = {
+                    command = "${pkgs.fish}/bin/fish_indent";
+                    options = ["--write"];
+                    includes = map (x: "bin/${x}") [
+                      "," "git-peek" "mount-backup" "nixfetch" "pywith" "show" "sysdo"
+                    ] ++ ["*.fish"];
+                  };
+                  settings.formatter.lua = {
+                    command = lib.getExe pkgs.luaformatter;
+                    options = [ "-i" "--column-limit=100" "--indent-width=2" ];
+                    includes = [ "*.lua" ];
+                  };
+                };
               }
               {
                 name = "deploy";

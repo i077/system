@@ -267,7 +267,29 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-darwin": "nixpkgs-darwin",
+        "treefmt-nix": "treefmt-nix",
         "utils": "utils_3"
+      }
+    },
+    "treefmt-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1669243631,
+        "narHash": "sha256-/+rQlsZbOHtjj8aXSzkv3UVI4FMZRMrx3UuiaL+rj5c=",
+        "owner": "kclejeune",
+        "repo": "treefmt-nix",
+        "rev": "283773627dac2400e09fafa461588aca34f8845c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kclejeune",
+        "ref": "kclejeune",
+        "repo": "treefmt-nix",
+        "type": "github"
       }
     },
     "utils": {
