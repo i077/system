@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   services.unbound = {
     enable = true;
     settings = {
@@ -36,7 +41,7 @@
   };
 
   # root-hints have to be downloaded without DNS being available
-  networking.hosts = { "192.0.47.9" = [ "internic.net" "www.internic.net" ]; };
+  networking.hosts = {"192.0.47.9" = ["internic.net" "www.internic.net"];};
 
   systemd.services.unbound.preStart = ''
     set -euo pipefail

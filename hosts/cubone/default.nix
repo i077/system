@@ -1,7 +1,5 @@
-{ pkgs, ... }:
-
-{
-  imports = [ ./hardware-configuration.nix ./argonone.nix ./time-machine.nix ];
+{pkgs, ...}: {
+  imports = [./hardware-configuration.nix ./argonone.nix ./time-machine.nix];
 
   boot = {
     loader.grub.enable = false;
@@ -16,14 +14,16 @@
   };
 
   # Add 2GB swap
-  swapDevices = [{
-    device = "/var/swapfile";
-    size = 2048;
-  }];
+  swapDevices = [
+    {
+      device = "/var/swapfile";
+      size = 2048;
+    }
+  ];
 
   # Networking -- I only use Ethernet, no wireless here
   networking.hostName = "cubone";
   networking.interfaces.eth0.useDHCP = true;
 
-  environment.systemPackages = with pkgs; [ dig nmap ];
+  environment.systemPackages = with pkgs; [dig nmap];
 }

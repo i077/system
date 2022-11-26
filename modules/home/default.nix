@@ -1,4 +1,8 @@
-{ lib, pkgs, ... }: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   programs.home-manager.enable = true;
 
   home = {
@@ -8,12 +12,12 @@
       EDITOR = "nvim";
       HOMEBREW_NO_AUTO_UPDATE = 1;
     };
-    packages = with pkgs; [ curlie exa jq nix-index ripgrep ripgrep-all rnix-lsp ];
+    packages = with pkgs; [curlie exa jq nix-index ripgrep ripgrep-all rnix-lsp];
 
     # Rebuild cache upon activation (for custom themes)
     activation."batCacheBuild" = {
-      before = [ ];
-      after = [ "linkGeneration" ];
+      before = [];
+      after = ["linkGeneration"];
       data = "${lib.getExe pkgs.bat} cache --build";
     };
   };
@@ -29,5 +33,5 @@
   programs.broot.enable = true;
 
   # Include other SSH config files that I don't want to check in here
-  programs.ssh.includes = [ "~/.ssh/config.d/*" ];
+  programs.ssh.includes = ["~/.ssh/config.d/*"];
 }

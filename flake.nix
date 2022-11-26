@@ -59,8 +59,7 @@
   };
 
   nixConfig = {
-    substituters =
-      [ "https://i077.cachix.org" "https://cache.nixos.org" "https://nix-community.cachix.org/" ];
+    substituters = ["https://i077.cachix.org" "https://cache.nixos.org" "https://nix-community.cachix.org/"];
     trusted-public-keys = [
       "i077.cachix.org-1:v28tOFUfUjtVXdPol5FfEO/6wC/VKWnHkD32/aMJJBk="
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
@@ -68,93 +67,108 @@
     ];
   };
 
-  outputs = { self, nixpkgs, darwin, deploy-rs, devshell, home-manager, utils, ... }@inputs:
-    let
-      inherit (nixpkgs) lib;
+  outputs = {
+    self,
+    nixpkgs,
+    darwin,
+    deploy-rs,
+    devshell,
+    home-manager,
+    utils,
+    ...
+  } @ inputs: let
+    inherit (nixpkgs) lib;
 
-      mkDarwinConfig = system: path:
-        darwin.lib.darwinSystem {
-          inherit system;
-          modules = [ home-manager.darwinModule ./modules/darwin path ];
-          specialArgs = { inherit inputs; };
-        };
-
-      mkNixosConfig = system: path:
-        nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [ ./modules/nixos path ];
-          specialArgs = { inherit inputs; };
-        };
-    in {
-      nixosConfigurations = { cubone = mkNixosConfig "aarch64-linux" ./hosts/cubone; };
-
-      darwinConfigurations = {
-        NTC-MacBook = mkDarwinConfig "x86_64-darwin" ./hosts/ntc-macbook;
-        Venusaur = mkDarwinConfig "aarch64-darwin" ./hosts/venusaur;
+    mkDarwinConfig = system: path:
+      darwin.lib.darwinSystem {
+        inherit system;
+        modules = [home-manager.darwinModule ./modules/darwin path];
+        specialArgs = {inherit inputs;};
       };
 
-      deploy = {
-        sshUser = "imran";
-        user = "root";
-        nodes = {
-          cubone = {
-            hostname = "cubone";
-            profiles.system.path =
-              deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.cubone;
-          };
-        };
+    mkNixosConfig = system: path:
+      nixpkgs.lib.nixosSystem {
+        inherit system;
+        modules = [./modules/nixos path];
+        specialArgs = {inherit inputs;};
       };
+  in {
+    nixosConfigurations = {cubone = mkNixosConfig "aarch64-linux" ./hosts/cubone;};
 
-      checks =
-        builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
-
-      devShells = utils.lib.eachDefaultSystemMap (system:
-        let
-          pkgs = import nixpkgs {
-            inherit system;
-            overlays = [ devshell.overlay ];
-          };
-          inherit (pkgs) lib;
-        in {
-          default = pkgs.devshell.mkShell {
-            name = "system";
-            packages = with pkgs; [
-              # Wrap nix to support flakes
-              (writeShellScriptBin "nix" ''
-                ${lib.getExe pkgs.nix} --extra-experimental-features "nix-command flakes" "$@"
-              '')
-              cachix
-              jo
-            ];
-
-            commands = [
-              {
-                help = "Format the entire code tree";
-                package = inputs.treefmt-nix.lib.mkWrapper pkgs {
-                  projectRootFile = ".git/config";
-                  programs.alejandra.enable = true;
-                  programs.prettier.enable = true;
-                  settings.formatter.fish = {
-                    command = "${pkgs.fish}/bin/fish_indent";
-                    options = ["--write"];
-                    includes = map (x: "bin/${x}") [
-                      "," "git-peek" "mount-backup" "nixfetch" "pywith" "show" "sysdo"
-                    ] ++ ["*.fish"];
-                  };
-                  settings.formatter.lua = {
-                    command = lib.getExe pkgs.luaformatter;
-                    options = [ "-i" "--column-limit=100" "--indent-width=2" ];
-                    includes = [ "*.lua" ];
-                  };
-                };
-              }
-              {
-                name = "deploy";
-                help = "Deploy profiles to servers";
-                package = deploy-rs.defaultPackage.${system};
-              }
-            ];
-          };
-        });
+    darwinConfigurations = {
+      NTC-MacBook = mkDarwinConfig "x86_64-darwin" ./hosts/ntc-macbook;
+      Venusaur = mkDarwinConfig "aarch64-darwin" ./hosts/venusaur;
     };
+
+    deploy = {
+      sshUser = "imran";
+      user = "root";
+      nodes = {
+        cubone = {
+          hostname = "cubone";
+          profiles.system.path =
+            deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.cubone;
+        };
+      };
+    };
+
+    checks =
+      builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+
+    devShells = utils.lib.eachDefaultSystemMap (system: let
+      pkgs = import nixpkgs {
+        inherit system;
+        overlays = [devshell.overlay];
+      };
+      inherit (pkgs) lib;
+    in {
+      default = pkgs.devshell.mkShell {
+        name = "system";
+        packages = with pkgs; [
+          # Wrap nix to support flakes
+          (writeShellScriptBin "nix" ''
+            ${lib.getExe pkgs.nix} --extra-experimental-features "nix-command flakes" "$@"
+          '')
+          cachix
+          jo
+        ];
+
+        commands = [
+          {
+            help = "Format the entire code tree";
+            package = inputs.treefmt-nix.lib.mkWrapper pkgs {
+              projectRootFile = ".git/config";
+              programs.alejandra.enable = true;
+              programs.prettier.enable = true;
+              settings.formatter.fish = {
+                command = "${pkgs.fish}/bin/fish_indent";
+                options = ["--write"];
+                includes =
+                  map (x: "bin/${x}") [
+                    ","
+                    "git-peek"
+                    "mount-backup"
+                    "nixfetch"
+                    "pywith"
+                    "show"
+                    "sysdo"
+                  ]
+                  ++ ["*.fish"];
+              };
+              settings.formatter.lua = {
+                command = lib.getExe pkgs.luaformatter;
+                options = ["-i" "--column-limit=100" "--indent-width=2"];
+                includes = ["*.lua"];
+              };
+            };
+          }
+          {
+            name = "deploy";
+            help = "Deploy profiles to servers";
+            package = deploy-rs.defaultPackage.${system};
+          }
+        ];
+      };
+    });
+  };
 }

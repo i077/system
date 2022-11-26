@@ -1,6 +1,6 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   programs.neovim = {
-    extraPackages = [ pkgs.sumneko-lua-language-server ];
+    extraPackages = [pkgs.sumneko-lua-language-server];
     lspconfig = ''
       require'lspconfig'.sumneko_lua.setup {
         settings = {

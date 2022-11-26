@@ -20,15 +20,20 @@
 # I could have the data be in the form "system-double" -> "attr" to make it easier to work with,
 # but it would be harder to tell at a glance which packages are being replaced across all systems.
 # Perhaps this isn't as useful, so maybe I'll change this in the future.
-
-{ config, inputs, lib, pkgs, ... }:
-let
+{
+  config,
+  inputs,
+  lib,
+  pkgs,
+  ...
+}: let
   currentSystem = config.nixpkgs.system;
 
   overlayData = builtins.fromJSON (builtins.readFile ./broken-overlay-data.json);
   # Filter overlay data by current system, so this will look like
   #   { "attr": { "nixpkgs_rev": ..., }, ... }
-  overlayDataForSystem = builtins.mapAttrs (n: v: v.${currentSystem})
+  overlayDataForSystem =
+    builtins.mapAttrs (n: v: v.${currentSystem})
     (lib.filterAttrs (n: v: builtins.hasAttr currentSystem v) overlayData);
 
   # Function to import nixpkgs at a specified commit (I know, IFD...)
@@ -38,14 +43,15 @@ let
       owner = "NixOS";
       repo = "nixpkgs";
       inherit rev hash;
-    }) { inherit (config.nixpkgs) config system; };
+    }) {inherit (config.nixpkgs) config system;};
 
   # Function to check if a package is still broken in this flake's nixpkgs input
-  # Note: This is a really ugly hack using TFD and an unsafe function,
+  # Note: This is a really ugly hack using IFD and an unsafe function,
   # but ideally there isn't more than one or two broken packages at a time so does it really matter?
-  packageStillBroken = prevpkgs: attr:
-    let drvPath = prevpkgs.${attr}.drvPath;
-    in import (pkgs.runCommand "try-build-${attr}" { } ''
+  packageStillBroken = prevpkgs: attr: let
+    drvPath = prevpkgs.${attr}.drvPath;
+  in
+    import (pkgs.runCommand "try-build-${attr}" {} ''
       ${lib.getExe pkgs.nix} build ${
         builtins.unsafeDiscardStringContext drvPath
       } && echo false > $out || echo true > $out
@@ -54,10 +60,10 @@ in {
   nixpkgs.overlays = [
     (final: prev:
       # Map each package's last good revision data to an actual derivation from that revision
-      builtins.mapAttrs (attr: data:
-        if packageStillBroken prev attr then
-          (nixpkgsRev data.nixpkgs_rev data.nixpkgs_hash).${attr}
-        else
-          throw "${attr} builds successfully, but is still in broken overlay") overlayDataForSystem)
+        builtins.mapAttrs (attr: data:
+          if packageStillBroken prev attr
+          then (nixpkgsRev data.nixpkgs_rev data.nixpkgs_hash).${attr}
+          else throw "${attr} builds successfully, but is still in broken overlay")
+        overlayDataForSystem)
   ];
 }

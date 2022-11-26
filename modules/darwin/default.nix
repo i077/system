@@ -1,7 +1,10 @@
-{ inputs, lib, pkgs, ... }:
-
 {
-  imports = [ ./brew.nix ../broken-overlay.nix ];
+  inputs,
+  lib,
+  pkgs,
+  ...
+}: {
+  imports = [./brew.nix ../broken-overlay.nix];
 
   nix = {
     configureBuildUsers = true;
@@ -13,7 +16,7 @@
 
     settings = {
       # Add administrators to trusted users
-      trusted-users = [ "@admin" ];
+      trusted-users = ["@admin"];
     };
 
     # Add inputs to registry & nix path
@@ -32,31 +35,32 @@
           };
           flake = inputs.${name};
         });
-    in {
-      nixpkgs = {
-        from = {
-          id = "nixpkgs";
-          type = "indirect";
+    in
+      {
+        nixpkgs = {
+          from = {
+            id = "nixpkgs";
+            type = "indirect";
+          };
+          flake = inputs.nixpkgs-darwin;
         };
-        flake = inputs.nixpkgs-darwin;
-      };
-    } // copyFlakeInputs [ "self" "darwin" "home-manager" ];
-
+      }
+      // copyFlakeInputs ["self" "darwin" "home-manager"];
   };
 
   programs.zsh.enable = true;
 
   services.nix-daemon.enable = true;
 
-  environment.systemPackages = with pkgs; [ coreutils obsidian ];
+  environment.systemPackages = with pkgs; [coreutils obsidian];
 
   # Fonts
   fonts.fontDir.enable = true;
-  fonts.fonts = with pkgs; [ input-fonts ];
+  fonts.fonts = with pkgs; [input-fonts];
 
   # Enable home-manager
   home-manager = {
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = {inherit inputs;};
     useGlobalPkgs = true;
     useUserPackages = true;
     backupFileExtension = "bak";

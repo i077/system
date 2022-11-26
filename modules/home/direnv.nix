@@ -1,7 +1,7 @@
-{ ... }: {
+{...}: {
   programs.direnv = {
     enable = true;
-    nix-direnv = { enable = true; };
+    nix-direnv = {enable = true;};
 
     stdlib = ''
       # Store .direnv in cache instead of project dir

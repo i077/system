@@ -1,4 +1,8 @@
-{ pkgs, lib, ... }: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   home-manager.users.imran = {
     imports = [
       ../../modules/home
@@ -15,6 +19,6 @@
       userEmail = lib.mkForce ("imran.hossain" + "@" + "saic.com");
     };
 
-    home.packages = with pkgs; [ awscli2 nodePackages.pnpm nodejs-16_x ];
+    home.packages = with pkgs; [awscli2 nodePackages.pnpm nodejs-16_x];
   };
 }

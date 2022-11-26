@@ -1,5 +1,5 @@
-{ lib, ... }:
-let inherit (lib) mkAfter mkBefore mkMerge;
+{lib, ...}: let
+  inherit (lib) mkAfter mkBefore mkMerge;
 in {
   programs.fish.enable = true;
   # Workaround for $PATH ordering in fish

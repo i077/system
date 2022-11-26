@@ -1,5 +1,8 @@
-{ lib, pkgs, ... }:
-let
+{
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (builtins) readFile;
   inherit (lib) mkBefore;
 
@@ -25,7 +28,7 @@ in {
     vimAlias = true;
     vimdiffAlias = true;
 
-    extraPackages = with pkgs; [ neovim-remote ];
+    extraPackages = with pkgs; [neovim-remote];
 
     plugins = with pkgs.vimPlugins; [
       # Editor
@@ -94,5 +97,5 @@ in {
     pkgs.tree-sitter.withPlugins (_: pkgs.tree-sitter.allGrammars);
 
   # LSP
-  imports = [ ./lsp ];
+  imports = [./lsp];
 }

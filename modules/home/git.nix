@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   programs.git = {
     enable = true;
 
@@ -12,11 +12,9 @@
 
     aliases = let
       # A nicer-looking one-line log format. Thanks @malob!
-      logformat =
-        "--format=format:'%C(blue)%h%C(reset) - %C(green)(%ar)%C(reset) %s %C(italic)- %an%C(reset)%C(magenta bold)%d%C(reset)'";
+      logformat = "--format=format:'%C(blue)%h%C(reset) - %C(green)(%ar)%C(reset) %s %C(italic)- %an%C(reset)%C(magenta bold)%d%C(reset)'";
       # Small function to get the default branch in origin
-      defaultBranch = remote:
-        ''!b() { git remote show ${remote} | grep "HEAD branch" | sed 's/.*: //' ;};'';
+      defaultBranch = remote: ''!b() { git remote show ${remote} | grep "HEAD branch" | sed 's/.*: //' ;};'';
     in {
       # Staging/diffs
       a = "add";
@@ -69,15 +67,14 @@
       ignore = "!gi() { curl -sL https://www.toptal.com/developers/gitignore/api/$@ ;}; gi";
     };
 
-    ignores = [ ".DS_Store" ];
+    ignores = [".DS_Store"];
 
     extraConfig = {
       pull.rebase = false;
       init.defaultBranch = "main";
 
       # Sign with SSH key
-      user.signingkey =
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHQRxhrUwCg/DcNQfG8CwIMdJsHu0jZWI2BZV/T6ka5N";
+      user.signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHQRxhrUwCg/DcNQfG8CwIMdJsHu0jZWI2BZV/T6ka5N";
       gpg.format = "ssh";
       gpg.ssh.allowedSignersFile = "~/.config/git/allowed-signers";
       commit.gpgsign = true;
@@ -98,9 +95,8 @@
       };
       git_protocol = "ssh";
     };
-
   };
 
   # Add git extensions & utilities
-  home.packages = with pkgs; [ lazygit ];
+  home.packages = with pkgs; [lazygit];
 }

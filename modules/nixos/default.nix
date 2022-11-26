@@ -1,7 +1,5 @@
 # Default config for my servers
-{ pkgs, ... }:
-
-let
+{pkgs, ...}: let
   mySSHKeys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBsq7jgT0egpEZ4QpgaFHRRxrwk7vzWVvZE0w7Bhk9hK imran@NTC-MacBook"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID1YIyqTUGvH71i6MWCsYPVoijYLZWfapmuMSR4aGAh9 Shortcuts on Geodude"
@@ -9,20 +7,20 @@ let
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIGGsm2JWPKT+pUJHs7l7el4OJFxQZjkC3T/oxkLUlG9 Shortcuts on venusaur"
   ];
 in {
-  imports = [ ../broken-overlay.nix ];
+  imports = [../broken-overlay.nix];
 
   system.stateVersion = "20.09";
 
   time.timeZone = "America/New_York";
 
   # Passwordless accounts, auth is done via keypair
-  nix.settings.trusted-users = [ "@wheel" ];
+  nix.settings.trusted-users = ["@wheel"];
   security.sudo.wheelNeedsPassword = false;
 
   # Add user
   users.users.imran = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    extraGroups = ["wheel"];
     openssh.authorizedKeys.keys = mySSHKeys;
   };
 

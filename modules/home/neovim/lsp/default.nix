@@ -3,9 +3,12 @@
 # config for each language should be in its own separate file. So I'm declaring
 # a new option here that will gather all those lua snippets and place them in a plugin block for
 # nvim-lspconfig, which will go in the programs.neovim.plugins option.
-
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (lib) mkBefore mkOption types;
 
   cfg = config.programs.neovim.lspconfig;
@@ -21,11 +24,13 @@ in {
   config = {
     programs.neovim = {
       # Add lspconfig with all gathered configuration
-      plugins = [{
-        plugin = pkgs.vimPlugins.nvim-lspconfig;
-        type = "lua";
-        config = cfg;
-      }];
+      plugins = [
+        {
+          plugin = pkgs.vimPlugins.nvim-lspconfig;
+          type = "lua";
+          config = cfg;
+        }
+      ];
 
       # Add defaults, which will go before all other language-specific config
       lspconfig = mkBefore "";
@@ -33,5 +38,5 @@ in {
   };
 
   # Import language-specific configs
-  imports = [ ./lua.nix ./nix.nix ./python.nix ./terraform.nix ./typescript.nix ];
+  imports = [./lua.nix ./nix.nix ./python.nix ./terraform.nix ./typescript.nix];
 }

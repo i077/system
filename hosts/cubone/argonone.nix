@@ -1,6 +1,9 @@
-{ inputs, lib, pkgs, ... }:
-
-let
+{
+  inputs,
+  lib,
+  pkgs,
+  ...
+}: let
   fancontrol-pkg = pkgs.buildGoModule {
     name = "argonone-fancontrold";
     version = "0.1.0";
@@ -14,15 +17,15 @@ in {
   ];
 
   # Enable I2C for fan control
-  boot.initrd.kernelModules = [ "i2c-dev" "i2c-bcm2835" ];
-  boot.kernelModules = [ "i2c-dev" "i2c-bcm2835" ];
+  boot.initrd.kernelModules = ["i2c-dev" "i2c-bcm2835"];
+  boot.kernelModules = ["i2c-dev" "i2c-bcm2835"];
   hardware.i2c.enable = true;
   hardware.raspberry-pi."4".i2c-bcm2708.enable = true;
 
   # Enable fan controller
   systemd.services.argonone-fancontrold = {
     enable = true;
-    wantedBy = [ "default.target" ];
+    wantedBy = ["default.target"];
 
     serviceConfig = {
       dynamicUser = true;

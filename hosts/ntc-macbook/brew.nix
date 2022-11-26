@@ -1,4 +1,4 @@
-{ ... }: {
+{...}: {
   homebrew = {
     casks = [
       "apache-directory-studio"
