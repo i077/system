@@ -13,21 +13,25 @@ build_template: &BUILD_TEMPLATE
   timeout_in: 120m
   enable_flake_script: echo "experimental-features = nix-command flakes" | $SUDO tee -a /etc/nix/nix.conf
   install_cachix_script: nix-env -iA cachix -f https://cachix.org/api/v1/install && cachix use $CACHIX_NAME
-  build_script: cachix watch-exec $CACHIX_NAME -- nix build -j auto .#$OUTPUTS --system ${ARCH//arm/aarch}-${CIRRUS_OS} --show-trace
+  build_script: cachix watch-exec $CACHIX_NAME -- nix build -j auto $OUTPUTS --system ${ARCH}-${CIRRUS_OS} --show-trace
 
 build_darwin_profiles_task:
   macos_instance:
     image: $DARWIN_BUILD_IMAGE
   matrix:
     - env:
-        ARCH: arm64
-        OUTPUTS: darwinConfigurations.Venusaur.config.system.build.toplevel
+        ARCH: aarch64
+        OUTPUTS: 
+          - .#darwinConfigurations.Venusaur.config.system.build.toplevel
+          - .#devShells.aarch64-darwin.default
     - env:
         ARCH: x86_64
-        OUTPUTS: darwinConfigurations.NTC-MacBook.config.system.build.toplevel
+        OUTPUTS:
+          - .#darwinConfigurations.NTC-MacBook.config.system.build.toplevel
+          - .#devShells.aarch64-darwin.default
   install_rosetta_script: softwareupdate --install-rosetta --agree-to-license
   install_nix_script: bash <(curl -L "$NIX_INSTALL_URL") --daemon
-  enable_trusted_users_script: echo -e "trusted-users = root admin\nextra-platforms = x86_64-darwin aarch64-darwin" | sudo tee -a /etc/nix/nix.conf
+  configure_nix_script: echo -e "trusted-users = root admin\nextra-platforms = x86_64-darwin aarch64-darwin" | sudo tee -a /etc/nix/nix.conf
   kickstart_nix_daemon_script: sudo launchctl kickstart -k system/org.nixos.nix-daemon
   <<: *BUILD_TEMPLATE
 
@@ -40,8 +44,9 @@ build_nixos_profiles_task:
         cpu: 4
         memory: 12G
       env:
-        ARCH: arm64
-        OUTPUTS: nixosConfigurations.cubone.config.system.build.toplevel
+        ARCH: aarch64
+        OUTPUTS:
+          - .#nixosConfigurations.cubone.config.system.build.toplevel
     # - container:
     #     image: $LINUX_BUILD_IMAGE
     #     cpu: 4
