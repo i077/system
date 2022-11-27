@@ -49,6 +49,7 @@ in {
       plenary-nvim # Library of Lua functions
       (pluginWithCfg telescope-nvim) # Fuzzy entry selection
       (pluginWithCfg nerdtree) # File browser
+      (pluginWithLua toggleterm-nvim) # Easier :terminal management
 
       # Syntax
       vim-polyglot # A bunch of languages
