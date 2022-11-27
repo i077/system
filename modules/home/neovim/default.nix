@@ -37,7 +37,8 @@ in {
       surround # Surround text
       commentary # Comment code with 'gcc'
       easy-align # Alignment plugin
-      lightspeed-nvim # Enhanced motions
+      (pluginWithLua leap-nvim) # Enhanced motions
+      (pluginWithLua leap-ast-nvim) # Leap with tree-sitter nodes
       vim-indent-object # Use indents as motions
       (pluginWithCfg undotree) # Visualize the undo tree
       vim-nixhash # Automated TOFU hash fetching for Nix derivations
