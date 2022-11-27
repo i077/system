@@ -1,8 +1,8 @@
 {pkgs, ...}: {
   programs.neovim = {
-    extraPackages = [pkgs.rnix-lsp];
+    extraPackages = [pkgs.nil];
     lspconfig = ''
-      require'lspconfig'.rnix.setup{}
+      require'lspconfig'.nil_ls.setup{}
     '';
   };
 }
