@@ -22,6 +22,7 @@
 
     # Some default packages
     casks = [
+      "alt-tab"
       "bartender"
       "contexts"
       "firefox"
