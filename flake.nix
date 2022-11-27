@@ -28,10 +28,7 @@
 
     utils.url = "github:numtide/flake-utils";
 
-    treefmt-nix = {
-      url = "github:kclejeune/treefmt-nix/kclejeune";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    treefmt-nix.url = "github:numtide/treefmt-nix";
 
     # A nicer developer env experience
     devshell.url = "github:numtide/devshell";
