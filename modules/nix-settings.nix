@@ -6,18 +6,18 @@
       "i077.cachix.org-1:v28tOFUfUjtVXdPol5FfEO/6wC/VKWnHkD32/aMJJBk="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     ];
-
-    # Add remote builders
-    distributedBuilds = true;
-    buildMachines = [
-      {
-        hostName = "eu.nixbuild.net";
-        systems = ["x86_64-linux" "aarch64-linux"];
-        maxJobs = 100;
-        supportedFeatures = ["benchmark" "big-parallel"];
-      }
-    ];
   };
+
+  # Add remote builders
+  nix.distributedBuilds = true;
+  nix.buildMachines = [
+    {
+      hostName = "eu.nixbuild.net";
+      systems = ["x86_64-linux" "aarch64-linux"];
+      maxJobs = 100;
+      supportedFeatures = ["benchmark" "big-parallel"];
+    }
+  ];
 
   # Use nix flakes for local flake evaluation
   nix.extraOptions = ''
