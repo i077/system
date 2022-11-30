@@ -34,7 +34,7 @@ build_darwin_profiles_task:
         ARCH: x86_64
         OUTPUTS:
           - .#darwinConfigurations.NTC-MacBook.config.system.build.toplevel
-          - .#devShells.aarch64-darwin.default
+          - .#devShells.x86_64-darwin.default
   install_rosetta_script: softwareupdate --install-rosetta --agree-to-license
   install_nix_script: bash <(curl -L "$NIX_INSTALL_URL") --daemon
   configure_nix_script: echo -e "trusted-users = root admin\nextra-platforms = x86_64-darwin aarch64-darwin" | sudo tee -a /etc/nix/nix.conf
