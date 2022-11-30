@@ -14,6 +14,12 @@ build_template: &BUILD_TEMPLATE
   enable_flake_script: echo "experimental-features = nix-command flakes" | $SUDO tee -a /etc/nix/nix.conf
   install_cachix_script: nix-env -iA cachix -f https://cachix.org/api/v1/install && cachix use $CACHIX_NAME
   build_script: cachix watch-exec $CACHIX_NAME -- nix build -j auto $OUTPUTS --system ${ARCH}-${CIRRUS_OS} --show-trace
+  print_diff_script: |
+    [ $CIRRUS_BRANCH = 'flakebot' ] && for out in $OUTPUTS; do
+      nix build -j auto $out -o result --quiet;
+      nix build -j auto github:i077/system#$(echo $out | cut -d# -f2) -o result-old --quiet;
+      nix run nixpkgs#nvd -- diff ./result-old ./result;
+    done || echo "Not in flakebot branch"
 
 build_darwin_profiles_task:
   macos_instance:
