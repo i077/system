@@ -36,6 +36,7 @@
       "neovide"
       "plexamp"
       "raycast"
+      "remarkable"
       "stats"
       "visual-studio-code"
     ];
