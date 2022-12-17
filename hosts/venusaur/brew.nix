@@ -3,6 +3,7 @@
     casks = [
       "altserver"
       "discord"
+      "fmail2"
       "mullvadvpn"
       "steam"
       "skim"
