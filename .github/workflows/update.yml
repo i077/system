@@ -29,7 +29,7 @@ jobs:
         git checkout -B flakebot
     - name: Update & commit lockfile
       run: |
-        nix flake update --commit-lock-file
+        nix flake update --commit-lock-file --accept-flake-config
         echo "commit_info<<EOF" >> $GITHUB_ENV
         git log --format=%B -1 >> $GITHUB_ENV
         echo "EOF" >> $GITHUB_ENV
