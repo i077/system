@@ -22,6 +22,7 @@ jobs:
       with:
         extra_nix_config: |
           experimental-features = nix-command flakes
+          access-tokens = github.com=${{ secrets.FLAKEBOT_PR_TOKEN }}
     - name: Prepare flakebot branch
       run: |
         git config --local user.email "flakebot@users.noreply.github.com"
