@@ -34,4 +34,11 @@ in {
   programs.mosh.enable = true;
 
   services.tailscale.enable = true;
+
+  # Garbage collect nix stores weekly
+  nix.gc = {
+    automatic = true;
+    dates = "Sunday 04:00";
+    options = "--delete-older-than 7d";
+  };
 }
