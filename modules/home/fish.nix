@@ -9,17 +9,19 @@
 
     shellAbbrs = {
       g = "git";
+      k = "kubectl";
+
       l = "exa";
       ls = "exa";
       la = "exa -a";
       ll = "exa -l";
       lL = "exa -algiSH --git";
       lt = "exa -lT";
+
       m = "make";
       py = "ptpython";
       t = "tmux";
       ta = "tmux a -t";
-      userctl = "systemctl --user";
       v = "nvim";
 
       # Apparently I mix these up all the time.
