@@ -19,6 +19,6 @@
       userEmail = lib.mkForce ("imran.hossain" + "@" + "saic.com");
     };
 
-    home.packages = with pkgs; [awscli2 nodePackages.pnpm nodejs-16_x kubectl kubernetes-helm eksctl];
+    home.packages = with pkgs; [awscli2 nodePackages.pnpm nodejs-16_x kubectl kubernetes-helm eksctl fluxcd];
   };
 }
