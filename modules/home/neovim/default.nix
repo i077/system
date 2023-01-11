@@ -79,6 +79,10 @@ in {
     ];
 
     extraConfig = ''
+      ${readVimSection "editor"}
+      ${readVimSection "ui"}
+      ${readVimSection "mappings"}
+      ${readVimSection "functions"}
       if exists('g:vscode')
         syntax off
       else
@@ -86,13 +90,6 @@ in {
       endif
     '';
   };
-
-  xdg.configFile."nvim/init-home-manager.vim".text = mkBefore ''
-    ${readVimSection "editor"}
-    ${readVimSection "ui"}
-    ${readVimSection "mappings"}
-    ${readVimSection "functions"}
-  '';
 
   # Treesitter parsers
   xdg.configFile."nvim/parser".source =
