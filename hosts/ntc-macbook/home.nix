@@ -20,5 +20,8 @@
     };
 
     home.packages = with pkgs; [awscli2 nodePackages.pnpm nodejs-16_x kubectl kubernetes-helm eksctl fluxcd];
+
+    # k9s at work
+    programs.k9s.enable = true;
   };
 }
