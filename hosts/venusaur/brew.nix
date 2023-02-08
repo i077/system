@@ -4,6 +4,7 @@
       "altserver"
       "discord"
       "fmail2"
+      "minecraft"
       "mullvadvpn"
       "steam"
       "skim"
