@@ -10,7 +10,6 @@
       "skim"
       "the-unarchiver"
       "whatsapp-alpha"
-      "wireshark"
       "zoom"
       "zotero"
     ];

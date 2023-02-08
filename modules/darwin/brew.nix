@@ -39,6 +39,7 @@
       "remarkable"
       "stats"
       "visual-studio-code"
+      "wireshark"
     ];
 
     masApps = {
