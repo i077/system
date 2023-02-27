@@ -26,4 +26,10 @@
   networking.interfaces.eth0.useDHCP = true;
 
   environment.systemPackages = with pkgs; [dig nmap];
+
+  # Enable IP forwarding for use as Tailscale exit node
+  boot.kernel.sysctl = {
+    "net.ipv4.ip_forward" = 1;
+    "net.ipv6.conf.all.forwarding" = 1;
+  };
 }
