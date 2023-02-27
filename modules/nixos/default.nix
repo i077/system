@@ -27,9 +27,11 @@ in {
   # OpenSSH configuration
   services.openssh = {
     enable = true;
+    settings = {
     passwordAuthentication = false;
     kbdInteractiveAuthentication = false;
     permitRootLogin = "no";
+    };
   };
   programs.mosh.enable = true;
 

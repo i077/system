@@ -28,7 +28,7 @@ in {
     wantedBy = ["default.target"];
 
     serviceConfig = {
-      dynamicUser = true;
+      DynamicUser = true;
       Group = "i2c";
       ExecStart = lib.getExe fancontrol-pkg;
     };
