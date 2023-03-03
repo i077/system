@@ -2,7 +2,7 @@
   programs.neovim = {
     extraPackages = [pkgs.sumneko-lua-language-server];
     lspconfig = ''
-      require'lspconfig'.sumneko_lua.setup {
+      require'lspconfig'.lua_ls.setup {
         settings = {
           Lua = {
             runtime = {
