@@ -16,35 +16,6 @@ Dependencies for this flake are specified in [`flake.nix`](./flake.nix) in the `
 
 ## Maintenance
 
-[`sysdo`](./bin/sysdo) is a fish script I wrote to help manage common tasks like updating
-this flake and rebuilding the system configuration (`sysdo up`) or removing
-generations more than a month old (`sysdo GC 30`).
-
-`$ sysdo help`
-
-```
-Usage: sysdo [flags] [verb] [options]
-
-Flags:
-    -C, --no-check      Don't run checks when building configuration
-    -r, --review        Review changes in configuration before activating
-    -k, --keep-result   Keep nix build output symlinks
-
-Verbs:
-        help            Print this help message
-        clean           Clean up nix build outputs
-        check           Run checks on this repository
-     s, switch          Build, activate, and add boot entry for the current configuration
-     b, boot            Build and add boot entry for the current configuration
-     t, test            Build and activate the current configuration
-        build           Build the current configuration
-        update          Update flake inputs
-    sh, shell           Spawn a devShell (use -c to specify a command)
-        repl            Start nix repl with flake
-        git             Execute a git command in this repository
-        gc              Delete unreachable store paths
-        GC [D]          Delete generations older than D days (60 by default)
-    up, upgrade         Run update and switch
-        ub              Run update and boot
-        ut              Run update and test
-```
+Common maintenance tasks, like updating the flake, switching configurations, and garbage-collecting
+the Nix store are stored in a [Justfile](./Justfile) and run using
+[just](https://github.com/casey/just).

@@ -131,6 +131,7 @@
         ];
 
         commands = [
+          {package = pkgs.just;}
           {
             help = "Format the entire code tree";
             package = inputs.treefmt-nix.lib.mkWrapper pkgs {
@@ -156,6 +157,11 @@
                 command = lib.getExe pkgs.luaformatter;
                 options = ["-i" "--column-limit=100" "--indent-width=2"];
                 includes = ["*.lua"];
+              };
+              settings.formatter.just = {
+                command = lib.getExe pkgs.just;
+                options = ["--fmt" "--unstable" "-f"];
+                includes = ["Justfile"];
               };
             };
           }
