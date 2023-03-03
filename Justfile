@@ -1,5 +1,6 @@
-default:
-    @just --list
+# Build & activate this host's profile
+switch: check fmt
+    darwin-rebuild --flake . switch
 
 # Format files, and ask to amend last commit if changes are present
 fmt:
@@ -22,25 +23,15 @@ fmt:
         end
     end
 
+# Start a REPL with flake outputs
 repl:
     @nix repl --file repl.nix --argstr hostname $(hostname)
 
-update:
-    nix flake update --commit-lock-file
-
+# Build this host's profile
 build:
     darwin-rebuild --flake . build
 
-switch: check fmt
-    darwin-rebuild --flake . switch
-
-s: switch
-
-boot: check fmt
-    darwin-rebuild --flake . boot
-
-up: update switch
-
+# Check for a clean working tree
 check:
     #!/usr/bin/env fish
     source bin/_lib.fish
@@ -53,6 +44,7 @@ check:
         exit 1
     end
 
+# Garbage-collect the Nix store
 gc age='60':
     sudo nix-collect-garbage --delete-older-than {{ age }}d
     nix-collect-garbage
