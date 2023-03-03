@@ -9,11 +9,6 @@
     # NixOS modules for running on certain hardware
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
-    flake-compat = {
-      url = "github:edolstra/flake-compat";
-      flake = false;
-    };
-
     # Manage macOS systems with Nix
     darwin = {
       url = "github:LnL7/nix-darwin";
