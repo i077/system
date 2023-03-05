@@ -85,7 +85,10 @@
         specialArgs = {inherit inputs;};
       };
   in {
-    nixosConfigurations = {cubone = mkNixosConfig "aarch64-linux" ./hosts/cubone;};
+    nixosConfigurations = {
+      cubone = mkNixosConfig "aarch64-linux" ./hosts/cubone;
+      staryu = mkNixosConfig "x86_64-linux" ./hosts/staryu;
+    };
 
     darwinConfigurations = {
       NTC-MacBook = mkDarwinConfig "x86_64-darwin" ./hosts/ntc-macbook;
