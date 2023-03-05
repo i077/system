@@ -21,9 +21,15 @@
     }
   ];
 
-  # Networking -- I only use Ethernet, no wireless here
-  networking.hostName = "cubone";
-  networking.interfaces.eth0.useDHCP = true;
+  hardware.enableRedistributableFirmware = true;
+
+  networking = {
+    hostName = "cubone";
+    interfaces.eth0.useDHCP = true;
+    networkmanager = {
+      enable = true;
+    };
+  };
 
   environment.systemPackages = with pkgs; [dig nmap];
 
