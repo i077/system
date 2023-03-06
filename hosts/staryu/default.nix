@@ -37,6 +37,18 @@
     fsType = "ext4";
   };
 
+  # Expose drive as SMB share
+  services.samba = {
+    enable = true;
+    openFirewall = true;
+    shares.plexdata = {
+      path = "/mnt/data/plex";
+      comment = "staryu Plex media";
+      "valid users" = ["imran"];
+      "read only" = false;
+    };
+  };
+
   # Plex Media Server
   services.plex = {
     enable = true;
