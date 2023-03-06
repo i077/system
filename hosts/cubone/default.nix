@@ -44,4 +44,10 @@
     device = "/dev/disk/by-uuid/db9b749a-6dd4-4c26-b41b-9efd18a23512";
     fsType = "ext4";
   };
+
+  # Allow additional SSH keys for unattended backup
+  users.users.imran.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEwxfrYbiYUreL+wKQLUEP8GNhAYNgPnigmt5yveT1n6 NTC-MacBook"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGvjExjsgc8AhTJva4Lv/bHCxaXjoBvUiQu9ZmFltZU1 dialga"
+  ];
 }
