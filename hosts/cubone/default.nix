@@ -49,5 +49,6 @@
   users.users.imran.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEwxfrYbiYUreL+wKQLUEP8GNhAYNgPnigmt5yveT1n6 NTC-MacBook"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGvjExjsgc8AhTJva4Lv/bHCxaXjoBvUiQu9ZmFltZU1 dialga"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIITRYKr6WJS0tVMXpVF2phNj+UErylLiAe7umC0UjWna Venusaur"
   ];
 }
