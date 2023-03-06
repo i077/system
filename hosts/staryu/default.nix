@@ -16,9 +16,12 @@
   # This is meant to run server workloads
   services.logind.lidSwitch = "lock";
 
-  # Enable distributed builds
+  # Enable root login for distributed builds
   services.openssh.settings.PermitRootLogin = lib.mkForce "prohibit-password";
   users.users.root.openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGTgmWqiXS1b+l8KhvdrjZtbXXCh5UuBnbnase5601p2"];
+
+  # Allow cross-compilation of ARM builds
+  boot.binfmt.emulatedSystems = ["aarch64-linux"];
 
   nixpkgs.config.allowUnfree = true;
 
