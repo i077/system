@@ -104,6 +104,11 @@
           profiles.system.path =
             deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.cubone;
         };
+        staryu = {
+          hostname = "staryu";
+          profiles.system.path =
+            deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.staryu;
+        };
       };
     };
 

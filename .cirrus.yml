@@ -28,7 +28,7 @@ build_darwin_profiles_task:
   matrix:
     - env:
         ARCH: aarch64
-        OUTPUTS: 
+        OUTPUTS:
           - .#darwinConfigurations.Venusaur.config.system.build.toplevel
           - .#devShells.aarch64-darwin.default
     - env:
@@ -54,10 +54,12 @@ build_nixos_profiles_task:
         ARCH: aarch64
         OUTPUTS:
           - .#nixosConfigurations.cubone.config.system.build.toplevel
-    # - container:
-    #     image: $LINUX_BUILD_IMAGE
-    #     cpu: 4
-    #     memory: 12G
-    #   env:
-    #     ARCH: x86_64
+    - container:
+        image: $LINUX_BUILD_IMAGE
+        cpu: 4
+        memory: 12G
+      env:
+        ARCH: x86_64
+        OUTPUTS:
+          - .#nixosConfigurations.staryu.config.system.build.toplevel
   <<: *BUILD_TEMPLATE
