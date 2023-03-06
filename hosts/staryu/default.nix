@@ -7,6 +7,9 @@
 
   boot.loader.systemd-boot.enable = true;
 
+  # This will be on AC usually, so set CPU governor to ondemand
+  powerManagement.cpuFreqGovernor = "ondemand";
+
   networking = {
     hostName = "staryu";
     networkmanager.enable = true;
