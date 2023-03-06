@@ -25,6 +25,7 @@
       "alt-tab"
       "bartender"
       "contexts"
+      "duplicacy-web-edition"
       "firefox"
       "fork"
       "iterm2"
