@@ -2,6 +2,10 @@
 switch: check fmt
     darwin-rebuild --flake . switch
 
+# Deploy server profiles
+deploy host='': check fmt
+    deploy .#{{ host }}
+
 # Format files, and ask to amend last commit if changes are present
 fmt:
     #!/usr/bin/env fish
