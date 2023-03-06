@@ -1,4 +1,8 @@
-{inputs, ...}: {
+{
+  inputs,
+  lib,
+  ...
+}: {
   imports = [./hardware-configuration.nix inputs.nixos-hardware.nixosModules.microsoft-surface-common];
 
   boot.loader.systemd-boot.enable = true;
@@ -15,4 +19,12 @@
   # Enable distributed builds
   services.openssh.settings.PermitRootLogin = lib.mkForce "prohibit-password";
   users.users.root.openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGTgmWqiXS1b+l8KhvdrjZtbXXCh5UuBnbnase5601p2"];
+
+  nixpkgs.config.allowUnfree = true;
+
+  # Plex Media Server
+  services.plex = {
+    enable = true;
+    openFirewall = true;
+  };
 }
