@@ -43,4 +43,7 @@ in {
     dates = "Sunday 04:00";
     options = "--delete-older-than 7d";
   };
+
+  nixpkgs.config.allowUnfree = true;
+  environment.systemPackages = with pkgs; [duplicacy];
 }
