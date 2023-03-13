@@ -65,4 +65,9 @@
     useUserPackages = true;
     backupFileExtension = "bak";
   };
+
+  users.users.imran = {
+    home = "/Users/imran";
+    shell = pkgs.fish;
+  };
 }
