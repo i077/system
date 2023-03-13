@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: {
-  imports = [./brew.nix ../broken-overlay.nix ../nix-settings.nix];
+  imports = [./brew.nix ./xdg.nix ../broken-overlay.nix ../nix-settings.nix];
 
   nix = {
     configureBuildUsers = true;

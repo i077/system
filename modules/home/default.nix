@@ -34,4 +34,6 @@
 
   # Include other SSH config files that I don't want to check in here
   programs.ssh.includes = ["~/.ssh/config.d/*"];
+
+  xdg.enable = true;
 }
