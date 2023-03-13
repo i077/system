@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   programs.git = {
     enable = true;
 
@@ -76,7 +80,7 @@
       # Sign with SSH key
       user.signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHQRxhrUwCg/DcNQfG8CwIMdJsHu0jZWI2BZV/T6ka5N";
       gpg.format = "ssh";
-      gpg.ssh.allowedSignersFile = "~/.config/git/allowed-signers";
+      gpg.ssh.allowedSignersFile = "${config.xdg.configHome}/git/allowed-signers";
       commit.gpgsign = true;
     };
 

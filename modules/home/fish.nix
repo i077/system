@@ -1,4 +1,5 @@
 {
+  config,
   inputs,
   lib,
   pkgs,
@@ -82,7 +83,7 @@
     interactiveShellInit = ''
       test -d ~/system/bin; and set -p PATH ~/system/bin
       # Add 1Password shell plugins support
-      test -f ~/.config/op/plugins.sh; and source ~/.config/op/plugins.sh
+      test -f ${config.xdg.configHome}/op/plugins.sh; and source ${config.xdg.configHome}/op/plugins.sh
       # Show vi-mode in cursor
       set -g fish_cursor_default block
       set -g fish_cursor_insert line
