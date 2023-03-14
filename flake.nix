@@ -115,6 +115,27 @@
     checks =
       builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
 
+    lib = {
+      # Helper function to generate variables for `just repl`
+      mkReplVars = {hostname}: let
+        pkgs = nixpkgs.legacyPackages.${builtins.currentSystem};
+      in {
+        inherit pkgs;
+        inherit (pkgs) lib;
+        flake = self;
+        inherit
+          (self
+            .${
+              if pkgs.stdenv.isDarwin
+              then "darwinConfigurations"
+              else "nixosConfigurations"
+            }
+            .${hostname})
+          config
+          ;
+      };
+    };
+
     devShells = utils.lib.eachDefaultSystemMap (system: let
       pkgs = import nixpkgs {
         inherit system;

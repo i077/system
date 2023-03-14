@@ -29,7 +29,7 @@ fmt:
 
 # Start a REPL with flake outputs
 repl:
-    @nix repl --file repl.nix --argstr hostname $(hostname)
+    @nix repl --expr '(builtins.getFlake "'$(pwd)'").lib.mkReplVars {hostname="'$(hostname)'";}'
 
 # Build this host's profile
 build:
