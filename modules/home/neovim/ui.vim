@@ -14,7 +14,7 @@ let g:gruvbox_italicize_comments=1
 hi Conceal guibg=None
 
 " Neovide/other GUI stuff
-if exists('g:neovide')
+if exists('g:neovide') || exists('g:started_by_firenvim')
     " Set guifont
     set guifont=Berkeley\ Mono:10
     let g:neovide_cursor_trail_size=0
