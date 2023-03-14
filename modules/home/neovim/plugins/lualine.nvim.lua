@@ -1,4 +1,4 @@
-if (vim.g['vscode'] == nil) then
+if (vim.g['vscode'] == nil or vim.g['started_by_firenvim'] == nil) then
   require('lualine').setup {
     options = {theme = 'auto', component_separators = '', section_separators = ''},
 
