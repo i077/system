@@ -4,7 +4,6 @@
   ...
 }: let
   inherit (builtins) readFile;
-  inherit (lib) mkBefore;
 
   readVimSection = file: readFile (./. + "/${file}.vim");
   pluginWithCfg = plugin: {
@@ -50,6 +49,7 @@ in {
       (pluginWithCfg telescope-nvim) # Fuzzy entry selection
       (pluginWithCfg nerdtree) # File browser
       (pluginWithLua toggleterm-nvim) # Easier :terminal management
+      (pluginWithLua firenvim) # Use nvim for textareas in the browser
 
       # Syntax
       vim-polyglot # A bunch of languages
