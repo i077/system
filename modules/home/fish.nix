@@ -37,7 +37,7 @@
               echo "lwhich: Expected exactly one argument."
               return 127
           end
-          which $argv[1]; or return 1
+          which $argv[1] > /dev/null; or return 1
           readlink -f (which $argv[1])
         '';
       };
