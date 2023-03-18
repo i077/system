@@ -1,5 +1,9 @@
 # Default config for my servers
-{pkgs, ...}: let
+{
+  pkgs,
+  lib,
+  ...
+}: let
   mySSHKeys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBsq7jgT0egpEZ4QpgaFHRRxrwk7vzWVvZE0w7Bhk9hK imran@NTC-MacBook"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID1YIyqTUGvH71i6MWCsYPVoijYLZWfapmuMSR4aGAh9 Shortcuts on Geodude"
@@ -46,4 +50,8 @@ in {
 
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [duplicacy];
+
+  # Workaround for NetworkManager-wait-online timing out
+  systemd.services.systemd-udevd.restartIfChanged =
+    lib.warn "Workaround for issue https://github.com/NixOS/nixpkgs/issues/180175 is still active" false;
 }
