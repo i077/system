@@ -27,7 +27,6 @@
       "contexts"
       "duplicacy-web-edition"
       "firefox"
-      "fork"
       "iterm2"
       "karabiner-elements"
       "keybase"
