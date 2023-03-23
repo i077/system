@@ -75,15 +75,13 @@ if set -q _flag_requirements; or set -q _flag_R
     set build_json (nix build --impure --no-link --json \
        --expr '(builtins.getFlake "'$FLAKE'").lib.'$currentSystem'.mkPython {
           requirements = builtins.readFile '$reqfile'; }')
-    # If the build didn't succeed, stop
     if test -z build_json
         log_error "mach-nix couldn't build the Python environment"
         exit 1
     end
-    # Otherwise, grab the outPath from the JSON
-    set outPath (echo $build_json | jq -r 'first | .outputs.out')
-    # TODO spawn a shell with this environment instead
-    $outPath/bin/$cmd
+    # Grab the derivation path from the JSON and spawn a shell using the derivation
+    set drvPath (echo $build_json | jq -r 'first | .drvPath')
+    nix shell $drvPath --command $cmd
 else
     # No -r/-R was passsed, so continue with mach-nix's pythonWith
 
