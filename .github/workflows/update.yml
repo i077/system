@@ -11,47 +11,21 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  build:
+  update:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    - uses: DeterminateSystems/nix-installer-action@v1
       with:
-        persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
-        fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
-    - uses: cachix/install-nix-action@v19
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Update flake.lock
+      uses: DeterminateSystems/update-flake-lock@v19
       with:
-        extra_nix_config: |
-          experimental-features = nix-command flakes
-          access-tokens = github.com=${{ secrets.FLAKEBOT_PR_TOKEN }}
-    - name: Prepare flakebot branch
-      run: |
-        git config --local user.email "flakebot@users.noreply.github.com"
-        git config --local user.name "flakebot"
-        git checkout -B flakebot
-    - name: Update & commit lockfile
-      run: |
-        nix flake update --commit-lock-file --accept-flake-config
-        echo "commit_info<<EOF" >> $GITHUB_ENV
-        git log --format=%B -1 >> $GITHUB_ENV
-        echo "EOF" >> $GITHUB_ENV
-    - name: Push changes
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.FLAKEBOT_PR_TOKEN }}
-        branch: flakebot
-        force: true
-    - name: pull-request-action
-      uses: vsoch/pull-request-action@1.0.24
-      env:
-        GITHUB_TOKEN: ${{ secrets.FLAKEBOT_PR_TOKEN }}
-        PULL_REQUEST_FROM_BRANCH: flakebot
-        PULL_REQUEST_BRANCH: master
-        PULL_REQUEST_UPDATE: true
-        MAINTAINER_CANT_MODIFY: true
-        PASS_ON_ERROR: true
-        PULL_REQUEST_TITLE: Update flake inputs
-        PULL_REQUEST_BODY: |
-          This is an automated pull request to update this flake's inputs.
+        token: ${{ secrets.GH_UPDATER_TOKEN }}
+        nix-options: --accept-flake-config
+        pr-body: |
+          Automated changes by the [update-flake-lock](https://github.com/DeterminateSystems/update-flake-lock) GitHub Action.
+
           ```
-          ${{ env.commit_info }}
+          {{ env.GIT_COMMIT_MESSAGE }}
           ```

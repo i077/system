@@ -16,11 +16,13 @@ build_template: &BUILD_TEMPLATE
   install_cachix_script: nix profile install nixpkgs/nixpkgs-unstable#cachix && cachix use $CACHIX_NAME
   build_script: cachix watch-exec $CACHIX_NAME -- nix build $NIX_BUILD_FLAGS $OUTPUTS --system ${ARCH}-${CIRRUS_OS} --show-trace
   print_diff_script: |
-    [ $CIRRUS_BRANCH = 'flakebot' ] && for out in $OUTPUTS; do
-      nix build $NIX_BUILD_FLAGS $out -o result --quiet;
-      nix build $NIX_BUILD_FLAGS github:i077/system#$(echo $out | cut -d# -f2) -o result-old --quiet;
-      nix run nixpkgs#nvd -- diff ./result-old ./result;
-    done || echo "Not in flakebot branch"
+    if [ $CIRRUS_BRANCH = 'update_flake_lock_action' ]; then
+      for out in $OUTPUTS; do
+        nix build $NIX_BUILD_FLAGS $out -o result --quiet;
+        nix build $NIX_BUILD_FLAGS github:i077/system#$(echo $out | cut -d# -f2) -o result-old --quiet;
+        nix run nixpkgs#nvd -- diff ./result-old ./result;
+      done
+    fi
 
 build_darwin_profiles_task:
   macos_instance:
