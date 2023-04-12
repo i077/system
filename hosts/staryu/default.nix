@@ -32,4 +32,6 @@
 
   # Allow cross-compilation of ARM builds
   boot.binfmt.emulatedSystems = ["aarch64-linux"];
+
+  microsoft-surface.kernelVersion = "6.1.18";
 }
