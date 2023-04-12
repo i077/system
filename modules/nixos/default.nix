@@ -52,6 +52,7 @@ in {
   environment.systemPackages = with pkgs; [duplicacy];
 
   # Workaround for NetworkManager-wait-online timing out
-  systemd.services.systemd-udevd.restartIfChanged =
-    lib.warn "Workaround for issue https://github.com/NixOS/nixpkgs/issues/180175 is still active" false;
+  systemd.services.NetworkManager-wait-online.enable =
+    lib.warn "Workaround for issue https://github.com/NixOS/nixpkgs/issues/180175 is still active" (lib.mkForce false);
+  systemd.services.systemd-networkd-wait-online.enable = lib.mkForce false;
 }
