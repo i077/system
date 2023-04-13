@@ -38,6 +38,7 @@
       "raycast"
       "remarkable"
       "stats"
+      "sublime-merge"
       "visual-studio-code"
       "wireshark"
     ];
