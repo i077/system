@@ -5,6 +5,7 @@
       "docker"
       "google-chrome"
       "navicat-premium"
+      "slack"
       "zoom"
     ];
   };
