@@ -18,9 +18,11 @@ build_template: &BUILD_TEMPLATE
   print_diff_script: |
     if [ $CIRRUS_BRANCH = 'update_flake_lock_action' ]; then
       for out in $OUTPUTS; do
+        echo "===== $out"
         nix build $NIX_BUILD_FLAGS $out -o result --quiet;
         nix build $NIX_BUILD_FLAGS github:i077/system#$(echo $out | cut -d# -f2) -o result-old --quiet;
         nix run nixpkgs#nvd -- diff ./result-old ./result;
+        echo "====="
       done
     fi
 
