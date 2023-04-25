@@ -1,0 +1,44 @@
+#!/usr/bin/env fish
+
+# Retrieve the logs of the last CI run against the flake update branch.
+# Useful for quickly seeing what packages in each system's closure were updated.
+
+set _dir (dirname (status filename))
+source $_dir/_lib.fish
+
+log_step "Contacting Cirrus CI..."
+set cirrus_json \
+  (curlie --silent POST \
+    "https://api.cirrus-ci.com/graphql" \
+    query='{
+      ownerRepository(owner: "i077", name: "system", platform: "github") {
+        builds(last: 1, branch: "update_flake_lock_action") { 
+          edges {
+            node {
+              status 
+              changeIdInRepo
+              tasks { name status commandLogsTail(name: "print_diff") }
+            }
+          }
+        }
+      }
+    }' | jq .data.ownerRepository.builds.edges[0].node)
+set ci_lines (echo $cirrus_json | jq -r .tasks[].commandLogsTail[])
+
+# Only capture output between nvd delimiters
+set IS_DIFF 0
+for line in $ci_lines
+  if string match -q "===== *" $line
+    set IS_DIFF 1
+    tput bold
+  else if string match -q "=====" $line
+    set IS_DIFF 0
+  end
+  
+  if test "$IS_DIFF" -gt 0
+    set -a difflines $line
+  end
+  tput sgr0
+end
+
+string join \n $difflines | bat --file-name "Flake update closure diffs" --color=always
