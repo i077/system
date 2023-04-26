@@ -18,6 +18,7 @@
       "homebrew/cask-fonts"
       "homebrew/core"
       "homebrew/cask-drivers"
+      "homebrew/cask-versions"
     ];
 
     # Some default packages
