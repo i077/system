@@ -34,7 +34,6 @@
       "logseq"
       "logi-options-plus"
       "monitorcontrol"
-      "neovide"
       "plexamp"
       "raycast"
       "remarkable"
