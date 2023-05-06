@@ -18,7 +18,7 @@
     # Manage user environment with Nix
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
 
     utils.url = "github:numtide/flake-utils";
