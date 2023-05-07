@@ -40,7 +40,7 @@ function getrev -a double
     log_step "Getting last good revision for nixpkgs#$double.$attr..."
     # Get Hydra project & jobset, which varies by system
     set hydra_proj nixpkgs
-    if string match -q "aarch64-darwin" $double
+    if string match -q aarch64-darwin $double
         set hydra_jobset nixpkgs-unstable-aarch64-darwin
     else
         set hydra_jobset trunk
@@ -51,7 +51,7 @@ function getrev -a double
     set latest_build_json \
         (curl -sL -H "accept: application/json" "$HYDRA_URL/job/$hydra_proj/$hydra_jobset/$hydra_job/latest")
     set latest_build_eval_id (echo $latest_build_json | jq -r ".jobsetevals[0]")
-    if string match -q "null" $latest_build_eval_id
+    if string match -q null $latest_build_eval_id
         log_error "Couldn't find a successful build."
         return
     end
@@ -101,7 +101,7 @@ if set -q _flag_update
 
     # Update file with new results
     set tmpfile (mktemp)
-    jo -p -D -f $json_path -- $attr=$result_json > $tmpfile
+    jo -p -D -f $json_path -- $attr=$result_json >$tmpfile
     mv $tmpfile $json_path
     log_ok "File updated."
 else

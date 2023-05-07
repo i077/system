@@ -58,7 +58,7 @@ else
         log_error "No link with this key."
         exit 1
     end
-    
+
     if test $_flag_print
         echo $link
     else
