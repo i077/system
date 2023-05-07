@@ -69,8 +69,6 @@
     utils,
     ...
   } @ inputs: let
-    inherit (nixpkgs) lib;
-
     mkDarwinConfig = system: path:
       darwin.lib.darwinSystem {
         inherit system;
@@ -166,16 +164,12 @@
                 command = "${pkgs.fish}/bin/fish_indent";
                 options = ["--write"];
                 includes =
-                  map (x: "bin/${x}") [
-                    ","
-                    "git-peek"
-                    "mount-backup"
-                    "nixfetch"
-                    "pywith"
-                    "show"
-                    "sysdo"
-                  ]
-                  ++ ["*.fish"];
+                  ["*.fish"]
+                  ++
+                  # Format scripts in ./bin interpreted by fish
+                  builtins.filter
+                  (f: builtins.substring 0 19 (builtins.readFile ./bin/${f}) == "#!/usr/bin/env fish")
+                  (builtins.attrNames (builtins.readDir ./bin));
               };
               settings.formatter.lua = {
                 command = lib.getExe pkgs.luaformatter;
