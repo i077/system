@@ -155,10 +155,13 @@
             includes =
               ["*.fish"]
               ++
-              # Format scripts in ./bin interpreted by fish
-              builtins.filter
-              (f: builtins.substring 0 19 (builtins.readFile ./bin/${f}) == "#!/usr/bin/env fish")
-              (builtins.attrNames (builtins.readDir ./bin));
+              # Exclude non-fish scripts in ./bin from formatter
+              (pkgs.lib.pipe ./bin [
+                builtins.readDir # Read the ./bin directory
+                (pkgs.lib.flip builtins.removeAttrs ["imgcat"]) # Remove non-fish scripts
+                builtins.attrNames # Just get the names of the files
+                (map (x: "bin/${x}")) # Map names to their actual paths relative to repo's root
+              ]);
           };
           settings.formatter.just = {
             command = pkgs.lib.getExe pkgs.just;
