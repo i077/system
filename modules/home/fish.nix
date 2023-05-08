@@ -10,7 +10,6 @@
 
     shellAbbrs = {
       g = "git";
-      k = "kubectl";
 
       l = "exa";
       ls = "exa";

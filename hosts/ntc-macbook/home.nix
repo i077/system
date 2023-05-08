@@ -19,7 +19,14 @@
       userEmail = lib.mkForce ("imran.hossain" + "@" + "saic.com");
     };
 
-    home.packages = with pkgs; [awscli2 nodejs-19_x kubectl kubernetes-helm eksctl fluxcd];
+    home.packages = with pkgs; [awscli2 nodejs-19_x kubectl kubectx kubernetes-helm eksctl fluxcd];
+
+    # Add kubectl & friends as aliases
+    programs.fish.shellAbbrs = {
+      k = "kubectl";
+      kcx = "kubectx";
+      kns = "kubens";
+    };
 
     # k9s at work
     programs.k9s.enable = true;
