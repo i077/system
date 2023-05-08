@@ -21,15 +21,13 @@
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
 
-    utils.url = "github:numtide/flake-utils";
-
-    treefmt-nix.url = "github:numtide/treefmt-nix";
-
-    # A nicer developer env experience
-    devshell.url = "github:numtide/devshell";
-
     # Easily deploy changes to systems
     deploy-rs.url = "github:serokell/deploy-rs";
+
+    # Dev-environment stuff
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    treefmt-nix.url = "github:numtide/treefmt-nix";
+    devshell.url = "github:numtide/devshell";
 
     # Jump to directories by frecency with fish
     fish-z = {
@@ -51,7 +49,11 @@
   };
 
   nixConfig = {
-    substituters = ["https://i077.cachix.org" "https://cache.nixos.org" "https://nix-community.cachix.org/"];
+    substituters = [
+      "https://i077.cachix.org"
+      "https://cache.nixos.org"
+      "https://nix-community.cachix.org/"
+    ];
     trusted-public-keys = [
       "i077.cachix.org-1:v28tOFUfUjtVXdPol5FfEO/6wC/VKWnHkD32/aMJJBk="
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
@@ -59,137 +61,115 @@
     ];
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    darwin,
-    deploy-rs,
-    devshell,
-    home-manager,
-    utils,
-    ...
-  } @ inputs: let
-    mkDarwinConfig = system: path:
-      darwin.lib.darwinSystem {
-        inherit system;
-        modules = [home-manager.darwinModule ./modules/darwin path];
-        specialArgs = {inherit inputs;};
-      };
+  outputs = inputs:
+    inputs.flake-parts.lib.mkFlake {inherit inputs;}
+    {
+      imports = [
+        inputs.treefmt-nix.flakeModule
+        inputs.devshell.flakeModule
+        # Workaround to allow merging of flake's deploy option
+        {options.flake.deploy = inputs.nixpkgs.lib.mkOption {};}
+      ];
+      systems = ["x86_64-darwin" "aarch64-darwin" "x86_64-linux" "aarch64-linux"];
 
-    mkNixosConfig = system: path:
-      nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [./modules/nixos path];
-        specialArgs = {inherit inputs;};
-      };
-  in {
-    nixosConfigurations = {
-      cubone = mkNixosConfig "aarch64-linux" ./hosts/cubone;
-      staryu = mkNixosConfig "x86_64-linux" ./hosts/staryu;
-    };
+      flake = let
+        inherit (inputs) self nixpkgs deploy-rs darwin home-manager;
+        inherit (nixpkgs.lib) mkMerge;
 
-    darwinConfigurations = {
-      NTC-MacBook = mkDarwinConfig "x86_64-darwin" ./hosts/ntc-macbook;
-      Venusaur = mkDarwinConfig "aarch64-darwin" ./hosts/venusaur;
-    };
+        mkDarwinConfig = system: path:
+          darwin.lib.darwinSystem {
+            inherit system;
+            modules = [home-manager.darwinModule ./modules/darwin path];
+            specialArgs = {inherit inputs;};
+          };
 
-    deploy = {
-      sshUser = "imran";
-      user = "root";
-      nodes = {
-        cubone = {
-          hostname = "cubone";
-          profiles.system.path =
-            deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.cubone;
+        mkNixosDeployment = name: system: {
+          nixosConfigurations.${name} = nixpkgs.lib.nixosSystem {
+            inherit system;
+            modules = [./modules/nixos ./hosts/${name}];
+            specialArgs = {inherit inputs;};
+          };
+          deploy.nodes.${name} = {
+            hostname = name;
+            profiles.system.path = deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations.${name};
+          };
         };
-        staryu = {
-          hostname = "staryu";
-          profiles.system.path =
-            deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.staryu;
-        };
-      };
-    };
-
-    checks =
-      builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
-
-    lib = {
-      # Helper function to generate variables for `just repl`
-      mkReplVars = {hostname}: let
-        pkgs = nixpkgs.legacyPackages.${builtins.currentSystem};
-      in {
-        inherit pkgs;
-        inherit (pkgs) lib;
-        flake = self;
-        inherit
-          (self
-            .${
-              if pkgs.stdenv.isDarwin
-              then "darwinConfigurations"
-              else "nixosConfigurations"
-            }
-            .${hostname})
-          config
-          ;
-      };
-    };
-
-    devShells = utils.lib.eachDefaultSystemMap (system: let
-      pkgs = import nixpkgs {
-        inherit system;
-        overlays = [devshell.overlays.default];
-      };
-      inherit (pkgs) lib;
-    in {
-      default = pkgs.devshell.mkShell {
-        name = "system";
-        packages = with pkgs; [
-          # Wrap nix to support flakes
-          (writeShellScriptBin "nix" ''
-            ${lib.getExe pkgs.nix} --extra-experimental-features "nix-command flakes" "$@"
-          '')
-          cachix
-          jo
-        ];
-
-        commands = [
-          {package = pkgs.just;}
+      in
+        mkMerge [
+          (mkNixosDeployment "cubone" "aarch64-linux")
+          (mkNixosDeployment "staryu" "x86_64-linux")
           {
-            help = "Format the entire code tree";
-            package = inputs.treefmt-nix.lib.mkWrapper pkgs {
-              projectRootFile = ".git/config";
-              programs.alejandra.enable = true;
-              programs.prettier.enable = true;
-              settings.formatter.fish = {
-                command = "${pkgs.fish}/bin/fish_indent";
-                options = ["--write"];
-                includes =
-                  ["*.fish"]
-                  ++
-                  # Format scripts in ./bin interpreted by fish
-                  builtins.filter
-                  (f: builtins.substring 0 19 (builtins.readFile ./bin/${f}) == "#!/usr/bin/env fish")
-                  (builtins.attrNames (builtins.readDir ./bin));
-              };
-              settings.formatter.lua = {
-                command = lib.getExe pkgs.luaformatter;
-                options = ["-i" "--column-limit=100" "--indent-width=2"];
-                includes = ["*.lua"];
-              };
-              settings.formatter.just = {
-                command = lib.getExe pkgs.just;
-                options = ["--fmt" "--unstable" "-f"];
-                includes = ["Justfile"];
-              };
+            darwinConfigurations = {
+              NTC-MacBook = mkDarwinConfig "x86_64-darwin" ./hosts/ntc-macbook;
+              Venusaur = mkDarwinConfig "aarch64-darwin" ./hosts/venusaur;
             };
-          }
-          {
-            name = "deploy";
-            help = "Deploy profiles to servers";
-            package = deploy-rs.defaultPackage.${system};
+
+            deploy = {
+              sshUser = "imran";
+              user = "root";
+            };
+
+            checks =
+              builtins.mapAttrs
+              (system: deployLib: deployLib.deployChecks self.deploy)
+              deploy-rs.lib;
           }
         ];
+
+      perSystem = {
+        config,
+        inputs',
+        pkgs,
+        ...
+      }: {
+        devshells.default = {
+          name = "system";
+          packages = with pkgs; [
+            # Wrap nix to support flakes
+            (writeShellScriptBin "nix" ''
+              ${lib.getExe nix} --extra-experimental-features "nix-command flakes" "$@"
+            '')
+            cachix
+            jo
+          ];
+
+          commands = [
+            {package = pkgs.just;}
+            {package = config.treefmt.build.wrapper;}
+            {
+              name = "deploy";
+              help = "Deploy profiles to servers";
+              package = inputs'.deploy-rs.packages.default;
+            }
+          ];
+        };
+
+        treefmt = {
+          projectRootFile = ".git/config";
+          programs.alejandra.enable = true;
+          programs.prettier.enable = true;
+          settings.formatter.fish = {
+            command = "${pkgs.fish}/bin/fish_indent";
+            options = ["--write"];
+            includes =
+              ["*.fish"]
+              ++
+              # Format scripts in ./bin interpreted by fish
+              builtins.filter
+              (f: builtins.substring 0 19 (builtins.readFile ./bin/${f}) == "#!/usr/bin/env fish")
+              (builtins.attrNames (builtins.readDir ./bin));
+          };
+          settings.formatter.lua = {
+            command = pkgs.lib.getExe pkgs.luaformatter;
+            options = ["-i" "--column-limit=100" "--indent-width=2"];
+            includes = ["*.lua"];
+          };
+          settings.formatter.just = {
+            command = pkgs.lib.getExe pkgs.just;
+            options = ["--fmt" "--unstable" "-f"];
+            includes = ["Justfile"];
+          };
+        };
       };
-    });
-  };
+    };
 }

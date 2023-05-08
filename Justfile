@@ -29,7 +29,11 @@ fmt:
 
 # Start a REPL with flake outputs
 repl:
-    @nix repl --expr '(builtins.getFlake "'$(pwd)'").lib.mkReplVars {hostname="'$(hostname)'";}'
+    @nix repl --expr 'let \
+        flake = builtins.getFlake "'$(pwd)'"; \
+        hostname = "'$(hostname)'"; \
+        pkgs = flake.inputs.nixpkgs.legacyPackages.${builtins.currentSystem}; in \
+        { inherit flake pkgs; inherit (pkgs) lib; configs = flake.darwinConfigurations // flake.nixosConfigurations; }'
 
 # Build this host's profile
 build:
