@@ -1,8 +1,11 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: {
+  nix.package = pkgs.nixUnstable;
+
   nix.settings = {
     # Add other binary caches
     substituters = ["https://i077.cachix.org" "https://nix-community.cachix.org/"];
