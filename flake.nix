@@ -68,7 +68,7 @@
         inputs.treefmt-nix.flakeModule
         inputs.devshell.flakeModule
         # Workaround to allow merging of flake's deploy option
-        {options.flake.deploy = inputs.nixpkgs.lib.mkOption {};}
+        {options.flake.deploy = inputs.nixpkgs.lib.mkOption {type = inputs.nixpkgs.lib.types.anything;};}
       ];
       systems = ["x86_64-darwin" "aarch64-darwin" "x86_64-linux" "aarch64-linux"];
 
@@ -91,6 +91,8 @@
           };
           deploy.nodes.${name} = {
             hostname = name;
+            sshUser = "imran";
+            user = "root";
             profiles.system.path = deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations.${name};
           };
         };
@@ -102,11 +104,6 @@
             darwinConfigurations = {
               NTC-MacBook = mkDarwinConfig "x86_64-darwin" ./hosts/ntc-macbook;
               Venusaur = mkDarwinConfig "aarch64-darwin" ./hosts/venusaur;
-            };
-
-            deploy = {
-              sshUser = "imran";
-              user = "root";
             };
 
             checks =
