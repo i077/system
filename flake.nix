@@ -148,6 +148,7 @@
           projectRootFile = ".git/config";
           programs.alejandra.enable = true;
           programs.prettier.enable = true;
+          programs.stylua.enable = true;
           settings.formatter.fish = {
             command = "${pkgs.fish}/bin/fish_indent";
             options = ["--write"];
@@ -158,11 +159,6 @@
               builtins.filter
               (f: builtins.substring 0 19 (builtins.readFile ./bin/${f}) == "#!/usr/bin/env fish")
               (builtins.attrNames (builtins.readDir ./bin));
-          };
-          settings.formatter.lua = {
-            command = pkgs.lib.getExe pkgs.luaformatter;
-            options = ["-i" "--column-limit=100" "--indent-width=2"];
-            includes = ["*.lua"];
           };
           settings.formatter.just = {
             command = pkgs.lib.getExe pkgs.just;

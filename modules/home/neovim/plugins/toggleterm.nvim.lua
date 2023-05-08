@@ -1,1 +1,1 @@
-require('toggleterm').setup {}
+require("toggleterm").setup({})
