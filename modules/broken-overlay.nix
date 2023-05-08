@@ -34,7 +34,7 @@
   #   { "attr": { "nixpkgs_rev": ..., }, ... }
   overlayDataForSystem =
     builtins.mapAttrs (n: v: v.${currentSystem})
-    (lib.filterAttrs (n: v: builtins.hasAttr currentSystem v) overlayData);
+    (lib.filterAttrs (n: builtins.hasAttr currentSystem) overlayData);
 
   # Function to import nixpkgs at a specified commit (I know, IFD...)
   nixpkgsRev = rev: hash:
@@ -49,7 +49,7 @@
   # Note: This is a really ugly hack using IFD and an unsafe function,
   # but ideally there isn't more than one or two broken packages at a time so does it really matter?
   packageStillBroken = prevpkgs: attr: let
-    drvPath = prevpkgs.${attr}.drvPath;
+    inherit (prevpkgs.${attr}) drvPath;
   in
     import (pkgs.runCommand "try-build-${attr}" {} ''
       ${lib.getExe pkgs.nix} build ${
