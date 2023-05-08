@@ -52,15 +52,14 @@
     inherit (prevpkgs.${attr}) drvPath;
   in
     import (pkgs.runCommand "try-build-${attr}" {} ''
-      ${lib.getExe pkgs.nix} build ${
-        builtins.unsafeDiscardStringContext drvPath
-      } && echo false > $out || echo true > $out
+      ${lib.getExe pkgs.nix} build ${builtins.unsafeDiscardStringContext drvPath} && echo false > $out || echo true > $out
     '');
 in {
   nixpkgs.overlays = [
     (final: prev:
       # Map each package's last good revision data to an actual derivation from that revision
-        builtins.mapAttrs (attr: data:
+        builtins.mapAttrs
+        (attr: data:
           if packageStillBroken prev attr
           then (nixpkgsRev data.nixpkgs_rev data.nixpkgs_hash).${attr}
           else throw "${attr} builds successfully, but is still in broken overlay")
