@@ -58,7 +58,7 @@ build_nixos_profiles_task:
       env:
         ARCH: aarch64
         OUTPUTS:
-          - .#nixosConfigurations.cubone.config.system.build.toplevel
+          - .#deploy.nodes.cubone.profiles.system.path
     - container:
         image: $LINUX_BUILD_IMAGE
         cpu: 4
@@ -66,5 +66,5 @@ build_nixos_profiles_task:
       env:
         ARCH: x86_64
         OUTPUTS:
-          - .#nixosConfigurations.staryu.config.system.build.toplevel
+          - .#deploy.nodes.staryu.profiles.system.path
   <<: *BUILD_TEMPLATE
