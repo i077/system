@@ -15,6 +15,7 @@ set cirrus_json \
         builds(last: 1, branch: "update_flake_lock_action") { 
           edges {
             node {
+              id
               status 
               changeIdInRepo
               tasks { name status commandLogsTail(name: "print_diff") }
@@ -23,14 +24,22 @@ set cirrus_json \
         }
       }
     }' | jq .data.ownerRepository.builds.edges[0].node)
-set ci_lines (echo $cirrus_json | jq -r .tasks[].commandLogsTail[])
+set cirrus_status (echo $cirrus_json | jq -r .status)
+if test -n "$cirrus_status"; and test $cirrus_status != COMPLETED
+    log_warn "Build status is currently '$cirrus_status'."
+    log_warn "See https://cirrus-ci.com/build/"(echo $cirrus_json | jq -r .id)" for build logs."
+    if not ask_yesno "Continue?"
+        exit 0
+    end
+end
+set ci_lines (echo $cirrus_json | jq -r .tasks[].commandLogsTail[]\?)
 
 # Only capture output between nvd delimiters
 set IS_DIFF 0
 for line in $ci_lines
     if string match -q "===== *" $line
         set IS_DIFF 1
-        tput bold
+        set -a difflines "" ""
     else if string match -q "=====" $line
         set IS_DIFF 0
     end
@@ -41,4 +50,4 @@ for line in $ci_lines
     tput sgr0
 end
 
-string join \n $difflines | bat --file-name "Flake update closure diffs" --color=always
+string join \n $difflines | less -FR
