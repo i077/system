@@ -23,7 +23,6 @@
 
     # Some default packages
     casks = [
-      "alt-tab"
       "bartender"
       "contexts"
       "duplicacy-web-edition"
@@ -31,9 +30,9 @@
       "iterm2"
       "karabiner-elements"
       "keybase"
-      "logseq"
       "monitorcontrol"
       "mouse-fix"
+      "multi"
       "plexamp"
       "raycast"
       "remarkable"
