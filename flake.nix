@@ -127,6 +127,7 @@
             '')
             cachix
             jo
+            nvd
           ];
 
           commands = [

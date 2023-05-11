@@ -27,6 +27,12 @@ fmt:
         end
     end
 
+# Diff this host's closure in the flake against its current one
+diff:
+    nix build ".#darwinConfigurations.$(hostname).system" -o ./new-system
+    nvd --color always diff /run/current-system ./new-system | less -FR
+    rm ./new-system
+
 # Start a REPL with flake outputs
 repl:
     @nix repl --expr 'let \
