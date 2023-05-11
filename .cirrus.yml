@@ -22,7 +22,7 @@ build_template: &BUILD_TEMPLATE
         nix build $NIX_BUILD_FLAGS $out -o result --quiet;
         nix build $NIX_BUILD_FLAGS github:i077/system#$(echo $out | cut -d# -f2) -o result-old --quiet;
         echo "===== $out"
-        nix run nixpkgs#nvd -- diff ./result-old ./result;
+        nix run nixpkgs#nvd -- --color always diff ./result-old ./result;
         echo -e "=====\n"
       done
     fi
