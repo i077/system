@@ -1,8 +1,4 @@
-{
-  lib,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   programs.home-manager.enable = true;
 
   home = {
@@ -13,13 +9,6 @@
       HOMEBREW_NO_AUTO_UPDATE = 1;
     };
     packages = with pkgs; [curlie exa libqalculate just jq neovide nix-index ripgrep ripgrep-all rnix-lsp];
-
-    # Rebuild cache upon activation (for custom themes)
-    activation."batCacheBuild" = {
-      before = [];
-      after = ["linkGeneration"];
-      data = "${lib.getExe pkgs.bat} cache --build";
-    };
   };
 
   programs.bat = {
