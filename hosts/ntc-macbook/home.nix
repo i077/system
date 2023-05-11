@@ -10,6 +10,7 @@
       ../../modules/home/direnv.nix
       ../../modules/home/fzf.nix
       ../../modules/home/git.nix
+      ../../modules/home/k8s.nix
       ../../modules/home/neovim
       ../../modules/home/1password.nix
     ];
@@ -19,16 +20,6 @@
       userEmail = lib.mkForce ("imran.hossain" + "@" + "saic.com");
     };
 
-    home.packages = with pkgs; [awscli2 nodejs-19_x kubectl kubectx kubernetes-helm eksctl fluxcd];
-
-    # Add kubectl & friends as aliases
-    programs.fish.shellAbbrs = {
-      k = "kubectl";
-      kcx = "kubectx";
-      kns = "kubens";
-    };
-
-    # k9s at work
-    programs.k9s.enable = true;
+    home.packages = with pkgs; [awscli2 nodejs-19_x];
   };
 }
