@@ -6,6 +6,7 @@
       "fmail2"
       "minecraft"
       "mullvadvpn"
+      "onedrive"
       "steam"
       "skim"
       "the-unarchiver"
