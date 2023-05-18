@@ -20,6 +20,6 @@
       userEmail = lib.mkForce ("imran.hossain" + "@" + "saic.com");
     };
 
-    home.packages = with pkgs; [awscli2 nodejs-19_x];
+    home.packages = with pkgs; [awscli2];
   };
 }
