@@ -45,7 +45,11 @@ for line in $ci_lines
     end
 
     if test "$IS_DIFF" -gt 0
-        set -a difflines $line
+        if string match -q "===== *" $line
+            set -a difflines $bold$line$resf
+        else
+          set -a difflines $line
+        end
     end
     tput sgr0
 end
