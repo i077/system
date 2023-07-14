@@ -48,7 +48,7 @@ for line in $ci_lines
         if string match -q "===== *" $line
             set -a difflines $bold$line$resf
         else
-          set -a difflines $line
+            set -a difflines $line
         end
     end
     tput sgr0

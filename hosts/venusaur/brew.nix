@@ -2,6 +2,7 @@
   homebrew = {
     casks = [
       "altserver"
+      "copilot"
       "discord"
       "fmail2"
       "minecraft"
