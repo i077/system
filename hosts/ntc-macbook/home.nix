@@ -20,6 +20,6 @@
       userEmail = lib.mkForce ("imran.hossain" + "@" + "saic.com");
     };
 
-    home.packages = with pkgs; [awscli2];
+    home.packages = with pkgs; [awscli2 terraform];
   };
 }
