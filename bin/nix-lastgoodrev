@@ -38,13 +38,9 @@ set attr $argv[1]
 
 function getrev -a double
     log_step "Getting last good revision for nixpkgs#$double.$attr..."
-    # Get Hydra project & jobset, which varies by system
+    # Get Hydra project & jobset
     set hydra_proj nixpkgs
-    if string match -q aarch64-darwin $double
-        set hydra_jobset nixpkgs-unstable-aarch64-darwin
-    else
-        set hydra_jobset trunk
-    end
+    set hydra_jobset trunk
 
     # Get latest successful build info
     set hydra_job $attr.$double
