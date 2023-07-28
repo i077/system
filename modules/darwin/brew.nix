@@ -27,6 +27,7 @@
       "contexts"
       "duplicacy-web-edition"
       "firefox"
+      "gitup"
       "iterm2"
       "karabiner-elements"
       "keybase"
@@ -37,7 +38,6 @@
       "raycast"
       "remarkable"
       "stats"
-      "sublime-merge"
       "visual-studio-code"
       "wireshark"
     ];
