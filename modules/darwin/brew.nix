@@ -14,9 +14,7 @@
 
     taps = [
       "homebrew/bundle"
-      "homebrew/cask"
       "homebrew/cask-fonts"
-      "homebrew/core"
       "homebrew/cask-drivers"
       "homebrew/cask-versions"
     ];
