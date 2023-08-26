@@ -63,109 +63,11 @@
 
   outputs = inputs:
     inputs.flake-parts.lib.mkFlake {inherit inputs;} {
-      imports = [
-        inputs.treefmt-nix.flakeModule
-        inputs.devshell.flakeModule
-        # Workaround to allow merging of flake's deploy option
-        {options.flake.deploy = inputs.nixpkgs.lib.mkOption {type = inputs.nixpkgs.lib.types.anything;};}
-      ];
       systems = ["x86_64-darwin" "aarch64-darwin" "x86_64-linux" "aarch64-linux"];
 
-      flake = let
-        inherit (inputs) self nixpkgs deploy-rs darwin home-manager;
-        inherit (nixpkgs.lib) mkMerge;
-
-        mkDarwinConfig = system: path:
-          darwin.lib.darwinSystem {
-            inherit system;
-            modules = [home-manager.darwinModule ./modules/darwin path];
-            specialArgs = {inherit inputs;};
-          };
-
-        mkNixosDeployment = name: system: {
-          nixosConfigurations.${name} = nixpkgs.lib.nixosSystem {
-            inherit system;
-            modules = [./modules/nixos ./hosts/${name}];
-            specialArgs = {inherit inputs;};
-          };
-          deploy.nodes.${name} = {
-            hostname = name;
-            sshUser = "imran";
-            user = "root";
-            profiles.system.path = deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations.${name};
-          };
-        };
-      in
-        mkMerge [
-          (mkNixosDeployment "cubone" "aarch64-linux")
-          (mkNixosDeployment "staryu" "x86_64-linux")
-          {
-            darwinConfigurations = {
-              NTC-MacBook = mkDarwinConfig "x86_64-darwin" ./hosts/ntc-macbook;
-              Venusaur = mkDarwinConfig "aarch64-darwin" ./hosts/venusaur;
-            };
-
-            checks =
-              builtins.mapAttrs
-              (system: deployLib: deployLib.deployChecks self.deploy)
-              deploy-rs.lib;
-          }
-        ];
-
-      perSystem = {
-        config,
-        inputs',
-        pkgs,
-        ...
-      }: {
-        devshells.default = {
-          name = "system";
-          packages = with pkgs; [
-            # Wrap nix to support flakes
-            (writeShellScriptBin "nix" ''
-              ${lib.getExe nix} --extra-experimental-features "nix-command flakes" "$@"
-            '')
-            cachix
-            jo
-            nvd
-          ];
-
-          commands = [
-            {package = pkgs.just;}
-            {package = config.treefmt.build.wrapper;}
-            {
-              name = "deploy";
-              help = "Deploy profiles to servers";
-              package = inputs'.deploy-rs.packages.default;
-            }
-          ];
-        };
-
-        treefmt = {
-          projectRootFile = ".git/config";
-          programs.alejandra.enable = true;
-          programs.prettier.enable = true;
-          programs.stylua.enable = true;
-          settings.formatter.fish = {
-            command = "${pkgs.fish}/bin/fish_indent";
-            options = ["--write"];
-            includes =
-              ["*.fish"]
-              ++
-              # Exclude non-fish scripts in ./bin from formatter
-              (pkgs.lib.pipe ./bin [
-                builtins.readDir # Read the ./bin directory
-                (pkgs.lib.flip builtins.removeAttrs ["imgcat"]) # Remove non-fish scripts
-                builtins.attrNames # Just get the names of the files
-                (map (x: "bin/${x}")) # Map names to their actual paths relative to repo's root
-              ]);
-          };
-          settings.formatter.just = {
-            command = pkgs.lib.getExe pkgs.just;
-            options = ["--fmt" "--unstable" "-f"];
-            includes = ["Justfile"];
-          };
-        };
-      };
+      imports = [
+        ./flake/devshell.nix
+        ./flake/hosts.nix
+      ];
     };
 }
