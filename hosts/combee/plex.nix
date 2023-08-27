@@ -11,7 +11,7 @@
     openFirewall = true;
     shares.plexdata = {
       path = "/mnt/data/plex";
-      comment = "staryu Plex media";
+      comment = "combee Plex media";
       "valid users" = ["imran"];
       "read only" = false;
     };
@@ -19,7 +19,7 @@
 
   # Plex Media Server
   services.plex = {
-    enable = false;
+    enable = true;
     openFirewall = true;
   };
 }
