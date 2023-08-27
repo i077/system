@@ -67,6 +67,6 @@ build_nixos_profiles_task:
       env:
         ARCH: x86_64
         OUTPUTS:
-          - .#deploy.nodes.staryu.profiles.system.path
+          - .#deploy.nodes.combee.profiles.system.path
           - .#packages.${ARCH}-linux.rescueImage
   <<: *BUILD_TEMPLATE
