@@ -1,10 +1,7 @@
-{
-  lib,
-  ...
-}: {
+{lib, ...}: {
   imports = [
     ./hardware-configuration.nix
-    # ./plex.nix
+    ./plex.nix
   ];
 
   boot.loader.systemd-boot.enable = true;

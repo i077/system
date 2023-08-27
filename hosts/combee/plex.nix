@@ -19,7 +19,7 @@
 
   # Plex Media Server
   services.plex = {
-    enable = true;
+    enable = false;
     openFirewall = true;
   };
 }
