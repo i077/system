@@ -1,4 +1,8 @@
-{lib, ...}: {
+{
+  inputs,
+  pkgs,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
     ./plex.nix
@@ -12,12 +16,15 @@
     networkmanager.enable = true;
   };
 
-  # Enable root login for distributed builds
-  services.openssh.settings.PermitRootLogin = lib.mkForce "prohibit-password";
-  users.users.root.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGTgmWqiXS1b+l8KhvdrjZtbXXCh5UuBnbnase5601p2"
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG13aSroi6VPpZII3u+0XkJyfE7ldbC6ovvMr3Fl6tMn"
-  ];
+  # Create user for distributed nix builds
+  users.groups.nixremote = {};
+  users.users.nixremote = {
+    isSystemUser = true;
+    group = "nixremote";
+    shell = pkgs.bashInteractive;
+    openssh.authorizedKeys.keys = inputs.self.lib.mySshKeys;
+  };
+  nix.settings.trusted-users = ["nixremote"];
 
   # Allow cross-compilation of ARM builds
   boot.binfmt.emulatedSystems = ["aarch64-linux"];
