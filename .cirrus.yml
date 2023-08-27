@@ -59,7 +59,6 @@ build_nixos_profiles_task:
         ARCH: aarch64
         OUTPUTS:
           - .#deploy.nodes.cubone.profiles.system.path
-          - .#packages.${ARCH}-linux.rescueImage
     - container:
         image: $LINUX_BUILD_IMAGE
         cpu: 4
@@ -68,5 +67,4 @@ build_nixos_profiles_task:
         ARCH: x86_64
         OUTPUTS:
           - .#deploy.nodes.combee.profiles.system.path
-          - .#packages.${ARCH}-linux.rescueImage
   <<: *BUILD_TEMPLATE
