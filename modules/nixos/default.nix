@@ -1,6 +1,6 @@
 # Defaults for all NixOS configurations
 {...}: {
-  imports = [../broken-overlay.nix ../nix-settings.nix ];
+  imports = [../broken-overlay.nix ../nix-settings.nix];
 
   system.stateVersion = "20.09";
 
