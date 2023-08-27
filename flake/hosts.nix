@@ -15,7 +15,7 @@
   mkNixosDeployment = name: system: {
     nixosConfigurations.${name} = nixpkgs.lib.nixosSystem {
       inherit system;
-      modules = [../modules/nixos ../hosts/${name}];
+      modules = [../modules/nixos ../modules/nixos/server.nix ../hosts/${name}];
       specialArgs = {inherit inputs;};
     };
     deploy.nodes.${name} = {
@@ -43,6 +43,13 @@ in {
         builtins.mapAttrs
         (system: deployLib: deployLib.deployChecks self.deploy)
         deploy-rs.lib;
+
+      # Add my SSH keys to the lib set
+      lib.mySshKeys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHQRxhrUwCg/DcNQfG8CwIMdJsHu0jZWI2BZV/T6ka5N"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBsq7jgT0egpEZ4QpgaFHRRxrwk7vzWVvZE0w7Bhk9hK"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGTgmWqiXS1b+l8KhvdrjZtbXXCh5UuBnbnase5601p2"
+      ];
     }
   ];
 }
