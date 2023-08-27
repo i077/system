@@ -1,27 +1,19 @@
 {
-  inputs,
   lib,
   ...
 }: {
   imports = [
-    inputs.nixos-hardware.nixosModules.microsoft-surface-common
     ./hardware-configuration.nix
-    ./plex.nix
+    # ./plex.nix
   ];
 
   boot.loader.systemd-boot.enable = true;
-
-  # This will be on AC usually, so set CPU governor to ondemand
-  powerManagement.cpuFreqGovernor = "ondemand";
+  boot.loader.efi.canTouchEfiVariables = true;
 
   networking = {
-    hostName = "staryu";
+    hostName = "combee";
     networkmanager.enable = true;
   };
-
-  # Lock, but don't suspend, on lid close
-  # This is meant to run server workloads
-  services.logind.lidSwitch = "lock";
 
   # Enable root login for distributed builds
   services.openssh.settings.PermitRootLogin = lib.mkForce "prohibit-password";
@@ -32,6 +24,4 @@
 
   # Allow cross-compilation of ARM builds
   boot.binfmt.emulatedSystems = ["aarch64-linux"];
-
-  microsoft-surface.kernelVersion = "6.1.18";
 }

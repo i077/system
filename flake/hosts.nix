@@ -32,7 +32,7 @@ in {
   ];
   flake = mkMerge [
     (mkNixosDeployment "cubone" "aarch64-linux")
-    (mkNixosDeployment "staryu" "x86_64-linux")
+    (mkNixosDeployment "combee" "x86_64-linux")
     {
       darwinConfigurations = {
         NTC-MacBook = mkDarwinConfig "x86_64-darwin" ../hosts/ntc-macbook;
@@ -49,6 +49,7 @@ in {
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHQRxhrUwCg/DcNQfG8CwIMdJsHu0jZWI2BZV/T6ka5N"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBsq7jgT0egpEZ4QpgaFHRRxrwk7vzWVvZE0w7Bhk9hK"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGTgmWqiXS1b+l8KhvdrjZtbXXCh5UuBnbnase5601p2"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG13aSroi6VPpZII3u+0XkJyfE7ldbC6ovvMr3Fl6tMn"
       ];
     }
   ];
