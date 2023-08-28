@@ -3,10 +3,10 @@ on:
   push:
     branches:
       - master
-  pull_request:
-    branches:
-      - master
-    types: [opened, synchronize]
+    paths:
+      - flake.lock
+      - flake/rescue.nix
+  workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
