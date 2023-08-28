@@ -1,1 +1,11 @@
-{}
+{
+  "neovide": {
+    "x86_64-darwin": {
+      "nixpkgs_rev": "844ffa82bbe2a2779c86ab3a72ff1b4176cec467",
+      "nixpkgs_hash": "sha256-D21ctOBjr2Y3vOFRXKRoFr6uNBvE8q5jC4RrMxRZXTM=",
+      "pname": "neovide-0.10.4",
+      "hydra_build": 1798360,
+      "build_date": "2023-07-24"
+    }
+  }
+}
