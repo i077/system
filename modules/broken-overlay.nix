@@ -22,7 +22,6 @@
 # Perhaps this isn't as useful, so maybe I'll change this in the future.
 {
   config,
-  inputs,
   lib,
   pkgs,
   ...
@@ -51,8 +50,14 @@
   packageStillBroken = prevpkgs: attr: let
     inherit (prevpkgs.${attr}) drvPath;
   in
-    import (pkgs.runCommand "try-build-${attr}" {} ''
-      ${lib.getExe pkgs.nix} build ${builtins.unsafeDiscardStringContext drvPath} && echo false > $out || echo true > $out
+    import (pkgs.runCommand "try-build-${attr}" {buildInputs = [pkgs.nix];} ''
+      set +e
+      nix build ${builtins.unsafeDiscardStringContext drvPath}^out
+      if [ $? -eq 0 ]; then
+        echo false > $out
+      else
+        echo true > $out
+      fi
     '');
 in {
   nixpkgs.overlays = [
