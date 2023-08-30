@@ -86,7 +86,7 @@ else
     # No -r/-R was passsed, so continue with mach-nix's pythonWith
 
     # If ptpython is present, we probably want that instead of python
-    if contains ptpython $argv; and ! set -q _flag_command
+    if contains ptpython $argv; and ! set -q _flag_command; and ! set -q _flag_shell
         log_minor "Found ptpython in args, running that instead of python."
         set cmd ptpython
     end
