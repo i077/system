@@ -2,11 +2,7 @@ name: Update flake inputs
 
 on:
   schedule:
-    - cron: "0 4 * * *"
-  push:
-    branches: 
-      - master
-  # Allows you to run this workflow manually from the Actions tab
+    - cron: "0 4 * * 2,5"
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
