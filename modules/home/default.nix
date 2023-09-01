@@ -1,5 +1,12 @@
-{pkgs, ...}: {
+{
+  inputs,
+  pkgs,
+  ...
+}: {
   programs.home-manager.enable = true;
+
+  # Import external home-manager modules
+  imports = [inputs.nixvim.homeManagerModules.nixvim];
 
   home = {
     stateVersion = "20.09";

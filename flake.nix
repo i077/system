@@ -41,6 +41,8 @@
       flake = false;
     };
 
+    nixvim.url = "github:nix-community/nixvim";
+
     # Utilities for the Argon One Raspi case
     argonone-utils = {
       url = "github:mgdm/argonone-utils";
