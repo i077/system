@@ -1,5 +1,8 @@
 # Build & activate this host's profile
-switch: check fmt
+switch: check fmt fast-switch
+
+# Switch without running checks/formatting, for rapid iteration
+fast-switch:
     darwin-rebuild --flake . switch
 
 # Deploy server profiles
