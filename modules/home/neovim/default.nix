@@ -1,8 +1,4 @@
-{
-  lib,
-  pkgs,
-  ...
-}: let
+{pkgs, ...}: let
   inherit (builtins) readFile;
 
   readVimSection = file: readFile (./. + "/${file}.vim");
@@ -21,7 +17,7 @@
   };
 in {
   programs.neovim = {
-    enable = true;
+    enable = false;
 
     # Set aliases
     vimAlias = true;
@@ -93,4 +89,11 @@ in {
 
   # LSP
   imports = [./lsp];
+
+  programs.nixvim = {
+    enable = true;
+
+    # Set colorscheme
+    colorschemes.nord.enable = true;
+  };
 }
