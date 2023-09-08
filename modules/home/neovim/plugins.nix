@@ -33,7 +33,32 @@ in {
       # f/t but with two characters
       plugins.leap.enable = true;
 
-      extraPlugins = with pkgs.vimPlugins; [direnv-vim];
+      # Better folds
+      plugins.nvim-ufo.enable = true;
+
+      # Keymap hints
+      plugins.which-key.enable = true;
+
+      # Autopairs
+      plugins.nvim-autopairs = {
+        enable = true;
+        checkTs = true;
+        mapBs = true;
+        mapCW = true;
+      };
+
+      # Extra plugins that aren't yet in nixvim
+      extraPlugins = with pkgs.vimPlugins; [
+        sensible # Sensible defaults
+        repeat # Repeatable plugin actions
+        easy-align # Align text around symbols
+        direnv-vim # Direnv integration
+      ];
+    }
+    # Visualize the undo tree
+    {
+      plugins.undotree.enable = true;
+      maps.normal."<F5>" = ":UndotreeToggle<CR>";
     }
     # Git integration w/ vim-fugitive
     {
