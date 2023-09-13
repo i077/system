@@ -22,6 +22,8 @@
       py = "ptpython";
       t = "tmux";
       ta = "tmux a -t";
+
+      nv = "neovide";
       v = "nvim";
 
       # Apparently I mix these up all the time.

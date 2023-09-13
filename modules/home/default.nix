@@ -15,7 +15,7 @@
       EDITOR = "nvim";
       HOMEBREW_NO_AUTO_UPDATE = 1;
     };
-    packages = with pkgs; [curlie exa libqalculate just jq neovide nix-index ripgrep rnix-lsp unixtools.watch];
+    packages = with pkgs; [curlie exa libqalculate just jq nix-index ripgrep rnix-lsp unixtools.watch];
   };
 
   programs.bat = {
