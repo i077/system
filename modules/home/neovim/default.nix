@@ -117,9 +117,6 @@ in {
     };
 
     options = {
-      # Highlight the current line
-      cursorline = true;
-
       # Mouse interaction
       mouse = "a";
 
@@ -148,6 +145,24 @@ in {
       # Font for GUI editors
       guifont = "Berkeley Mono:10";
     };
+
+    # Show cursorline, but only on current window
+    # via https://stackoverflow.com/a/12018552
+    autoGroups.CursorLine = {};
+    autoCmd = [
+      {
+        group = "CursorLine";
+        event = ["VimEnter" "WinEnter" "BufWinEnter"];
+        pattern = "*";
+        command = "setlocal cursorline";
+      }
+      {
+        group = "CursorLine";
+        event = "WinLeave";
+        pattern = "*";
+        command = "setlocal nocursorline";
+      }
+    ];
 
     # Set leader
     globals.mapleader = " ";
