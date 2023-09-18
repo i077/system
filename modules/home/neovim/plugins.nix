@@ -28,7 +28,16 @@ in {
       plugins.comment-nvim.enable = true;
 
       # Automatic session management
-      plugins.auto-session.enable = true;
+      plugins.auto-session = {
+        enable = true;
+        cwdChangeHandling = {};
+      };
+      # Map to :Telescope for sessions
+      maps.normal."<leader>fs" = {
+        silent = true;
+        action = "require('auto-session.session-lens').search_session";
+        lua = true;
+      };
 
       # f/t but with two characters
       plugins.leap.enable = true;
@@ -117,6 +126,19 @@ in {
         easy-align # Align text around symbols
         direnv-vim # Direnv integration
       ];
+    }
+
+    # mini.nvim
+    {
+      plugins.mini.enable = true;
+      plugins.mini.modules = {
+        # Enhanced textobjects
+        ai = {};
+        # Text alignment
+        align = {};
+        # Window-preserving buffer deletion
+        bufremove = {};
+      };
     }
 
     # Telescope picker
