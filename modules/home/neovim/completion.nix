@@ -7,6 +7,13 @@
       end
     '';
 
+    # Use icons insteead of text in completion menu when showing kind
+    plugins.lspkind = {
+      enable = true;
+      preset = "codicons";
+      mode = "symbol";
+    };
+
     plugins.nvim-cmp = {
       enable = true;
 
@@ -14,6 +21,11 @@
         [{name = "nvim_lsp";} {name = "path";}]
         [{name = "buffer";}]
       ];
+
+      view.entries = {
+        name = "custom";
+        selection_order = "near_cursor";
+      };
 
       mappingPresets = ["insert" "cmdline"];
       mapping = {
