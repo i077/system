@@ -93,6 +93,11 @@ in {
 
   imports = [./plugins.nix];
 
+  # Add configuration for Neovide
+  xdg.configFile."neovide/config.toml".source = (pkgs.formats.toml {}).generate "neovide-config.toml" {
+    multigrid = true;
+  };
+
   lib.nixvim = {
     # Helper function to create leader mappings under a prefix
     mkLeaderMappings = prefix:
