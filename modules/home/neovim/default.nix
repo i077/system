@@ -91,7 +91,7 @@ in {
     '';
   };
 
-  imports = [./plugins.nix];
+  imports = [./plugins.nix ./completion.nix];
 
   # Add configuration for Neovide
   xdg.configFile."neovide/config.toml".source = (pkgs.formats.toml {}).generate "neovide-config.toml" {

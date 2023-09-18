@@ -42,6 +42,9 @@ in {
       # f/t but with two characters
       plugins.leap.enable = true;
 
+      # Surrounds
+      plugins.surround.enable = true;
+
       # Better folds
       plugins.nvim-ufo.enable = true;
 
