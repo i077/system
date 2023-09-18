@@ -1,12 +1,5 @@
 {...}: {
   programs.nixvim = {
-    extraConfigLuaPre = ''
-      local has_words_before = function()
-        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-      end
-    '';
-
     # Use icons insteead of text in completion menu when showing kind
     plugins.lspkind = {
       enable = true;
@@ -18,8 +11,9 @@
       enable = true;
 
       sources = [
-        [{name = "nvim_lsp";} {name = "path";}]
-        [{name = "buffer";}]
+        {name = "nvim_lsp"; groupIndex = 1;}
+        {name = "path"; groupIndex = 1;}
+        {name = "buffer"; groupIndex = 2;}
       ];
 
       view.entries = {
@@ -29,42 +23,30 @@
 
       mappingPresets = ["insert" "cmdline"];
       mapping = {
+        "<C-Space>" = "cmp.mapping.complete()";
         "<C-e>" = "cmp.mapping.abort()";
         "<CR>" = "cmp.mapping.confirm({ select = false })"; # Accept only explicitly selected items
-        "<Tab>" = ''
-          function(fallback)
-            if not cmp.select_next_item() then
-              if vim.bo.buftype ~= "prompt" and has_words_before() then
-                cmp.complete()
-              else
-                fallback()
-              end
-            end
-          end
-        '';
-        "<S-Tab>" = ''
-          function(fallback)
-            if not cmp.select_prev_item() then
-              if vim.bo.buftype ~= "prompt" and has_words_before() then
-                cmp.complete()
-              else
-                fallback()
-              end
-            end
-          end
-        '';
+        "<Tab>" = "cmp.mapping.select_next_item()";
+        "<S-Tab>" = "cmp.mapping.select_prev_item()";
+        "<M-u>" = "cmp.mapping.scroll_docs(-4)";
+        "<M-d>" = "cmp.mapping.scroll_docs(4)";
       };
     };
 
     # Include other sources not in main setup table & setup other filetypes
     plugins.cmp-git.enable = true;
     plugins.cmp-cmdline.enable = true;
+    plugins.cmp-fish.enable = true;
 
     extraConfigLua = ''
       local cmp = require('cmp')
       -- Set up git commit completions
       cmp.setup.filetype("gitcommit", {
           sources = cmp.config.sources({ { name = "cmp_git" } }, { { name = "buffer" }, { name = "path" } }),
+      })
+
+      cmp.setup.filetype("fish", {
+          sources = cmp.config.sources({ { name = "fish" } }, { { name = "buffer" }, { name = "path" } }),
       })
 
       -- Use buffer source for `/`
