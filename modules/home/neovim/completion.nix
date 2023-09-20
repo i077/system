@@ -11,9 +11,18 @@
       enable = true;
 
       sources = [
-        {name = "nvim_lsp"; groupIndex = 1;}
-        {name = "path"; groupIndex = 1;}
-        {name = "buffer"; groupIndex = 2;}
+        {
+          name = "nvim_lsp";
+          groupIndex = 1;
+        }
+        {
+          name = "path";
+          groupIndex = 1;
+        }
+        {
+          name = "buffer";
+          groupIndex = 2;
+        }
       ];
 
       view.entries = {
