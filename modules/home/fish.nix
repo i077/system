@@ -11,12 +11,12 @@
     shellAbbrs = {
       g = "git";
 
-      l = "exa";
-      ls = "exa";
-      la = "exa -a";
-      ll = "exa -l";
-      lL = "exa -algiSH --git";
-      lt = "exa -lT";
+      l = "eza";
+      ls = "eza";
+      la = "eza -a";
+      ll = "eza -l";
+      lL = "eza -algiSH --git";
+      lt = "eza -lT";
 
       m = "make";
       py = "ptpython";

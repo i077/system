@@ -14,7 +14,7 @@ function help
 All ARGS after FILE get passed to the program used to show FILE.
 For example, if FILE is a directory, the resulting command run becomes:
 
-    exa -l FILE [ARGS...]"
+    ls -l FILE [ARGS...]"
 end
 
 
@@ -47,7 +47,7 @@ else if test -L $argv[1]
     show $linkto $argv[2..-1]
 else if test -d $argv[1]
     # If the listing ends up being long, use less as a pager
-    exa --color=always -l $argv | less -FR
+    ls --color=always -l $argv | less -FR
 else if test -f $argv[1]
     # If the file is a regular file, let's look at the mimetype...
     set mimetype (file --brief --mime-type $argv[1])
