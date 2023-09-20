@@ -115,11 +115,15 @@ in {
     vimAlias = true;
 
     # Set colorscheme
-    colorschemes.nord = {
-      enable = true;
-      borders = true;
-      italic = false;
-    };
+    extraConfigLuaPre = ''
+      require('gruvbox').setup({
+        italic = {
+          strings = false,
+        },
+      })
+    '';
+
+    colorschemes.gruvbox.enable = true;
 
     options = {
       # Mouse interaction
