@@ -41,9 +41,8 @@
       # Mouse interaction
       mouse = "a";
 
-      # Indentation
+      # Indentation -- 4 spaces per <Tab>
       tabstop = 4;
-      softtabstop = 4;
       expandtab = true;
       shiftwidth = 4;
 
@@ -120,5 +119,17 @@
 
     # Quickly correct typos (and create new undo point)
     maps.insert."<C-l>".action = "<C-g>u<Esc>[s1z=`]a<C-g>u";
+
+    # Different indentation for various filetypes
+    extraFiles = {
+      "after/ftplugin/nix.vim" = ''
+        setlocal tabstop=2
+        setlocal shiftwidth=2
+      '';
+      "after/ftplugin/typescript.vim" = ''
+        setlocal tabstop=2
+        setlocal shiftwidth=2
+      '';
+    };
   };
 }
