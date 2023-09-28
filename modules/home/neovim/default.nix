@@ -130,6 +130,10 @@
         setlocal tabstop=2
         setlocal shiftwidth=2
       '';
+      "after/ftplugin/terraform.vim" = ''
+        setlocal tabstop=2
+        setlocal shiftwidth=2
+      '';
     };
   };
 }
