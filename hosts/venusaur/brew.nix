@@ -10,6 +10,7 @@
       "onedrive"
       "steam"
       "skim"
+      "sony-ps-remote-play"
       "the-unarchiver"
       "whatsapp-beta"
       "zoom"
