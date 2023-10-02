@@ -30,7 +30,7 @@
       "karabiner-elements"
       "keybase"
       "monitorcontrol"
-      "mouse-fix"
+      "mac-mouse-fix"
       "multi"
       "plexamp"
       "raycast"

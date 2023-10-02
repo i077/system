@@ -11,7 +11,7 @@
       "steam"
       "skim"
       "the-unarchiver"
-      "whatsapp-alpha"
+      "whatsapp-beta"
       "zoom"
       "zotero"
     ];
