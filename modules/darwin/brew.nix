@@ -31,7 +31,6 @@
       "keybase"
       "monitorcontrol"
       "mac-mouse-fix"
-      "multi"
       "plexamp"
       "raycast"
       "remarkable"
