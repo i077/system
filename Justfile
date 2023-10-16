@@ -61,6 +61,21 @@ check:
         exit 1
     end
 
+# Merge the latest flake update commit
+up: check
+    #!/usr/bin/env fish
+    source bin/_lib.fish
+    ./bin/flakeup-logs
+    if ask_yesno "Merge the latest update commit?"
+        git fetch
+        if ! git merge-base --is-ancestor master origin/update_flake_lock_action
+            log_warn "Cannot merge using fast-forward."
+            if ask_yesno "Cherry-pick commit instead?"
+                git cherry-pick origin/update_flake_lock_action
+            end
+        end
+    end
+
 # Garbage-collect the Nix store
 gc age='60':
     sudo nix-collect-garbage --delete-older-than {{ age }}d
