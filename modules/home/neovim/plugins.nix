@@ -33,11 +33,14 @@ in {
         cwdChangeHandling = {};
       };
       # Map to :Telescope for sessions
-      maps.normal."<leader>fs" = {
-        silent = true;
-        action = "require('auto-session.session-lens').search_session";
-        lua = true;
-      };
+      keymaps = [
+        {
+          key = "<leader>fs";
+          options.silent = true;
+          action = "require('auto-session.session-lens').search_session";
+          lua = true;
+        }
+      ];
 
       # f/t but with two characters
       plugins.leap.enable = true;
@@ -166,7 +169,13 @@ in {
     # Visualize the undo tree
     {
       plugins.undotree.enable = true;
-      maps.normal."<F5>" = ":UndotreeToggle<CR>";
+      keymaps = [
+        {
+          key = "<F5>";
+          mode = ["n"];
+          action = ":UndotreeToggle<CR>";
+        }
+      ];
     }
 
     # File tree
@@ -174,10 +183,14 @@ in {
       plugins.nvim-tree.enable = true;
 
       # <C-h> to open/close file tree
-      maps.normal."<C-h>" = {
-        silent = true;
-        action = ":NvimTreeToggle<CR>";
-      };
+      keymaps = [
+        {
+          key = "<C-h>";
+          mode = ["n"];
+          options.silent = true;
+          action = ":NvimTreeToggle<CR>";
+        }
+      ];
     }
 
     # Git integration w/ vim-fugitive
@@ -185,7 +198,7 @@ in {
       plugins.fugitive.enable = true;
 
       # Create mappings under <Leader>g
-      maps.normal = mkLeaderMappings "g" {
+      keymaps = mkLeaderMappings "g" {
         "s" = ":Git<CR>";
         "l" = ":Git log --oneline --graph<CR>";
         "L" = ":Gclog<CR>";

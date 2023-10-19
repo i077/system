@@ -35,18 +35,22 @@ in {
       symbolInWinbar.enable = false;
     };
 
-    maps.normal =
-      {
-        K = {
-          silent = true;
+    keymaps =
+      [
+        {
+          key = "K";
+          mode = ["n"];
+          options.silent = true;
           action = ":Lspsaga hover_doc<CR>";
-        };
-        "gd" = {
-          silent = true;
+        }
+        {
+          key = "gd";
+          mode = ["n"];
+          options.silent = true;
           action = ":Lspsaga peek_definition<CR>";
-        };
-      }
-      // mkLeaderMappings "l" {
+        }
+      ]
+      ++ mkLeaderMappings "l" {
         "r" = ":Lspsaga rename<CR>";
         "o" = ":Lspsaga outline<CR>";
         "f" = ":Lspsaga finder<CR>";

@@ -13,11 +13,12 @@
   lib.nixvim = {
     # Helper function to create leader mappings under a prefix
     mkLeaderMappings = prefix:
-      lib.mapAttrs' (key: action:
-        lib.nameValuePair "<Leader>${prefix}${key}" {
-          silent = true;
-          inherit action;
-        });
+      lib.mapAttrsToList (key: action: {
+        key = "<Leader>${prefix}${key}";
+        mode = ["n"];
+        options.silent = true;
+        inherit action;
+      });
   };
 
   programs.nixvim = {
@@ -84,41 +85,51 @@
       }
     ];
 
-    # Set leader
-    globals.mapleader = " ";
-    maps.normalVisualOp." " = {
-      action = "<NOP>";
-      silent = true;
-    };
-
-    # Go to last buffer
-    maps.normal."<leader><Tab>" = "<C-^>";
-
     # Neovide options
     globals.neovide_cursor_trail_size = 0.3;
     globals.neovide_hide_mouse_when_typing = true;
     globals.neovide_input_macos_alt_is_meta = true;
 
-    # :write with ZW
-    maps.normal."ZW".action = ":w<CR>";
+    # Set leader
+    globals.mapleader = " ";
 
-    # <Tab> through completions
-    maps.insert."<Tab>" = {
-      expr = true;
-      action = ''pumvisible() ? "\<C-n>" : "\<Tab>"'';
-    };
-    maps.insert."<S-Tab>" = {
-      expr = true;
-      action = ''pumvisible() ? "\<C-p>" : "\<S-Tab>"'';
-    };
+    keymaps =
+      [
+        {
+          key = " ";
+          mode = ["n" "v"];
+          options.silent = true;
+          action = "<NOP>";
+        }
 
-    # Mappings to work with the OS clipboard
-    maps.normalVisualOp."gy" = "\"+y";
-    maps.normalVisualOp."gp" = "\"+p";
-    maps.normalVisualOp."gP" = "\"+P";
+        # Go to last buffer
+        {
+          key = "<leader><Tab>";
+          mode = "n";
+          action = "<C-^>";
+        }
 
-    # Quickly correct typos (and create new undo point)
-    maps.insert."<C-l>".action = "<C-g>u<Esc>[s1z=`]a<C-g>u";
+        # :write with ZW
+        {
+          key = "ZW";
+          mode = "n";
+          action = ":w<CR>";
+        }
+
+        # Quickly correct typos with <C-l>
+        {
+          key = "<C-l>";
+          mode = "i";
+          action = "<C-g>u<Esc>[s1z=`]a<C-g>u";
+        }
+      ]
+      ++
+      # Mappings to work with the OS clipboard
+      (map (k: {
+        key = "g${k}";
+        mode = ["n" "v"];
+        action = "\"+${k}";
+      }) ["y" "p" "P"]);
 
     # Different indentation for various filetypes
     extraFiles = {
