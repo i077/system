@@ -1,9 +1,12 @@
 {
+  config,
   inputs,
   lib,
   pkgs,
   ...
-}: {
+}: let
+  selfPkgs = inputs.self.packages.${config.nixpkgs.system};
+in {
   imports = [./brew.nix ./xdg.nix ../broken-overlay.nix ../nix-settings.nix ../nix-distributed.nix];
 
   nix = {
@@ -56,7 +59,7 @@
 
   # Fonts
   fonts.fontDir.enable = true;
-  fonts.fonts = with pkgs; [input-fonts];
+  fonts.fonts = [selfPkgs.berkeley-mono];
 
   # Enable home-manager
   home-manager = {

@@ -71,6 +71,7 @@
         ./flake/devshell.nix
         ./flake/hosts.nix
         ./flake/rescue.nix
+        ./flake/pkgs.nix
       ];
     };
 }
