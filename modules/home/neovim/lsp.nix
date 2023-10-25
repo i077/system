@@ -6,6 +6,15 @@ in {
       enable = true;
 
       servers = {
+        # Go
+        gopls.enable = true;
+
+        # Haskell
+        hls.enable = true;
+
+        # JSON
+        jsonls.enable = true;
+
         # Nix
         nil_ls = {
           enable = true;
