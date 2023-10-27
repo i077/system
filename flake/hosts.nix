@@ -4,12 +4,19 @@
   inherit (inputs) self nixpkgs deploy-rs darwin home-manager;
   inherit (nixpkgs.lib) mkMerge;
 
-  mkDarwinConfig = system: path:
-    darwin.lib.darwinSystem {
+  # For each Darwin configuration, create two darwinSystems:
+  # - one that targets the actual system, and
+  # - one that is meant for CI, so that dependencies using pkgs.requireFile can be skipped
+  mkDarwinSystem = name: system: path: let
+    systemArgs = isCi: {
       inherit system;
-      modules = [home-manager.darwinModule ../modules/darwin path];
+      modules = [home-manager.darwinModule ../modules/darwin path {lib.env.isCi = isCi;}];
       specialArgs = {inherit inputs;};
     };
+  in {
+    darwinConfigurations.${name} = darwin.lib.darwinSystem (systemArgs false);
+    darwinConfigurations."${name}-ci" = darwin.lib.darwinSystem (systemArgs true);
+  };
 
   # Create a nixosConfiguration output & deploy-rs node
   mkNixosDeployment = name: system: {
@@ -26,19 +33,21 @@
     };
   };
 in {
-  imports = [
+  imports = let
+    inherit (inputs.nixpkgs.lib) mkOption types;
+  in [
     # Workaround to allow merging of flake's deploy option
-    {options.flake.deploy = inputs.nixpkgs.lib.mkOption {type = inputs.nixpkgs.lib.types.anything;};}
+    {options.flake.deploy = mkOption {type = types.lazyAttrsOf types.raw;};}
+    {options.flake.darwinConfigurations = mkOption {type = types.lazyAttrsOf types.raw;};}
   ];
+
   flake = mkMerge [
     (mkNixosDeployment "cubone" "aarch64-linux")
     (mkNixosDeployment "combee" "x86_64-linux")
-    {
-      darwinConfigurations = {
-        NTC-MacBook = mkDarwinConfig "x86_64-darwin" ../hosts/ntc-macbook;
-        Venusaur = mkDarwinConfig "aarch64-darwin" ../hosts/venusaur;
-      };
+    (mkDarwinSystem "NTC-MacBook" "x86_64-darwin" ../hosts/ntc-macbook)
+    (mkDarwinSystem "Venusaur" "aarch64-darwin" ../hosts/venusaur)
 
+    {
       checks =
         builtins.mapAttrs
         (system: deployLib: deployLib.deployChecks self.deploy)

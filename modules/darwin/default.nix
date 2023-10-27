@@ -59,7 +59,10 @@ in {
 
   # Fonts
   fonts.fontDir.enable = true;
-  fonts.fonts = [selfPkgs.berkeley-mono];
+  fonts.fonts =
+    if config.lib.env.isCi
+    then []
+    else [selfPkgs.berkeley-mono];
 
   # Enable home-manager
   home-manager = {
