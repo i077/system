@@ -2,11 +2,9 @@
   imports = [./hardware-configuration.nix ./argonone.nix];
 
   boot = {
-    loader.grub.enable = false;
-    # Raspi-specific boot settings
-    loader.raspberryPi = {
-      enable = true;
-      version = 4;
+    loader = {
+      grub.enable = false;
+      generic-extlinux-compatible.enable = true;
     };
 
     # Raspi 4 kernel
