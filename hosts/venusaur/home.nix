@@ -1,4 +1,4 @@
-{...}: {
+{pkgs, ...}: {
   home-manager.users.imran = {
     imports = [
       ../../modules/home
@@ -9,6 +9,8 @@
       ../../modules/home/neovim
       ../../modules/home/1password.nix
     ];
+
+    home.packages = with pkgs; [jetbrains.idea-community];
 
     # Take advantage of that 120Hz screen in neovide
     programs.neovim.extraConfig = ''
