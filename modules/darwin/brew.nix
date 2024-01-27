@@ -37,6 +37,7 @@
       "stats"
       "visual-studio-code"
       "wireshark"
+      "zed"
     ];
 
     masApps = {
