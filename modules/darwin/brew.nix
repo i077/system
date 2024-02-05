@@ -27,6 +27,7 @@
       "firefox"
       "gitup"
       "iterm2"
+      "jetbrains-toolbox"
       "karabiner-elements"
       "keybase"
       "monitorcontrol"

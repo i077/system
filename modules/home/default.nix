@@ -15,7 +15,17 @@
       EDITOR = "nvim";
       HOMEBREW_NO_AUTO_UPDATE = 1;
     };
-    packages = with pkgs; [curlie libqalculate just jq mosh nix-index ripgrep rnix-lsp unixtools.watch];
+    packages = with pkgs; [
+      curlie
+      libqalculate
+      just
+      jq
+      mosh
+      nix-index
+      ripgrep
+      rnix-lsp
+      unixtools.watch
+    ];
   };
 
   programs.bat = {
