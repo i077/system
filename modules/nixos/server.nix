@@ -18,7 +18,7 @@
     openssh.authorizedKeys.keys = inputs.self.lib.mySshKeys;
   };
 
-  environment.systemPackages = with pkgs; [duplicacy];
+  environment.systemPackages = with pkgs; [duplicacy htop];
 
   services.openssh.settings.PermitRootLogin = "no";
   services.tailscale.enable = true;
