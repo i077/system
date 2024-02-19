@@ -11,14 +11,6 @@
     kernelPackages = pkgs.linuxPackages_rpi4;
   };
 
-  # Add 2GB swap
-  swapDevices = [
-    {
-      device = "/var/swapfile";
-      size = 2048;
-    }
-  ];
-
   hardware.enableRedistributableFirmware = true;
 
   networking = {
