@@ -23,6 +23,12 @@
   services.openssh.settings.PermitRootLogin = "no";
   services.tailscale.enable = true;
 
+  # Enable IP forwarding for use as Tailscale exit node
+  boot.kernel.sysctl = {
+    "net.ipv4.ip_forward" = 1;
+    "net.ipv6.conf.all.forwarding" = 1;
+  };
+
   # Garbage collect nix stores weekly
   nix.gc = {
     automatic = true;

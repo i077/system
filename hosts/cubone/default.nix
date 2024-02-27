@@ -23,12 +23,6 @@
 
   environment.systemPackages = with pkgs; [dig nmap];
 
-  # Enable IP forwarding for use as Tailscale exit node
-  boot.kernel.sysctl = {
-    "net.ipv4.ip_forward" = 1;
-    "net.ipv6.conf.all.forwarding" = 1;
-  };
-
   # Automount attached storage
   fileSystems."/mnt/storage" = {
     device = "/dev/disk/by-uuid/db9b749a-6dd4-4c26-b41b-9efd18a23512";
