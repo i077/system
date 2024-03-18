@@ -3,7 +3,7 @@
   lib,
   ...
 }: {
-  home-manager.users.imran = {
+  home-manager.users.hossaini = {
     imports = [
       ../../modules/home
       ../../modules/home/fish.nix
