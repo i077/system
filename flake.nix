@@ -29,18 +29,6 @@
     treefmt-nix.url = "github:numtide/treefmt-nix";
     devshell.url = "github:numtide/devshell";
 
-    # Jump to directories by frecency with fish
-    fish-z = {
-      url = "github:jethrokuan/z";
-      flake = false;
-    };
-
-    # Async fish prompt
-    fish-tide = {
-      url = "github:IlanCosman/tide";
-      flake = false;
-    };
-
     nixvim.url = "github:nix-community/nixvim";
 
     # Utilities for the Argon One Raspi case

@@ -69,11 +69,11 @@
     plugins = [
       {
         name = "z";
-        src = inputs.fish-z;
+        src = pkgs.fishPlugins.z.src;
       }
       {
         name = "tide";
-        src = inputs.fish-tide;
+        src = pkgs.fishPlugins.tide.src;
       }
     ];
 
