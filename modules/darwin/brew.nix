@@ -9,13 +9,10 @@
 
     onActivation = {
       autoUpdate = false;
-      cleanup = "zap";
     };
 
     taps = [
       "homebrew/bundle"
-      "homebrew/cask-fonts"
-      "homebrew/cask-drivers"
       "homebrew/cask-versions"
     ];
 
