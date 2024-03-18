@@ -5,20 +5,18 @@
   ...
 }: let
   inherit (lib.file) mkOutOfStoreSymlink;
-  homeDir = config.home.homeDirectory;
-  # Use ~/Library for storing app files, I don't want any dotfiles cluttering up ~.
-  # The exception is .config, where user-declared preferences are set (and the macOS analog,
-  # ~/Library/Preferences, according to the Apple Developer docs, shouldn't have directories
-  # created by random apps).
+  xdgDir = "${config.home.xdgDirectory}/Library/XDG";
+  # Use ~/Library/XDG for storing app files, I don't want any dotfiles cluttering up ~.
   xdg = {
-    cacheHome = "${homeDir}/Library/Caches";
-    dataHome = "${homeDir}/Library/Application Support";
+    configHome = "${xdgDir}/config";
+    cacheHome = "${xdgDir}/cache";
+    dataHome = "${xdgDir}/data";
     runtimeDir = "$TMPDIR";
-    stateHome = "${homeDir}/Library/Saved Application State";
+    stateHome = "${xdgDir}/state";
   };
 in {
   xdg = {
-    inherit (xdg) cacheHome dataHome stateHome;
+    inherit (xdg) configHome cacheHome dataHome stateHome;
   };
   home.sessionVariables.XDG_RUNTIME_DIR = xdg.runtimeDir;
 }
