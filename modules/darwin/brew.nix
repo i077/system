@@ -36,11 +36,5 @@
       "visual-studio-code"
       "zed"
     ];
-
-    masApps = {
-      Tailscale = 1475387142;
-      Xcode = 497799835;
-      "Things 3" = 904280696;
-    };
   };
 }
