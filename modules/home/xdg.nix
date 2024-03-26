@@ -1,5 +1,9 @@
 # Force all macOS utilities, e.g. zsh, to conform to the XDG Base Directory spec
-{config, lib, ...}: let
+{
+  config,
+  lib,
+  ...
+}: let
   inherit (lib.file) mkOutOfStoreSymlink;
   homeDir = config.home.homeDirectory;
   # Use ~/Library for storing app files, I don't want any dotfiles cluttering up ~.
