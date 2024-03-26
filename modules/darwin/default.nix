@@ -51,6 +51,8 @@ in {
       // copyFlakeInputs ["self" "darwin" "home-manager"];
   };
 
+  nixpkgs.config.allowUnfree = true;
+
   programs.zsh.enable = true;
 
   services.nix-daemon.enable = true;
