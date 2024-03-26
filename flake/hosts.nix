@@ -44,9 +44,8 @@ in {
   flake = mkMerge [
     (mkNixosDeployment "cubone" "aarch64-linux")
     (mkNixosDeployment "combee" "x86_64-linux")
-    (mkDarwinSystem "NTC-MacBook" "x86_64-darwin" ../hosts/ntc-macbook)
     (mkDarwinSystem "Venusaur" "aarch64-darwin" ../hosts/venusaur)
-
+    (mkDarwinSystem "workmac" "aarch64-darwin" ../hosts/workmac)
     {
       checks =
         builtins.mapAttrs

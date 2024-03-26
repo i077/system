@@ -10,6 +10,7 @@ in {
 
   # User config
   users.users.imran.home = "/Users/imran";
+  users.users.imran.shell = pkgs.fish;
 
   networking = {
     computerName = hostName;

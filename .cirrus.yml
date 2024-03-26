@@ -39,7 +39,7 @@ build_darwin_profiles_task:
     - env:
         ARCH: x86_64
         OUTPUTS:
-          - .#darwinConfigurations.NTC-MacBook-ci.config.system.build.toplevel
+          - .#darwinConfigurations.workmac-ci.config.system.build.toplevel
           - .#devShells.x86_64-darwin.default
   install_rosetta_script: softwareupdate --install-rosetta --agree-to-license
   install_nix_script: bash <(curl -L "$NIX_INSTALL_URL") --daemon

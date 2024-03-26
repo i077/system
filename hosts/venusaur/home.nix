@@ -9,12 +9,5 @@
       ../../modules/home/neovim
       ../../modules/home/1password.nix
     ];
-
-    # Take advantage of that 120Hz screen in neovide
-    programs.neovim.extraConfig = ''
-      if exists('g:neovide')
-        let g:neovide_refresh_rate=120
-      endif
-    '';
   };
 }

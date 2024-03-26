@@ -7,7 +7,7 @@
 }: let
   selfPkgs = inputs.self.packages.${config.nixpkgs.system};
 in {
-  imports = [./brew.nix ./xdg.nix ../broken-overlay.nix ../nix-settings.nix ../nix-distributed.nix];
+  imports = [./brew.nix ../broken-overlay.nix ../nix-settings.nix ../nix-distributed.nix];
 
   nix = {
     configureBuildUsers = true;
@@ -70,10 +70,5 @@ in {
     useGlobalPkgs = true;
     useUserPackages = true;
     backupFileExtension = "bak";
-  };
-
-  users.users.imran = {
-    home = "/Users/imran";
-    shell = pkgs.fish;
   };
 }

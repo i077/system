@@ -3,21 +3,12 @@
   lib,
   pkgs,
   ...
-}: let
-  hostName = "NTC-MacBook";
-in {
+}: {
   imports = [./brew.nix ./home.nix ../../modules/darwin/fish.nix ../../modules/darwin/1password.nix];
 
   # User config
-  users.users.imran.home = "/Users/imran";
-
-  networking = {
-    computerName = hostName;
-    inherit hostName;
-  };
-
-  # Enable touch ID for sudo
-  security.pam.enableSudoTouchIdAuth = true;
+  users.users.hossaini.home = "/Users/hossaini";
+  users.users.hossaini.shell = pkgs.fish;
 
   # Enable x86 builds
   nix.extraOptions = ''
