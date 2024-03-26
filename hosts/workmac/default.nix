@@ -1,6 +1,4 @@
-{
-  ...
-}: {
+{...}: {
   imports = [./brew.nix ./home.nix ../../modules/darwin/fish.nix ../../modules/darwin/1password.nix];
 
   # User config

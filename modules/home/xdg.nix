@@ -1,8 +1,5 @@
 # Force all macOS utilities, e.g. zsh, to conform to the XDG Base Directory spec
-{
-  config,
-  ...
-}: let
+{config, ...}: let
   # Use ~/Library/XDG for storing app files, I don't want any dotfiles cluttering up ~.
   xdgSubdir = "Library/XDG";
   xdgDir = "${config.home.homeDirectory}/Library/XDG";

@@ -1,6 +1,4 @@
-{
-  ...
-}: let
+{...}: let
   hostName = "Venusaur";
 in {
   imports = [./brew.nix ./home.nix ../../modules/darwin/fish.nix ../../modules/darwin/1password.nix];
