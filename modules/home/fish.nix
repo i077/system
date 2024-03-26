@@ -85,9 +85,15 @@
       test -d ~/system/bin; and set -p PATH ~/system/bin
       # Add 1Password shell plugins support
       test -f ${config.xdg.configHome}/op/plugins.sh; and source ${config.xdg.configHome}/op/plugins.sh
-      # Show vi-mode in cursor
+
+      # Configure Tide prompt
+      tide configure --auto --style=Lean --prompt_colors='16 colors' --show_time=No --lean_prompt_height='Two lines' --prompt_connection=Solid --prompt_spacing=Sparse --icons='Few icons' --transient=No
+
+      # Vi keybindings
+      set -g fish_key_bindings fish_vi_key_bindings
       set -g fish_cursor_default block
       set -g fish_cursor_insert line
+
       # Custom bindings
       bind -M insert \cs accept-autosuggestion repaint
       bind -M insert \cc kill-whole-line repaint
