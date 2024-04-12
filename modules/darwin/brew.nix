@@ -1,4 +1,4 @@
-{config, ...}: {
+{...}: {
   homebrew = {
     # Enable homebrew & global bundle management
     enable = true;
@@ -8,6 +8,7 @@
     };
 
     onActivation = {
+      cleanup = "uninstall";
       autoUpdate = false;
     };
 

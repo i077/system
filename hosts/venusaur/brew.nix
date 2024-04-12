@@ -11,6 +11,7 @@
       "steam"
       "skim"
       "sony-ps-remote-play"
+      "swiftformat-for-xcode"
       "the-unarchiver"
       "whatsapp-beta"
       "zoom"
