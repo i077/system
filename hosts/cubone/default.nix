@@ -28,7 +28,7 @@
     (final: super: {
       # Fix for "FATAL: Module sun4i-drm not found in directory" when building kernel modules
       makeModulesClosure = x:
-        super.makeModulesClosure (x // { allowMissing = true; });
+        super.makeModulesClosure (x // {allowMissing = true;});
     })
   ];
 
