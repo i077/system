@@ -8,7 +8,7 @@
     name = "argonone-fancontrold";
     version = "0.1.0";
     src = inputs.argonone-utils;
-    vendorSha256 = "18qwmg249lr7xb9f7lrrflhsr7drx750ndqd8hirq5hgj4c4f66k";
+    vendorHash = "sha256-0xhHGJEPFpwjRA03C8rpuZ2sIXU50+PS6ifTRMSrHKM=";
     meta.mainProgram = "argonone-fancontrold";
   };
 in {
