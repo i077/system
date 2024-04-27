@@ -22,6 +22,7 @@
       jq
       mosh
       nix-index
+      nix-output-monitor
       ripgrep
       rnix-lsp
       unixtools.watch
