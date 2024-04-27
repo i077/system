@@ -1,5 +1,15 @@
-{pkgs, ...}: {
-  imports = [./hardware-configuration.nix ./argonone.nix];
+{
+  inputs,
+  lib,
+  pkgs,
+  ...
+}: {
+  imports = [
+    inputs.nixos-hardware.nixosModules.raspberry-pi-4
+    inputs.nixos-generators.nixosModules.sd-aarch64
+    ./hardware-configuration.nix
+    ./argonone.nix
+  ];
 
   boot = {
     loader = {
@@ -9,7 +19,18 @@
 
     # Raspi 4 kernel
     kernelPackages = pkgs.linuxPackages_rpi4;
+
+    # I don't need ZFS, it just inflates build times
+    supportedFilesystems.zfs = lib.mkForce false;
   };
+
+  nixpkgs.overlays = [
+    (final: super: {
+      # Fix for "FATAL: Module sun4i-drm not found in directory" when building kernel modules
+      makeModulesClosure = x:
+        super.makeModulesClosure (x // { allowMissing = true; });
+    })
+  ];
 
   hardware.enableRedistributableFirmware = true;
 
@@ -21,7 +42,10 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [dig nmap];
+  environment.systemPackages = with pkgs; [
+    libraspberrypi
+    raspberrypi-eeprom
+  ];
 
   # Automount attached storage
   fileSystems."/mnt/storage" = {

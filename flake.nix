@@ -8,6 +8,7 @@
 
     # NixOS modules for running on certain hardware
     nixos-hardware.url = "github:NixOS/nixos-hardware";
+    nixos-generators.url = "github:nix-community/nixos-generators";
 
     # Manage macOS systems with Nix
     darwin = {
