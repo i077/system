@@ -20,12 +20,14 @@ in {
       # Show code context, e.g. what function current line is under
       plugins.treesitter-context = {
         enable = true;
-        maxLines = 2;
-        minWindowHeight = 100;
+        settings = {
+          max_lines = 2;
+          min_window_height = 100;
+        };
       };
 
       # Comments
-      plugins.comment-nvim.enable = true;
+      plugins.comment.enable = true;
 
       # Automatic session management
       plugins.auto-session = {
@@ -57,15 +59,17 @@ in {
       # Autopairs
       plugins.nvim-autopairs = {
         enable = true;
-        checkTs = true;
-        mapBs = true;
-        mapCW = true;
+        settings = {
+          check_ts = true;
+          map_bs = true;
+          map_c_w = true;
+        };
       };
 
       # Focused writing
       plugins.goyo = {
         enable = true;
-        width = 120;
+        settings.width = 120;
       };
 
       # Statusline

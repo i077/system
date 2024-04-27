@@ -38,7 +38,7 @@
 
     colorschemes.gruvbox.enable = true;
 
-    options = {
+    opts = {
       # Mouse interaction
       mouse = "a";
 

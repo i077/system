@@ -7,10 +7,10 @@
       mode = "symbol";
     };
 
-    plugins.nvim-cmp = {
+    plugins.cmp = {
       enable = true;
 
-      sources = [
+      settings.sources = [
         {
           name = "nvim_lsp";
           groupIndex = 1;
@@ -25,13 +25,12 @@
         }
       ];
 
-      view.entries = {
+      settings.view.entries = {
         name = "custom";
         selection_order = "near_cursor";
       };
 
-      mappingPresets = ["insert" "cmdline"];
-      mapping = {
+      settings.mapping = {
         "<C-Space>" = "cmp.mapping.complete()";
         "<C-e>" = "cmp.mapping.abort()";
         "<CR>" = "cmp.mapping.confirm({ select = false })"; # Accept only explicitly selected items
