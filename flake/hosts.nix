@@ -37,8 +37,8 @@ in {
     inherit (inputs.nixpkgs.lib) mkOption types;
   in [
     # Workaround to allow merging of flake's deploy option
-    {options.flake.deploy = mkOption {type = types.lazyAttrsOf types.raw;};}
-    {options.flake.darwinConfigurations = mkOption {type = types.lazyAttrsOf types.raw;};}
+    {options.flake.deploy = mkOption {type = types.lazyAttrsOf types.anything;};}
+    {options.flake.darwinConfigurations = mkOption {type = types.lazyAttrsOf types.anything;};}
   ];
 
   flake = mkMerge [
