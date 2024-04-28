@@ -10,12 +10,12 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - uses: DeterminateSystems/nix-installer-action@v9
+    - uses: actions/checkout@v4
+    - uses: DeterminateSystems/nix-installer-action@v10
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
     - name: Update flake.lock
-      uses: DeterminateSystems/update-flake-lock@v20
+      uses: DeterminateSystems/update-flake-lock@v21
       with:
         token: ${{ secrets.GH_UPDATER_TOKEN }}
         nix-options: --accept-flake-config
