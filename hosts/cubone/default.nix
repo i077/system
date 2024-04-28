@@ -24,6 +24,9 @@
     supportedFilesystems.zfs = lib.mkForce false;
   };
 
+  # Adjust boot partition to 500MB
+  sdImage.firmwareSize = 500;
+
   nixpkgs.overlays = [
     (final: super: {
       # Fix for "FATAL: Module sun4i-drm not found in directory" when building kernel modules
