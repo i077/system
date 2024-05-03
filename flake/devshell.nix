@@ -16,7 +16,7 @@
       packages = with pkgs; [
         # Wrap nix to support flakes
         (writeShellScriptBin "nix" ''
-          ${lib.getExe nix} --extra-experimental-features "nix-command flakes" "$@"
+          ${lib.getExe nixVersions.latest} --extra-experimental-features "nix-command flakes" "$@"
         '')
         cachix
         jo

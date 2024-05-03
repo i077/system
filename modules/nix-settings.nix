@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  nix.package = pkgs.nixUnstable;
+  nix.package = pkgs.nixVersions.latest;
 
   nix.settings = {
     # Add other binary caches
