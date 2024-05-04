@@ -36,7 +36,8 @@ build_darwin_profiles_task:
           - .#devShells.aarch64-darwin.default
   install_rosetta_script: softwareupdate --install-rosetta --agree-to-license
   install_nix_script: curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm
-  install_cachix_script: nix profile install --impure github:nixos/nixpkgs/nixpkgs-unstable#cachix 
+  install_cachix_script: nix profile install --impure github:nixos/nixpkgs/nixpkgs-unstable#cachix
+  trust_user_script: echo "trusted-users = root admin" | sudo tee -a /etc/nix/nix.conf && sudo pkill nix-daemon
   <<: *BUILD_TEMPLATE
 
 build_nixos_profiles_task:
