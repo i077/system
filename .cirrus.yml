@@ -2,18 +2,15 @@ env:
   CIRRUS_SHELL: bash -il
   CACHIX_AUTH_TOKEN: ENCRYPTED[!5b9226401f61dbae39295591ce5115a7f499fa0c24fd6e8a46df6188eda5e03de499c8adfea6a86dd4c0e284e107f3e0!]
   CACHIX_NAME: i077
-  DARWIN_BUILD_IMAGE: ghcr.io/cirruslabs/macos-ventura-base:latest
-  LINUX_BUILD_IMAGE: nixos/nix:latest
-  NIX_INSTALL_URL: https://nixos.org/nix/install
+  DARWIN_BUILD_IMAGE: ghcr.io/cirruslabs/macos-sonoma-base:latest
+  LINUX_BUILD_IMAGE: nixpkgs/cachix-flakes:latest
   NIX_BUILD_FLAGS: -j auto --accept-flake-config
-  SUDO: sudo
 
 build_template: &BUILD_TEMPLATE
   only_if: $CIRRUS_BRANCH == $CIRRUS_DEFAULT_BRANCH || $CIRRUS_TAG != '' || $CIRRUS_PR != '' || $CIRRUS_BUILD_SOURCE == ""
   name: build_${CIRRUS_OS}_${ARCH}
   timeout_in: 120m
-  enable_flake_script: echo "experimental-features = nix-command flakes" | $SUDO tee -a /etc/nix/nix.conf
-  install_cachix_script: nix profile install --impure github:nixos/nixpkgs/nixpkgs-unstable#cachix && cachix use $CACHIX_NAME
+  use_cachix_script: cachix use $CACHIX_NAME
   build_script: cachix watch-exec $CACHIX_NAME -- nix build $NIX_BUILD_FLAGS $OUTPUTS --system ${ARCH}-${CIRRUS_OS} --show-trace
   print_diff_script: |
     if [ $CIRRUS_BRANCH = 'update_flake_lock_action' ]; then
@@ -35,21 +32,14 @@ build_darwin_profiles_task:
         ARCH: aarch64
         OUTPUTS:
           - .#darwinConfigurations.Venusaur-ci.config.system.build.toplevel
-          - .#devShells.aarch64-darwin.default
-    - env:
-        ARCH: x86_64
-        OUTPUTS:
           - .#darwinConfigurations.workmac-ci.config.system.build.toplevel
-          - .#devShells.x86_64-darwin.default
+          - .#devShells.aarch64-darwin.default
   install_rosetta_script: softwareupdate --install-rosetta --agree-to-license
-  install_nix_script: bash <(curl -L "$NIX_INSTALL_URL") --daemon
-  configure_nix_script: echo -e "trusted-users = root admin\nextra-platforms = x86_64-darwin aarch64-darwin" | sudo tee -a /etc/nix/nix.conf
-  kickstart_nix_daemon_script: sudo launchctl kickstart -k system/org.nixos.nix-daemon
+  install_nix_script: curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm
+  install_cachix_script: nix profile install --impure github:nixos/nixpkgs/nixpkgs-unstable#cachix 
   <<: *BUILD_TEMPLATE
 
 build_nixos_profiles_task:
-  env:
-    SUDO: ""
   matrix:
     - arm_container:
         image: $LINUX_BUILD_IMAGE
