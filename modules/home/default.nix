@@ -24,7 +24,6 @@
       nix-index
       nix-output-monitor
       ripgrep
-      rippkgs
       unixtools.watch
     ];
   };
@@ -46,14 +45,6 @@
     forwardAgent = true;
     includes = ["~/.ssh/config.d/*"];
   };
-
-  # Generate rippkgs index
-  xdg.dataFile."rippkgs-index.sqlite".source = let
-    rippkgsIndexCmd = pkgs.runCommand "rippkgs-index" {buildInputs = [pkgs.nix];} ''
-      mkdir $out
-      ${pkgs.rippkgs}/bin/rippkgs-index nixpkgs -o $out/index.sqlite ${pkgs.path}
-    '';
-  in "${rippkgsIndexCmd}/index.sqlite";
 
   xdg.enable = true;
 }
