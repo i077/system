@@ -13,7 +13,6 @@
       "sony-ps-remote-play"
       "swiftformat-for-xcode"
       "the-unarchiver"
-      "whatsapp-beta"
       "zoom"
       "zotero"
     ];
@@ -24,6 +23,7 @@
       Tailscale = 1475387142;
       Telegram = 747648890;
       "Things 3" = 904280696;
+      WhatsApp = 310633997;
       Xcode = 497799835;
     };
   };
