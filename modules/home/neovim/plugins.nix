@@ -39,8 +39,7 @@ in {
         {
           key = "<leader>fs";
           options.silent = true;
-          action = "require('auto-session.session-lens').search_session";
-          lua = true;
+          action.__raw = "require('auto-session.session-lens').search_session";
         }
       ];
 
@@ -166,7 +165,6 @@ in {
           "<leader>fr" = "oldfiles";
           "<leader>fd" = "diagnostics";
         };
-        keymapsSilent = true;
       };
     }
 

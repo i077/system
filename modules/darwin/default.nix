@@ -60,8 +60,7 @@ in {
   environment.systemPackages = with pkgs; [coreutils obsidian];
 
   # Fonts
-  fonts.fontDir.enable = true;
-  fonts.fonts =
+  fonts.packages =
     if config.lib.env.isCi
     then []
     else [selfPkgs.berkeley-mono];
