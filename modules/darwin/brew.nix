@@ -19,12 +19,12 @@
 
     # Some default packages
     casks = [
-      "bartender"
       "contexts"
       "duplicacy-web-edition"
       "firefox"
       "iterm2"
       "jetbrains-toolbox"
+      "jordanbaird-ice"
       "karabiner-elements"
       "monitorcontrol"
       "mac-mouse-fix"
