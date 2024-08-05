@@ -10,34 +10,34 @@ jobs:
       matrix:
         hostname: [giratina, dialga]
     steps:
-    - uses: actions/checkout@v3
-      with:
-        path: system
-    - name: Checkout nixpkgs
-      uses: actions/checkout@v3
-      with:
-        repository: NixOS/nixpkgs
-        fetch-depth: 0
-        path: nixpkgs
-    - name: Cleanup disk
-      uses: curoky/cleanup-disk-action@v2.0
-    - uses: cachix/install-nix-action@v19
-      with:
-        extra_nix_config: |
-          experimental-features = nix-command flakes
-    - name: Configure Cachix
-      uses: cachix/cachix-action@v12
-      with:
-        name: i077
-        # No need to push useless builds to the cache
-        skipPush: true
-    - name: Bisect nixpkgs flake input
-      run: |
-        # Assumes that HEAD points to a flake update commit and extract nixpkgs refs
-        GOOD_REF=$(git -C system log --format=%B -1 | grep "'nixpkgs'" | sed "s/\* Updated '.*': '.*\([0-9a-f]\{40\}\)' -> '.*[0-9a-f]\{40\}'/\1/")
-        BAD_REF=$(git -C system log --format=%B -1 | grep "'nixpkgs'" | sed "s/\* Updated '.*': '.*[0-9a-f]\{40\}' -> '.*\([0-9a-f]\{40\}\)'/\1/")
-        git -C nixpkgs bisect start
-        git -C nixpkgs bisect good $GOOD_REF
-        git -C nixpkgs bisect bad $BAD_REF
-        # Automate git bisect with nix build command
-        git -C nixpkgs bisect run nix build $GITHUB_WORKSPACE/system#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel --override-input nixpkgs $GITHUB_WORKSPACE/nixpkgs
+      - uses: actions/checkout@v3
+        with:
+          path: system
+      - name: Checkout nixpkgs
+        uses: actions/checkout@v3
+        with:
+          repository: NixOS/nixpkgs
+          fetch-depth: 0
+          path: nixpkgs
+      - name: Cleanup disk
+        uses: curoky/cleanup-disk-action@v2.0
+      - uses: cachix/install-nix-action@v19
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+      - name: Configure Cachix
+        uses: cachix/cachix-action@v12
+        with:
+          name: i077
+          # No need to push useless builds to the cache
+          skipPush: true
+      - name: Bisect nixpkgs flake input
+        run: |
+          # Assumes that HEAD points to a flake update commit and extract nixpkgs refs
+          GOOD_REF=$(git -C system log --format=%B -1 | grep "'nixpkgs'" | sed "s/\* Updated '.*': '.*\([0-9a-f]\{40\}\)' -> '.*[0-9a-f]\{40\}'/\1/")
+          BAD_REF=$(git -C system log --format=%B -1 | grep "'nixpkgs'" | sed "s/\* Updated '.*': '.*[0-9a-f]\{40\}' -> '.*\([0-9a-f]\{40\}\)'/\1/")
+          git -C nixpkgs bisect start
+          git -C nixpkgs bisect good $GOOD_REF
+          git -C nixpkgs bisect bad $BAD_REF
+          # Automate git bisect with nix build command
+          git -C nixpkgs bisect run nix build $GITHUB_WORKSPACE/system#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel --override-input nixpkgs $GITHUB_WORKSPACE/nixpkgs

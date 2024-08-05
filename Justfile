@@ -13,7 +13,7 @@ deploy host='': check fmt
 fmt:
     #!/usr/bin/env fish
     source bin/_lib.fish
-    if not treefmt -q --fail-on-change
+    if not treefmt --fail-on-change
         git update-index
         set -l reformatted_files (git ls-files -m -o -d --exclude-standard)
         if test (count $reformatted_files) -gt 0
