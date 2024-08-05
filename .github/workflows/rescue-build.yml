@@ -20,7 +20,7 @@ jobs:
         with:
           # Shallow clones won't work
           fetch-depth: 0
-      - uses: DeterminateSystems/nix-installer-action@v10
+      - uses: DeterminateSystems/nix-installer-action@v13
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Configure Cachix
