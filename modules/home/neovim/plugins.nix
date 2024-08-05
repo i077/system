@@ -12,9 +12,11 @@ in {
       plugins.treesitter = {
         enable = true;
         folding = true;
-        indent = true;
         nixvimInjections = true;
-        incrementalSelection.enable = true;
+        settings = {
+          incremental_selection.enable = true;
+          indent.enable = true;
+        };
       };
 
       # Show code context, e.g. what function current line is under

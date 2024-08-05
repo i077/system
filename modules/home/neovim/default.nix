@@ -132,19 +132,15 @@
       }) ["y" "p" "P"]);
 
     # Different indentation for various filetypes
-    extraFiles = {
-      "after/ftplugin/nix.vim" = ''
+    extraFiles = let
+      indentTwoSpaces = ''
         setlocal tabstop=2
         setlocal shiftwidth=2
       '';
-      "after/ftplugin/typescript.vim" = ''
-        setlocal tabstop=2
-        setlocal shiftwidth=2
-      '';
-      "after/ftplugin/terraform.vim" = ''
-        setlocal tabstop=2
-        setlocal shiftwidth=2
-      '';
+    in {
+      "after/ftplugin/nix.vim".text = indentTwoSpaces;
+      "after/ftplugin/terraform.vim".text = indentTwoSpaces;
+      "after/ftplugin/typescript.vim".text = indentTwoSpaces;
     };
   };
 }
