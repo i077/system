@@ -20,7 +20,7 @@
       userEmail = lib.mkForce ("imran.hossain" + "@" + "saic.com");
     };
 
-    home.packages = with pkgs; [awscli2 terraform];
+    home.packages = with pkgs; [awscli2 colima docker terraform];
 
     # Add completions for docker
     xdg.configFile."fish/completions/docker.fish".source = "${pkgs.docker.src}/contrib/completion/fish/docker.fish";
