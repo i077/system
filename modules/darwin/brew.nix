@@ -19,14 +19,14 @@
 
     # Some default packages
     casks = [
+      "betterdisplay"
       "contexts"
       "duplicacy-web-edition"
       "firefox"
+      "hyperkey"
       "iterm2"
       "jetbrains-toolbox"
       "jordanbaird-ice"
-      "karabiner-elements"
-      "monitorcontrol"
       "mac-mouse-fix"
       "plexamp"
       "raycast"
