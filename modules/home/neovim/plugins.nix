@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  inherit (config.lib.nixvim) mkLeaderMappings;
+  inherit (config.lib.nvim) mkLeaderMappings;
 in {
   programs.nixvim = lib.mkMerge [
     {

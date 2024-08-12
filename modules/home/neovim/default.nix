@@ -10,7 +10,7 @@
     multigrid = true;
   };
 
-  lib.nixvim = {
+  lib.nvim = {
     # Helper function to create leader mappings under a prefix
     mkLeaderMappings = prefix:
       lib.mapAttrsToList (key: action: {
