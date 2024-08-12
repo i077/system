@@ -2,7 +2,7 @@ env:
   CIRRUS_SHELL: bash -il
   CACHIX_AUTH_TOKEN: ENCRYPTED[!5b9226401f61dbae39295591ce5115a7f499fa0c24fd6e8a46df6188eda5e03de499c8adfea6a86dd4c0e284e107f3e0!]
   CACHIX_NAME: i077
-  DARWIN_BUILD_IMAGE: ghcr.io/cirruslabs/macos-sonoma-base:latest
+  DARWIN_BUILD_IMAGE: ghcr.io/cirruslabs/macos-runner:sonoma
   LINUX_BUILD_IMAGE: nixpkgs/cachix-flakes:latest
   NIX_BUILD_FLAGS: -j auto --accept-flake-config
 
