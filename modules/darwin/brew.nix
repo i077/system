@@ -28,6 +28,7 @@
       "jetbrains-toolbox"
       "jordanbaird-ice"
       "mac-mouse-fix"
+      "mediamate"
       "plexamp"
       "raycast"
       "stats"
