@@ -17,6 +17,7 @@
     };
     packages = with pkgs; [
       curlie
+      dasel
       libqalculate
       just
       jq
