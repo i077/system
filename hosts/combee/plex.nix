@@ -26,4 +26,7 @@
     enable = true;
     openFirewall = true;
   };
+
+  # Allow Plex to access video devices, e.g. a TV tuner
+  users.users.plex.extraGroups = ["video"];
 }
