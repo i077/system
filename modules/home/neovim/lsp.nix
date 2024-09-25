@@ -30,7 +30,7 @@ in {
         terraformls.enable = true;
 
         # TypeScript
-        tsserver.enable = true;
+        ts-ls.enable = true;
       };
     };
 

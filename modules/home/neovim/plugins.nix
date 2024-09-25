@@ -49,7 +49,7 @@ in {
       plugins.leap.enable = true;
 
       # Surrounds
-      plugins.surround.enable = true;
+      plugins.vim-surround.enable = true;
 
       # Better folds
       plugins.nvim-ufo.enable = true;
@@ -76,57 +76,62 @@ in {
       # Statusline
       plugins.lualine = {
         enable = true;
-        componentSeparators = {
-          left = "";
-          right = "";
-        };
-        sectionSeparators = {
-          left = "";
-          right = "";
-        };
-        iconsEnabled = false;
 
-        sections = {
-          # Only show the first char of the current mode
-          lualine_a = [
-            {
-              name = "mode";
-              extraConfig.fmt.__raw = "function(str) return str:sub(1,1) end";
-            }
-            "selectioncount"
-          ];
-          lualine_b = ["branch" "diff"];
-          lualine_c = [
-            {
-              name = "filename";
-              extraConfig.path = 1;
-            }
-          ];
+        settings = {
+          options = {
+            componentSeparators = {
+              left = "";
+              right = "";
+            };
+            sectionSeparators = {
+              left = "";
+              right = "";
+            };
+            iconsEnabled = false;
+          };
 
-          lualine_x = ["diagnostics" "filetype"];
-          lualine_y = ["progress" "searchcount"];
-          lualine_z = ["location"];
-        };
+          sections = {
+            # Only show the first char of the current mode
+            lualine_a = [
+              {
+                name = "mode";
+                extraConfig.fmt.__raw = "function(str) return str:sub(1,1) end";
+              }
+              "selectioncount"
+            ];
+            lualine_b = ["branch" "diff"];
+            lualine_c = [
+              {
+                name = "filename";
+                extraConfig.path = 1;
+              }
+            ];
 
-        tabline = {
-          lualine_a = [
-            {
-              name = "windows";
-              extraConfig.windows_color = {
-                active = "lualine_a_normal";
-                inactive = "lualine_b_inactive";
-              };
-            }
-          ];
-          lualine_z = [
-            {
-              name = "tabs";
-              extraConfig.tabs_color = {
-                active = "lualine_a_normal";
-                inactive = "lualine_b_inactive";
-              };
-            }
-          ];
+            lualine_x = ["diagnostics" "filetype"];
+            lualine_y = ["progress" "searchcount"];
+            lualine_z = ["location"];
+          };
+
+          tabline = {
+            lualine_a = [
+              {
+                name = "windows";
+                extraConfig.windows_color = {
+                  active = "lualine_a_normal";
+                  inactive = "lualine_b_inactive";
+                };
+              }
+            ];
+            lualine_z = [
+              {
+                name = "tabs";
+                extraConfig.tabs_color = {
+                  active = "lualine_a_normal";
+                  inactive = "lualine_b_inactive";
+                };
+              }
+            ];
+          };
         };
       };
 
@@ -168,6 +173,8 @@ in {
           "<leader>fd" = "diagnostics";
         };
       };
+
+      plugins.web-devicons.enable = true;
     }
 
     # Visualize the undo tree
