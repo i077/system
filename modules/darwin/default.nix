@@ -9,6 +9,8 @@
 in {
   imports = [./brew.nix ../broken-overlay.nix ../nix-settings.nix ../nix-distributed.nix];
 
+  system.stateVersion = 4;
+
   nix = {
     configureBuildUsers = true;
     # Enable flakes
