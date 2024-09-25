@@ -86,9 +86,6 @@
       # Add 1Password shell plugins support
       test -f ${config.xdg.configHome}/op/plugins.sh; and source ${config.xdg.configHome}/op/plugins.sh
 
-      # Configure Tide prompt
-      tide configure --auto --style=Lean --prompt_colors='16 colors' --show_time=No --lean_prompt_height='Two lines' --prompt_connection=Solid --prompt_spacing=Sparse --icons='Few icons' --transient=No
-
       # Vi keybindings
       set -g fish_key_bindings fish_vi_key_bindings
       set -g fish_cursor_default block
