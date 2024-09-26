@@ -15,7 +15,7 @@
       inherit (pkgs) lib;
       pname = "berkeley-mono";
     in
-      pkgs.stdenv.mkDerivation {
+      pkgs.stdenvNoCC.mkDerivation {
         inherit pname;
         version = "1.009";
 
@@ -32,7 +32,7 @@
         };
         sourceRoot = ".";
 
-        nativeBuildInputs = with pkgs; [unzip];
+        nativeBuildInputs = with pkgs; [unzip nerd-font-patcher parallel];
 
         dontConfigure = true;
         dontBuild = true;
@@ -43,6 +43,7 @@
           installDir=$out/share/fonts/truetype
           mkdir -p $installDir
           find . -name "*.ttf" -exec cp -a {} $installDir \;
+          find . -name "*.ttf" | parallel nerd-font-patcher -c --progressbars --out $installDir
 
           runHook postInstall
         '';
