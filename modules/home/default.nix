@@ -16,8 +16,10 @@
       HOMEBREW_NO_AUTO_UPDATE = 1;
     };
     packages = with pkgs; [
+      colima
       curlie
       dasel
+      docker
       libqalculate
       just
       jq
