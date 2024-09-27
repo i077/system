@@ -26,6 +26,13 @@ in {
         # Python
         pylsp.enable = true;
 
+        # Rust
+        rust-analyzer = {
+          enable = true;
+          installRustc = false;
+          installCargo = false;
+        };
+
         # Terraform
         terraformls.enable = true;
 
