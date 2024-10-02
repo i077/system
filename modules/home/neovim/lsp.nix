@@ -36,6 +36,9 @@ in {
         # Terraform
         terraformls.enable = true;
 
+        # LaTeX
+        texlab.enable = true;
+
         # TypeScript
         ts-ls.enable = true;
       };

@@ -227,5 +227,10 @@ in {
         "w" = ":Gwrite<CR>";
       };
     }
+
+    # Live LaTeX editing
+    {
+      plugins.texpresso.enable = true;
+    }
   ];
 }
