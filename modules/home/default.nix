@@ -35,7 +35,7 @@
     enable = true;
     config = {
       pager = "less -FR";
-      theme = "Nord";
+      theme = "gruvbox-dark";
     };
   };
 
