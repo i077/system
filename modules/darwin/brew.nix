@@ -30,6 +30,7 @@
       "mac-mouse-fix"
       "mediamate"
       "plexamp"
+      "pocket-casts"
       "raycast"
       "stats"
       "visual-studio-code"
