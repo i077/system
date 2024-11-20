@@ -34,7 +34,7 @@ in {
       # Automatic session management
       plugins.auto-session = {
         enable = true;
-        cwdChangeHandling = {};
+        settings.cwd_change_handling = false;
       };
       # Map to :Telescope for sessions
       keymaps = [
