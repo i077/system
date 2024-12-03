@@ -10,13 +10,16 @@ in {
         gopls.enable = true;
 
         # Haskell
-        hls.enable = true;
+        hls = {
+          enable = true;
+          installGhc = false;
+        };
 
         # JSON
         jsonls.enable = true;
 
         # Nix
-        nil-ls = {
+        nil_ls = {
           enable = true;
           settings = {
             formatting.command = ["alejandra"];
@@ -27,7 +30,7 @@ in {
         pylsp.enable = true;
 
         # Rust
-        rust-analyzer = {
+        rust_analyzer = {
           enable = true;
           installRustc = false;
           installCargo = false;
@@ -40,7 +43,7 @@ in {
         texlab.enable = true;
 
         # TypeScript
-        ts-ls.enable = true;
+        ts_ls.enable = true;
       };
     };
 
