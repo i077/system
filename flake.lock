@@ -275,6 +275,22 @@
         "type": "github"
       }
     },
+    "iterm2-integration": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1723324630,
+        "narHash": "sha256-meYWZ3ZMsVVh8wMHALJuTjBLopcAa4LVpCRtClHJ7yA=",
+        "owner": "gnachman",
+        "repo": "iTerm2-shell-integration",
+        "rev": "c2a41928ff1e224ecaa054035331b2a8aa7416a3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gnachman",
+        "repo": "iTerm2-shell-integration",
+        "type": "github"
+      }
+    },
     "ixx": {
       "inputs": {
         "flake-utils": [
@@ -554,6 +570,7 @@
         "devshell": "devshell",
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
+        "iterm2-integration": "iterm2-integration",
         "nixos-generators": "nixos-generators",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_4",
