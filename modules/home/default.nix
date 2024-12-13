@@ -14,7 +14,11 @@
     sessionVariables = {
       EDITOR = "nvim";
       HOMEBREW_NO_AUTO_UPDATE = 1;
+
+      # Disable Python virtualenv prompt updates, since tide takes care of that
+      VIRTUAL_ENV_DISABLE_PROMPT = 1;
     };
+
     packages = with pkgs; [
       colima
       curlie
