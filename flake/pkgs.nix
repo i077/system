@@ -17,16 +17,23 @@
     in
       pkgs.stdenvNoCC.mkDerivation {
         inherit pname;
-        version = "1.009";
+        version = "2.000";
 
         src = pkgs.requireFile rec {
           name = "${pname}-typeface.zip";
-          hash = "sha256-aMmQSuLzAt+Z92QvjpYGVIICpDaHc+DDSwhRt0l2XNQ=";
+          sha256 = "0iakm2ga73k1ia81zg20ws1dk2ssmdb257aqx7nbq0pkv1nxdr1c";
 
           message = ''
-            Log in to https://berkeleygraphics.com/accounts/login/,
-            download the Berkeley Mono typeface, and add it to the Nix store with:
+            Log in to https://usgraphics.com/auth/login/, and
+            download the Berkeley Mono typeface with:
+            - TrueType format
+            - Normal width
+            - All widths
+            - All slants
+            - Glyph alternatives: dotted zero, normal seven
+            - No contextual alternatives
 
+            Zip up all .ttf files and add the zip to the Nix store with:
             $ nix store add-file /path/to/${name}
           '';
         };
@@ -49,7 +56,7 @@
         '';
 
         meta = {
-          homepage = "https://berkeleygraphics.com/typefaces/berkeley-mono/";
+          homepage = "https://usgraphics.com/products/berkeley-mono";
           license = lib.licenses.unfree;
           maintainers = [lib.maintainers.i077];
           platforms = lib.platforms.all;
