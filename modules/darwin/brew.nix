@@ -23,6 +23,7 @@
       "contexts"
       "duplicacy-web-edition"
       "firefox"
+      "ghostty"
       "hyperkey"
       "iterm2"
       "jetbrains-toolbox"
