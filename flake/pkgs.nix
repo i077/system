@@ -30,7 +30,7 @@
             - Normal width
             - All widths
             - All slants
-            - Glyph alternatives: dotted zero, normal seven
+            - Glyph alternatives: dotted zero, standard seven
             - No contextual alternatives
 
             Zip up all .ttf files and add the zip to the Nix store with:
@@ -50,7 +50,7 @@
           installDir=$out/share/fonts/truetype
           mkdir -p $installDir
           find . -name "*.ttf" -exec cp -a {} $installDir \;
-          find . -name "*.ttf" | parallel nerd-font-patcher -c --progressbars --out $installDir
+          find . -name "*.ttf" | parallel nerd-font-patcher --debug 2 --complete --progressbars --out $installDir
 
           runHook postInstall
         '';
