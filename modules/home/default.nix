@@ -6,7 +6,7 @@
   programs.home-manager.enable = true;
 
   # Import external home-manager modules
-  imports = [inputs.nixvim.homeManagerModules.nixvim ./xdg.nix];
+  imports = [inputs.nixvim.homeManagerModules.nixvim ./ghostty.nix ./xdg.nix];
 
   home = {
     stateVersion = "20.09";
