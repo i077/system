@@ -11,6 +11,9 @@ in {
 
   system.stateVersion = 4;
 
+  # macOS Sequoia requires using a new set of user/group IDs for nixbld users
+  ids.gids.nixbld = 350;
+
   nix = {
     configureBuildUsers = true;
     # Enable flakes
