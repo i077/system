@@ -25,7 +25,6 @@
       "firefox"
       "ghostty"
       "hyperkey"
-      "iterm2"
       "jetbrains-toolbox"
       "jordanbaird-ice"
       "mac-mouse-fix"

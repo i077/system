@@ -37,11 +37,6 @@
       url = "github:mgdm/argonone-utils";
       flake = false;
     };
-
-    iterm2-integration = {
-      url = "github:gnachman/iTerm2-shell-integration";
-      flake = false;
-    };
   };
 
   nixConfig = {
