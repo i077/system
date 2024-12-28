@@ -94,16 +94,16 @@ in {
             # Only show the first char of the current mode
             lualine_a = [
               {
-                name = "mode";
-                extraConfig.fmt.__raw = "function(str) return str:sub(1,1) end";
+                __unkeyed-1 = "mode";
+                fmt = "function(str) return str:sub(1,1) end";
               }
               "selectioncount"
             ];
             lualine_b = ["branch" "diff"];
             lualine_c = [
               {
-                name = "filename";
-                extraConfig.path = 1;
+                __unkeyed-1 = "filename";
+                path = 1;
               }
             ];
 
@@ -115,8 +115,8 @@ in {
           tabline = {
             lualine_a = [
               {
-                name = "windows";
-                extraConfig.windows_color = {
+                __unkeyed-1 = "windows";
+                windows_color = {
                   active = "lualine_a_normal";
                   inactive = "lualine_b_inactive";
                 };
@@ -124,8 +124,8 @@ in {
             ];
             lualine_z = [
               {
-                name = "tabs";
-                extraConfig.tabs_color = {
+                __unkeyed-1 = "tabs";
+                tabs_color = {
                   active = "lualine_a_normal";
                   inactive = "lualine_b_inactive";
                 };
