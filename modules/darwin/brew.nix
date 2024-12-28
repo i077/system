@@ -36,6 +36,7 @@
       "stats"
       "visual-studio-code"
       "zed"
+      "zen-browser"
     ];
   };
 }
