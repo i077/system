@@ -8,5 +8,7 @@ in {
 
     theme = "GruvboxDark";
     mouse-hide-while-typing = true;
+
+    cursor-style-blink = false;
   };
 }
