@@ -39,7 +39,7 @@
         };
         sourceRoot = ".";
 
-        nativeBuildInputs = with pkgs; [unzip nerd-font-patcher parallel];
+        nativeBuildInputs = with pkgs; [unzip parallel];
 
         dontConfigure = true;
         dontBuild = true;
@@ -50,7 +50,6 @@
           installDir=$out/share/fonts/truetype
           mkdir -p $installDir
           find . -name "*.ttf" -exec cp -a {} $installDir \;
-          find . -name "*.ttf" | parallel nerd-font-patcher --debug 2 --complete --progressbars --out $installDir
 
           runHook postInstall
         '';

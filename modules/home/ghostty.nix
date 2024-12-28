@@ -1,5 +1,5 @@
-{ lib, ... }: let
-  mkCfg = lib.generators.toKeyValue { listsAsDuplicateKeys = true; };
+{lib, ...}: let
+  mkCfg = lib.generators.toKeyValue {listsAsDuplicateKeys = true;};
 in {
   xdg.configFile."ghostty/config".text = mkCfg {
     font-family = "Berkeley Mono";
