@@ -1,11 +1,10 @@
-#!/usr/bin/env fish
+#!/usr/bin/env nix
+#! nix shell nixpkgs#uv -c fish
 
 # Spawn a python environment (and run it) with the given list of packages.
 
 set _dir (dirname (status filename))
 source $_dir/_lib.fish
-
-set FLAKE "github:DavHau/mach-nix"
 
 function usage
     echo "pywith - Quickly spawn Python environments
@@ -16,7 +15,7 @@ function usage
 
 "$bold"Options:"$resf"
     -h, --help              Print this help message
-    -c, --command=<cmd>     Run <cmd> in the built shell (default: python)
+    -c, --command=<cmd>     Run <cmd> in the built shell (default: ptpython)
     -s, --shell             Same as '-c $SHELL'
     -f, --file=<file>       Interpret <file> with built Python env
     -r, --requirements      Read packages from a text file
@@ -37,6 +36,9 @@ if set -q _flag_help
     exit 0
 end
 
+# Hardcode Python 3.13 for now
+set -a uv_args '--python' '3.13'
+
 # Give a default command if none was given
 if set -q _flag_command; and begin
         set -q _flag_file; or set -q _flag_shell
@@ -54,44 +56,27 @@ else if set -q _flag_file
     end
     set cmd python $_flag_file
 else
-    set cmd python
+    set -a uv_args '--with' 'ptpython'
+    set cmd ptpython
 end
 
 
+# If -r or -R was passed, read from the given requirements file
 if set -q _flag_requirements; or set -q _flag_R
-    # If -r or -R was passed, read from the given requirements file
+    set -a uv_args '--with-requirements'
+
     if set -q _flag_R
-        set reqfile './requirements.txt'
+        set -a uv_args './requirements.txt'
     else
-        set reqfile $_flag_requirements
+        set -a uv_args $_flag_requirements
     end
-    set currentSystem (nix-instantiate --eval -E 'builtins.currentSystem')
-
-    log_step "Reading packages from "$reqfile"..."
-
-    # Build the python environment with requirements.txt, and capture the JSON output
-    # Unforunately 'mach-nix gen -r <file>' isn't working right now, so I have to
-    # use the mkPython function in a nix expression.
-    set build_json (nix build --impure --no-link --json \
-       --expr '(builtins.getFlake "'$FLAKE'").lib.'$currentSystem'.mkPython {
-          requirements = builtins.readFile '$reqfile'; }')
-    if test -z build_json
-        log_error "mach-nix couldn't build the Python environment"
-        exit 1
-    end
-    # Grab the derivation path from the JSON and spawn a shell using the derivation
-    set drvPath (echo $build_json | jq -r 'first | .drvPath')
-    nix shell $drvPath --command $cmd
-else
-    # No -r/-R was passsed, so continue with mach-nix's pythonWith
-
-    # If ptpython is present, we probably want that instead of python
-    if contains ptpython $argv; and ! set -q _flag_command; and ! set -q _flag_shell
-        log_minor "Found ptpython in args, running that instead of python."
-        set cmd ptpython
-    end
-
-    # Read in the packages to a chain of attributes
-    set attrlist (for pkg in $argv; printf ".%s" $pkg; end)
-    nix shell $FLAKE\#gen.python$attrlist --command $cmd
 end
+
+for pkg in $argv
+    set -a uv_args '--with' $pkg
+end
+
+# Run uv run
+uv run $uv_args $cmd
+
+# vim: set ft=fish sw=4:
