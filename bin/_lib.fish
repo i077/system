@@ -81,33 +81,32 @@ function check_progs
 end
 
 # Utils for dictionaries stored as universal variables
+function dict_init --argument-names dict
+    if not set -Uq $dict
+        set -U $dict '{}'
+    end
+end
+
 function dict_set --argument-names dict key value
-    set -U $dict'__'$key $value
+    dict_init $dict
+    set -U $dict (echo $$dict | jq '. * {"'$key'": "'$value'"}')
 end
 
 function dict_get --argument-names dict key
-    eval echo \$$dict'__'$key
+    dict_init $dict
+    echo $$dict | jq -r '.["'$key'"]'
 end
 
 function dict_query --argument-names dict key
-    if set -Uq $dict'__'$key
-        return 0
-    end
-    return 1
+    dict_init $dict
+    echo $$dict | jq -e 'has("'$key'")' > /dev/null
 end
 
 function dict_list_keys --argument-names dict
-    for var in (set -Un | grep '^'$dict'__')
-        echo $var | sed 's/'$dict'__//'
-    end
+    dict_init $dict
+    echo $$dict | jq -r '. | keys[]'
 end
 
 function dict_clear --argument-names dict key
-    if test -z $key
-        for key in (dict_list_keys $dict)
-            set -Ue $dict'__'$key
-        end
-    else
-        set -Ue $dict'__'$key
-    end
+    set -Ue $dict
 end
