@@ -8,7 +8,7 @@ in {
 
     theme = "GruvboxDark";
     mouse-hide-while-typing = true;
-    
+
     macos-option-as-alt = "left";
 
     cursor-style-blink = false;

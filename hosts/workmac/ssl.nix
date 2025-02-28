@@ -13,7 +13,10 @@
   ];
 
   # Configure various CLIs to use the built CA bundle
-  home-manager.users.hossaini.home.sessionVariables = builtins.listToAttrs (map 
-    (var: {name = var; value = "/etc/ssl/certs/ca-certificates.crt";}) 
+  home-manager.users.hossaini.home.sessionVariables = builtins.listToAttrs (map
+    (var: {
+      name = var;
+      value = "/etc/ssl/certs/ca-certificates.crt";
+    })
     ["AWS_CA_BUNDLE" "CURL_CA_BUNDLE"]);
 }

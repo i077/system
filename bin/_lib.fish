@@ -99,7 +99,7 @@ end
 
 function dict_query --argument-names dict key
     dict_init $dict
-    echo $$dict | jq -e 'has("'$key'")' > /dev/null
+    echo $$dict | jq -e 'has("'$key'")' >/dev/null
 end
 
 function dict_list_keys --argument-names dict
