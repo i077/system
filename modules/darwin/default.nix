@@ -15,7 +15,6 @@ in {
   ids.gids.nixbld = 350;
 
   nix = {
-    configureBuildUsers = true;
     # Enable flakes
     extraOptions = ''
       build-users-group = nixbld
@@ -59,8 +58,6 @@ in {
   nixpkgs.config.allowUnfree = true;
 
   programs.zsh.enable = true;
-
-  services.nix-daemon.enable = true;
 
   environment.systemPackages = with pkgs; [coreutils obsidian];
 

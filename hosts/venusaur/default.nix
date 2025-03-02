@@ -12,7 +12,7 @@ in {
   };
 
   # Enable touch ID for sudo
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   # Enable x86 builds
   nix.extraOptions = ''
