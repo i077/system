@@ -10,7 +10,7 @@
   mkDarwinSystem = name: system: path: let
     systemArgs = isCi: {
       inherit system;
-      modules = [home-manager.darwinModule ../modules/darwin path {lib.env.isCi = isCi;}];
+      modules = [home-manager.darwinModules.default ../modules/darwin path {lib.env.isCi = isCi;}];
       specialArgs = {inherit inputs;};
     };
   in {
