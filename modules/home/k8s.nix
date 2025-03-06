@@ -1,6 +1,6 @@
 # Kubneretes-related tooling
 {pkgs, ...}: {
-  home.packages = with pkgs; [kubectl kubectx kubernetes-helm fluxcd stern vcluster];
+  home.packages = with pkgs; [kubectl kubectl-node-shell kubectx kubernetes-helm fluxcd stern vcluster];
 
   # Add kubectl & friends as aliases
   programs.fish.shellAbbrs = {
