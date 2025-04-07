@@ -6,11 +6,6 @@
   programs.git = {
     enable = true;
 
-    package = pkgs.git.override (old: {
-      sendEmailSupport = true;
-      withSsh = true;
-    });
-
     userName = "Imran Hossain";
     userEmail = "hi" + "@" + "imranh.org";
 
