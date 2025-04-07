@@ -60,7 +60,6 @@ else
     set cmd ptpython
 end
 
-
 # If -r or -R was passed, read from the given requirements file
 if set -q _flag_requirements; or set -q _flag_R
     set -a uv_args --with-requirements

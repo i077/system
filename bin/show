@@ -17,8 +17,6 @@ For example, if FILE is a directory, the resulting command run becomes:
     ls -l FILE [ARGS...]"
 end
 
-
-
 if test -z $argv[1]
     # If no argument is passed and we're in a pipe, act like a pager.
     if test -t 0 # Check if stdout is a terminal (heuristic for pipe)

@@ -70,7 +70,6 @@ function _run
     exec_attr $argv
 end
 
-
 # Entry point
 argparse -s n/dry-run 'k/forget=' y/yes h/help -- $argv
 or return
