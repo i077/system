@@ -28,6 +28,7 @@
       just
       jq
       mosh
+      nil
       nix-index
       nix-output-monitor
       ripgrep

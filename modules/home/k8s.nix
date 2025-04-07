@@ -1,5 +1,9 @@
 # Kubneretes-related tooling
-{inputs, pkgs, ...}: let
+{
+  inputs,
+  pkgs,
+  ...
+}: let
   kubesess = inputs.nix-hot-pot.packages.${pkgs.system}.kubesess.overrideAttrs (old: {
     postInstall = ''
       mkdir -p $out/share/fish/vendor_completions.d $out/share/fish/vendor_functions.d
