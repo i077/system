@@ -10,6 +10,8 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     nixos-generators.url = "github:nix-community/nixos-generators";
 
+    nix-hot-pot.url = "github:shopstic/nix-hot-pot";
+
     # Manage macOS systems with Nix
     darwin = {
       url = "github:LnL7/nix-darwin";

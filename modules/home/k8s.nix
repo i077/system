@@ -1,14 +1,21 @@
 # Kubneretes-related tooling
-{pkgs, ...}: {
-  home.packages = with pkgs; [kubectl kubectl-node-shell kubectx kubernetes-helm fluxcd stern vcluster];
+{inputs, pkgs, ...}: let
+  kubesess = inputs.nix-hot-pot.packages.${pkgs.system}.kubesess.overrideAttrs (old: {
+    postInstall = ''
+      mkdir -p $out/share/fish/vendor_completions.d $out/share/fish/vendor_functions.d
+      cp scripts/fish/completions/*.fish $out/share/fish/vendor_completions.d
+      cp scripts/fish/functions/*.fish $out/share/fish/vendor_functions.d
+    '';
+  });
+in {
+  home.packages = with pkgs; [kubectl kubectl-node-shell kubesess fluxcd stern vcluster];
 
   # Add kubectl & friends as aliases
-  programs.fish.shellAbbrs = {
-    k = "kubectl";
-    kcx = "kubectx";
-    kns = "kubens";
+  programs.fish = {
+    shellAbbrs = {
+      k = "kubectl";
+    };
   };
 
-  # k9s at work
   programs.k9s.enable = true;
 }
