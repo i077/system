@@ -21,12 +21,12 @@
     casks = [
       "betterdisplay"
       "contexts"
-      "duplicacy-web-edition"
       "firefox"
       "ghostty"
       "hyperkey"
       "jetbrains-toolbox"
       "jordanbaird-ice"
+      "kopiaui"
       "mac-mouse-fix"
       "mediamate"
       "plexamp"
