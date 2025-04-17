@@ -11,7 +11,7 @@ using [flake-parts](https://flake.parts), which adds NixOS' module system for ad
 
 - [`flake`](./flake) is where flake outputs are declared. Outputs are split into files by
   functionality.
-- [`modules`](./modules) stores snippets of configuration for NixOS, nix-darwin, and home-manager.
+- [`modules`](./modules) stores snippets of configuration for nix-darwin and home-manager.
 - [`hosts`](./hosts) stores configuration for each machine managed in this repo.
   User environment config is stored in a `home.nix` file or `home` directory for each host (if at all).
 - [`bin`](./bin) is a collection of shell scripts I find useful. These are usually written for [fish](https://fishshell.com/).

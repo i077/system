@@ -27,7 +27,6 @@
             # Build on top of the GNOME installer ISO
             "${modulesPath}/installer/cd-dvd/installation-cd-graphical-gnome.nix"
             "${modulesPath}/installer/cd-dvd/channel.nix"
-            ../modules/nixos
           ];
 
           isoImage.isoBaseName = lib.mkForce "nixos-rescue";
