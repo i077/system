@@ -4,13 +4,13 @@
   inherit (inputs) nixpkgs darwin home-manager;
   inherit (nixpkgs.lib) mkMerge;
 
-  mkDarwinSystem = name: system: path: let
+  mkDarwinSystem = name: system: let
     systemArgs = isCi: {
       inherit system;
       modules = [
         home-manager.darwinModules.default
         ../modules/darwin
-        path
+        ../hosts/${name}
         {lib.env.isCi = isCi;}
       ];
       specialArgs = {inherit inputs;};
@@ -30,8 +30,8 @@ in {
   ];
 
   flake = mkMerge [
-    (mkDarwinSystem "Venusaur" "aarch64-darwin" ../hosts/venusaur)
-    (mkDarwinSystem "workmac" "aarch64-darwin" ../hosts/workmac)
+    (mkDarwinSystem "Venusaur" "aarch64-darwin")
+    (mkDarwinSystem "workmac" "aarch64-darwin")
     {
       # Add my SSH keys to the lib set
       lib.mySshKeys = [
