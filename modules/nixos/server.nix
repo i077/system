@@ -5,8 +5,6 @@
   lib,
   ...
 }: {
-  imports = [../nix-distributed.nix];
-
   # Passwordless accounts, auth is done via keypair
   nix.settings.trusted-users = ["@wheel"];
   security.sudo.wheelNeedsPassword = false;
