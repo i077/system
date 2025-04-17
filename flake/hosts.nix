@@ -4,17 +4,22 @@
   inherit (inputs) self nixpkgs deploy-rs darwin home-manager;
   inherit (nixpkgs.lib) mkMerge;
 
-  # For each Darwin configuration, create two darwinSystems:
-  # - one that targets the actual system, and
-  # - one that is meant for CI, so that dependencies using pkgs.requireFile can be skipped
   mkDarwinSystem = name: system: path: let
     systemArgs = isCi: {
       inherit system;
-      modules = [home-manager.darwinModules.default ../modules/darwin path {lib.env.isCi = isCi;}];
+      modules = [
+        home-manager.darwinModules.default
+        ../modules/darwin
+        path
+        {lib.env.isCi = isCi;}
+      ];
       specialArgs = {inherit inputs;};
     };
   in {
+    # For each Darwin host, create two darwinSystems:
+    # - one that targets the actual system, and
     darwinConfigurations.${name} = darwin.lib.darwinSystem (systemArgs false);
+    # - one that is meant for CI, so that options defined with pkgs.requireFile can be skipped
     darwinConfigurations."${name}-ci" = darwin.lib.darwinSystem (systemArgs true);
   };
 
@@ -37,8 +42,8 @@ in {
     inherit (inputs.nixpkgs.lib) mkOption types;
   in [
     # Workaround to allow merging of flake's deploy option
-    {options.flake.deploy = mkOption {type = types.lazyAttrsOf types.anything;};}
-    {options.flake.darwinConfigurations = mkOption {type = types.lazyAttrsOf types.anything;};}
+    {options.flake.deploy = mkOption {type = types.lazyAttrsOf types.raw;};}
+    {options.flake.darwinConfigurations = mkOption {type = types.lazyAttrsOf types.raw;};}
   ];
 
   flake = mkMerge [
