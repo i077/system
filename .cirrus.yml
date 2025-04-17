@@ -39,23 +39,3 @@ build_darwin_profiles_task:
   install_cachix_script: nix profile install --impure github:nixos/nixpkgs/nixpkgs-unstable#cachix
   trust_user_script: echo "trusted-users = root admin" | sudo tee -a /etc/nix/nix.conf && sudo pkill nix-daemon
   <<: *BUILD_TEMPLATE
-
-build_nixos_profiles_task:
-  matrix:
-    - arm_container:
-        image: $LINUX_BUILD_IMAGE
-        cpu: 4
-        memory: 12G
-      env:
-        ARCH: aarch64
-        OUTPUTS:
-          - .#deploy.nodes.cubone.profiles.system.path
-    - container:
-        image: $LINUX_BUILD_IMAGE
-        cpu: 4
-        memory: 12G
-      env:
-        ARCH: x86_64
-        OUTPUTS:
-          - .#deploy.nodes.combee.profiles.system.path
-  <<: *BUILD_TEMPLATE

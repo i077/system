@@ -28,7 +28,7 @@ in {
 
     # Add inputs to registry & nix path
     nixPath = lib.mkForce [
-      "nixpkgs=${inputs.nixpkgs-darwin}"
+      "nixpkgs=${inputs.nixpkgs}"
       "home-manager=${inputs.home-manager}"
       "darwin=${inputs.darwin}"
     ];
@@ -43,16 +43,7 @@ in {
           flake = inputs.${name};
         });
     in
-      {
-        nixpkgs = {
-          from = {
-            id = "nixpkgs";
-            type = "indirect";
-          };
-          flake = inputs.nixpkgs-darwin;
-        };
-      }
-      // copyFlakeInputs ["self" "darwin" "home-manager"];
+      copyFlakeInputs ["self" "nixpkgs" "darwin" "home-manager"];
   };
 
   nixpkgs.config.allowUnfree = true;

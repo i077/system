@@ -26,11 +26,6 @@
       commands = [
         {package = pkgs.just;}
         {package = config.treefmt.build.wrapper;}
-        {
-          name = "deploy";
-          help = "Deploy profiles to servers";
-          package = inputs'.deploy-rs.packages.default;
-        }
       ];
     };
 

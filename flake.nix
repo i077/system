@@ -2,43 +2,29 @@
   description = "My Nix configurations";
 
   inputs = {
-    # Use unstable-small branch for quicker updates
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
-    nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-
-    # NixOS modules for running on certain hardware
-    nixos-hardware.url = "github:NixOS/nixos-hardware";
-    nixos-generators.url = "github:nix-community/nixos-generators";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     nix-hot-pot.url = "github:shopstic/nix-hot-pot";
 
     # Manage macOS systems with Nix
     darwin = {
       url = "github:LnL7/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Manage user environment with Nix
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Easily deploy changes to systems
-    deploy-rs.url = "github:serokell/deploy-rs";
+    # Module for neovim configuration
+    nixvim.url = "github:nix-community/nixvim";
 
     # Dev-environment stuff
     flake-parts.url = "github:hercules-ci/flake-parts";
     treefmt-nix.url = "github:numtide/treefmt-nix";
     devshell.url = "github:numtide/devshell";
-
-    nixvim.url = "github:nix-community/nixvim";
-
-    # Utilities for the Argon One Raspi case
-    argonone-utils = {
-      url = "github:mgdm/argonone-utils";
-      flake = false;
-    };
   };
 
   nixConfig = {

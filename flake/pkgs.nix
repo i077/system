@@ -4,7 +4,7 @@
     system,
     ...
   }: {
-    _module.args.pkgs = import inputs.nixpkgs-darwin {
+    _module.args.pkgs = import inputs.nixpkgs {
       inherit system;
       # The pkgs set used to instantiate the berkeley-mono package must have allowUnfree set
       # so others can use it.

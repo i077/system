@@ -1,8 +1,7 @@
 # System configuration
 
-This repository hosts system/user configuration for my servers running [NixOS](https://nixos.org) and my macOS machines
-managed through [nix-darwin](https://github.com/LnL7/nix-darwin), as well as user environments managed through
-[home-manager](https://github.com/nix-community/home-manager).
+This repository hosts system/user configuration for my macOS machines managed through [nix-darwin](https://github.com/LnL7/nix-darwin)
+and their user environments managed through [home-manager](https://github.com/nix-community/home-manager).
 
 ## Structure
 
