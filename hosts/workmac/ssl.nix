@@ -1,6 +1,6 @@
-{pkgs, ...}: {
+{lib, pkgs, ...}: {
   # Add Private CA
-  security.pki.certificateFiles = [
+  security.pki.certificateFiles = lib.optional lib.env.isCi [
     (pkgs.requireFile {
       name = "private-ca.cer";
       hash = "sha256-VNdLlz0lEC7cQhEr+DXAHqkWWpPKtZDUjgI8vSSSmPU=";
@@ -18,5 +18,5 @@
       name = var;
       value = "/etc/ssl/certs/ca-certificates.crt";
     })
-    ["AWS_CA_BUNDLE" "CURL_CA_BUNDLE"]);
+    ["AWS_CA_BUNDLE" "CURL_CA_BUNDLE" "REQUESTS_CA_BUNDLE"]);
 }
