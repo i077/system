@@ -14,14 +14,11 @@
       "swiftformat-for-xcode"
       "tailscale"
       "the-unarchiver"
-      "zoom"
-      "zotero"
     ];
 
     masApps = {
-      "Microsoft Remote Desktop" = 1295203466;
-      "Reeder 5" = 1529448980;
-      Telegram = 747648890;
+      "Windows App" = 1295203466;
+      "Reeder." = 6475002485;
       "Things 3" = 904280696;
       WhatsApp = 310633997;
       Xcode = 497799835;
