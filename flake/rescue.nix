@@ -30,7 +30,7 @@
             ../modules/nixos
           ];
 
-          isoImage.isoBaseName = "nixos-rescue";
+          isoImage.isoBaseName = lib.mkForce "nixos-rescue";
 
           system.stateVersion = "20.09";
           time.timeZone = "America/New_York";
