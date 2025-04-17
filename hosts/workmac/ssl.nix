@@ -1,10 +1,11 @@
 {
+  config,
   lib,
   pkgs,
   ...
 }: {
   # Add Private CA
-  security.pki.certificateFiles = lib.optional lib.env.isCi [
+  security.pki.certificateFiles = lib.optional config.lib.env.isCi [
     (pkgs.requireFile {
       name = "private-ca.cer";
       hash = "sha256-VNdLlz0lEC7cQhEr+DXAHqkWWpPKtZDUjgI8vSSSmPU=";
