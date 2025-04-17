@@ -1,4 +1,8 @@
-{lib, pkgs, ...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   # Add Private CA
   security.pki.certificateFiles = lib.optional lib.env.isCi [
     (pkgs.requireFile {

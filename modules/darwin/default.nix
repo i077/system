@@ -73,5 +73,6 @@ in {
     useGlobalPkgs = true;
     useUserPackages = true;
     backupFileExtension = "bak";
+    sharedModules = [inputs.nixvim.homeManagerModules.nixvim];
   };
 }

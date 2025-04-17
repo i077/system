@@ -1,12 +1,7 @@
-{
-  inputs,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   programs.home-manager.enable = true;
 
-  # Import external home-manager modules
-  imports = [inputs.nixvim.homeManagerModules.nixvim ./ghostty.nix ./xdg.nix];
+  imports = [./ghostty.nix ./xdg.nix];
 
   home = {
     stateVersion = "20.09";
@@ -29,6 +24,7 @@
       jq
       mosh
       nil
+      nixd
       nix-index
       nix-output-monitor
       ripgrep
