@@ -50,5 +50,7 @@
     includes = ["~/.ssh/config.d/*"];
   };
 
+  programs.go.enable = true;
+
   xdg.enable = true;
 }
