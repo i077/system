@@ -34,6 +34,7 @@
       "raycast"
       "stats"
       "visual-studio-code"
+      "vivaldi"
       "zed"
     ];
   };
