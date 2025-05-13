@@ -12,7 +12,7 @@
     '';
   });
 in {
-  home.packages = with pkgs; [kubectl kubectl-node-shell kubesess fluxcd stern vcluster];
+  home.packages = with pkgs; [kubectl kubectl-node-shell kubernetes-helm kubesess fluxcd stern vcluster];
 
   # Add kubectl & friends as aliases
   programs.fish = {
