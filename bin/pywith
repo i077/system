@@ -37,7 +37,7 @@ if set -q _flag_help
 end
 
 # Hardcode Python 3.13 for now
-set -a uv_args --python '3.13'
+set -a uv_args --python '3.13' --native-tls
 
 # Give a default command if none was given
 if set -q _flag_command; and begin
