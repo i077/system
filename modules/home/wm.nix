@@ -8,12 +8,12 @@ in {
       enable-normalization-opposite-orientation-for-nested-containers = true;
 
       gaps = {
-        inner.horizontal = 8;
-        inner.vertical = 8;
-        outer.left = 8;
-        outer.right = 8;
-        outer.top = 8;
-        outer.bottom = 8;
+        inner.horizontal = 4;
+        inner.vertical = 4;
+        outer.left = 4;
+        outer.right = 4;
+        outer.top = 4;
+        outer.bottom = 4;
       };
 
       mode.main.binding = {
