@@ -20,7 +20,6 @@
     # Some default packages
     casks = [
       "betterdisplay"
-      "contexts"
       "firefox"
       "ghostty"
       "hyperkey"

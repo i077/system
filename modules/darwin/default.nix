@@ -7,7 +7,7 @@
 }: let
   selfPkgs = inputs.self.packages.${config.nixpkgs.system};
 in {
-  imports = [./brew.nix ../broken-overlay.nix ../nix-settings.nix];
+  imports = [./brew.nix ./wm.nix ../broken-overlay.nix ../nix-settings.nix];
 
   system.stateVersion = 4;
 
