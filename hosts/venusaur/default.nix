@@ -6,6 +6,8 @@ in {
   # User config
   users.users.imran.home = "/Users/imran";
 
+  system.primaryUser = "imran";
+
   networking = {
     computerName = hostName;
     inherit hostName;
