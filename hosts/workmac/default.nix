@@ -9,6 +9,7 @@
 
   # User config
   users.users.hossaini.home = "/Users/hossaini";
+  system.primaryUser = "hossaini";
 
   # Enable x86 builds
   nix.extraOptions = ''
