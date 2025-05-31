@@ -15,7 +15,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Update flake.lock
-        uses: DeterminateSystems/update-flake-lock@v23
+        uses: DeterminateSystems/update-flake-lock@v25
         with:
           token: ${{ secrets.GH_UPDATER_TOKEN }}
           nix-options: --accept-flake-config
