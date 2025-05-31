@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   programs.home-manager.enable = true;
 
-  imports = [./ghostty.nix ./xdg.nix ./wm.nix];
+  imports = [./ghostty.nix ./xdg.nix ./wm.nix ./ptpython.nix];
 
   home = {
     stateVersion = "20.09";
