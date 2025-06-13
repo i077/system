@@ -3,7 +3,7 @@ switch: check fmt fast-switch
 
 # Switch without running checks/formatting, for rapid iteration
 fast-switch:
-    darwin-rebuild --flake .#$(just get-name) switch
+    sudo darwin-rebuild --flake .#$(just get-name) switch
 
 # Deploy server profiles
 deploy host='': check fmt
