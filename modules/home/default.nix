@@ -19,6 +19,7 @@
       curlie
       dasel
       docker
+      docker-credential-helpers
       libqalculate
       just
       jq
