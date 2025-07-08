@@ -28,6 +28,7 @@
       nixd
       nix-index
       nix-output-monitor
+      openssl
       ripgrep
       unixtools.watch
     ];
