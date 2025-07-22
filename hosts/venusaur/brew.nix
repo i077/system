@@ -2,17 +2,17 @@
   homebrew = {
     casks = [
       "altserver"
-      "copilot"
+      "copilot-money"
       "discord"
       "fmail3"
       "minecraft"
-      "mullvadvpn"
+      "mullvad-vpn"
       "onedrive"
       "steam"
       "skim"
       "sony-ps-remote-play"
       "swiftformat-for-xcode"
-      "tailscale"
+      "tailscale-app"
       "the-unarchiver"
     ];
 
