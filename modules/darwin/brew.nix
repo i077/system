@@ -14,7 +14,6 @@
 
     taps = [
       "homebrew/bundle"
-      "homebrew/cask-versions"
     ];
 
     # Some default packages

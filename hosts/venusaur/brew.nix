@@ -4,7 +4,7 @@
       "altserver"
       "copilot"
       "discord"
-      "fmail2"
+      "fmail3"
       "minecraft"
       "mullvadvpn"
       "onedrive"
