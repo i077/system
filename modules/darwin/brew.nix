@@ -31,7 +31,6 @@
       "pocket-casts"
       "raycast"
       "stats"
-      "visual-studio-code"
       "vivaldi"
       "zed"
     ];
