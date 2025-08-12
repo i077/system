@@ -54,6 +54,35 @@
         '';
       };
 
+      awsp = {
+        description = "Set AWS profile & region";
+        body = ''
+          if set -q argv[1]
+              set -gx AWS_PROFILE $argv[1]
+          else
+              set -gx AWS_PROFILE (aws configure list-profiles | fzf)
+          end
+
+          if set -q argv[2]
+              set -gx AWS_REGION $argv[2]
+          end
+        '';
+      };
+
+      awsr = {
+        body = ''
+          if set -q AWS_PROFILE
+              echo "awsr: AWS_PROFILE not set."
+              return 1
+          end
+          if set -q argv[1]
+              set -gx AWS_REGION $argv[1]
+          else
+              set -gx AWS_REGION (aws account list-regions --output text --query 'Regions[*].[RegionName]' | fzf)
+          end
+        '';
+      };
+
       # Greeting taken from bobthefish
       fish_greeting = {
         body = ''
@@ -96,7 +125,12 @@
       bind -M insert \cc kill-whole-line repaint
 
       # Add proper completion for aws cli: github.com/aws/aws-cli/issues/1079
-      test -x (which aws_completer); and complete --command aws --no-files --arguments '(begin; set --local --export COMP_SHELL fish; set --local --export COMP_LINE (commandline); aws_completer | sed \'s/ $//\'; end)'
+      if test -x (which aws)
+          test -x (which aws_completer); and complete --command aws --no-files --arguments '(begin; set --local --export COMP_SHELL fish; set --local --export COMP_LINE (commandline); aws_completer | sed \'s/ $//\'; end)'
+          complete --command awsp --no-files -a '(aws configure list-profiles)'
+          complete --command awsp --no-files -n 'test (count (commandline -xpc)) -eq 2' -a '(aws --profile (set -l cl (commandline -xp); echo $cl[2]) account list-regions --output text --query \'Regions[*].[RegionName]\')'
+          complete --command awsr --no-files -a '(set -q AWS_PROFILE; and aws account list-regions --output text --query \'Regions[*].[RegionName]\')'
+      end
     '';
   };
 }
