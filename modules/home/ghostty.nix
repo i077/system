@@ -6,7 +6,7 @@ in {
     font-size = 14;
     font-thicken = true;
 
-    theme = "GruvboxDark";
+    theme = "Gruvbox Dark";
     mouse-hide-while-typing = true;
 
     macos-option-as-alt = "left";
