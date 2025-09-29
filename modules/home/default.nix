@@ -1,7 +1,17 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   programs.home-manager.enable = true;
 
-  imports = [./ghostty.nix ./xdg.nix ./wm.nix ./ptpython.nix];
+  imports = [
+    ./ghostty.nix
+    ./xdg.nix
+    ./wm.nix
+    ./ptpython.nix
+    inputs.nix-index-database.homeModules.nix-index
+  ];
 
   home = {
     stateVersion = "20.09";
@@ -26,7 +36,6 @@
       mosh
       nil
       nixd
-      nix-index
       nix-output-monitor
       openssl
       ripgrep
