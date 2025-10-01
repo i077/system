@@ -30,7 +30,7 @@ end
 
 function locate_attr
     # Use nix-locate to find the right package
-    set -g attr (nix-locate --top-level --minimal --at-root --whole-name "/bin/$argv[1]")
+    set -g attr (nix-locate --minimal --at-root --whole-name "/bin/$argv[1]")
     if test (count $attr) -eq 0
         log_error "No match."
         exit 1
