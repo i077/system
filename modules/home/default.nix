@@ -40,6 +40,7 @@
       openssl
       ripgrep
       unixtools.watch
+      zstd
     ];
   };
 
