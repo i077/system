@@ -41,7 +41,7 @@ in {
         {
           key = "<leader>fs";
           options.silent = true;
-          action.__raw = "require('auto-session.session-lens').search_session";
+          action = "<cmd>AutoSession search<CR>";
         }
       ];
 

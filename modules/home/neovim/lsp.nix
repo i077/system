@@ -49,12 +49,10 @@ in {
 
     plugins.lspsaga = {
       enable = true;
-
-      # Don't show action icon in signcolumn
-      lightbulb.sign = false;
-
-      # Turn off breadcrumbs
-      symbolInWinbar.enable = false;
+      settings = {
+        # Don't show action icon in signcolumn
+        lightbulb.sign = false;
+      };
     };
 
     keymaps =
