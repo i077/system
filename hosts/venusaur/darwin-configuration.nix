@@ -28,7 +28,7 @@ in {
     "altserver"
     "copilot-money"
     "discord"
-    "fmail3"
+    "fastmail"
     "minecraft"
     "mullvad-vpn"
     "onedrive"
