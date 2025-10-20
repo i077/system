@@ -83,4 +83,4 @@ gc age='60':
 # Get name of config to apply, overriden with .hostname file
 [private]
 @get-name:
-    [[ -f .hostname ]] && cat .hostname || hostname
+    [[ -f .hostname ]] && cat .hostname || hostname | tr 'A-Z' 'a-z'

@@ -2,34 +2,30 @@
   description = "My Nix configurations";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    blueprint.url = "github:numtide/blueprint";
+    blueprint.inputs.nixpkgs.follows = "nixpkgs";
 
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-hot-pot.url = "github:shopstic/nix-hot-pot";
 
     # Manage macOS systems with Nix
-    darwin = {
-      url = "github:LnL7/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nix-darwin.url = "github:nix-darwin/nix-darwin";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
     # Manage user environment with Nix
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Module for neovim configuration
+    # Manage neovim config with the module system
     nixvim.url = "github:nix-community/nixvim";
 
     # Dev-environment stuff
-    flake-parts.url = "github:hercules-ci/flake-parts";
     treefmt-nix.url = "github:numtide/treefmt-nix";
     devshell.url = "github:numtide/devshell";
 
-    nix-index-database = {
-      url = "github:nix-community/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # Regularly updated nix-index database (for bin/,)
+    nix-index-database.url = "github:nix-community/nix-index-database";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   nixConfig = {
@@ -46,14 +42,8 @@
   };
 
   outputs = inputs:
-    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
-      systems = ["x86_64-darwin" "aarch64-darwin" "x86_64-linux" "aarch64-linux"];
-
-      imports = [
-        ./flake/devshell.nix
-        ./flake/hosts.nix
-        ./flake/rescue.nix
-        ./flake/pkgs.nix
-      ];
+    inputs.blueprint {
+      inherit inputs;
+      nixpkgs.config.allowUnfree = true;
     };
 }

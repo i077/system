@@ -3,11 +3,10 @@
   inputs,
   lib,
   pkgs,
+  perSystem,
   ...
-}: let
-  selfPkgs = inputs.self.packages.${config.nixpkgs.system};
-in {
-  imports = [./brew.nix ./wm.nix ../broken-overlay.nix ../nix-settings.nix];
+}: {
+  lib.env.isCi = false;
 
   system.stateVersion = 4;
 
@@ -15,22 +14,35 @@ in {
   ids.gids.nixbld = 350;
 
   nix = {
-    # Enable flakes
-    extraOptions = ''
-      build-users-group = nixbld
-      max-jobs = auto
-    '';
+    package = pkgs.nixVersions.latest;
 
     settings = {
       # Add administrators to trusted users
       trusted-users = ["@admin"];
+
+      # Enable flakes
+      experimental-features = ["nix-command" "flakes"];
+
+      build-users-group = "nixbld";
+
+      builders-use-substitutes = true;
+
+      # Allow building x86 macOS packages
+      extra-platforms = ["x86_64-darwin" "aarch64-darwin"];
+
+      # Add other binary caches
+      substituters = ["https://i077.cachix.org" "https://nix-community.cachix.org/"];
+      trusted-public-keys = [
+        "i077.cachix.org-1:v28tOFUfUjtVXdPol5FfEO/6wC/VKWnHkD32/aMJJBk="
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      ];
     };
 
     # Add inputs to registry & nix path
     nixPath = lib.mkForce [
       "nixpkgs=${inputs.nixpkgs}"
       "home-manager=${inputs.home-manager}"
-      "darwin=${inputs.darwin}"
+      "darwin=${inputs.nix-darwin}"
     ];
     registry = let
       # Helper to copy a list of given flake inputs to the registry
@@ -43,7 +55,7 @@ in {
           flake = inputs.${name};
         });
     in
-      copyFlakeInputs ["self" "nixpkgs" "darwin" "home-manager"];
+      copyFlakeInputs ["self" "nixpkgs" "nix-darwin" "home-manager"];
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -56,14 +68,8 @@ in {
   fonts.packages =
     if config.lib.env.isCi
     then []
-    else [selfPkgs.berkeley-mono];
+    else [perSystem.self.berkeley-mono];
 
-  # Enable home-manager
-  home-manager = {
-    extraSpecialArgs = {inherit inputs;};
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    backupFileExtension = "bak";
-    sharedModules = [inputs.nixvim.homeManagerModules.nixvim];
-  };
+  # Configure home-manager
+  home-manager.backupFileExtension = "bak";
 }

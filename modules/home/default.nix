@@ -6,10 +6,6 @@
   programs.home-manager.enable = true;
 
   imports = [
-    ./ghostty.nix
-    ./xdg.nix
-    ./wm.nix
-    ./ptpython.nix
     inputs.nix-index-database.homeModules.nix-index
   ];
 
@@ -44,6 +40,9 @@
     ];
   };
 
+  # Add completions for docker
+  xdg.configFile."fish/completions/docker.fish".source = "${pkgs.docker.src}/contrib/completion/fish/docker.fish";
+
   programs.bat = {
     enable = true;
     config = {
@@ -58,11 +57,11 @@
 
   # Include other SSH config files that I don't want to check in here
   programs.ssh = {
-    forwardAgent = true;
+    matchBlocks."*" = {
+      forwardAgent = true;
+    };
     includes = ["~/.ssh/config.d/*"];
   };
 
   programs.go.enable = true;
-
-  xdg.enable = true;
 }

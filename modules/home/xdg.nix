@@ -12,6 +12,7 @@
   };
 in {
   xdg = {
+    enable = true;
     inherit (xdg) configHome cacheHome dataHome stateHome;
   };
   home.sessionVariables.XDG_RUNTIME_DIR = xdg.runtimeDir;

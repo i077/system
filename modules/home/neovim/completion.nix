@@ -3,8 +3,10 @@
     # Use icons insteead of text in completion menu when showing kind
     plugins.lspkind = {
       enable = true;
-      preset = "codicons";
-      mode = "symbol";
+      settings = {
+        preset = "codicons";
+        mode = "symbol";
+      };
     };
 
     plugins.cmp = {

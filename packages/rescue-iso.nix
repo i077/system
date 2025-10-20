@@ -1,23 +1,15 @@
-# This part defines a NixOS rescue/installation ISO that can be used to bootstrap or repair systems.
 {
-  config,
   inputs,
+  system,
+  flake,
+  pkgs,
   ...
 }: let
-  inherit (inputs) nixpkgs;
-  inherit (nixpkgs.lib) mkIf;
-
-  flakeConfig = config;
-
-  isLinux = system: builtins.elem system nixpkgs.lib.systems.doubles.linux;
-
-  # Define the NixOS configuration for the rescue ISO
-  rescueConfig = system:
-    nixpkgs.lib.nixosSystem {
-      inherit system;
-      modules = [
-        ({
-          config,
+  rescueConfig = inputs.nixpkgs.lib.nixosSystem {
+    inherit system;
+    modules = [
+      (
+        {
           lib,
           modulesPath,
           pkgs,
@@ -54,10 +46,9 @@
           networking.hostId = null;
 
           # Support building for other linux systems supported by this flake
-          boot.binfmt.emulatedSystems =
-            builtins.filter
-            (supportedSystem: supportedSystem != system && isLinux supportedSystem)
-            flakeConfig.systems;
+          boot.binfmt.emulatedSystems = builtins.filter (
+            supportedSystem: supportedSystem != system
+          ) ["x86_64-linux" "aarch64-linux"];
 
           networking = {
             hostName = "rescue";
@@ -90,17 +81,21 @@
           # Define root user
           users.users.root = {
             password = "rescue";
-            openssh.authorizedKeys.keys = inputs.self.lib.mySshKeys;
+            openssh.authorizedKeys.keys = [
+              "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHQRxhrUwCg/DcNQfG8CwIMdJsHu0jZWI2BZV/T6ka5N"
+              "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBsq7jgT0egpEZ4QpgaFHRRxrwk7vzWVvZE0w7Bhk9hK"
+              "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGTgmWqiXS1b+l8KhvdrjZtbXXCh5UuBnbnase5601p2"
+              "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG13aSroi6VPpZII3u+0XkJyfE7ldbC6ovvMr3Fl6tMn"
+              "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID1YIyqTUGvH71i6MWCsYPVoijYLZWfapmuMSR4aGAh9"
+            ];
           };
           users.mutableUsers = false;
-        })
-      ];
-    };
-in {
-  flake.nixosConfigurations.rescue = rescueConfig "x86_64-linux";
-
-  perSystem = {system, ...}:
-    mkIf (isLinux system) {
-      packages.rescueImage = (rescueConfig system).config.system.build.isoImage;
-    };
-}
+        }
+      )
+    ];
+  };
+in
+  pkgs.symlinkJoin {
+    paths = [rescueConfig.config.system.build.isoImage];
+    meta.platforms = pkgs.lib.platforms.linux;
+  }

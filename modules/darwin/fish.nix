@@ -2,6 +2,7 @@
   inherit (lib) mkAfter mkBefore mkMerge;
 in {
   programs.fish.enable = true;
+
   # Workaround for $PATH ordering in fish
   # /usr/libexec/path_helper prepends system paths before anything else
   environment.etc."fish/nixos-env-preinit.fish".text = mkMerge [
