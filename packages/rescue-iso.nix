@@ -1,7 +1,7 @@
 {
   inputs,
   system,
-  flake,
+  pname,
   pkgs,
   ...
 }: let
@@ -21,29 +21,13 @@
             "${modulesPath}/installer/cd-dvd/channel.nix"
           ];
 
-          isoImage.isoBaseName = lib.mkForce "nixos-rescue";
+          image.baseName = lib.mkForce "nixos-rescue";
 
           system.stateVersion = "20.09";
           time.timeZone = "America/New_York";
 
           # Use latest kernel
           boot.kernelPackages = pkgs.linuxPackages_latest;
-
-          boot.supportedFilesystems = lib.mkForce [
-            "btrfs"
-            "cifs"
-            "exfat"
-            "ext2"
-            "ext4"
-            "f2fs"
-            "jfs"
-            "ntfs"
-            "reiserfs"
-            "vfat"
-            "xfs"
-            # "zfs" Commented out since zfs is broken on latest kernel
-          ];
-          networking.hostId = null;
 
           # Support building for other linux systems supported by this flake
           boot.binfmt.emulatedSystems = builtins.filter (
@@ -52,10 +36,7 @@
 
           networking = {
             hostName = "rescue";
-            wireless = {
-              enable = true;
-              userControlled.enable = true;
-            };
+            hostId = "44444444";
           };
 
           # Add additional rescue tools
@@ -96,6 +77,7 @@
   };
 in
   pkgs.symlinkJoin {
+    name = pname;
     paths = [rescueConfig.config.system.build.isoImage];
     meta.platforms = pkgs.lib.platforms.linux;
   }
