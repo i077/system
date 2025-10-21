@@ -26,9 +26,6 @@
           system.stateVersion = "20.09";
           time.timeZone = "America/New_York";
 
-          # Use latest kernel
-          boot.kernelPackages = pkgs.linuxPackages_latest;
-
           # Support building for other linux systems supported by this flake
           boot.binfmt.emulatedSystems = builtins.filter (
             supportedSystem: supportedSystem != system
