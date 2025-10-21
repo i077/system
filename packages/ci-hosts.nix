@@ -6,13 +6,15 @@
   flake,
   pname,
   ...
-}:
-pkgs.symlinkJoin {
-  name = pname;
-  paths =
-    map
-    (c: (c.extendModules {modules = [{lib.env.isCi = true;}];}).system)
-    (builtins.attrValues flake.darwinConfigurations);
-
-  meta.platforms = pkgs.lib.platforms.darwin;
-}
+}: let
+  symlinkSystemsCmds =
+    pkgs.lib.concatMapAttrsStringSep "\n"
+    (name: config: "ln -s ${(config.extendModules {modules = [{lib.env.isCi = true;}];}).system} $out/${name}")
+    flake.darwinConfigurations;
+in
+  pkgs.runCommand pname {
+    meta.platforms = pkgs.lib.platforms.darwin;
+  } ''
+    mkdir $out
+    ${symlinkSystemsCmds}
+  ''
