@@ -1,0 +1,6 @@
+# yaml-language-server: $schema=https://garnix.io/api/garnix-config-schema.json
+builds:
+  include:
+    - devShells.*.default
+    - packages.*-linux.rescue-iso
+    - packages.aarch64-darwin.ci-hosts
