@@ -61,6 +61,9 @@
         });
     in
       copyFlakeInputs ["self" "nixpkgs" "nix-darwin" "home-manager"];
+
+    optimise.automatic = true;
+    gc.automatic = true;
   };
 
   nixpkgs.config.allowUnfree = true;
