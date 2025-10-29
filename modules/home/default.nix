@@ -29,7 +29,7 @@
       libqalculate
       just
       jq
-      mosh
+      mas
       nil
       nixd
       nix-output-monitor
