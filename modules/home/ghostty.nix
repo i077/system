@@ -6,7 +6,7 @@ in {
     font-size = 14;
     font-thicken = true;
 
-    theme = "Gruvbox Dark";
+    theme = "Monokai Pro Spectrum";
     mouse-hide-while-typing = true;
 
     macos-option-as-alt = "left";

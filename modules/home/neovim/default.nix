@@ -12,19 +12,23 @@
   ];
 
   # Add configuration for Neovide
-  xdg.configFile."neovide/config.toml".source = (pkgs.formats.toml {}).generate "neovide-config.toml" {
-    multigrid = true;
-  };
+  xdg.configFile."neovide/config.toml".source =
+    (pkgs.formats.toml {}).generate "neovide-config.toml"
+    {
+      multigrid = true;
+    };
 
   lib.nvim = {
     # Helper function to create leader mappings under a prefix
     mkLeaderMappings = prefix:
-      lib.mapAttrsToList (key: action: {
-        key = "<Leader>${prefix}${key}";
-        mode = ["n"];
-        options.silent = true;
-        inherit action;
-      });
+      lib.mapAttrsToList (
+        key: action: {
+          key = "<Leader>${prefix}${key}";
+          mode = ["n"];
+          options.silent = true;
+          inherit action;
+        }
+      );
   };
 
   programs.nixvim = {
@@ -33,16 +37,7 @@
     viAlias = true;
     vimAlias = true;
 
-    # Set colorscheme
-    extraConfigLuaPre = ''
-      require('gruvbox').setup({
-        italic = {
-          strings = false,
-        },
-      })
-    '';
-
-    colorschemes.gruvbox.enable = true;
+    colorschemes.monokai-pro.enable = true;
 
     opts = {
       # Mouse interaction
@@ -79,7 +74,11 @@
     autoCmd = [
       {
         group = "CursorLine";
-        event = ["VimEnter" "WinEnter" "BufWinEnter"];
+        event = [
+          "VimEnter"
+          "WinEnter"
+          "BufWinEnter"
+        ];
         pattern = "*";
         command = "setlocal cursorline";
       }
@@ -103,7 +102,10 @@
       [
         {
           key = " ";
-          mode = ["n" "v"];
+          mode = [
+            "n"
+            "v"
+          ];
           options.silent = true;
           action = "<NOP>";
         }
@@ -131,11 +133,22 @@
       ]
       ++
       # Mappings to work with the OS clipboard
-      (map (k: {
-        key = "g${k}";
-        mode = ["n" "v"];
-        action = "\"+${k}";
-      }) ["y" "p" "P"]);
+      (
+        map
+        (k: {
+          key = "g${k}";
+          mode = [
+            "n"
+            "v"
+          ];
+          action = "\"+${k}";
+        })
+        [
+          "y"
+          "p"
+          "P"
+        ]
+      );
 
     # Different indentation for various filetypes
     extraFiles = let
