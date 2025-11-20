@@ -87,7 +87,7 @@ end
 
 set result_json (jo -e -- $jo_opts)
 if set -q _flag_update
-    set json_path $_flake/modules/broken-overlay-data.json
+    set json_path $_flake/modules/darwin/broken-overlay-data.json
     # Check if there's already an existing key for $attr, since jo doesn't merge objects
     # If we don't do this, we'll lose information about the last good revision for another system.
     set old_attr_result (cat $json_path | jq -r .$attr)

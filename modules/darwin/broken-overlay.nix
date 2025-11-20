@@ -26,7 +26,7 @@
   pkgs,
   ...
 }: let
-  currentSystem = config.nixpkgs.system;
+  currentSystem = config.nixpkgs.hostPlatform.system;
 
   overlayData = builtins.fromJSON (builtins.readFile ./broken-overlay-data.json);
   # Filter overlay data by current system, so this will look like
@@ -42,7 +42,10 @@
       owner = "NixOS";
       repo = "nixpkgs";
       inherit rev hash;
-    }) {inherit (config.nixpkgs) config system;};
+    }) {
+      inherit (config.nixpkgs) config;
+      system = currentSystem;
+    };
 
   # Function to check if a package is still broken in this flake's nixpkgs input
   # Note: This is a really ugly hack using IFD and an unsafe function,
