@@ -4,7 +4,6 @@
 in {
   home.sessionVariables.SSH_AUTH_SOCK = darwinSockPath;
   programs.ssh = {
-    enable = true;
     extraConfig = ''
       IdentityAgent "${darwinSockPath}"
     '';
