@@ -80,11 +80,11 @@
     ignores = [".DS_Store"];
   };
 
-# Difftastic, a syntactic diff tool
-programs.difftastic = {
-  enable = true;
-  git.enable = true;
-};
+  # Difftastic, a syntactic diff tool
+  programs.difftastic = {
+    enable = true;
+    git.enable = true;
+  };
 
   # GitHub CLI
   programs.gh = {

@@ -25,7 +25,9 @@ in {
 
   # Host specific programs
   homebrew.casks = [
+    "adobe-digital-editions"
     "altserver"
+    "calibre"
     "copilot-money"
     "discord"
     "fastmail"
