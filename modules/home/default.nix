@@ -57,6 +57,7 @@
 
   # Include other SSH config files that I don't want to check in here
   programs.ssh = {
+    enable = true;
     matchBlocks."*" = {
       forwardAgent = true;
     };
