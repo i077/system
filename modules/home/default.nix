@@ -21,7 +21,6 @@
     };
 
     packages = with pkgs; [
-      colima
       curlie
       dasel
       docker
