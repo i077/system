@@ -20,7 +20,7 @@
 
   programs.git = {
     lfs.enable = true;
-    userEmail = lib.mkForce ("imran.hossain" + "@" + "saic.com");
+    settings.user.email = lib.mkForce ("imran.hossain" + "@" + "saic.com");
   };
 
   home.packages = with pkgs; [awscli2 aws-sso-cli aws-vault terraform terragrunt ssm-session-manager-plugin];
