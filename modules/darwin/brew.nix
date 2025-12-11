@@ -22,6 +22,7 @@
       "betterdisplay"
       "firefox"
       "ghostty"
+      "homerow"
       "hyperkey"
       "jetbrains-toolbox"
       "jordanbaird-ice"
