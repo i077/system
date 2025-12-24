@@ -6,7 +6,7 @@ in {
     font-size = 14;
     font-thicken = true;
 
-    theme = "Monokai Pro Spectrum";
+    theme = "dark:Monokai Pro Ristretto,light:Monokai Pro Light Sun";
     mouse-hide-while-typing = true;
 
     macos-option-as-alt = "left";
