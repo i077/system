@@ -11,7 +11,7 @@ in {
       # Syntax highlighting using tree-sitter
       plugins.treesitter = {
         enable = true;
-        folding = true;
+        folding.enable = true;
         nixvimInjections = true;
         settings = {
           incremental_selection.enable = true;
