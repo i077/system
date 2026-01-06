@@ -54,6 +54,8 @@
 
   programs.broot.enable = true;
 
+  programs.nix-index-database.comma.enable = true;
+
   # Include other SSH config files that I don't want to check in here
   programs.ssh = {
     enable = true;
