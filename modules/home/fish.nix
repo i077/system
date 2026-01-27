@@ -70,7 +70,7 @@
 
       awsr = {
         body = ''
-          if set -q AWS_PROFILE
+          if not set -q AWS_PROFILE
               echo "awsr: AWS_PROFILE not set."
               return 1
           end
