@@ -15,7 +15,6 @@
   # Host specific programs
   homebrew.casks = [
     "apache-directory-studio"
-    "navicat-premium"
     "slack"
   ];
 }
