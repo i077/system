@@ -29,6 +29,7 @@ in {
     "altserver"
     "calibre"
     "copilot-money"
+    "cryptomator"
     "discord"
     "fastmail"
     "minecraft"
