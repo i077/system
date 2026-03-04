@@ -137,9 +137,9 @@ in {
 
       # Extra plugins that aren't yet in nixvim
       extraPlugins = with pkgs.vimPlugins; [
-        sensible # Sensible defaults
-        repeat # Repeatable plugin actions
-        easy-align # Align text around symbols
+        vim-sensible # Sensible defaults
+        vim-repeat # Repeatable plugin actions
+        vim-easy-align # Align text around symbols
         direnv-vim # Direnv integration
       ];
     }
