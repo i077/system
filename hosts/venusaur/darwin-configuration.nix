@@ -32,6 +32,7 @@ in {
     "cryptomator"
     "discord"
     "fastmail"
+    "fuse-t"
     "minecraft"
     "mullvad-vpn"
     "onedrive"
