@@ -25,7 +25,6 @@
       "homerow"
       "hyperkey"
       "jetbrains-toolbox"
-      "jordanbaird-ice"
       "kopiaui"
       "mac-mouse-fix"
       "mediamate"
@@ -33,6 +32,7 @@
       "pocket-casts"
       "raycast"
       "stats"
+      "thaw"
       "vivaldi"
       "zed"
     ];
