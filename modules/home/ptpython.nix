@@ -43,7 +43,7 @@
     completion_visualization = rawPy "CompletionVisualisation.POP_UP";
   };
 
-  colorscheme = "native";
+  colorscheme = "default-ansi";
 in {
   home.packages = [pkgs.uv];
   home.sessionVariables.PTPYTHON_CONFIG_HOME = "${config.xdg.configHome}/ptpython";
