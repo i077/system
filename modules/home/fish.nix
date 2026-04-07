@@ -59,7 +59,7 @@
           if set -q argv[1]
               set -gx AWS_PROFILE $argv[1]
           else
-              set -gx AWS_PROFILE (aws configure list-profiles | fzf)
+              set -gx AWS_PROFILE (sed -En 's/^\[profile ([a-z0-9-]+)]$/\1/p' ~/.aws/config | fzf)
           end
 
           if set -q argv[2]
@@ -126,7 +126,7 @@
       # Add proper completion for aws cli: github.com/aws/aws-cli/issues/1079
       if test -x (which aws)
           test -x (which aws_completer); and complete --command aws --no-files --arguments '(begin; set --local --export COMP_SHELL fish; set --local --export COMP_LINE (commandline); aws_completer | sed \'s/ $//\'; end)'
-          complete --command awsp --no-files -a '(aws configure list-profiles)'
+          complete --command awsp --no-files -a '(sed -En \'s/^\[profile ([a-z0-9-]+)]$/\1/p\' ~/.aws/config)'
           complete --command awsp --no-files -n 'test (count (commandline -xpc)) -eq 2' -a '(aws --profile (set -l cl (commandline -xp); echo $cl[2]) account list-regions --output text --query \'Regions[*].[RegionName]\')'
           complete --command awsr --no-files -a '(set -q AWS_PROFILE; and aws account list-regions --output text --query \'Regions[*].[RegionName]\')'
       end
