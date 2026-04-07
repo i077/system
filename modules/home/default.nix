@@ -25,6 +25,7 @@
       dasel
       docker
       docker-credential-helpers
+      gnused
       libqalculate
       just
       jq
