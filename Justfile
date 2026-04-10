@@ -1,34 +1,9 @@
 # Build & activate this host's profile
-switch: check fmt fast-switch
+switch: check fast-switch
 
 # Switch without running checks/formatting, for rapid iteration
 fast-switch:
     sudo darwin-rebuild --flake .#$(just get-name) switch
-
-# Deploy server profiles
-deploy host='': check fmt
-    deploy .#{{ host }}
-
-# Format files, and ask to amend last commit if changes are present
-fmt:
-    #!/usr/bin/env fish
-    source bin/_lib.fish
-    if not treefmt --fail-on-change
-        git update-index
-        set -l reformatted_files (git ls-files -m -o -d --exclude-standard)
-        if test (count $reformatted_files) -gt 0
-            log_warn "The files below were re-formatted:"
-            for f in $reformatted_files
-                echo "- $f"
-            end
-            if ask_yesno "Amend the last commit with these changes?"
-                git add $reformatted_files
-                git commit --amend --no-edit
-            else
-                exit 1
-            end
-        end
-    end
 
 # Diff this host's closure in the flake against its current one
 diff:
