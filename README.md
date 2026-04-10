@@ -5,16 +5,15 @@ and their user environments managed through [home-manager](https://github.com/ni
 
 ## Structure
 
-This repository is a [flake](https://www.tweag.io/blog/2020-05-25-flakes/). Dependencies for this
-flake are specified in [`flake.nix`](./flake.nix) in the `inputs` set. The output set is configured
-using [flake-parts](https://flake.parts), which adds NixOS' module system for added, uh, modularity.
+This repository is a [flake](https://www.tweag.io/blog/2020-05-25-flakes/).
+Dependencies for this flake are specified in [`flake.nix`](./flake.nix) in the `inputs` set.
+The output set is configured using [blueprint](https://github.com/numtide/blueprint).
 
-- [`flake`](./flake) is where flake outputs are declared. Outputs are split into files by
-  functionality.
 - [`modules`](./modules) stores snippets of configuration for nix-darwin and home-manager.
 - [`hosts`](./hosts) stores configuration for each machine managed in this repo.
-  User environment config is stored in a `home.nix` file or `home` directory for each host (if at all).
-- [`bin`](./bin) is a collection of shell scripts I find useful. These are usually written for [fish](https://fishshell.com/).
+  Home-manager config for each user is stored in the `users` subdirectory.
+- [`bin`](./bin) is a collection of shell scripts I find useful.
+  These are usually written for [fish](https://fishshell.com/).
 
 ## Maintenance
 
