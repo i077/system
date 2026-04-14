@@ -23,5 +23,13 @@
     settings.user.email = lib.mkForce ("imran.hossain" + "@" + "saic.com");
   };
 
-  home.packages = with pkgs; [awscli2 aws-sso-cli aws-vault terraform terragrunt ssm-session-manager-plugin];
+  home.packages = with pkgs; [
+    awscli2
+    aws-sso-cli
+    aws-vault
+    pre-commit
+    terraform
+    terragrunt
+    ssm-session-manager-plugin
+  ];
 }
