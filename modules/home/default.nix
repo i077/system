@@ -35,6 +35,7 @@
       nix-output-monitor
       openssl
       ripgrep
+      socat
       unixtools.watch
       zstd
     ];
