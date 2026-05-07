@@ -1,6 +1,8 @@
 {flake, ...}: {
   imports = [
     flake.darwinModules.default
+    flake.darwinModules.brew
+    flake.darwinModules.broken-overlay
     flake.darwinModules.fish
     flake.darwinModules.onepassword
     ./ssl.nix

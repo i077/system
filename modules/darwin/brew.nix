@@ -28,8 +28,6 @@
       "kopiaui"
       "mac-mouse-fix"
       "mediamate"
-      "plexamp"
-      "pocket-casts"
       "raycast"
       "stats"
       "thaw"
