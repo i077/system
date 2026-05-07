@@ -39,7 +39,6 @@ in {
     "steam"
     "skim"
     "sony-ps-remote-play"
-    "swiftformat-for-xcode"
     "tailscale-app"
     "the-unarchiver"
   ];
