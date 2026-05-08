@@ -18,6 +18,7 @@
 
     # Some default packages
     casks = [
+      "antinote"
       "betterdisplay"
       "dockdoor"
       "firefox"
