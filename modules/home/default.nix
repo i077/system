@@ -7,6 +7,7 @@
 
   imports = [
     inputs.nix-index-database.homeModules.nix-index
+    inputs.paneru.homeModules.paneru
   ];
 
   home = {
