@@ -8,6 +8,7 @@
         focus_follows_mouse = true;
         mouse_follows_focus = true;
         preset_column_widths = [0.33 0.5 0.66 0.8];
+        horizontal_mouse_warp = -1;
       };
 
       padding = {
@@ -32,6 +33,11 @@
         window_swap_east = "ctrl+alt+shift-l";
         window_swap_north = "ctrl+alt+shift-k";
         window_swap_south = "ctrl+alt+shift-j";
+
+        window_virtual_north = "ctrl+alt-m";
+        window_virtual_south = "ctrl+alt-n";
+        window_virtualmove_north = "ctrl+alt+shift-m";
+        window_virtualmove_south = "ctrl+alt+shift-n";
 
         window_stack = "ctrl+alt-i";
         window_unstack = "ctrl+alt-o";
