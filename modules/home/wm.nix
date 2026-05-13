@@ -7,7 +7,12 @@
         animation_speed = 12;
         focus_follows_mouse = true;
         mouse_follows_focus = true;
-        preset_column_widths = [0.33 0.5 0.66 0.8];
+        preset_column_widths = [
+          0.33
+          0.5
+          0.66
+          0.8
+        ];
         horizontal_mouse_warp = -1;
       };
 
@@ -38,6 +43,7 @@
         window_virtual_south = "ctrl+alt-n";
         window_virtualmove_north = "ctrl+alt+shift-m";
         window_virtualmove_south = "ctrl+alt+shift-n";
+        window_nextdisplay = "ctrl+alt+shift-]";
 
         window_stack = "ctrl+alt-i";
         window_unstack = "ctrl+alt-o";
