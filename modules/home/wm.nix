@@ -2,6 +2,7 @@
   services.paneru = {
     enable = true;
 
+    # See https://github.com/karinushka/paneru/blob/main/CONFIGURATION.md
     settings = {
       options = {
         animation_speed = 12;
@@ -54,6 +55,12 @@
 
         window_resize = "ctrl+alt-r";
         window_fullwidth = "ctrl+alt-return";
+      };
+
+      windows.antinote = {
+        title = ".*";
+        bundleID = "com.chabomakers.Antinote";
+        floating = true;
       };
     };
   };
