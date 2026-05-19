@@ -57,6 +57,11 @@
         window_fullwidth = "alt-return";
       };
 
+      windows.all = {
+        title = ".*";
+        horizontal_padding = 4;
+      };
+
       windows.antinote = {
         title = ".*";
         bundleID = "com.chabomakers.Antinote";
