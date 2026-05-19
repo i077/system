@@ -9,12 +9,6 @@ in {
         # Go
         gopls.enable = true;
 
-        # Haskell
-        hls = {
-          enable = true;
-          installGhc = false;
-        };
-
         # JSON
         jsonls.enable = true;
 
@@ -38,9 +32,6 @@ in {
 
         # Terraform
         terraformls.enable = true;
-
-        # LaTeX
-        texlab.enable = true;
 
         # TypeScript
         ts_ls.enable = true;
