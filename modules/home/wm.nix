@@ -6,8 +6,8 @@
     settings = {
       options = {
         animation_speed = 12;
-        focus_follows_mouse = true;
-        mouse_follows_focus = true;
+        focus_follows_mouse = false;
+        mouse_follows_focus = false;
         preset_column_widths = [
           0.33
           0.5
