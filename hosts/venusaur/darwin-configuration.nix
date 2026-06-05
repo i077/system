@@ -45,10 +45,12 @@ in {
 
   homebrew.masApps = {
     "Bear" = 1091189122;
-    "Windows App" = 1295203466;
-    "Reeder." = 6475002485;
+    Sofa = 1276554886;
     "Things 3" = 904280696;
+    Weathergraph = 1501958576;
+    "Windows App" = 1295203466;
     WhatsApp = 310633997;
+    Unread = 1363637349;
     Xcode = 497799835;
   };
 }
