@@ -28,6 +28,11 @@
     awscli2
     aws-sso-cli
     aws-vault
+    (google-cloud-sdk.withExtraComponents (
+      with google-cloud-sdk.components; [
+        gke-gcloud-auth-plugin
+      ]
+    ))
     pre-commit
     terraform
     terragrunt
