@@ -45,6 +45,7 @@ in {
 
   homebrew.masApps = {
     "Bear" = 1091189122;
+    Current = 6758530974;
     Sofa = 1276554886;
     "Things 3" = 904280696;
     Weathergraph = 1501958576;
