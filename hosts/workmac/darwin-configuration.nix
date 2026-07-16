@@ -16,7 +16,6 @@
 
   # Host specific programs
   homebrew.casks = [
-    "apache-directory-studio"
     "slack"
   ];
 }
