@@ -23,6 +23,7 @@
       "dockdoor"
       "firefox"
       "ghostty"
+      "helium-browser"
       "homerow"
       "hyperkey"
       "jetbrains-toolbox"
@@ -32,7 +33,6 @@
       "raycast"
       "stats"
       "thaw"
-      "vivaldi"
       "zed"
     ];
   };
