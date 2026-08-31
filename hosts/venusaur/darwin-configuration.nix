@@ -46,14 +46,15 @@ in {
   homebrew.masApps = {
     "1Password for Safari" = 1569813296;
     "Bear" = 1091189122;
-    Current = 6758530974;
     "Kagi for Safari" = 1622835804;
     Sofa = 1276554886;
+    "StopTheMadness Pro" = 6471380298;
     "Things 3" = 904280696;
     Weathergraph = 1501958576;
     "Windows App" = 1295203466;
     WhatsApp = 310633997;
     Unread = 1363637349;
+    Unwatched = 6477287463;
     "uBlock Origin Lite" = 6745342698;
     Xcode = 497799835;
   };
