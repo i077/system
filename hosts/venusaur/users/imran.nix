@@ -12,6 +12,5 @@
     flake.homeModules.onepassword
     flake.homeModules.ptpython
     flake.homeModules.xdg
-    flake.homeModules.wm
   ];
 }
