@@ -12,10 +12,6 @@
       autoUpdate = false;
     };
 
-    taps = [
-      "homebrew/bundle"
-    ];
-
     # Some default packages
     casks = [
       "antinote"
