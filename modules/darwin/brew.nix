@@ -14,21 +14,16 @@
 
     # Some default packages
     casks = [
-      "antinote"
       "betterdisplay"
-      "dockdoor"
       "firefox"
       "ghostty"
-      "helium-browser"
       "homerow"
       "hyperkey"
       "jetbrains-toolbox"
       "kopiaui"
       "mac-mouse-fix"
       "mediamate"
-      "raycast"
       "stats"
-      "thaw"
       "zed"
     ];
   };

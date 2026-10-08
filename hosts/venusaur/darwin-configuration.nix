@@ -28,11 +28,11 @@ in {
     "adobe-digital-editions"
     "altserver"
     "calibre"
-    "copilot-money"
     "cryptomator"
     "discord"
     "fastmail"
     "fuse-t"
+    "helium-browser"
     "minecraft"
     "mullvad-vpn"
     "onedrive"
@@ -44,19 +44,28 @@ in {
   ];
 
   homebrew.masApps = {
-    "1Password for Safari" = 1569813296;
-    "Bear" = 1091189122;
-    "Kagi for Safari" = 1622835804;
+    Bear = 1091189122;
+    Copilot = 1447330651;
+    Flighty = 1358823008;
+    Flyleaf = 6475200381;
+    Infuse = 1136220934;
     MusicHarbor = 1440405750;
+    Parcel = 375589283;
     Sofa = 1276554886;
-    "StopTheMadness Pro" = 6471380298;
     "Things 3" = 904280696;
-    Weathergraph = 1501958576;
-    "Windows App" = 1295203466;
-    WhatsApp = 310633997;
     Unread = 1363637349;
     Unwatched = 6477287463;
-    "uBlock Origin Lite" = 6745342698;
+    Weathergraph = 1501958576;
+    WhatsApp = 310633997;
+    "Windows App" = 1295203466;
     Xcode = 497799835;
+
+    # Safari extensions
+    "1Password for Safari" = 1569813296;
+    "Dark Reader for Safari" = 1438243180;
+    Litterbox = 6805719216;
+    "Kagi for Safari" = 1622835804;
+    "StopTheMadness Pro" = 6471380298;
+    "uBlock Origin Lite" = 6745342698;
   };
 }
