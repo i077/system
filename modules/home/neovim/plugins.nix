@@ -227,18 +227,5 @@ in {
         "w" = ":Gwrite<CR>";
       };
     }
-
-    # Live LaTeX editing
-    {
-      plugins.vimtex = {
-        enable = true;
-        # TeXLive will come from a project's devshell
-        texlivePackage = null;
-        settings = {
-          view_method = "skim";
-        };
-      };
-      plugins.texpresso.enable = true;
-    }
   ];
 }
