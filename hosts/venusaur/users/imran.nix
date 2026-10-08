@@ -7,7 +7,6 @@
     flake.homeModules.git
     flake.homeModules.ghostty
     flake.homeModules.k8s
-    flake.homeModules.music
     flake.homeModules.neovim
     flake.homeModules.onepassword
     flake.homeModules.ptpython
