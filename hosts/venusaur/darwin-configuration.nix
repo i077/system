@@ -49,6 +49,7 @@ in {
     Flighty = 1358823008;
     Flyleaf = 6475200381;
     Infuse = 1136220934;
+    Mela = 1568924476;
     MusicHarbor = 1440405750;
     Parcel = 375589283;
     Sofa = 1276554886;
