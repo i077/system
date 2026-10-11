@@ -2,6 +2,7 @@
   imports = [
     flake.homeModules.default
     flake.homeModules.direnv
+    flake.homeModules.helix
     flake.homeModules.fish
     flake.homeModules.fzf
     flake.homeModules.git

@@ -14,7 +14,8 @@
     stateVersion = "20.09";
 
     sessionVariables = {
-      EDITOR = "nvim";
+      EDITOR = "hx";
+      VISUAL = "hx";
       HOMEBREW_NO_AUTO_UPDATE = 1;
 
       # Disable Python virtualenv prompt updates, since tide takes care of that
