@@ -14,6 +14,7 @@
 
     # Some default packages
     casks = [
+      "alt-tab"
       "betterdisplay"
       "firefox"
       "ghostty"
