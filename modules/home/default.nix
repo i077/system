@@ -7,7 +7,7 @@
 
   imports = [
     inputs.nix-index-database.homeModules.nix-index
-    inputs.paneru.homeModules.paneru
+    inputs.omniwm.homeManagerModules.default
   ];
 
   home = {

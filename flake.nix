@@ -28,8 +28,8 @@
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
     # Sliding window manager
-    paneru.url = "github:karinushka/paneru";
-    paneru.inputs.nixpkgs.follows = "nixpkgs";
+    omniwm.url = "github:mst-mkt/omniwm.nix";
+    omniwm.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   nixConfig = {
