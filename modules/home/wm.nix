@@ -1,0 +1,5 @@
+{...}: {
+  programs.omniwm = {
+    enable = true;
+  };
+}

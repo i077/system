@@ -11,6 +11,7 @@
     flake.homeModules.neovim
     flake.homeModules.onepassword
     flake.homeModules.ptpython
+    flake.homeModules.wm
     flake.homeModules.xdg
   ];
 }
