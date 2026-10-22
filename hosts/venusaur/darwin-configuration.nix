@@ -40,7 +40,7 @@ in {
     "skim"
     "sony-ps-remote-play"
     "tailscale-app"
-    "the-unarchiver"
+    "thingsmacsandboxhelper"
   ];
 
   homebrew.masApps = {
