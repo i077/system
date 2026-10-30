@@ -7,11 +7,11 @@
 in
   pkgs.stdenvNoCC.mkDerivation {
     inherit pname;
-    version = "2.000";
+    version = "2.004";
 
     src = pkgs.requireFile rec {
       name = "${pname}-typeface.zip";
-      sha256 = "0iakm2ga73k1ia81zg20ws1dk2ssmdb257aqx7nbq0pkv1nxdr1c";
+      hash = "sha256-57uBDP2icHA7B9JEQe+YJd1+mHutxYYRs/W6t4Ezgyk=";
 
       message = ''
         Log in to https://usgraphics.com/auth/login/, and
