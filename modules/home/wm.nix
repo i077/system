@@ -4,6 +4,14 @@
   ...
 }: let
   l = inputs.omniwm.lib;
+  defaultSettings = fromTOML (builtins.readFile "${inputs.omniwm}/settings-defaults.toml");
+  unassignedDefaultHotkeys = builtins.listToAttrs (
+    map (h: {
+      name = h.id;
+      value = "Unassigned";
+    })
+    defaultSettings.hotkeys
+  );
   mkNumHotkeys = command: binding:
     lib.genAttrs'
     (lib.range 1 9)
@@ -46,17 +54,9 @@ in {
 
       overview.enabled = true;
 
-      workspaces = l.workspaces [
-        {}
-        {}
-        {}
-        {}
-        {}
-        {}
-        {}
-        {monitorAssignment.type = "secondary";}
-        {monitorAssignment.type = "secondary";}
-      ];
+      workspaces =
+        l.workspaces
+        ((lib.replicate 7 {}) ++ (lib.replicate 2 {monitorAssignment.type = "secondary";}));
 
       workspaceBar = {
         enabled = true;
@@ -70,7 +70,8 @@ in {
       mouseWarp.enabled = true;
 
       hotkeys = l.hotkeys (
-        {
+        unassignedDefaultHotkeys
+        // {
           # Focus & movement
           focusDownOrLeft = "Hyper+Comma";
           focusUpOrRight = "Hyper+Period";
