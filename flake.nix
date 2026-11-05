@@ -12,6 +12,19 @@
     nix-darwin.url = "github:nix-darwin/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Manage Homebrew installations
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+
+    # Homebrew taps as flake inputs
+    homebrew-core = {
+      url = "github:Homebrew/homebrew-core";
+      flake = false;
+    };
+    homebrew-cask = {
+      url = "github:Homebrew/homebrew-cask";
+      flake = false;
+    };
+
     # Manage user environment with Nix
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
